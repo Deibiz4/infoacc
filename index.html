@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Market Intelligence Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .section-title svg {
+            color: var(--primary);
+        }
+
+        .report-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(0, 242, 254, 0.15);
+        }
+
+        .report-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .report-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .report-summary {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--glass);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            color: var(--secondary);
+        }
+
+        .latest-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .archive-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .archive-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: 0.2s;
+        }
+
+        .archive-item:hover {
+            background: var(--glass);
+            padding-left: 1.5rem;
+        }
+
+        .archive-item a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .archive-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<header>
+<span class="logo-badge">Antigravity Trading System</span>
+<h1>Hub de Informes</h1>
+<p class="subtitle">Repositorio Central de Análisis de Mercado Diario</p>
+</header>
+<div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+<!-- COLUMN 1: STOCKS -->
+<div class="column">
+<h2 class="section-title" style="color: var(--primary); border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
+<svg fill="none" height="28" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M3 3v18h18"></path>
+<path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path>
+</svg>
+                    Stocks Market
+                </h2>
+<!-- LATEST REPORT -->
+<div style="margin-bottom: 2rem;">
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Último Informe</h3>
+<a class="report-card" href="reports/daily_market_report_2026_02_16.html" id="latest-report-stock">
+<span class="latest-badge" style="background: var(--success); color: #fff;">Wait</span>
+<span class="report-date">16 De Febrero, 2026</span>
+<span class="report-title">Informe Diario - Market Scan &amp; Value</span>
+<span class="report-summary">Análisis actualizado con datos reales de mercado. Oportunidades Value (RSI) y Momentum detectadas por el escáner.</span>
+</a>
+</div>
+<!-- SIGNALS -->
+<div style="margin-bottom: 2rem;">
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Monitor</h3>
+<a class="report-card" href="signals.html" style="border-color: var(--accent); padding: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<span class="report-title" style="font-size: 1.2rem; margin-bottom: 0.2rem;">Dashboard
+                                    de Señales</span>
+<span class="report-summary" style="margin-bottom: 0;">Rendimiento y Alertas
+                                    Activas</span>
+</div>
+<svg fill="none" height="24" stroke="var(--accent)" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M5 12h14M12 5l7 7-7 7"></path>
+</svg>
+</div>
+</a>
+</div>
+<!-- ARCHIVE -->
+<div>
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Archivo Histórico</h3>
+<ul class="archive-list" id="archive-stock">
+<!-- Populated by update_hub.py -->
+</ul>
+</div>
+</div>
+<!-- COLUMN 2: CRYPTO -->
+<div class="column">
+<h2 class="section-title" style="color: #8b5cf6; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
+<svg fill="none" height="28" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="28">
+<circle cx="12" cy="12" r="10"></circle>
+<path d="M16 8l-8 8"></path>
+<path d="M16 16L8 8"></path>
+</svg>
+                    Crypto Market
+                </h2>
+<!-- LATEST REPORT -->
+<div style="margin-bottom: 2rem;">
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Último Informe</h3>
+<a class="report-card" href="infocryptos/reports/crypto_market_report_2026_02_16.html" id="latest-report-crypto" style="border-color: #8b5cf6;">
+<span class="latest-badge" style="background: #8b5cf6; color: #fff;">Wait</span>
+<span class="report-date">16 De Febrero, 2026</span>
+<span class="report-title">Informe Diario - Crypto Intelligence</span>
+<span class="report-summary">Análisis de Volatilidad, RSI y Momentum para BTC, ETH y Altcoins principales.</span>
+</a>
+</div>
+<!-- SIGNALS -->
+<div style="margin-bottom: 2rem;">
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Monitor</h3>
+<a class="report-card" href="infocryptos/signals.html" style="border-color: #8b5cf6; padding: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<span class="report-title" style="font-size: 1.2rem; margin-bottom: 0.2rem;">Monitor
+                                    Crypto</span>
+<span class="report-summary" style="margin-bottom: 0;">Rendimiento y Alertas
+                                    Activas</span>
+</div>
+<svg fill="none" height="24" stroke="#8b5cf6" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M5 12h14M12 5l7 7-7 7"></path>
+</svg>
+</div>
+</a>
+</div>
+<!-- ARCHIVE -->
+<div>
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Archivo Histórico</h3>
+<ul class="archive-list" id="archive-crypto">
+<!-- Populated by update_hub.py -->
+</ul>
+</div>
+</div>
+<!-- COLUMN 3: FOREX -->
+<div class="column">
+<h2 class="section-title" style="color: #10b981; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
+<svg fill="none" height="28" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+</svg>
+                    Forex Market
+                </h2>
+<!-- LATEST REPORT -->
+<div style="margin-bottom: 2rem;">
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Último Informe</h3>
+<a class="report-card" href="infofx/reports/forex_market_report_2026_02_16.html" id="latest-report-forex" style="border-color: #10b981;">
+<span class="latest-badge" style="background: #10b981; color: #fff;">Wait</span>
+<span class="report-date">16 De Febrero, 2026</span>
+<span class="report-title">Informe Diario - Mercado Divisas</span>
+<span class="report-summary">Análisis Técnico y Fundamental para pares Mayores y Cruces (Forex).</span>
+</a>
+</div>
+<!-- SIGNALS -->
+<div style="margin-bottom: 2rem;">
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Monitor</h3>
+<a class="report-card" href="infofx/signals.html" style="border-color: #10b981; padding: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<div>
+<span class="report-title" style="font-size: 1.2rem; margin-bottom: 0.2rem;">Monitor
+                                    Forex</span>
+<span class="report-summary" style="margin-bottom: 0;">Rendimiento y Alertas
+                                    Activas</span>
+</div>
+<svg fill="none" height="24" stroke="#10b981" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M5 12h14M12 5l7 7-7 7"></path>
+</svg>
+</div>
+</a>
+</div>
+<!-- ARCHIVE -->
+<div>
+<h3 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                        Archivo Histórico</h3>
+<ul class="archive-list" id="archive-forex">
+<!-- Populated by update_hub.py -->
+</ul>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

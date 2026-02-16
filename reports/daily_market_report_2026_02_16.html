@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Banking Report - Stocks - 2026-02-16</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --accent: #38BDF8;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glass: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(148, 163, 184, 0.1);
+            --success: #10B981;
+            --danger: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .date {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+        }
+
+        .memo-box {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), transparent);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 3rem;
+        }
+
+        .memo-box h2 {
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .metric span:first-child {
+            color: var(--text-muted);
+        }
+
+        .metric span:last-child {
+            font-weight: 600;
+        }
+
+        .trade-plan {
+            margin-top: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px dashed var(--glass-border);
+        }
+
+        .rr {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .valuation-deep {
+            margin-top: 3rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+
+        .valuation-deep h2 {
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 1.5rem;
+            color: #E2E8F0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        th {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        nav {
+            margin-bottom: 2rem;
+        }
+
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav><a href="../index.html">← VOLVER AL HUB</a></nav>
+
+        <header>
+            <span class="date">INSTITUTIONAL ANALYSIS • 2026-02-16</span>
+            <h1>Global Markets Intelligence</h1>
+            <p style="color: var(--text-muted)">Equity Research & Quantitative Strategy Branch</p>
+        </header>
+
+        <div class="memo-box">
+            <h2>Partner's Memo: Resumen Ejecutivo</h2>
+            <p>Apertura con sesgo defensivo debido a un VIX en consolidación. El foco institucional se desplaza hacia la
+                tecnología de mega-capitatalización que ha entrado en niveles técnicos de sobreventa (RSI < 30). Las
+                    valoraciones actuales de Microsoft y Amazon presentan puntos de entrada asimétricos para un
+                    horizonte de 3 a 6 meses.</p>
+        </div>
+
+        <h2 class="section-title">1. Contexto Macro & Sentiment</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Volatilidad & Riesgo</h3>
+                <div class="metric"><span>VIX Index</span><span>14.2 (Bajo)</span></div>
+                <div class="metric"><span>Sentiment</span><span>Fear & Greed: 42 (Miedo)</span></div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Niveles bajos de VIX sugieren
+                    complacencia, pero el sentiment 'Miedo' indica capitulación minorista cerca de soportes.</p>
+            </div>
+            <div class="card">
+                <h3>Tasas & Divisas</h3>
+                <div class="metric"><span>Treasury 10Y (TNX)</span><span>4.12%</span></div>
+                <div class="metric"><span>DXY (Dólar)</span><span>103.80</span></div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">DXY fuerte presiona márgenes
+                    internacionales. Yields estables favorecen valoraciones tech.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">2. Value Plays: High Conviction Tech</h2>
+        <div class="grid">
+            <!-- MSFT -->
+            <div class="card">
+                <h3>Microsoft (MSFT)</h3>
+                <div class="metric"><span>Precio Actual</span><span>$401.32</span></div>
+                <div class="metric"><span>RSI (Oversold)</span><span>24.9</span></div>
+                <div class="metric"><span>P/E Forward</span><span>31.2x</span></div>
+                <div class="trade-plan">
+                    <div class="metric"><span>Entrada</span><span>$401.32</span></div>
+                    <div class="metric"><span>Target (TP)</span><span>$421.39</span></div>
+                    <div class="metric"><span>Stop Loss</span><span>$389.28</span></div>
+                    <div class="metric"><span>R:R Ratio</span><span class="rr">1:2.4</span></div>
+                </div>
+            </div>
+
+            <!-- AMZN -->
+            <div class="card">
+                <h3>Amazon (AMZN)</h3>
+                <div class="metric"><span>Precio Actual</span><span>$198.79</span></div>
+                <div class="metric"><span>RSI (Oversold)</span><span>16.7</span></div>
+                <div class="metric"><span>EV/EBITDA</span><span>14.5x</span></div>
+                <div class="trade-plan">
+                    <div class="metric"><span>Entrada</span><span>$198.79</span></div>
+                    <div class="metric"><span>Target (TP)</span><span>$208.73</span></div>
+                    <div class="metric"><span>Stop Loss</span><span>$192.83</span></div>
+                    <div class="metric"><span>R:R Ratio</span><span class="rr">1:2.3</span></div>
+                </div>
+            </div>
+
+            <!-- GOOGL -->
+            <div class="card">
+                <h3>Alphabet (GOOGL)</h3>
+                <div class="metric"><span>Precio Actual</span><span>$305.72</span></div>
+                <div class="metric"><span>RSI (Oversold)</span><span>23.4</span></div>
+                <div class="metric"><span>Free Cash Flow Yield</span><span>4.8%</span></div>
+                <div class="trade-plan">
+                    <div class="metric"><span>Entrada</span><span>$305.72</span></div>
+                    <div class="metric"><span>Target (TP)</span><span>$321.01</span></div>
+                    <div class="metric"><span>Stop Loss</span><span>$296.55</span></div>
+                    <div class="metric"><span>R:R Ratio</span><span class="rr">1:2.1</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="valuation-deep">
+            <h2>3. Valoración Fundamental: Microsoft (DCF Analysis)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Análisis de flujo de caja descontado proyectado a
+                5 años basado en expansión de márgenes por IA Generativa y crecimiento de Azure.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Escenario</th>
+                        <th>Crecimiento Rev.</th>
+                        <th>Margen EBITDA</th>
+                        <th>Valor Implícito (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: var(--success)">Optimista (25%)</td>
+                        <td>14%</td>
+                        <td>52%</td>
+                        <td>$485.20</td>
+                    </tr>
+                    <tr>
+                        <td>Base (50%)</td>
+                        <td>11%</td>
+                        <td>48%</td>
+                        <td>$432.15</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--danger)">Pesimista (25%)</td>
+                        <td>8%</td>
+                        <td>44%</td>
+                        <td>$378.50</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 2rem; background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px;">
+                <p><strong>Veredicto Goldman Sachs Style:</strong> La actual capitulación de precios ofrece un margen de
+                    seguridad del 8% respecto a nuestro escenario base. Recomendamos COMPRA FUERTE en el rango
+                    $395-$405.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Este informe es generado algorítmicamente con fines informativos. No constituye asesoramiento financiero.
+            </p>
+            <p>© 2026 Antigravity Markets | Institutional Intelligence</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

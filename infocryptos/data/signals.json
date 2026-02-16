@@ -1,0 +1,26 @@
+[
+    {
+        "id": "20260216_SOL-USD",
+        "date": "2026-02-16",
+        "ticker": "SOL",
+        "entry_price": 85.9374,
+        "status": "PENDING",
+        "notes": "RSI Oversold (33.8). Dip buy opportunity.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "target_price": 92.8124,
+        "stop_loss": 81.6405
+    },
+    {
+        "id": "20260216_BNB-USD",
+        "date": "2026-02-16",
+        "ticker": "BNB",
+        "entry_price": 618.1015,
+        "status": "PENDING",
+        "notes": "RSI Oversold (25.4). Dip buy opportunity.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "target_price": 667.5496,
+        "stop_loss": 587.1964
+    }
+]

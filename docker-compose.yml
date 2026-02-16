@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # Web Server (Nginx) - Running 24/7
+  web:
+    image: nginx:alpine
+    container_name: antigravity_web
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro # Mount current dir to serve index.html, signals.html
+      - ./reports:/usr/share/nginx/html/reports:ro # Explicitly mount reports just in case
+      - ./data:/usr/share/nginx/html/data:ro # Mount data for signals.json access
+
+  # Worker (Python) - Runs the daily schedule
+  worker:
+    build: .
+    container_name: antigravity_worker
+    restart: always
+    volumes:
+      - ./reports:/app/reports # Read/Write access to generate reports
+      - ./data:/app/data # Read/Write access to update signals
+    environment:
+      - PYTHONUNBUFFERED=1

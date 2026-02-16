@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex & Metals Intelligence - 2026-02-16</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #050A14;
+            --bg-secondary: #0F172A;
+            --accent: #E2E8F0;
+            --fx-green: #10B981;
+            --fx-red: #EF4444;
+            --gold: #D4AF37;
+            --silver: #A8A9AD;
+            --text-main: #F1F5F9;
+            --text-muted: #64748B;
+            --glass: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(226, 232, 240, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2.5rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 5rem;
+            text-align: right;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.04em;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .widget {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .widget h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 1.5rem;
+        }
+
+        .ticker {
+            font-size: 2rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .change {
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .up {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--fx-green);
+        }
+
+        .analysis-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1.5rem;
+        }
+
+        .metals-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .metal-card {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .metal-label {
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gold {
+            color: var(--gold);
+        }
+
+        .silver {
+            color: var(--silver);
+        }
+
+        .levels-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .levels-table th {
+            text-align: left;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            padding-bottom: 1rem;
+        }
+
+        .levels-table td {
+            font-family: 'Outfit', sans-serif;
+            padding: 1rem 0;
+            border-top: 1px solid var(--glass-border);
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 6rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        nav {
+            margin-bottom: 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav><a href="../index.html">← HUB PRINCIPAL</a></nav>
+
+        <header>
+            <h1>World Currency Insights</h1>
+            <p class="tagline">Global Macro & Foreign Exchange Desk • Feb 16, 2026</p>
+        </header>
+
+        <div class="metals-bar">
+            <div class="metal-card">
+                <span class="metal-label gold">GOLD (XAU/USD)</span>
+                <strong>$2,145.20 <span class="change up">+0.4%</span></strong>
+            </div>
+            <div class="metal-card">
+                <span class="metal-label silver">SILVER (XAG/USD)</span>
+                <strong>$24.58 <span class="change up">+0.2%</span></strong>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <!-- AUDUSD -->
+            <div class="widget">
+                <h2>Commodity Currencies • High Beta</h2>
+                <div class="price-row">
+                    <span class="ticker">AUD/USD</span>
+                    <span class="change up">BULLISH MOMENTUM</span>
+                </div>
+                <div class="analysis-text">
+                    El AUDUSD mantiene una estructura alcista sólida por encima de la SMA 50. La debilidad marginal del
+                    DXY y la mejora en los precios del hierro favorecen al Aussie. Buscamos continuación hacia niveles
+                    de 0.7150.
+                </div>
+                <table class="levels-table">
+                    <thead>
+                        <tr>
+                            <th>Entry</th>
+                            <th>Take Profit</th>
+                            <th>Stop Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.7086</td>
+                            <td style="color: var(--fx-green)">0.7143</td>
+                            <td style="color: var(--fx-red)">0.6789</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- NZDUSD -->
+            <div class="widget">
+                <h2>Oceanic Crosses • Risk-On</h2>
+                <div class="price-row">
+                    <span class="ticker">NZD/USD</span>
+                    <span class="change up">TREND CONTINUATION</span>
+                </div>
+                <div class="analysis-text">
+                    Correlación positiva con el AUD. El Kiwi se beneficia de un sentimiento 'Pro-Riesgo' en Asia. El
+                    soporte dinámico en la SMA 50 actúa como pivote institucional clave.
+                </div>
+                <table class="levels-table">
+                    <thead>
+                        <tr>
+                            <th>Entry</th>
+                            <th>Take Profit</th>
+                            <th>Stop Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.6043</td>
+                            <td style="color: var(--fx-green)">0.6092</td>
+                            <td style="color: var(--fx-red)">0.5863</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="widget" style="margin-top: 3rem;">
+            <h2>Desk Strategy: DXY Impact</h2>
+            <p style="color: var(--text-muted);">Mantenemos una perspectiva cautelosa pero optimista en los cruces
+                oceánicos. El DXY encuentra resistencia en la zona de 104.20. Cualquier quiebre por debajo de 103.50
+                acelerará los targets propuestos. Exposición recomendada: Media (1% riesgo).</p>
+        </div>
+
+        <div class="footer">
+            <p>Análisis generado algorítmicamente por Antigravity FX Engine. El mercado de divisas conlleva un alto
+                riesgo de apalancamiento.</p>
+            <p>© 2026 Antigravity Forex & Metals</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Señales - Antigravity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-main);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: var(--glass);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .status-badge.PENDING {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-badge.ACTIVE {
+            background: rgba(0, 242, 254, 0.2);
+            color: var(--primary);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        .status-badge.HIT_TARGET {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.HIT_STOP {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .ticker {
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .type-long {
+            color: var(--success);
+            font-size: 0.8rem;
+            padding: 0.1rem 0.4rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 0.3rem;
+        }
+
+        .type-short {
+            color: var(--danger);
+            font-size: 0.8rem;
+            padding: 0.1rem 0.4rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 0.3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">Antigravity Hub</a>
+            <nav>
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="#" class="nav-link active">Monitor de Señales</a>
+            </nav>
+        </header>
+
+        <h1 style="margin-bottom: 2rem;">Rendimiento de Señales (Últimos 7 Días)</h1>
+
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="win-rate">--%</div>
+                <div class="stat-label">Win Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-signals">--</div>
+                <div class="stat-label">Señales Totales</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="active-signals" style="color: var(--primary);">--</div>
+                <div class="stat-label">Activas / Pendientes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pnl-factor" style="color: var(--success);">--</div>
+                <div class="stat-label">Factor de Beneficio Est.</div>
+            </div>
+        </div>
+
+        <!-- Signals Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Ticker / Tipo</th>
+                        <th>Contexto</th>
+                        <th>Entrada</th>
+                        <th>Objetivo</th>
+                        <th>Stop</th>
+                        <th>Estado</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody id="signals-body">
+                    <!-- Javascript will populate this -->
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 3rem; color: var(--text-muted);">Cargando
+                            señales...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to load and display signals
+        async function loadSignals() {
+            try {
+                const response = await fetch('data/signals.json');
+                const signals = await response.json();
+
+                const tbody = document.getElementById('signals-body');
+                tbody.innerHTML = '';
+
+                let wins = 0;
+                let losses = 0;
+                let active = 0;
+                let totalClosed = 0;
+
+                // Sort by date descending
+                signals.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                signals.forEach(signal => {
+                    // Update stats
+                    if (signal.status === 'HIT_TARGET') { wins++; totalClosed++; }
+                    if (signal.status === 'HIT_STOP') { losses++; totalClosed++; }
+                    if (signal.status === 'PENDING' || signal.status === 'ACTIVE') active++;
+
+                    const tr = document.createElement('tr');
+
+                    // Determine type tag
+                    const typeTag = signal.type === 'LONG'
+                        ? '<span class="type-long">L</span>'
+                        : '<span class="type-short">S</span>';
+
+                    tr.innerHTML = `
+                        <td>${signal.date}</td>
+                        <td>
+                            <div class="ticker">
+                                ${signal.ticker}
+                                ${typeTag}
+                            </div>
+                        </td>
+                        <td style="color: var(--text-muted); font-size: 0.85rem;">${signal.context}</td>
+                        <td style="font-weight: 600;">$${signal.entry_price}</td>
+                        <td style="color: var(--success);">$${signal.target_price}</td>
+                        <td style="color: var(--danger);">$${signal.stop_loss}</td>
+                        <td><span class="status-badge ${signal.status}">${signal.status.replace('_', ' ')}</span></td>
+                        <td style="color: var(--text-muted); font-size: 0.85rem; max-width: 250px;">${signal.notes}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // Update Stats Display
+                const winRate = totalClosed > 0 ? Math.round((wins / totalClosed) * 100) : 0;
+
+                document.getElementById('total-signals').textContent = signals.length;
+                document.getElementById('active-signals').textContent = active;
+                document.getElementById('win-rate').textContent = winRate + '%';
+                // Placeholder calc for PnL factor (simulation)
+                document.getElementById('pnl-factor').textContent = totalClosed > 0 ? '1:2.1' : '-';
+
+            } catch (error) {
+                console.error('Error loading signals:', error);
+                document.getElementById('signals-body').innerHTML = `
+                    <tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">Error cargando data/signals.json. Asegúrate de estar ejecutando esto en un servidor local (Localhost) o ajusta las políticas CORS.</td></tr>
+                `;
+            }
+        }
+
+        loadSignals();
+    </script>
+</body>
+
+</html>
