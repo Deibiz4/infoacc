@@ -2,6 +2,14 @@ import os
 import datetime
 import locale
 from bs4 import BeautifulSoup
+import sys
+
+# Configure stdout/stderr encoding for Windows console compatibility
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
 
 # Configure locale for Spanish dates
 try:
@@ -16,15 +24,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX_PATH = os.path.join(BASE_DIR, 'index.html')
 REPORTS_DIR = os.path.join(BASE_DIR, 'reports')
 
-def get_latest_report():
-    """Find the most recent HTML report file."""
+def get_all_reports():
+    """Find all HTML report files, sorted descending by date."""
+    if not os.path.exists(REPORTS_DIR):
+        return []
     files = [f for f in os.listdir(REPORTS_DIR) if f.startswith('daily_market_report_') and f.endswith('.html')]
-    if not files:
-        return None
-    
-    # Sort by date (filename contains date YYYY_MM_DD)
+    # Sort descending (e.g. 2026_07_16 first, 2026_02_16 last)
     files.sort(reverse=True)
-    return files[0]
+    return files
 
 def update_hub():
     print("🌐 Updating Web Hub (index.html)...")
@@ -33,19 +40,19 @@ def update_hub():
         print(f"❌ Error: {INDEX_PATH} not found.")
         return False
 
-    latest_report_file = get_latest_report()
-    if not latest_report_file:
+    all_reports = get_all_reports()
+    if not all_reports:
          print("⚠️ No reports found to update index.")
          return False
          
+    latest_report_file = all_reports[0]
     print(f"📄 Latest Report Found: {latest_report_file}")
 
     # Parse Date from Filename
-    # daily_market_report_2026_02_16.html
     try:
         date_str = latest_report_file.replace('daily_market_report_', '').replace('.html', '')
         report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-        formatted_date = report_date.strftime("%d de %B, %Y").title() # "16 De Febrero, 2026"
+        formatted_date = report_date.strftime("%d de %B, %Y").title()
     except Exception as e:
         print(f"⚠️ Error parsing date: {e}")
         formatted_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -53,47 +60,9 @@ def update_hub():
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
 
-    latest_card = None
-    
-    # --- 1. Archive Previous Latest Report ---
-    # Find the CURRENT "Latest Report" card by ID
     latest_card = soup.find('a', id='latest-report-stock')
-            
-    if latest_card:
-        
-        if latest_card and 'daily_market_report' in latest_card['href']:
-            old_href = latest_card['href']
-            old_title = latest_card.find('span', class_='report-title').text.strip()
-            old_date_text = latest_card.find('span', class_='report-date').text.strip()
-            
-            # Check if this old report is already in the archive to avoid dupes
-            archive_list = soup.find('ul', id='archive-stock')
-            if archive_list:
-                existing_links = [a['href'] for a in archive_list.find_all('a')]
-                
-                # Only archive if it's NOT the same as the NEW report we are about to set
-                # and NOT already in archive
-                new_href_relative = f"reports/{latest_report_file}"
-                
-                if old_href != new_href_relative and old_href not in existing_links:
-                    print(f"📦 Archiving previous report: {old_href}")
-                    
-                    new_item = soup.new_tag('li', attrs={'class': 'archive-item'})
-                    
-                    link = soup.new_tag('a', href=old_href)
-                    
-                    date_span = soup.new_tag('span', attrs={'class': 'archive-date'})
-                    date_span.string = old_date_text
-                    
-                    link.append(date_span)
-                    link.append(f" {old_title}") # Simple text append for title part
-                    
-                    new_item.append(link)
-                    
-                    # Prepend to list
-                    archive_list.insert(0, new_item)
-
-    # --- 2. Update Latest Report Section ---
+    
+    # --- 1. Update Latest Report Section ---
     if latest_card:
         # Update Href
         latest_card['href'] = f"reports/{latest_report_file}"
@@ -102,7 +71,7 @@ def update_hub():
         date_elem = latest_card.find('span', class_='report-date')
         if date_elem: date_elem.string = formatted_date
         
-        # Update Title (Static for now, or extract from Report content if we wanted strictly)
+        # Update Title
         title_elem = latest_card.find('span', class_='report-title')
         if title_elem: title_elem.string = "Informe Diario - Market Scan & Value"
         
@@ -112,6 +81,59 @@ def update_hub():
             summary_elem.string = "Análisis actualizado con datos reales de mercado. Oportunidades Value (RSI) y Momentum detectadas por el escáner."
     else:
         print("⚠️ Warning: Could not find 'Latest Report' card to update.")
+
+    # --- 2. Rebuild Archive List ---
+    archive_list = soup.find('ul', id='archive-stock')
+    if archive_list:
+        # Clear existing items
+        archive_list.clear()
+        
+        # Populate with the rest of reports
+        for report_file in all_reports[1:]:
+            try:
+                date_str = report_file.replace('daily_market_report_', '').replace('.html', '')
+                report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
+                formatted_date = report_date.strftime("%d de %B, %Y").title()
+            except Exception as e:
+                formatted_date = date_str
+            
+            new_item = soup.new_tag('li', attrs={'class': 'archive-item'})
+            link = soup.new_tag('a', href=f"reports/{report_file}")
+            
+            date_span = soup.new_tag('span', attrs={'class': 'archive-date'})
+            date_span.string = formatted_date
+            
+            link.append(date_span)
+            link.append(f" Informe Diario - Market Scan & Value")
+            new_item.append(link)
+            archive_list.append(new_item)
+            
+        print(f"📦 Archive list rebuilt with {len(all_reports[1:])} reports.")
+
+    # --- 3. Inject Signals Data to signals.html (for local file:// compatibility) ---
+    signals_html_path = os.path.join(BASE_DIR, 'signals.html')
+    signals_json_path = os.path.join(BASE_DIR, 'data', 'signals.json')
+    if os.path.exists(signals_html_path) and os.path.exists(signals_json_path):
+        try:
+            with open(signals_json_path, 'r', encoding='utf-8') as sf:
+                raw_json = sf.read()
+            with open(signals_html_path, 'r', encoding='utf-8') as shf:
+                html_content = shf.read()
+            
+            # Find window.SIGNALS_DATA = [...]; and replace it
+            import re
+            pattern = r'window\.SIGNALS_DATA\s*=\s*\[.*?\];'
+            replacement = f'window.SIGNALS_DATA = {raw_json.strip()};'
+            updated_html, count = re.subn(pattern, replacement, html_content, flags=re.DOTALL)
+            
+            if count > 0:
+                with open(signals_html_path, 'w', encoding='utf-8') as shf:
+                    shf.write(updated_html)
+                print("💉 Injected dynamic signals database into signals.html successfully.")
+            else:
+                print("⚠️ Pattern window.SIGNALS_DATA not found in signals.html.")
+        except Exception as je:
+            print(f"⚠️ Error injecting data to signals.html: {je}")
 
     # Save changes
     with open(INDEX_PATH, 'w', encoding='utf-8') as f:

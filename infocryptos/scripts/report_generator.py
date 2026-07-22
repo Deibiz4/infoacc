@@ -198,48 +198,44 @@ def fetch_macro_data():
 def generate_signal_card(signal, is_momentum=False):
     ticker = signal.get("ticker")
     price = signal.get("entry_price")
-    entry = f"${price:.2f}"
-    stop = f"${signal.get('stop_loss'):.2f}"
-    target = f"${signal.get('target_price'):.2f}"
+    entry = f"${price:.4g}"
+    stop = f"${signal.get('stop_loss'):.4g}"
+    target = f"${signal.get('target_price'):.4g}"
     notes = signal.get("notes")
-    
-    # Calculate R:R
+    direction = signal.get("type", "LONG").upper()
+    context = signal.get("context", "")
+
+    # Calculate R:R (handles both LONG and SHORT)
     try:
-        risk = price - signal.get("stop_loss")
-        reward = signal.get("target_price") - price
+        risk = abs(price - signal.get("stop_loss"))
+        reward = abs(signal.get("target_price") - price)
         rr_ratio = reward / risk if risk > 0 else 0
         rr_text = f"1:{rr_ratio:.1f}"
     except:
         rr_text = "N/A"
 
-    badge_html = ""
-    card_style = "card plan-card"
-    
-    if is_momentum:
-        card_style = "card" # Base card
-        border_color = "var(--warning)"
-        badge_text = "MOMENTUM"
-        badge_bg = "var(--warning)"
-        
-        if "BREAKOUT" in signal.get("context", ""):
-            badge_text = "BREAKOUT"
-            badge_bg = "var(--success)"
-            border_color = "var(--success)"
-        elif "SHORT" in signal.get("type", ""):
-             badge_text = "SHORT"
-             badge_bg = "var(--danger)"
-             border_color = "var(--danger)"
-             
-        card_style += f'" style="border-left: 4px solid {border_color};'
-        badge_html = f'<span class="badge" style="background: {badge_bg};">{badge_text}</span>'
+    # Direction badge and card border
+    if direction == "SHORT":
+        dir_badge_style = "background: var(--danger); color: white;"
+        card_border = "border-left: 4px solid var(--danger);"
+        dir_icon = "&#9660; SHORT"
+        rr_color = "var(--danger)"
     else:
-        # Value Style
-         badge_html = f'<small style="color: var(--text-secondary)">Value / Reversal</small>'
+        dir_badge_style = "background: var(--success); color: white;"
+        card_border = "border-left: 4px solid var(--success);"
+        dir_icon = "&#9650; LONG"
+        rr_color = "var(--success)"
+
+    context_label = context.replace("_", " ").title()
 
     html = f"""
-            <div class="{card_style}">
+            <div class="card plan-card" style="{card_border}">
                 <div class="plan-header">
-                    <h3>{ticker} {badge_html}</h3>
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">{ticker}</h3>
+                        <span style="{dir_badge_style} font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">{dir_icon}</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">{context_label}</span>
+                    </div>
                     <span class="plan-price">{entry}</span>
                 </div>
                 <p class="metric-context">{notes}</p>
@@ -253,12 +249,12 @@ def generate_signal_card(signal, is_momentum=False):
                         <span class="level-value">{stop}</span>
                     </div>
                     <div class="target">
-                        <span class="level-label">Target 1</span>
+                        <span class="level-label">Target</span>
                         <span class="level-value">{target}</span>
                     </div>
                 </div>
                 <div style="margin-top: 1rem; text-align: right;">
-                    <span class="risk-reward">R:R {rr_text}</span>
+                    <span class="risk-reward" style="background: {rr_color}20; color: {rr_color}; border: 1px solid {rr_color}40;">R:R {rr_text}</span>
                 </div>
             </div>
     """
@@ -286,23 +282,25 @@ def generate_risk_section():
 
 def generate_html_report(signals, macro):
     today_str = datetime.datetime.now().strftime("%d de %B de %Y")
-    
-    # Categorize Signals
-    value_signals = [s for s in signals if "VALUE" in s.get("context", "VALUE")]
-    momentum_signals = [s for s in signals if "MOMENTUM" in s.get("context", "")]
-    
-    # Fallback if all are categorized as one type or untyped
-    if not momentum_signals and len(value_signals) > 5:
-        # Move some high volatility ones to momentum if we can measure it, 
-        # or just split list for visual balance
-        pass 
 
-    # Generate Cards HTML
-    value_cards_html = "".join([generate_signal_card(s, False) for s in value_signals])
-    momentum_cards_html = "".join([generate_signal_card(s, True) for s in momentum_signals])
-    
-    if not value_cards_html: value_cards_html = "<p class='metric-context'>No se encontraron oportunidades de valor hoy.</p>"
-    if not momentum_cards_html: momentum_cards_html = "<p class='metric-context'>No se encontraron oportunidades de momentum/breakout hoy.</p>"
+    # Split by direction
+    long_signals = [s for s in signals if s.get("type", "LONG").upper() == "LONG"]
+    short_signals = [s for s in signals if s.get("type", "LONG").upper() == "SHORT"]
+
+    long_cards_html = "".join([generate_signal_card(s, False) for s in long_signals])
+    short_cards_html = "".join([generate_signal_card(s, False) for s in short_signals])
+
+    if not long_cards_html:
+        long_cards_html = "<p class='metric-context'>No se encontraron oportunidades LONG hoy.</p>"
+    if not short_cards_html:
+        short_cards_html = "<p class='metric-context'>No se encontraron oportunidades SHORT hoy.</p>"
+
+    vix_level = "BAJO"
+    try:
+        vix_val = float(macro.get('vix') or 0)
+        vix_level = "ALTO" if vix_val > 20 else "MODERADO" if vix_val > 15 else "BAJO"
+    except:
+        pass
 
     html = f"""<!DOCTYPE html>
 <html lang="es">
@@ -318,21 +316,24 @@ def generate_html_report(signals, macro):
 <body>
 
 <div class="container">
-    <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border);">
-        <a href="../../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">← Volver al Hub</a>
+    <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border); display:flex; justify-content:space-between;">
+        <a href="../../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Volver al Hub</a>
+        <a href="../../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 Ver Analytics & Win Rate</a>
     </nav>
 
     <header>
         <h1>Informe Mercado Crypto</h1>
-        <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 3rem;">{today_str}</p>
+        <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 1rem;">{today_str}</p>
+        <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem;">
+            <span style="background:#10b98122; color:#10b981; border:1px solid #10b98144; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9650; {len(long_signals)} LONG</span>
+            <span style="background:#ef444422; color:#ef4444; border:1px solid #ef444444; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9660; {len(short_signals)} SHORT</span>
+            <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">VIX {macro['vix']} &bull; {vix_level}</span>
+        </div>
     </header>
 
     <!-- SECTION 1: MACRO -->
     <section>
-        <h2>1. Contexto Macro & Sentiment</h2>
-        <div class="card">
-            <p>Datos en tiempo real de los principales indicadores de riesgo. El VIX en <strong>{macro['vix']}</strong> sugiere un entorno de <span style="color:{macro['vix_color']}">riesgo {("ALTO" if float(macro['vix'] or 0) > 20 else "MODERADO" if float(macro['vix'] or 0) > 15 else "BAJO")}</span> para activos de riesgo como Crypto.</p>
-        </div>
+        <h2>1. Contexto Macro &amp; Sentiment</h2>
         <div class="details-grid">
             <div class="card">
                 <h3>VIX (Volatilidad)</h3>
@@ -344,40 +345,38 @@ def generate_html_report(signals, macro):
                 <span class="metric-value">{macro['tnx']}</span>
                 <span class="metric-context">{macro['tnx_change']} Yield</span>
             </div>
-             <div class="card">
-                <h3>DXY (Dólar)</h3>
+            <div class="card">
+                <h3>DXY (Dolar)</h3>
                 <span class="metric-value">{macro['dxy']}</span>
                 <span class="metric-context">{macro['dxy_change']} Fuerza USD</span>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: VALUE PLAYS -->
+    <!-- SECTION 2: LONG SIGNALS -->
     <section>
-        <h2>2. Value Plays: Oversold Bounce</h2>
-        <p style="color: var(--text-secondary)">Selección de criptos infravaloradas (RSI Oversold) con potencial rebote.</p>
-        
+        <h2 style="color: #10b981;">&#9650; 2. Senales LONG &mdash; Compra / Alcista</h2>
+        <p style="color: var(--text-secondary);">Criptos con sobreventa, momentum alcista o acumulacion sobre SMA50.</p>
         <div class="plan-grid">
-            {value_cards_html}
+            {long_cards_html}
         </div>
     </section>
 
-    <!-- SECTION 3: MOMENTUM -->
+    <!-- SECTION 3: SHORT SIGNALS -->
     <section>
-        <h2>3. Momentum & Breakouts</h2>
-         <p style="color: var(--text-secondary)">Criptos con fuerza relativa y patrones de ruptura.</p>
-        
-        <div class="details-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-            {momentum_cards_html}
+        <h2 style="color: #ef4444;">&#9660; 3. Senales SHORT &mdash; Venta / Bajista</h2>
+        <p style="color: var(--text-secondary);">Criptos en sobrecompra extrema o ruptura bajista bajo SMA50.</p>
+        <div class="plan-grid">
+            {short_cards_html}
         </div>
     </section>
 
     <!-- SECTION 4: RISK MANAGEMENT -->
     <section>
-        <h2>4. Gestión de Riesgo Crypto</h2>
+        <h2>4. Gestion de Riesgo Crypto</h2>
         <div class="card" style="border-left: 4px solid var(--accent-color);">
             <ul>
-                <li><strong>Volatilidad:</strong> Crypto es 3x más volátil que Stocks. Reduce el tamaño de posición acorde.</li>
+                <li><strong>Volatilidad:</strong> Crypto es 3x mas volatil que Stocks. Reduce el tamano de posicion acorde.</li>
                 <li><strong>Custodia:</strong> "Not your keys, not your coins". Retira ganancias a Cold Storage.</li>
                 <li><strong>Stop Loss:</strong> Obligatorio. El mercado 24/7 no perdona.</li>
             </ul>
@@ -386,15 +385,15 @@ def generate_html_report(signals, macro):
 
     <!-- SECTION 5: SIGNALS AUDIT -->
     <section>
-        <h2>5. Auditoría</h2>
+        <h2>5. Auditoria</h2>
         <div class="card">
-            <p>Señales generadas algorítmicamente y auditadas en tiempo real.</p>
-            <p><small style="color: var(--text-secondary)">Total Señales Hoy: {len(signals)}</small></p>
+            <p>Senales generadas algoritmicamente y auditadas en tiempo real.</p>
+            <p><small style="color: var(--text-secondary)">Total Senales Hoy: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
         </div>
     </section>
 
     <div class="footer">
-        <p>Generado por Antigravity Crypto System • {today_str}</p>
+        <p>Generado por Antigravity Crypto System &bull; {today_str}</p>
     </div>
 </div>
 
@@ -410,7 +409,23 @@ def run_generator(signals_file, output_dir):
         os.makedirs(output_dir)
 
     with open(signals_file, 'r', encoding='utf-8') as f:
-        signals = json.load(f)
+        all_signals = json.load(f)
+        
+    today_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    
+    # Filter to only display PENDING or ACTIVE signals
+    open_signals = [
+        s for s in all_signals 
+        if s.get("status") in ["PENDING", "ACTIVE"]
+    ]
+    
+    # De-duplicate: Keep only the most recent signal for each ticker
+    unique_signals = {}
+    for s in open_signals:
+        ticker = s.get("ticker")
+        unique_signals[ticker] = s
+        
+    signals = list(unique_signals.values())
         
     macro = fetch_macro_data()
     

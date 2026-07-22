@@ -12,7 +12,7 @@ SIGNALS_FILE = os.path.join(DATA_DIR, 'signals.json')
 TICKERS = [
     "BTC-USD", "ETH-USD", "SOL-USD", "BNB-USD", "XRP-USD",
     "ADA-USD", "DOGE-USD", "AVAX-USD", "DOT-USD", "LINK-USD",
-    "TRX-USD", "MATIC-USD", "SHIB-USD", "LTC-USD", "BCH-USD"
+    "TRX-USD", "NEAR-USD", "SHIB-USD", "LTC-USD", "BCH-USD"
 ]
 MAX_HISTORY = "1y"
 
@@ -61,7 +61,10 @@ def generate_signal(ticker, df):
         "notes": ""
     }
     
-    # Strategies (Simplified for Crypto Volatility)
+    # Strategies (Bidirectional for Crypto)
+
+    # ---- LONG STRATEGIES ----
+
     # 1. RSI Oversold (Value Play)
     if rsi < 35: # Crypto runs hotter/colder
         signal["type"] = "LONG"
@@ -70,7 +73,7 @@ def generate_signal(ticker, df):
         signal["stop_loss"] = round(price * 0.95, 4)
         signal["notes"] = f"RSI Oversold ({rsi:.1f}). Dip buy opportunity."
         return signal
-        
+
     # 2. Momentum / Breakout
     elif price > sma50 and rsi > 55 and rsi < 75:
         signal["type"] = "LONG"
@@ -80,15 +83,50 @@ def generate_signal(ticker, df):
         signal["notes"] = "Above SMA 50 with strong momentum."
         return signal
 
+    # ---- SHORT STRATEGIES ----
+
+    # 3. RSI Overbought (Mean Reversion Short)
+    elif rsi > 75: # Higher threshold for crypto's natural volatility
+        signal["type"] = "SHORT"
+        signal["context"] = "OVERBOUGHT_REJECTION"
+        signal["target_price"] = round(price * 0.92, 4)  # target: -8%
+        signal["stop_loss"] = round(price * 1.05, 4)     # stop: +5%
+        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Mean reversion short opportunity."
+        return signal
+
+    # 4. SMA 50 Breakdown (Bearish Momentum)
+    elif price < sma50 and rsi < 45:
+        signal["type"] = "SHORT"
+        signal["context"] = "BREAKDOWN_SHORT"
+        signal["target_price"] = round(price * 0.90, 4)  # target: -10%
+        signal["stop_loss"] = round(sma50 * 1.02, 4)     # stop: just above SMA50
+        signal["notes"] = "Below SMA 50 with bearish pressure. Short momentum."
+        return signal
+
     return None
 
 def scan_market():
-    print(f"🔍 Scanning {len(TICKERS)} tickers...")
+    print(f"Scanning {len(TICKERS)} tickers...")
     
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)
 
-    signals = []
+    # Load existing signals to keep history/active state and prevent duplicates
+    existing_signals = []
+    active_or_pending_tickers = set()
+    if os.path.exists(SIGNALS_FILE):
+        try:
+            with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                existing_signals = json.load(f)
+                active_or_pending_tickers = {
+                    s.get("ticker") for s in existing_signals 
+                    if s.get("status") in ["PENDING", "ACTIVE"]
+                }
+        except Exception as e:
+            print(f"⚠️ Error loading existing signals: {e}")
+            existing_signals = []
+
+    new_signals = []
     market_data_rows = []
     
     # Bulk download for speed
@@ -104,14 +142,17 @@ def scan_market():
             # Calc Indicators
             df = calculate_indicators(df)
             
-            # 1. Generate Signal Logic
-            sig = generate_signal(ticker, df)
-            if sig:
-                signals.append(sig)
+            # 1. Generate Signal Logic (Only if ticker has no active/pending signal)
+            clean_ticker = ticker.replace("-USD", "")
+            if clean_ticker in active_or_pending_tickers:
+                print(f"⏭️ Skipping {clean_ticker}: Already has an active or pending signal.")
+            else:
+                sig = generate_signal(ticker, df)
+                if sig:
+                    new_signals.append(sig)
             
             # 2. Prepare CSV Row (Google Sheets formula)
             # Use "CURRENCY:BTCUSD" for Google Finance
-            clean_ticker = ticker.replace("-USD", "")
             sheet_ticker = f"CURRENCY:{clean_ticker}USD"
             
             # Adapted Columns for Crypto
@@ -133,13 +174,14 @@ def scan_market():
             market_data_rows.append(csv_row)
             
         except Exception as e:
-            print(f"⚠️ Error processing {ticker}: {e}")
+            print(f"Error processing {ticker}: {e}")
             continue
 
-    # Save Signals JSON
-    print(f"✅ Found {len(signals)} signals.")
+    # Combine existing and new signals
+    combined_signals = existing_signals + new_signals
+    print(f"Found {len(new_signals)} new signals. Total historical/active signals: {len(combined_signals)}")
     with open(SIGNALS_FILE, 'w', encoding='utf-8') as f:
-        json.dump(signals, f, indent=4)
+        json.dump(combined_signals, f, indent=4)
         
     # Save CSV for Sheets
     headers = [
@@ -152,7 +194,7 @@ def scan_market():
         writer.writerow(headers)
         writer.writerows(market_data_rows)
         
-    print(f"✅ Exported Market Scan to {CSV_FILE}")
+    print(f"Exported Market Scan to {CSV_FILE}")
 
 if __name__ == "__main__":
     scan_market()

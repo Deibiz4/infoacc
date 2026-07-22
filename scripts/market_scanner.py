@@ -65,7 +65,9 @@ def generate_signal(ticker, df):
     }
     
     # --- Strategies ---
-    
+
+    # ---- LONG STRATEGIES ----
+
     # 1. RSI Oversold (Value Play)
     if rsi < 30:
         signal["type"] = "LONG"
@@ -74,7 +76,7 @@ def generate_signal(ticker, df):
         signal["stop_loss"] = round(price * 0.97, 2)
         signal["notes"] = f"RSI Oversold ({rsi:.1f}). Rebound potential."
         return signal
-        
+
     # 2. SMA 50 Breakout (Momentum)
     elif price > sma50 and prev_row['Close'] <= prev_row['SMA_50']:
         signal["type"] = "LONG"
@@ -83,7 +85,7 @@ def generate_signal(ticker, df):
         signal["stop_loss"] = round(price * 0.95, 2)
         signal["notes"] = "SMA 50 Breakout. Bullish momentum."
         return signal
-    
+
     # 3. Pullback to SMA 50 (Trend Continuation)
     elif price > sma50 and price < sma50 * 1.02 and rsi > 40 and rsi < 60:
         signal["type"] = "LONG"
@@ -93,12 +95,47 @@ def generate_signal(ticker, df):
         signal["notes"] = "Pullback to SMA 50 support."
         return signal
 
+    # ---- SHORT STRATEGIES ----
+
+    # 4. RSI Overbought (Mean Reversion Short)
+    elif rsi > 70:
+        signal["type"] = "SHORT"
+        signal["context"] = "OVERBOUGHT_REJECTION"
+        signal["target_price"] = round(price * 0.95, 2)  # target: -5%
+        signal["stop_loss"] = round(price * 1.03, 2)     # stop: +3%
+        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Mean reversion short opportunity."
+        return signal
+
+    # 5. SMA 50 Breakdown (Bearish Momentum)
+    elif price < sma50 and prev_row['Close'] >= prev_row['SMA_50']:
+        signal["type"] = "SHORT"
+        signal["context"] = "BREAKDOWN_SHORT"
+        signal["target_price"] = round(price * 0.92, 2)  # target: -8%
+        signal["stop_loss"] = round(price * 1.05, 2)     # stop: +5%
+        signal["notes"] = "SMA 50 Breakdown. Bearish momentum confirmed."
+        return signal
+
     return None
 
 def scan_market():
-    print(f"🔍 Scanning {len(TICKERS)} tickers...")
+    print(f"Scanning {len(TICKERS)} tickers...")
     
-    signals = []
+    # Load existing signals to keep history/active state and prevent duplicates
+    existing_signals = []
+    active_or_pending_tickers = set()
+    if os.path.exists(SIGNALS_FILE):
+        try:
+            with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                existing_signals = json.load(f)
+                active_or_pending_tickers = {
+                    s.get("ticker") for s in existing_signals 
+                    if s.get("status") in ["PENDING", "ACTIVE"]
+                }
+        except Exception as e:
+            print(f"⚠️ Error loading existing signals: {e}")
+            existing_signals = []
+    
+    new_signals = []
     market_data_rows = []
     
     # Bulk download for speed
@@ -115,10 +152,13 @@ def scan_market():
             df = calculate_indicators(df)
             last_row = df.iloc[-1]
             
-            # 1. Generate Signal Logic
-            sig = generate_signal(ticker, df)
-            if sig:
-                signals.append(sig)
+            # 1. Generate Signal Logic (Only if ticker has no active/pending signal)
+            if ticker in active_or_pending_tickers:
+                print(f"⏭️ Skipping {ticker}: Already has an active or pending signal.")
+            else:
+                sig = generate_signal(ticker, df)
+                if sig:
+                    new_signals.append(sig)
             
             # 2. Prepare CSV Row (Google Sheets format)
             # Ticker;Name;Price;Change%;Sparkline;Entry;Target;Stop;Date;Status;Type;Notes
@@ -156,13 +196,14 @@ def scan_market():
             market_data_rows.append(csv_row)
             
         except Exception as e:
-            print(f"⚠️ Error processing {ticker}: {e}")
+            print(f"Error processing {ticker}: {e}")
             continue
 
-    # Save Signals JSON
-    print(f"✅ Found {len(signals)} signals.")
+    # Combine existing and new signals
+    combined_signals = existing_signals + new_signals
+    print(f"Found {len(new_signals)} new signals. Total historical/active signals: {len(combined_signals)}")
     with open(SIGNALS_FILE, 'w', encoding='utf-8') as f:
-        json.dump(signals, f, indent=4)
+        json.dump(combined_signals, f, indent=4)
         
     # Save CSV for Sheets
     headers = [
@@ -176,7 +217,7 @@ def scan_market():
         writer.writerow(headers)
         writer.writerows(market_data_rows)
         
-    print(f"✅ Exported Market Scan to {CSV_FILE}")
+    print(f"Exported Market Scan to {CSV_FILE}")
 
 if __name__ == "__main__":
     scan_market()

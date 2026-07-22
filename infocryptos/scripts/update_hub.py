@@ -2,6 +2,14 @@ import os
 import datetime
 import locale
 from bs4 import BeautifulSoup
+import sys
+
+# Configure stdout/stderr encoding for Windows console compatibility
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
 
 # Configure locale for Spanish dates
 try:
@@ -13,20 +21,18 @@ except:
         print("⚠️ Warning: Spanish locale not found. Dates might be in English.")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-INDEX_PATH = os.path.join(BASE_DIR, '..', 'index.html')
+INDEX_PATH = os.path.abspath(os.path.join(BASE_DIR, '..', 'index.html'))
 REPORTS_DIR = os.path.join(BASE_DIR, 'reports')
-# The path relative to the PARENT index.html
 RELATIVE_REPORT_PATH = "infocryptos/reports"
 
-def get_latest_report():
-    """Find the most recent HTML report file."""
+def get_all_reports():
+    """Find all HTML report files, sorted descending by date."""
+    if not os.path.exists(REPORTS_DIR):
+        return []
     files = [f for f in os.listdir(REPORTS_DIR) if f.startswith('crypto_market_report_') and f.endswith('.html')]
-    if not files:
-        return None
-    
-    # Sort by date (filename contains date YYYY_MM_DD)
+    # Sort descending
     files.sort(reverse=True)
-    return files[0]
+    return files
 
 def update_hub():
     print(f"🌐 Updating Web Hub Control ({INDEX_PATH})...")
@@ -35,11 +41,12 @@ def update_hub():
         print(f"❌ Error: {INDEX_PATH} not found.")
         return False
 
-    latest_report_file = get_latest_report()
-    if not latest_report_file:
+    all_reports = get_all_reports()
+    if not all_reports:
          print("⚠️ No reports found to update index.")
          return False
          
+    latest_report_file = all_reports[0]
     print(f"📄 Latest Report Found: {latest_report_file}")
 
     # Parse Date
@@ -54,39 +61,11 @@ def update_hub():
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
 
-    # --- Find Crypto Section ---
     latest_card = soup.find('a', id='latest-report-crypto')
             
+    # --- 1. Update Card ---
     if latest_card:
-        # Check if archiving is needed
-        # If the link currently points to a DIFFERENT crypto report, archieve it?
-        # The main hub archive usually mixes everything or we might want separate archives.
-        # For now, let's just update the "Latest" card. 
-        # If we want to add to the shared archive list, we can.
-        
-        old_href = latest_card.get('href', '#')
-        old_title = latest_card.find('span', class_='report-title').text.strip()
-        old_date_text = latest_card.find('span', class_='report-date').text.strip()
-        
-        new_href = f"{RELATIVE_REPORT_PATH}/{latest_report_file}"
-        
-        # Archive logic (Shared List)
-        archive_list = soup.find('ul', id='archive-crypto')
-        if archive_list and 'crypto_market_report' in old_href and old_href != new_href:
-             existing_links = [a['href'] for a in archive_list.find_all('a')]
-             if old_href not in existing_links:
-                print(f"📦 Archiving previous crypto report: {old_href}")
-                new_item = soup.new_tag('li', attrs={'class': 'archive-item'})
-                link = soup.new_tag('a', href=old_href)
-                date_span = soup.new_tag('span', attrs={'class': 'archive-date'})
-                date_span.string = old_date_text
-                link.append(date_span)
-                link.append(f" {old_title}")
-                new_item.append(link)
-                archive_list.insert(0, new_item)
-
-        # Update Card
-        latest_card['href'] = new_href
+        latest_card['href'] = f"{RELATIVE_REPORT_PATH}/{latest_report_file}"
         
         date_elem = latest_card.find('span', class_='report-date')
         if date_elem: date_elem.string = formatted_date
@@ -97,15 +76,68 @@ def update_hub():
         summary_elem = latest_card.find('span', class_='report-summary')
         if summary_elem: 
             summary_elem.string = "Análisis de Volatilidad, RSI y Momentum para BTC, ETH y Altcoins principales."
-            
-        print("✅ Crypto Section updated in Main Hub.")
-        
-        with open(INDEX_PATH, 'w', encoding='utf-8') as f:
-            f.write(str(soup))
-        return True
     else:
         print("⚠️ Warning: Could not find '#latest-report-crypto' in main index.")
-        return False
+
+    # --- 2. Rebuild Archive List ---
+    archive_list = soup.find('ul', id='archive-crypto')
+    if archive_list:
+        # Clear existing items
+        archive_list.clear()
+        
+        # Populate with the rest of reports
+        for report_file in all_reports[1:]:
+            try:
+                date_str = report_file.replace('crypto_market_report_', '').replace('.html', '')
+                report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
+                formatted_date = report_date.strftime("%d de %B, %Y").title()
+            except Exception as e:
+                formatted_date = date_str
+            
+            new_item = soup.new_tag('li', attrs={'class': 'archive-item'})
+            link = soup.new_tag('a', href=f"{RELATIVE_REPORT_PATH}/{report_file}")
+            
+            date_span = soup.new_tag('span', attrs={'class': 'archive-date'})
+            date_span.string = formatted_date
+            
+            link.append(date_span)
+            link.append(f" Informe Diario - Crypto Intelligence")
+            new_item.append(link)
+            archive_list.append(new_item)
+            
+        print(f"📦 Crypto archive list rebuilt with {len(all_reports[1:])} reports.")
+
+    # --- 3. Inject Signals Data to signals.html (for local file:// compatibility) ---
+    signals_html_path = os.path.join(BASE_DIR, 'signals.html')
+    signals_json_path = os.path.join(BASE_DIR, 'data', 'signals.json')
+    if os.path.exists(signals_html_path) and os.path.exists(signals_json_path):
+        try:
+            with open(signals_json_path, 'r', encoding='utf-8') as sf:
+                raw_json = sf.read()
+            with open(signals_html_path, 'r', encoding='utf-8') as shf:
+                html_content = shf.read()
+            
+            # Find window.SIGNALS_DATA = [...]; and replace it
+            import re
+            pattern = r'window\.SIGNALS_DATA\s*=\s*\[.*?\];'
+            replacement = f'window.SIGNALS_DATA = {raw_json.strip()};'
+            updated_html, count = re.subn(pattern, replacement, html_content, flags=re.DOTALL)
+            
+            if count > 0:
+                with open(signals_html_path, 'w', encoding='utf-8') as shf:
+                    shf.write(updated_html)
+                print("💉 Injected dynamic signals database into Crypto signals.html successfully.")
+            else:
+                print("⚠️ Pattern window.SIGNALS_DATA not found in Crypto signals.html.")
+        except Exception as je:
+            print(f"⚠️ Error injecting data to Crypto signals.html: {je}")
+
+    # Save changes
+    with open(INDEX_PATH, 'w', encoding='utf-8') as f:
+        f.write(str(soup))
+        
+    print("✅ Crypto Section updated in Main Hub.")
+    return True
 
 if __name__ == "__main__":
     update_hub()

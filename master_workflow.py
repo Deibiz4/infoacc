@@ -3,6 +3,14 @@ import subprocess
 import logging
 import argparse
 from datetime import datetime
+import sys
+
+# Configure stdout/stderr encoding for Windows console compatibility
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
 
 # Configure logging
 logging.basicConfig(
@@ -48,6 +56,10 @@ def main():
     mode_str = " (DATA ONLY)" if args.data_only else ""
     logging.info(f"=== STARTING MASTER MARKET WORKFLOW{mode_str} ===")
     
+    # 0. Track Active Signals first
+    logging.info("Step 0: Tracking active and pending signal status updates...")
+    run_command("python scripts/track_signals.py", BASE_DIR)
+    
     data_flag = " --data-only" if args.data_only else ""
     
     # 1. Stocks (Root)
@@ -64,14 +76,19 @@ def main():
     # 4. Consolidate History (New Tab)
     success_history = run_command("python scripts/update_history.py", BASE_DIR)
     
+    # 5. Generate Analytics & Performance Metrics
+    logging.info("Step 5: Consolidating Analytics & Win Rate Metrics...")
+    success_analytics = run_command("python scripts/generate_analytics.py", BASE_DIR)
+    
     end_time = datetime.now()
     duration = end_time - start_time
     
     logging.info(f"=== MASTER WORKFLOW SUMMARY{mode_str} ===")
-    logging.info(f"Stocks:  {'✅' if success_stocks else '❌'}")
-    logging.info(f"Crypto:  {'✅' if success_crypto else '❌'}")
-    logging.info(f"Forex:   {'✅' if success_forex else '❌'}")
-    logging.info(f"History: {'✅' if success_history else '❌'}")
+    logging.info(f"Stocks:    {'✅' if success_stocks else '❌'}")
+    logging.info(f"Crypto:    {'✅' if success_crypto else '❌'}")
+    logging.info(f"Forex:     {'✅' if success_forex else '❌'}")
+    logging.info(f"History:   {'✅' if success_history else '❌'}")
+    logging.info(f"Analytics: {'✅' if success_analytics else '❌'}")
     logging.info(f"Total Duration: {duration}")
     logging.info("===============================")
 

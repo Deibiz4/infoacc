@@ -235,7 +235,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="pnl-factor" style="color: var(--success);">--</div>
-                <div class="stat-label">Factor de Beneficio Est.</div>
+                <div class="stat-label">Ganadas / Perdidas</div>
             </div>
         </div>
 
@@ -266,11 +266,217 @@
     </div>
 
     <script>
+        // Fallback static data if fetch is blocked locally by CORS
+        window.SIGNALS_DATA = [
+    {
+        "id": "20260716_BTC-USD",
+        "date": "2026-07-16",
+        "ticker": "BTC",
+        "entry_price": 64069.7383,
+        "status": "HIT_STOP",
+        "notes": "Above SMA 50 with strong momentum.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "target_price": 70476.7121,
+        "stop_loss": 62628.9712
+    },
+    {
+        "id": "20260716_ETH-USD",
+        "date": "2026-07-16",
+        "ticker": "ETH",
+        "entry_price": 1883.89,
+        "status": "ACTIVE",
+        "notes": "Above SMA 50 with strong momentum.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "target_price": 2072.279,
+        "stop_loss": 1709.4503
+    },
+    {
+        "id": "20260716_SOL-USD",
+        "date": "2026-07-16",
+        "ticker": "SOL",
+        "entry_price": 76.01,
+        "status": "ACTIVE",
+        "notes": "RSI Oversold (34.9). Dip buy opportunity.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "target_price": 82.0908,
+        "stop_loss": 72.2095
+    },
+    {
+        "id": "20260716_AVAX-USD",
+        "date": "2026-07-16",
+        "ticker": "AVAX",
+        "entry_price": 6.58,
+        "status": "ACTIVE",
+        "notes": "Below SMA 50 with bearish pressure. Short momentum.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "target_price": 5.922,
+        "stop_loss": 7.0436
+    },
+    {
+        "id": "20260716_LINK-USD",
+        "date": "2026-07-16",
+        "ticker": "LINK",
+        "entry_price": 8.419,
+        "status": "HIT_STOP",
+        "notes": "Above SMA 50 with strong momentum.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "target_price": 9.2609,
+        "stop_loss": 7.8058
+    },
+    {
+        "id": "20260716_SHIB-USD",
+        "date": "2026-07-16",
+        "ticker": "SHIB",
+        "entry_price": 0.0,
+        "status": "PENDING",
+        "notes": "RSI Overbought (100.0). Mean reversion short opportunity.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "target_price": 0.0,
+        "stop_loss": 0.0
+    },
+    {
+        "id": "20260717_XRP-USD",
+        "date": "2026-07-17",
+        "ticker": "XRP",
+        "entry_price": 1.0834,
+        "status": "PENDING",
+        "notes": "Below SMA 50 with bearish pressure. Short momentum.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "target_price": 0.9751,
+        "stop_loss": 1.1583
+    },
+    {
+        "id": "20260717_ADA-USD",
+        "date": "2026-07-17",
+        "ticker": "ADA",
+        "entry_price": 0.1587,
+        "status": "PENDING",
+        "notes": "RSI Oversold (32.7). Dip buy opportunity.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "target_price": 0.1714,
+        "stop_loss": 0.1508
+    },
+    {
+        "id": "20260717_DOGE-USD",
+        "date": "2026-07-17",
+        "ticker": "DOGE",
+        "entry_price": 0.0717,
+        "status": "PENDING",
+        "notes": "RSI Oversold (30.5). Dip buy opportunity.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "target_price": 0.0774,
+        "stop_loss": 0.0681
+    },
+    {
+        "id": "20260717_DOT-USD",
+        "date": "2026-07-17",
+        "ticker": "DOT",
+        "entry_price": 0.848,
+        "status": "PENDING",
+        "notes": "Below SMA 50 with bearish pressure. Short momentum.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "target_price": 0.7632,
+        "stop_loss": 0.9505
+    },
+    {
+        "id": "20260717_NEAR-USD",
+        "date": "2026-07-17",
+        "ticker": "NEAR",
+        "entry_price": 1.938,
+        "status": "PENDING",
+        "notes": "Below SMA 50 with bearish pressure. Short momentum.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "target_price": 1.7442,
+        "stop_loss": 2.1115
+    },
+    {
+        "id": "20260717_BCH-USD",
+        "date": "2026-07-17",
+        "ticker": "BCH",
+        "entry_price": 222.32,
+        "status": "PENDING",
+        "notes": "Below SMA 50 with bearish pressure. Short momentum.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "target_price": 200.088,
+        "stop_loss": 228.7408
+    },
+    {
+        "id": "20260720_BNB-USD",
+        "date": "2026-07-20",
+        "ticker": "BNB",
+        "entry_price": 564.04,
+        "status": "PENDING",
+        "notes": "RSI Oversold (34.8). Dip buy opportunity.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "target_price": 609.1632,
+        "stop_loss": 535.838
+    },
+    {
+        "id": "20260720_LINK-USD",
+        "date": "2026-07-20",
+        "ticker": "LINK",
+        "entry_price": 8.298,
+        "status": "ACTIVE",
+        "notes": "Above SMA 50 with strong momentum.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "target_price": 9.1278,
+        "stop_loss": 7.7448
+    },
+    {
+        "id": "20260720_LTC-USD",
+        "date": "2026-07-20",
+        "ticker": "LTC",
+        "entry_price": 46.73,
+        "status": "PENDING",
+        "notes": "Above SMA 50 with strong momentum.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "target_price": 51.403,
+        "stop_loss": 43.31
+    },
+    {
+        "id": "20260721_BTC-USD",
+        "date": "2026-07-21",
+        "ticker": "BTC",
+        "entry_price": 65930.3984,
+        "status": "ACTIVE",
+        "notes": "Above SMA 50 with strong momentum.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "target_price": 72523.4383,
+        "stop_loss": 61819.559
+    }
+];
+
         // Function to load and display signals
         async function loadSignals() {
             try {
-                const response = await fetch('data/signals.json');
-                const signals = await response.json();
+                let signals = [];
+                try {
+                    const response = await fetch('data/signals.json');
+                    signals = await response.json();
+                } catch (e) {
+                    console.warn("Fetch failed (CORS local file restriction). Loading embedded data...", e);
+                    signals = window.SIGNALS_DATA;
+                }
+
+                if (!signals || signals.length === 0) {
+                    signals = window.SIGNALS_DATA || [];
+                }
 
                 const tbody = document.getElementById('signals-body');
                 tbody.innerHTML = '';
@@ -320,13 +526,13 @@
                 document.getElementById('total-signals').textContent = signals.length;
                 document.getElementById('active-signals').textContent = active;
                 document.getElementById('win-rate').textContent = winRate + '%';
-                // Placeholder calc for PnL factor (simulation)
-                document.getElementById('pnl-factor').textContent = totalClosed > 0 ? '1:2.1' : '-';
+                // Display won vs lost instead of estimated factor
+                document.getElementById('pnl-factor').textContent = `${wins} G / ${losses} P`;
 
             } catch (error) {
                 console.error('Error loading signals:', error);
                 document.getElementById('signals-body').innerHTML = `
-                    <tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">Error cargando data/signals.json. Asegúrate de estar ejecutando esto en un servidor local (Localhost) o ajusta las políticas CORS.</td></tr>
+                    <tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">Error cargando las señales. Verifique el formato de los datos.</td></tr>
                 `;
             }
         }

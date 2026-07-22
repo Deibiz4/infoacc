@@ -3,12 +3,21 @@ import datetime
 import logging
 import time
 import argparse
+import sys
+
+# Configure stdout/stderr encoding for Windows console compatibility
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
 
 # Configure logging
 logging.basicConfig(
     filename='daily_workflow.log',
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    encoding='utf-8'
 )
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,7 +37,7 @@ def generate_fallback_html(today):
     </head>
     <body>
         <div class="container">
-            <h1>⚠️ Sistema en Mantenimiento</h1>
+            <h1>Sistema en Mantenimiento</h1>
             <p>No se han podido verificar datos concluyentes para el informe de hoy ({today}).</p>
             <p>El sistema está reintentando la conexión con los proveedores de datos.</p>
         </div>
@@ -40,7 +49,7 @@ def generate_fallback_html(today):
     html_path = os.path.join("reports", f"{report_filename}.html")
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html_content)
-    logging.warning(f"⚠️ Generated Fallback HTML to {html_path}")
+    logging.warning(f"Generated Fallback HTML to {html_path}")
 
 def run_workflow_attempt():
     # 1. Market Scanner (Real Data)
@@ -48,9 +57,9 @@ def run_workflow_attempt():
     try:
         from scripts.market_scanner import scan_market
         scan_market() # Generates data/signals.json and data/market_scan.csv
-        logging.info("✅ Market Scan completed.")
+        logging.info("Market Scan completed.")
     except Exception as e:
-        logging.error(f"❌ Market Scanner failed: {e}")
+        logging.error(f"Market Scanner failed: {e}")
         return False
 
     # 1.5 Update Google Sheet (New Automation)
@@ -60,9 +69,10 @@ def run_workflow_attempt():
             from scripts.update_sheet import update_google_sheet
             update_google_sheet()
         except Exception as e:
-             logging.error(f"⚠️ Google Sheet update failed: {e}")
+             logging.error(f"Google Sheet update failed: {e}")
     else:
-        logging.warning("⚠️ No credentials.json found. Skipping Sheet update.")
+        logging.warning("No credentials.json found. Skipping Sheet update.")
+    return True
 
 def run_reports_and_hub():
     # 2 & 3. Report Generation (USING NEW GENERATOR)
@@ -70,9 +80,9 @@ def run_reports_and_hub():
     try:
         from scripts.report_generator import run_generator
         run_generator("data/signals.json", "reports")
-        logging.info("✅ Reports generated successfully.")
+        logging.info("Reports generated successfully.")
     except Exception as e:
-        logging.error(f"❌ Report generation failed: {e}")
+        logging.error(f"Report generation failed: {e}")
         return False
 
     # 4. Update Web Hub (Index.html)
@@ -80,11 +90,11 @@ def run_reports_and_hub():
     try:
         from scripts.update_hub import update_hub
         update_hub()
-        logging.info("✅ Web Hub updated successfully.")
+        logging.info("Web Hub updated successfully.")
     except Exception as e:
         import traceback
         traceback.print_exc()
-        logging.error(f"❌ Web Hub update failed: {e}")
+        logging.error(f"Web Hub update failed: {e}")
 
     return True
 

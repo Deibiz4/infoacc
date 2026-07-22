@@ -1,3 +1,4 @@
 @echo off
-python d:\Docker\infoacc\master_workflow.py
+cd /d "%~dp0"
+python master_workflow.py
 pause

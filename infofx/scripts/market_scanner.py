@@ -92,12 +92,27 @@ def generate_signal(ticker, df):
     return None
 
 def scan_market():
-    print(f"🔍 Scanning {len(TICKERS)} pairs...")
+    print(f"Scanning {len(TICKERS)} pairs...")
     
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)
 
-    signals = []
+    # Load existing signals to keep history/active state and prevent duplicates
+    existing_signals = []
+    active_or_pending_tickers = set()
+    if os.path.exists(SIGNALS_FILE):
+        try:
+            with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
+                existing_signals = json.load(f)
+                active_or_pending_tickers = {
+                    s.get("ticker") for s in existing_signals 
+                    if s.get("status") in ["PENDING", "ACTIVE"]
+                }
+        except Exception as e:
+            print(f"⚠️ Error loading existing signals: {e}")
+            existing_signals = []
+
+    new_signals = []
     market_data_rows = []
     
     # Bulk download
@@ -117,24 +132,30 @@ def scan_market():
             # Calc Indicators
             df = calculate_indicators(df)
             
-            # 1. Generate Signal Logic
-            sig = generate_signal(ticker, df)
-            if sig:
-                signals.append(sig)
+            # Normalize ticker names
+            clean_ticker = ticker.replace("=X", "")
+            if ticker == "GC=F":
+                clean_ticker = "GOLD"
+            elif ticker == "SI=F":
+                clean_ticker = "SILVER"
+
+            # 1. Generate Signal Logic (Only if ticker has no active/pending signal)
+            if clean_ticker in active_or_pending_tickers:
+                print(f"⏭️ Skipping {clean_ticker}: Already has an active or pending signal.")
+            else:
+                sig = generate_signal(ticker, df)
+                if sig:
+                    new_signals.append(sig)
             
             # 2. Prepare CSV Row (Google Sheets formula)
             # Yahoo: EURUSD=X -> Google: CURRENCY:EURUSD
             # Gold: GC=F -> CURRENCY:XAUUSD
             # Silver: SI=F -> CURRENCY:XAGUSD
             
-            clean_ticker = ticker.replace("=X", "")
             sheet_ticker = f"CURRENCY:{clean_ticker}"
-            
-            if ticker == "GC=F":
-                clean_ticker = "GOLD"
+            if clean_ticker == "GOLD":
                 sheet_ticker = "CURRENCY:XAUUSD"
-            elif ticker == "SI=F":
-                clean_ticker = "SILVER"
+            elif clean_ticker == "SILVER":
                 sheet_ticker = "CURRENCY:XAGUSD"
             
             # Pair | Price | Change% | Sparkline | High | Low | Sentiment
@@ -157,13 +178,14 @@ def scan_market():
             market_data_rows.append(csv_row)
             
         except Exception as e:
-            print(f"⚠️ Error processing {ticker}: {e}")
+            print(f"Error processing {ticker}: {e}")
             continue
 
-    # Save Signals JSON
-    print(f"✅ Found {len(signals)} signals.")
+    # Combine existing and new signals
+    combined_signals = existing_signals + new_signals
+    print(f"Found {len(new_signals)} new signals. Total historical/active signals: {len(combined_signals)}")
     with open(SIGNALS_FILE, 'w', encoding='utf-8') as f:
-        json.dump(signals, f, indent=4)
+        json.dump(combined_signals, f, indent=4)
         
     # Save CSV for Sheets
     headers = [
@@ -176,7 +198,7 @@ def scan_market():
         writer.writerow(headers)
         writer.writerows(market_data_rows)
         
-    print(f"✅ Exported Market Scan to {CSV_FILE}")
+    print(f"Exported Market Scan to {CSV_FILE}")
 
 if __name__ == "__main__":
     scan_market()

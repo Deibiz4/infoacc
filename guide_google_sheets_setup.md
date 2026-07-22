@@ -22,7 +22,7 @@ Sigue estos pasos para obtener el archivo `credentials.json` que permitirá al s
 4.  Selecciona **JSON** y dale a "Crear".
 5.  **Se descargará un archivo automáticamente.** 
     *   Renómbralo a: `credentials.json`
-    *   Muévelo a la carpeta: `d:\Docker\infoacc\`
+    *   Muévelo a la carpeta: `d:\python\infoacc\infoacc\`
 
 ### 4. Compartir la Hoja con el Robot
 1.  Abre el archivo JSON que descargaste con el Bloc de Notas.
@@ -34,4 +34,4 @@ Sigue estos pasos para obtener el archivo `credentials.json` que permitirá al s
 
 ---
 
-✅ **Una vez tengas el archivo `credentials.json` en `d:\Docker\infoacc\`, avísame y programaré el script.**
+✅ **Una vez tengas el archivo `credentials.json` en `d:\python\infoacc\infoacc\`, avísame y programaré el script.**

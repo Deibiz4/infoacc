@@ -2,6 +2,15 @@ import gspread
 import json
 import os
 import datetime
+import sys
+
+# Configure stdout/stderr encoding for Windows console compatibility
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
+
 
 # --- Configuration ---
 SHEET_ID = "1e7xTeS-LMsKgapBLxVTayS6rqcHUgqjyx8-0EWlqG38"

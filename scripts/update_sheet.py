@@ -2,6 +2,15 @@ import gspread
 import csv
 import os
 import time
+import sys
+
+# Configure stdout/stderr encoding for Windows console compatibility
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
+
 
 # --- Configuration ---
 # Sheet ID from user: 

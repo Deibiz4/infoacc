@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Diario de Mercado - 17 de July de 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        
+    :root {
+        --bg-color: #0f172a;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        --accent-color: #3b82f6;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        background-image: radial-gradient(circle at top right, #1e293b 0%, transparent 40%);
+    }
+
+    h1, h2, h3 {
+        font-family: 'Outfit', sans-serif;
+        color: white;
+        margin-top: 0.5em;
+    }
+
+    h1 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+    h2 { font-size: 1.75rem; border-bottom: 1px solid var(--text-secondary); padding-bottom: 0.5rem; margin-top: 3rem; color: var(--accent-color); }
+    h3 { font-size: 1.25rem; color: #cbd5e1; }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        border: var(--glass-border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .metric-value { font-size: 1.5rem; font-weight: 700; color: white; display: block; margin-bottom: 0.5rem; }
+    .metric-context { font-size: 0.9rem; color: var(--text-secondary); }
+
+    .positive { color: var(--success); }
+    .negative { color: var(--danger); }
+
+    .plan-card {
+        border-left: 4px solid var(--accent-color);
+        background: linear-gradient(90deg, rgba(59,130,246,0.1) 0%, transparent 100%);
+    }
+
+    .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .plan-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .plan-price { font-size: 1.1em; font-weight: bold; }
+
+    .risk-reward {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+
+    .trade-levels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+        font-size: 0.9em;
+    }
+
+    .level-label { color: var(--text-secondary); display: block; margin-bottom: 0.2rem; }
+    .level-value { color: white; font-weight: 600; }
+
+    .entry { border-left: 2px solid var(--accent-color); padding-left: 0.5rem; }
+    .stop { border-left: 2px solid var(--danger); padding-left: 0.5rem; }
+    .target { border-left: 2px solid var(--success); padding-left: 0.5rem; }
+
+    ul { list-style-type: none; padding: 0; }
+    li { margin-bottom: 0.5rem; padding-left: 1.2rem; position: relative; }
+    li::before { content: "•"; color: var(--accent-color); position: absolute; left: 0; font-weight: bold; }
+
+    .footer {
+        text-align: center;
+        margin-top: 4rem;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 2rem;
+    }
+    
+    .badge {
+        font-size: 0.7em; 
+        padding: 2px 6px; 
+        border-radius: 4px; 
+        vertical-align: middle; 
+        color: #000; 
+        font-weight: bold;
+    }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border);">
+        <a href="../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Volver al Hub</a>
+    </nav>
+
+    <header>
+        <h1>Informe Diario de Mercado</h1>
+        <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 1rem;">17 de July de 2026</p>
+        <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem;">
+            <span style="background:#10b98122; color:#10b981; border:1px solid #10b98144; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9650; 14 LONG</span>
+            <span style="background:#ef444422; color:#ef4444; border:1px solid #ef444444; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9660; 8 SHORT</span>
+            <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">VIX 18.00 &bull; MODERADO</span>
+        </div>
+    </header>
+
+    <!-- SECTION 1: MACRO -->
+    <section>
+        <h2>1. Contexto Macroeconomico</h2>
+        <div class="details-grid">
+            <div class="card">
+                <h3>VIX (Volatilidad)</h3>
+                <span class="metric-value" style="color: var(--text-primary)">18.00</span>
+                <span class="metric-context">+7.59% respecto ayer</span>
+            </div>
+            <div class="card">
+                <h3>Bonos 10Y (TNX)</h3>
+                <span class="metric-value">4.57%</span>
+                <span class="metric-context">+0.53% Yield</span>
+            </div>
+            <div class="card">
+                <h3>DXY (Dolar)</h3>
+                <span class="metric-value">100.68</span>
+                <span class="metric-context">-0.05% Fuerza USD</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: LONG SIGNALS -->
+    <section>
+        <h2 style="color: #10b981;">&#9650; 2. Senales LONG &mdash; Compra / Alcista</h2>
+        <p style="color: var(--text-secondary);">Activos con configuracion tecnica alcista: sobreventa, ruptura al alza o tendencia confirmada.</p>
+        <div class="plan-grid">
+            
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">AMZN</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$254.96</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$254.96</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$242.21</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$275.36</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">PG</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$148.05</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$148.05</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$140.65</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$159.89</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">DE</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Trend Pullback</span>
+                    </div>
+                    <span class="plan-price">$589.48</span>
+                </div>
+                <p class="metric-context">Pullback to SMA 50 support.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$589.48</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$568.84</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$624.85</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">AMD</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Trend Pullback</span>
+                    </div>
+                    <span class="plan-price">$500.94</span>
+                </div>
+                <p class="metric-context">Pullback to SMA 50 support.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$500.94</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$486.35</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$531.00</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:2.1</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">INTC</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$96.98</span>
+                </div>
+                <p class="metric-context">RSI Oversold (26.4). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$96.98</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$94.07</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$101.83</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">QCOM</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$170.61</span>
+                </div>
+                <p class="metric-context">RSI Oversold (25.9). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$170.61</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$165.49</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$179.14</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">MU</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$853.20</span>
+                </div>
+                <p class="metric-context">RSI Oversold (21.0). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$853.20</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$827.60</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$895.86</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">ARM</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$262.01</span>
+                </div>
+                <p class="metric-context">RSI Oversold (28.1). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$262.01</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$254.15</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$275.11</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">SMCI</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$24.68</span>
+                </div>
+                <p class="metric-context">RSI Oversold (24.0). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$24.68</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$23.94</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$25.91</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">CVX</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$183.86</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$183.86</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$174.67</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$198.57</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">UBER</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$74.04</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$74.04</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$70.34</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$79.96</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">CAT</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$877.17</span>
+                </div>
+                <p class="metric-context">RSI Oversold (26.0). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$877.17</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$850.85</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$921.03</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">SOFI</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Trend Pullback</span>
+                    </div>
+                    <span class="plan-price">$17.32</span>
+                </div>
+                <p class="metric-context">Pullback to SMA 50 support.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$17.32</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$16.66</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$18.36</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">RIOT</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$18.82</span>
+                </div>
+                <p class="metric-context">RSI Oversold (15.4). Rebound potential.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$18.82</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$18.26</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$19.76</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+        </div>
+    </section>
+
+    <!-- SECTION 3: SHORT SIGNALS -->
+    <section>
+        <h2 style="color: #ef4444;">&#9660; 3. Senales SHORT &mdash; Venta / Bajista</h2>
+        <p style="color: var(--text-secondary);">Activos en zona de sobrecompra extrema o ruptura bajista bajo SMA50.</p>
+        <div class="plan-grid">
+            
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">AAPL</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$327.50</span>
+                </div>
+                <p class="metric-context">RSI Overbought (70.2). Mean reversion short opportunity.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$327.50</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$337.32</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$311.12</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">META</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$681.31</span>
+                </div>
+                <p class="metric-context">RSI Overbought (73.5). Mean reversion short opportunity.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$681.31</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$701.75</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$647.24</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">MSFT</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$401.10</span>
+                </div>
+                <p class="metric-context">RSI Overbought (77.5). Mean reversion short opportunity.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$401.10</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$413.13</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$381.05</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">NVDA</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Breakdown Short</span>
+                    </div>
+                    <span class="plan-price">$207.40</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakdown. Bearish momentum confirmed.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$207.40</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$217.77</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$190.81</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">TXN</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Breakdown Short</span>
+                    </div>
+                    <span class="plan-price">$291.22</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakdown. Bearish momentum confirmed.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$291.22</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$305.78</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$267.92</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">V</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$365.14</span>
+                </div>
+                <p class="metric-context">RSI Overbought (75.1). Mean reversion short opportunity.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$365.14</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$376.09</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$346.88</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">MA</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$551.54</span>
+                </div>
+                <p class="metric-context">RSI Overbought (79.4). Mean reversion short opportunity.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$551.54</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$568.09</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$523.96</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">PLTR</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$134.44</span>
+                </div>
+                <p class="metric-context">RSI Overbought (82.1). Mean reversion short opportunity.</p>
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entrada</span>
+                        <span class="level-value">$134.44</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$138.47</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$127.72</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+    
+        </div>
+    </section>
+
+    <!-- SECTION 4: RISK MANAGEMENT -->
+    
+    <section>
+        <h2>4. Gestión de Riesgo</h2>
+        <div class="card" style="border-left: 4px solid var(--accent-color);">
+            <ul>
+                <li><strong>Position Sizing:</strong> Mantener riesgo por operación en 1-2% del capital total.</li>
+                <li><strong>Exposición Total:</strong> Máx 3 operaciones simultáneas para evitar correlación excesiva.</li>
+                <li><strong>Advertencia Viernes:</strong> Liquidez baja desde 2PM ET. Cerrar posiciones intradía antes del cierre.</li>
+            </ul>
+        </div>
+    </section>
+    
+
+    <!-- SECTION 5: SIGNALS AUDIT -->
+    <section>
+        <h2>5. Auditoria</h2>
+        <div class="card">
+            <p>Senales generadas algoritmicamente y auditadas en tiempo real. Los precios objetivo son estimaciones basadas en ATR y niveles tecnicos.</p>
+            <p><small style="color: var(--text-secondary)">Total Senales Hoy: 22 (14 LONG / 8 SHORT)</small></p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>Generado por Antigravity Autonomous System &bull; 17 de July de 2026</p>
+    </div>
+</div>
+
+</body>
+</html>
