@@ -38,6 +38,20 @@
 
 ---
 
+## 🤖 System Architecture & AI Strategy
+
+InfoAcc uses a **hybrid deterministic quantitative engine** paired with **institutional-grade AI prompt engineering guidelines**:
+
+- **⚡ Deterministic Quantitative Core (0% API Overhead & 0% AI Hallucinations):**
+  - All market scans, price levels, RSI/EMA indicators, ATR targets, Stop Losses, and Win Rate calculations are processed in **pure Python**.
+  - Ensures **100% mathematical accuracy** without numeric hallucinations or latency. Runs completely free on GitHub Actions.
+
+- **📜 Institutional AI Prompt Guidelines (`report_generation_prompt.md`):**
+  - Contains structured master prompts designed following **Goldman Sachs, Morgan Stanley, and J.P. Morgan Equity Research** standards.
+  - Formatted for seamless integration with LLMs (such as OpenAI GPT-4o or Google Gemini 1.5 Pro) if narrative synthesis or executive summary extensions are enabled.
+
+---
+
 ## 🏛️ Application Navigation
 
 | Module | URL | Description |
