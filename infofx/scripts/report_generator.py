@@ -273,11 +273,11 @@ def generate_risk_section():
         <h2>4. Gestión de Riesgo Forex</h2>
         <div class="card" style="border-left: 4px solid var(--accent-color);">
             <ul>
-                <li><strong>Apalancamiento:</strong> El Forex permite alto apalancamiento. Úsalo con precaución extrema (máx 1:30 recomendado).</li>
-                <li><strong>Noticias Macro:</strong> Evita operar durante NFP, FOMC o IPC si no gestionas bien la volatilidad.</li>
-                <li><strong>DXY Correlation:</strong> Vigila siempre el Índice Dólar; es el motor de los pares mayores.</li>
-                {warning}
-                <li><strong>Stop Loss:</strong> Obligatorio. La liquidez puede desaparecer en eventos imprevistos.</li>
+                <li><strong>Leverage Safety:</strong> Limit leverage to maximum 1:10 - 1:20 to prevent margin calls.</li>
+                <li><strong>Pip Risk:</strong> Ensure Stop Loss distance is strictly within 1-2% account equity risk.</li>
+                <li><strong>Macro News:</strong> Avoid trading during NFP, FOMC, or CPI events if you cannot manage high volatility.</li>
+                <li><strong>DXY Correlation:</strong> Always monitor the US Dollar Index; it is the primary engine of major pairs.</li>
+                <li><strong>Stop Loss:</strong> Mandatory. Liquidity can vanish during unforeseen events.</li>
             </ul>
         </div>
     </section>
@@ -285,7 +285,7 @@ def generate_risk_section():
     return html
 
 def generate_html_report(signals, macro):
-    today_str = datetime.datetime.now().strftime("%d de %B de %Y")
+    today_str = datetime.datetime.now().strftime("%B %d, %Y")
 
     # Split by direction
     long_signals = [s for s in signals if s.get("type", "LONG").upper() == "LONG"]
@@ -295,23 +295,23 @@ def generate_html_report(signals, macro):
     short_cards_html = "".join([generate_signal_card(s, False) for s in short_signals])
 
     if not long_cards_html:
-        long_cards_html = "<p class='metric-context'>No se encontraron oportunidades LONG hoy.</p>"
+        long_cards_html = "<p class='metric-context'>No LONG forex opportunities identified today.</p>"
     if not short_cards_html:
-        short_cards_html = "<p class='metric-context'>No se encontraron oportunidades SHORT hoy.</p>"
+        short_cards_html = "<p class='metric-context'>No SHORT forex opportunities identified today.</p>"
 
-    vix_level = "BAJO"
+    vix_level = "LOW"
     try:
         vix_val = float(macro.get('vix') or 0)
-        vix_level = "ALTO" if vix_val > 20 else "MODERADO" if vix_val > 15 else "BAJO"
+        vix_level = "HIGH" if vix_val > 20 else "MODERATE" if vix_val > 15 else "LOW"
     except:
         pass
 
     html = f"""<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe Mercado Divisas - {today_str}</title>
+    <title>Forex Market Report - {today_str}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
     <style>
         {CSS_STYLES}
@@ -321,46 +321,46 @@ def generate_html_report(signals, macro):
 
 <div class="container">
     <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border); display:flex; justify-content:space-between;">
-        <a href="../../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Volver al Hub</a>
-        <a href="../../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 Ver Analytics & Win Rate</a>
+        <a href="../../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Back to Hub</a>
+        <a href="../../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 View Analytics & Win Rate</a>
     </nav>
 
     <header>
-        <h1>Informe Mercado Divisas</h1>
+        <h1>Forex Market Intelligence Report</h1>
         <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 1rem;">{today_str}</p>
         <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem;">
             <span style="background:#10b98122; color:#10b981; border:1px solid #10b98144; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9650; {len(long_signals)} LONG</span>
             <span style="background:#ef444422; color:#ef4444; border:1px solid #ef444444; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9660; {len(short_signals)} SHORT</span>
-            <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">DXY {macro['dxy']} &bull; {vix_level}</span>
+            <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">DXY {macro['dxy']} &bull; {vix_level} Volatility</span>
         </div>
     </header>
 
     <!-- SECTION 1: MACRO -->
     <section>
-        <h2>1. Contexto Macro &amp; Sentiment</h2>
+        <h2>1. FX Macro Drivers & Sentiment</h2>
         <div class="details-grid">
             <div class="card">
-                <h3>VIX (Volatilidad)</h3>
+                <h3>VIX (Volatility)</h3>
                 <span class="metric-value" style="color: {macro['vix_color']}">{macro['vix']}</span>
-                <span class="metric-context">{macro['vix_change']} respecto ayer</span>
+                <span class="metric-context">{macro['vix_change']} from yesterday</span>
             </div>
             <div class="card">
-                <h3>Bonos 10Y (TNX)</h3>
+                <h3>10Y Treasury Yield (TNX)</h3>
                 <span class="metric-value">{macro['tnx']}</span>
                 <span class="metric-context">{macro['tnx_change']} Yield</span>
             </div>
             <div class="card">
-                <h3>DXY (Dolar)</h3>
+                <h3>DXY (US Dollar)</h3>
                 <span class="metric-value">{macro['dxy']}</span>
-                <span class="metric-context">{macro['dxy_change']} Fuerza USD</span>
+                <span class="metric-context">{macro['dxy_change']} USD Strength</span>
             </div>
         </div>
     </section>
 
     <!-- SECTION 2: LONG SIGNALS -->
     <section>
-        <h2 style="color: #10b981;">&#9650; 2. Senales LONG &mdash; Compra / Alcista</h2>
-        <p style="color: var(--text-secondary);">Pares en sobreventa o con momentum alcista confirmado.</p>
+        <h2 style="color: #10b981;">&#9650; 2. LONG Signals &mdash; Buy / Bullish Setups</h2>
+        <p style="color: var(--text-secondary);">Pairs in oversold territory or with confirmed bullish momentum.</p>
         <div class="plan-grid">
             {long_cards_html}
         </div>
@@ -368,8 +368,8 @@ def generate_html_report(signals, macro):
 
     <!-- SECTION 3: SHORT SIGNALS -->
     <section>
-        <h2 style="color: #ef4444;">&#9660; 3. Senales SHORT &mdash; Venta / Bajista</h2>
-        <p style="color: var(--text-secondary);">Pares en sobrecompra extrema con potencial de reversion a la media.</p>
+        <h2 style="color: #ef4444;">&#9660; 3. SHORT Signals &mdash; Sell / Bearish Setups</h2>
+        <p style="color: var(--text-secondary);">Pairs in overbought territory with potential for mean reversion.</p>
         <div class="plan-grid">
             {short_cards_html}
         </div>
@@ -380,15 +380,15 @@ def generate_html_report(signals, macro):
 
     <!-- SECTION 5: SIGNALS AUDIT -->
     <section>
-        <h2>5. Auditoria</h2>
+        <h2>5. Audit & Tracking</h2>
         <div class="card">
-            <p>Senales generadas algoritmicamente y auditadas en tiempo real.</p>
-            <p><small style="color: var(--text-secondary)">Total Senales Hoy: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
+            <p>Signals generated algorithmically and tracked in real-time.</p>
+            <p><small style="color: var(--text-secondary)">Total Signals Today: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
         </div>
     </section>
 
     <div class="footer">
-        <p>Generado por Antigravity Forex System &bull; {today_str}</p>
+        <p>Generated by Antigravity Autonomous Forex System &bull; {today_str}</p>
     </div>
 </div>
 
@@ -398,7 +398,7 @@ def generate_html_report(signals, macro):
     return html
 
 def generate_markdown_report(signals, macro):
-    today_str = datetime.datetime.now().strftime("%d de %B de %Y")
+    today_str = datetime.datetime.now().strftime("%B %d, %Y")
     
     # Categorize Signals (Forex Contexts)
     value_signals = [s for s in signals if any(kw in s.get("context", "") for kw in ["OVERSOLD", "REJECTION", "BOUNCE"])]

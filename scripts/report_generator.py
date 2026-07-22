@@ -305,15 +305,15 @@ def generate_risk_section():
     weekday = datetime.datetime.now().strftime("%A")
     warning = ""
     if weekday == "Friday":
-        warning = "<li><strong>Advertencia Viernes:</strong> Liquidez baja desde 2PM ET. Cerrar posiciones intradía antes del cierre.</li>"
+        warning = "<li><strong>Friday Risk Warning:</strong> Liquidity drops significantly after 2:00 PM ET. Close intraday positions prior to weekend close.</li>"
     
     html = f"""
     <section>
-        <h2>4. Gestión de Riesgo</h2>
+        <h2>4. Risk & Capital Management</h2>
         <div class="card" style="border-left: 4px solid var(--accent-color);">
             <ul>
-                <li><strong>Position Sizing:</strong> Mantener riesgo por operación en 1-2% del capital total.</li>
-                <li><strong>Exposición Total:</strong> Máx 3 operaciones simultáneas para evitar correlación excesiva.</li>
+                <li><strong>Position Sizing:</strong> Maintain risk per trade at 1-2% of total account capital.</li>
+                <li><strong>Total Exposure:</strong> Maximum 3 simultaneous positions to avoid correlated drawdown.</li>
                 {warning}
             </ul>
         </div>
@@ -322,11 +322,11 @@ def generate_risk_section():
     return html
 
 def generate_html_report(signals, macro):
-    today_str = datetime.datetime.now().strftime("%d de %B de %Y")
+    today_str = datetime.datetime.now().strftime("%B %d, %Y")
 
     # Split by direction
     long_signals = [s for s in signals if s.get("type", "LONG").upper() == "LONG"]
-    short_signals = [s for s in signals if s.get("type", "LONG").upper() == "SHORT"]
+    short_signals = [s for s in signals if s.get("type", "SHORT").upper() == "SHORT"]
 
     # Fetch Sentiment & Calendar
     stock_sent = get_stock_sentiment(macro.get('vix', 15))
@@ -337,37 +337,37 @@ def generate_html_report(signals, macro):
     short_cards_html = "".join([generate_signal_card(s, False) for s in short_signals])
 
     if not long_cards_html:
-        long_cards_html = "<p class='metric-context'>No se encontraron oportunidades LONG hoy.</p>"
+        long_cards_html = "<p class='metric-context'>No LONG opportunities identified today.</p>"
     if not short_cards_html:
-        short_cards_html = "<p class='metric-context'>No se encontraron oportunidades SHORT hoy.</p>"
+        short_cards_html = "<p class='metric-context'>No SHORT opportunities identified today.</p>"
 
-    vix_level = "BAJO"
+    vix_level = "LOW"
     try:
         vix_val = float(macro.get('vix') or 0)
-        vix_level = "ALTO" if vix_val > 20 else "MODERADO" if vix_val > 15 else "BAJO"
+        vix_level = "HIGH" if vix_val > 20 else "MODERATE" if vix_val > 15 else "LOW"
     except:
         pass
 
     # Calendar Events HTML
     cal_html = ""
     for ev in eco_cal.get("events", []):
-        risk_color = "var(--danger)" if ev.get("impact") == "ALTO" else "var(--accent-color)"
+        risk_color = "var(--danger)" if ev.get("impact") in ["HIGH", "ALTO"] else "var(--accent-color)"
         cal_html += f"""
         <div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05);">
             <div>
                 <strong style="color:white;">{ev['event']}</strong>
                 <div style="font-size:0.8rem; color:var(--text-secondary);">{ev['time']} &bull; {ev['currency']}</div>
             </div>
-            <span style="background:{risk_color}22; color:{risk_color}; border:1px solid {risk_color}44; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">{ev['impact']} IMPACTO</span>
+            <span style="background:{risk_color}22; color:{risk_color}; border:1px solid {risk_color}44; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">{ev['impact']} IMPACT</span>
         </div>
         """
 
     html = f"""<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe Diario de Mercado - {today_str}</title>
+    <title>Daily Market Report - {today_str}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <style>
@@ -378,53 +378,53 @@ def generate_html_report(signals, macro):
 
 <div class="container">
     <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border); display:flex; justify-content:space-between;">
-        <a href="../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Volver al Hub</a>
-        <a href="../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 Ver Analytics & Win Rate</a>
+        <a href="../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Back to Hub</a>
+        <a href="../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 View Analytics & Win Rate</a>
     </nav>
 
     <header>
-        <h1>Informe Diario de Mercado</h1>
+        <h1>Daily Market Intelligence Report</h1>
         <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 1rem;">{today_str}</p>
         <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem; flex-wrap:wrap;">
             <span style="background:#10b98122; color:#10b981; border:1px solid #10b98144; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9650; {len(long_signals)} LONG</span>
             <span style="background:#ef444422; color:#ef4444; border:1px solid #ef444444; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9660; {len(short_signals)} SHORT</span>
             <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">VIX {macro['vix']} &bull; {vix_level}</span>
-            <span style="background:{stock_sent['color']}22; color:{stock_sent['color']}; border:1px solid {stock_sent['color']}44; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">Sentimiento: {stock_sent['classification']} ({stock_sent['value']}/100)</span>
+            <span style="background:{stock_sent['color']}22; color:{stock_sent['color']}; border:1px solid {stock_sent['color']}44; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">Sentiment: {stock_sent['classification']} ({stock_sent['value']}/100)</span>
         </div>
     </header>
 
     <!-- SECTION 1: MACRO & SENTIMENT -->
     <section>
-        <h2>1. Contexto Macroeconomico & Sentimiento</h2>
+        <h2>1. Macroeconomic Context & Market Sentiment</h2>
         <div class="details-grid">
             <div class="card">
-                <h3>VIX (Volatilidad)</h3>
+                <h3>VIX Index (Volatility)</h3>
                 <span class="metric-value" style="color: {macro['vix_color']}">{macro['vix']}</span>
-                <span class="metric-context">{macro['vix_change']} respecto ayer</span>
+                <span class="metric-context">{macro['vix_change']} vs yesterday</span>
             </div>
             <div class="card">
-                <h3>Bonos 10Y (TNX)</h3>
+                <h3>10Y Treasury Yield (TNX)</h3>
                 <span class="metric-value">{macro['tnx']}</span>
                 <span class="metric-context">{macro['tnx_change']} Yield</span>
             </div>
             <div class="card">
-                <h3>DXY (Dolar)</h3>
+                <h3>US Dollar Index (DXY)</h3>
                 <span class="metric-value">{macro['dxy']}</span>
-                <span class="metric-context">{macro['dxy_change']} Fuerza USD</span>
+                <span class="metric-context">{macro['dxy_change']} USD Strength</span>
             </div>
         </div>
 
         <!-- ECONOMIC CALENDAR CARD -->
         <div class="card" style="margin-top:1.5rem; border-left: 4px solid {'var(--danger)' if eco_cal['high_impact_risk'] else 'var(--accent-color)'};">
-            <h3>📅 Eventos Clave del Calendario Económico Hoy</h3>
+            <h3>📅 Key Economic Calendar Events Today</h3>
             {cal_html}
         </div>
     </section>
 
     <!-- SECTION 2: LONG SIGNALS -->
     <section>
-        <h2 style="color: #10b981;">&#9650; 2. Senales LONG &mdash; Compra / Alcista</h2>
-        <p style="color: var(--text-secondary);">Activos con configuracion tecnica alcista: sobreventa, ruptura al alza o tendencia confirmada.</p>
+        <h2 style="color: #10b981;">&#9650; 2. LONG Signals &mdash; Buy / Bullish Setups</h2>
+        <p style="color: var(--text-secondary);">Assets displaying bullish technical setups: oversold bounce, breakout or trend continuation.</p>
         <div class="plan-grid">
             {long_cards_html}
         </div>
@@ -432,8 +432,8 @@ def generate_html_report(signals, macro):
 
     <!-- SECTION 3: SHORT SIGNALS -->
     <section>
-        <h2 style="color: #ef4444;">&#9660; 3. Senales SHORT &mdash; Venta / Bajista</h2>
-        <p style="color: var(--text-secondary);">Activos en zona de sobrecompra extrema o ruptura bajista bajo SMA50.</p>
+        <h2 style="color: #ef4444;">&#9660; 3. SHORT Signals &mdash; Sell / Bearish Setups</h2>
+        <p style="color: var(--text-secondary);">Assets in extreme overbought territory or breaking down below key moving averages.</p>
         <div class="plan-grid">
             {short_cards_html}
         </div>
@@ -444,15 +444,15 @@ def generate_html_report(signals, macro):
 
     <!-- SECTION 5: SIGNALS AUDIT -->
     <section>
-        <h2>5. Auditoria</h2>
+        <h2>5. Audit & Tracking</h2>
         <div class="card">
-            <p>Senales generadas algoritmicamente y auditadas en tiempo real. Los precios objetivo son estimaciones basadas en ATR y niveles tecnicos.</p>
-            <p><small style="color: var(--text-secondary)">Total Senales Hoy: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
+            <p>Signals algorithmically generated and tracked in real-time. Target prices are calculated using ATR and technical pivot levels.</p>
+            <p><small style="color: var(--text-secondary)">Total Signals Today: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
         </div>
     </section>
 
     <div class="footer">
-        <p>Generado por Antigravity Autonomous System &bull; {today_str}</p>
+        <p>Generated by Antigravity Autonomous Trading System &bull; {today_str}</p>
     </div>
 </div>
 

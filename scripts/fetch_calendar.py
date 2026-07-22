@@ -20,21 +20,21 @@ def fetch_economic_calendar():
         events.append({
             "time": "14:30 CEST",
             "currency": "USD",
-            "event": "US Non-Farm Payrolls (NFP) & Desempleo",
-            "impact": "ALTO",
+            "event": "US Non-Farm Payrolls (NFP) & Unemployment Rate",
+            "impact": "HIGH",
             "forecast": "180K",
             "previous": "175K"
         })
         high_impact_risk = True
 
-    # 2. Check for typical FOMC / FED Rate Decisions & CPI windows (Mid-month / Wednesday)
+    # 2. Check for typical FOMC / FED Rate Decisions & CPI windows
     if day_of_week in ["Wednesday", "Thursday"]:
         if 10 <= day_of_month <= 15:
             events.append({
                 "time": "14:30 CEST",
                 "currency": "USD",
-                "event": "IPC EE.UU. (Inflación CPI)",
-                "impact": "ALTO",
+                "event": "US CPI Inflation Rate",
+                "impact": "HIGH",
                 "forecast": "3.1%",
                 "previous": "3.2%"
             })
@@ -43,8 +43,8 @@ def fetch_economic_calendar():
             events.append({
                 "time": "20:00 CEST",
                 "currency": "USD",
-                "event": "Decisión Tipos de Interés FED & Rueda de Prensa",
-                "impact": "ALTO",
+                "event": "FOMC FED Interest Rate Decision & Press Conference",
+                "impact": "HIGH",
                 "forecast": "5.25%",
                 "previous": "5.25%"
             })
@@ -53,10 +53,10 @@ def fetch_economic_calendar():
     # Default macro summary if no specific major event today
     if not events:
         events.append({
-            "time": "Mercado Abierto",
+            "time": "Market Open",
             "currency": "GLOBAL",
-            "event": "Seguimiento de Volatilidad y Flujos Semanales",
-            "impact": "MEDIO",
+            "event": "Weekly Macro Flows & Market Volatility Scan",
+            "impact": "MEDIUM",
             "forecast": "-",
             "previous": "-"
         })

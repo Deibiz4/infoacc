@@ -261,19 +261,13 @@ def generate_signal_card(signal, is_momentum=False):
     return html
 
 def generate_risk_section():
-    weekday = datetime.datetime.now().strftime("%A")
-    warning = ""
-    if weekday == "Friday":
-        warning = "<li><strong>Advertencia Viernes:</strong> Liquidez baja desde 2PM ET. Cerrar posiciones intradía antes del cierre.</li>"
-    
-    html = f"""
+    html = """
     <section>
-        <h2>4. Gestión de Riesgo</h2>
+        <h2>4. Risk & Leverage Management</h2>
         <div class="card" style="border-left: 4px solid var(--accent-color);">
             <ul>
-                <li><strong>Position Sizing:</strong> Mantener riesgo por operación en 1-2% del capital total.</li>
-                <li><strong>Exposición Total:</strong> Máx 3 operaciones simultáneas para evitar correlación excesiva.</li>
-                {warning}
+                <li><strong>Position Sizing:</strong> Limit position risk to max 1-2% of total portfolio capital.</li>
+                <li><strong>Volatility Warning:</strong> Crypto markets feature extreme intraday volatility; adhere strictly to Stop Loss orders.</li>
             </ul>
         </div>
     </section>
@@ -281,34 +275,39 @@ def generate_risk_section():
     return html
 
 def generate_html_report(signals, macro):
-    today_str = datetime.datetime.now().strftime("%d de %B de %Y")
+    today_str = datetime.datetime.now().strftime("%B %d, %Y")
 
     # Split by direction
     long_signals = [s for s in signals if s.get("type", "LONG").upper() == "LONG"]
-    short_signals = [s for s in signals if s.get("type", "LONG").upper() == "SHORT"]
+    short_signals = [s for s in signals if s.get("type", "SHORT").upper() == "SHORT"]
 
+    # Fetch Crypto Fear & Greed Index
+    crypto_fng = fetch_crypto_fear_and_greed()
+
+    # Generate Cards HTML
     long_cards_html = "".join([generate_signal_card(s, False) for s in long_signals])
     short_cards_html = "".join([generate_signal_card(s, False) for s in short_signals])
 
     if not long_cards_html:
-        long_cards_html = "<p class='metric-context'>No se encontraron oportunidades LONG hoy.</p>"
+        long_cards_html = "<p class='metric-context'>No LONG crypto opportunities identified today.</p>"
     if not short_cards_html:
-        short_cards_html = "<p class='metric-context'>No se encontraron oportunidades SHORT hoy.</p>"
+        short_cards_html = "<p class='metric-context'>No SHORT crypto opportunities identified today.</p>"
 
-    vix_level = "BAJO"
+    vix_level = "LOW"
     try:
         vix_val = float(macro.get('vix') or 0)
-        vix_level = "ALTO" if vix_val > 20 else "MODERADO" if vix_val > 15 else "BAJO"
+        vix_level = "HIGH" if vix_val > 20 else "MODERATE" if vix_val > 15 else "LOW"
     except:
         pass
 
     html = f"""<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informe Mercado Crypto - {today_str}</title>
+    <title>Crypto Market Report - {today_str}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <style>
         {CSS_STYLES}
     </style>
@@ -317,46 +316,46 @@ def generate_html_report(signals, macro):
 
 <div class="container">
     <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border); display:flex; justify-content:space-between;">
-        <a href="../../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Volver al Hub</a>
-        <a href="../../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 Ver Analytics & Win Rate</a>
+        <a href="../../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Back to Hub</a>
+        <a href="../../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 View Analytics & Win Rate</a>
     </nav>
 
     <header>
-        <h1>Informe Mercado Crypto</h1>
+        <h1>Crypto Market Intelligence Report</h1>
         <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 1rem;">{today_str}</p>
-        <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem;">
+        <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem; flex-wrap:wrap;">
             <span style="background:#10b98122; color:#10b981; border:1px solid #10b98144; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9650; {len(long_signals)} LONG</span>
             <span style="background:#ef444422; color:#ef4444; border:1px solid #ef444444; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9660; {len(short_signals)} SHORT</span>
-            <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">VIX {macro['vix']} &bull; {vix_level}</span>
+            <span style="background:{crypto_fng['color']}22; color:{crypto_fng['color']}; border:1px solid {crypto_fng['color']}44; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">Fear & Greed: {crypto_fng['classification']} ({crypto_fng['value']}/100)</span>
         </div>
     </header>
 
-    <!-- SECTION 1: MACRO -->
+    <!-- SECTION 1: MACRO & SENTIMENT -->
     <section>
-        <h2>1. Contexto Macro &amp; Sentiment</h2>
+        <h2>1. Crypto Sentiment & Market Drivers</h2>
         <div class="details-grid">
             <div class="card">
-                <h3>VIX (Volatilidad)</h3>
-                <span class="metric-value" style="color: {macro['vix_color']}">{macro['vix']}</span>
-                <span class="metric-context">{macro['vix_change']} respecto ayer</span>
+                <h3>Crypto Fear & Greed Index</h3>
+                <span class="metric-value" style="color: {crypto_fng['color']}">{crypto_fng['value']}/100</span>
+                <span class="metric-context">{crypto_fng['classification']} Sentiment</span>
             </div>
             <div class="card">
-                <h3>Bonos 10Y (TNX)</h3>
-                <span class="metric-value">{macro['tnx']}</span>
-                <span class="metric-context">{macro['tnx_change']} Yield</span>
+                <h3>Macro Volatility (VIX)</h3>
+                <span class="metric-value">{macro['vix']}</span>
+                <span class="metric-context">{macro['vix_change']} Level</span>
             </div>
             <div class="card">
-                <h3>DXY (Dolar)</h3>
+                <h3>US Dollar Index (DXY)</h3>
                 <span class="metric-value">{macro['dxy']}</span>
-                <span class="metric-context">{macro['dxy_change']} Fuerza USD</span>
+                <span class="metric-context">{macro['dxy_change']} Strength</span>
             </div>
         </div>
     </section>
 
     <!-- SECTION 2: LONG SIGNALS -->
     <section>
-        <h2 style="color: #10b981;">&#9650; 2. Senales LONG &mdash; Compra / Alcista</h2>
-        <p style="color: var(--text-secondary);">Criptos con sobreventa, momentum alcista o acumulacion sobre SMA50.</p>
+        <h2 style="color: #10b981;">&#9650; 2. LONG Signals &mdash; Buy / Bullish Setups</h2>
+        <p style="color: var(--text-secondary);">Cryptos displaying RSI oversold bounce, volume breakout or SMA50 support.</p>
         <div class="plan-grid">
             {long_cards_html}
         </div>
@@ -364,36 +363,27 @@ def generate_html_report(signals, macro):
 
     <!-- SECTION 3: SHORT SIGNALS -->
     <section>
-        <h2 style="color: #ef4444;">&#9660; 3. Senales SHORT &mdash; Venta / Bajista</h2>
-        <p style="color: var(--text-secondary);">Criptos en sobrecompra extrema o ruptura bajista bajo SMA50.</p>
+        <h2 style="color: #ef4444;">&#9660; 3. SHORT Signals &mdash; Sell / Bearish Setups</h2>
+        <p style="color: var(--text-secondary);">Cryptos in extreme overbought territory or breakdown below SMA50.</p>
         <div class="plan-grid">
             {short_cards_html}
         </div>
     </section>
 
     <!-- SECTION 4: RISK MANAGEMENT -->
-    <section>
-        <h2>4. Gestion de Riesgo Crypto</h2>
-        <div class="card" style="border-left: 4px solid var(--accent-color);">
-            <ul>
-                <li><strong>Volatilidad:</strong> Crypto es 3x mas volatil que Stocks. Reduce el tamano de posicion acorde.</li>
-                <li><strong>Custodia:</strong> "Not your keys, not your coins". Retira ganancias a Cold Storage.</li>
-                <li><strong>Stop Loss:</strong> Obligatorio. El mercado 24/7 no perdona.</li>
-            </ul>
-        </div>
-    </section>
+    {generate_risk_section()}
 
     <!-- SECTION 5: SIGNALS AUDIT -->
     <section>
-        <h2>5. Auditoria</h2>
+        <h2>5. Audit & Tracking</h2>
         <div class="card">
-            <p>Senales generadas algoritmicamente y auditadas en tiempo real.</p>
-            <p><small style="color: var(--text-secondary)">Total Senales Hoy: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
+            <p>Crypto signals algorithmically scanned and tracked in real-time.</p>
+            <p><small style="color: var(--text-secondary)">Total Crypto Signals Today: {len(signals)} ({len(long_signals)} LONG / {len(short_signals)} SHORT)</small></p>
         </div>
     </section>
 
     <div class="footer">
-        <p>Generado por Antigravity Crypto System &bull; {today_str}</p>
+        <p>Generated by Antigravity Autonomous Crypto System &bull; {today_str}</p>
     </div>
 </div>
 

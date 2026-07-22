@@ -48,15 +48,15 @@ def get_stock_sentiment(vix_value):
     try:
         vix = float(vix_value)
         if vix <= 13:
-            return {"value": 85, "classification": "Codicia Extrema", "color": "#10b981"}
+            return {"value": 85, "classification": "Extreme Greed", "color": "#10b981"}
         elif vix <= 16:
-            return {"value": 65, "classification": "Codicia", "color": "#34d399"}
+            return {"value": 65, "classification": "Greed", "color": "#34d399"}
         elif vix <= 20:
             return {"value": 50, "classification": "Neutral", "color": "#f59e0b"}
         elif vix <= 28:
-            return {"value": 30, "classification": "Miedo", "color": "#f97316"}
+            return {"value": 30, "classification": "Fear", "color": "#f97316"}
         else:
-            return {"value": 15, "classification": "Miedo Extremo", "color": "#ef4444"}
+            return {"value": 15, "classification": "Extreme Fear", "color": "#ef4444"}
     except (ValueError, TypeError):
         return {"value": 50, "classification": "Neutral", "color": "#f59e0b"}
 
