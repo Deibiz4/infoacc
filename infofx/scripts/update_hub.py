@@ -53,10 +53,10 @@ def update_hub():
     try:
         date_str = latest_report_file.replace('forex_market_report_', '').replace('.html', '')
         report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-        formatted_date = report_date.strftime("%d de %B, %Y").title()
+        formatted_date = report_date.strftime("%B %d, %Y")
     except Exception as e:
         print(f"⚠️ Error parsing date: {e}")
-        formatted_date = datetime.datetime.now().strftime("%Y-%m-%d")
+        formatted_date = datetime.datetime.now().strftime("%B %d, %Y")
 
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
@@ -71,11 +71,11 @@ def update_hub():
         if date_elem: date_elem.string = formatted_date
         
         title_elem = latest_card.find('span', class_='report-title')
-        if title_elem: title_elem.string = "Informe Diario - Mercado Divisas"
+        if title_elem: title_elem.string = "Daily Report - Forex Market"
         
         summary_elem = latest_card.find('span', class_='report-summary')
         if summary_elem: 
-            summary_elem.string = "Análisis Técnico y Fundamental para pares Mayores y Cruces (Forex)."
+            summary_elem.string = "Technical and fundamental analysis for Major Pairs and Crosses."
     else:
         print("⚠️ Warning: Could not find '#latest-report-forex' in main index.")
 
@@ -90,7 +90,7 @@ def update_hub():
             try:
                 date_str = report_file.replace('forex_market_report_', '').replace('.html', '')
                 report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-                formatted_date = report_date.strftime("%d de %B, %Y").title()
+                formatted_date = report_date.strftime("%B %d, %Y")
             except Exception as e:
                 formatted_date = date_str
             
@@ -101,7 +101,7 @@ def update_hub():
             date_span.string = formatted_date
             
             link.append(date_span)
-            link.append(f" Informe Diario - Mercado Divisas")
+            link.append(f" Daily Report - Forex Market")
             new_item.append(link)
             archive_list.append(new_item)
             

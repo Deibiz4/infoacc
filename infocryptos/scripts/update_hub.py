@@ -53,10 +53,10 @@ def update_hub():
     try:
         date_str = latest_report_file.replace('crypto_market_report_', '').replace('.html', '')
         report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-        formatted_date = report_date.strftime("%d de %B, %Y").title()
+        formatted_date = report_date.strftime("%B %d, %Y")
     except Exception as e:
         print(f"⚠️ Error parsing date: {e}")
-        formatted_date = datetime.datetime.now().strftime("%Y-%m-%d")
+        formatted_date = datetime.datetime.now().strftime("%B %d, %Y")
 
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
@@ -71,11 +71,11 @@ def update_hub():
         if date_elem: date_elem.string = formatted_date
         
         title_elem = latest_card.find('span', class_='report-title')
-        if title_elem: title_elem.string = "Informe Diario - Crypto Intelligence"
+        if title_elem: title_elem.string = "Daily Report - Crypto Intelligence"
         
         summary_elem = latest_card.find('span', class_='report-summary')
         if summary_elem: 
-            summary_elem.string = "Análisis de Volatilidad, RSI y Momentum para BTC, ETH y Altcoins principales."
+            summary_elem.string = "Volatility, RSI, and Momentum analysis for BTC, ETH, and major Altcoins."
     else:
         print("⚠️ Warning: Could not find '#latest-report-crypto' in main index.")
 
@@ -90,7 +90,7 @@ def update_hub():
             try:
                 date_str = report_file.replace('crypto_market_report_', '').replace('.html', '')
                 report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-                formatted_date = report_date.strftime("%d de %B, %Y").title()
+                formatted_date = report_date.strftime("%B %d, %Y")
             except Exception as e:
                 formatted_date = date_str
             
@@ -101,7 +101,7 @@ def update_hub():
             date_span.string = formatted_date
             
             link.append(date_span)
-            link.append(f" Informe Diario - Crypto Intelligence")
+            link.append(f" Daily Report - Crypto Intelligence")
             new_item.append(link)
             archive_list.append(new_item)
             

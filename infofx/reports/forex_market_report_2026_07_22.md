@@ -1,29 +1,35 @@
 # Informe Mercado Divisas
-22 de July de 2026
+July 22, 2026
 
 ## 1. Contexto Macro & Sentiment
-El Índice Dólar (DXY) en 101.14 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
+El Índice Dólar (DXY) en 101.10 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
 
 **VIX (Volatilidad)**
-17.05
--8.58% respecto ayer
+17.42
++2.17% respecto ayer
 
 **Bonos 10Y (TNX)**
 4.63%
 +0.65% Yield
 
 **DXY (Dólar)**
-101.14
--0.04% Fuerza USD
+101.10
+-0.08% Fuerza USD
 
 ## 2. Value Plays: Reversiones y Soportes
 Selección de pares en zonas de agotamiento (RSI) con potencial de giro.
 
+### USDCAD
+- Entrada: 1.40934
+- Target: 1.41639
+- Stop: 1.40652
+- Nota: RSI Oversold (30.0). Reversion play.
+
 ### NZDUSD
-- Entrada: 0.58207
-- Target: 0.57916
-- Stop: 0.58324
-- Nota: RSI Overbought (74.9). Reversion play.
+- Entrada: 0.58187
+- Target: 0.57896
+- Stop: 0.58303
+- Nota: RSI Overbought (74.4). Reversion play.
 
 ## 3. Momentum & Seguimiento de Tendencia
 Pares con fuerza relativa y confirmación de tendencia.
@@ -44,12 +50,6 @@ Pares con fuerza relativa y confirmación de tendencia.
 - Entrada: 218.11200
 - Target: 219.85690
 - Stop: 214.97706
-- Nota: Above SMA 50 with steady momentum.
-
-### GBPUSD
-- Entrada: 1.33743
-- Target: 1.34813
-- Stop: 1.33739
 - Nota: Above SMA 50 with steady momentum.
 
 ## 4. Gestión de Riesgo Forex

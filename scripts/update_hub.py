@@ -52,10 +52,10 @@ def update_hub():
     try:
         date_str = latest_report_file.replace('daily_market_report_', '').replace('.html', '')
         report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-        formatted_date = report_date.strftime("%d de %B, %Y").title()
+        formatted_date = report_date.strftime("%B %d, %Y")
     except Exception as e:
         print(f"⚠️ Error parsing date: {e}")
-        formatted_date = datetime.datetime.now().strftime("%Y-%m-%d")
+        formatted_date = datetime.datetime.now().strftime("%B %d, %Y")
 
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f, 'html.parser')
@@ -73,12 +73,12 @@ def update_hub():
         
         # Update Title
         title_elem = latest_card.find('span', class_='report-title')
-        if title_elem: title_elem.string = "Informe Diario - Market Scan & Value"
+        if title_elem: title_elem.string = "Daily Report - Market Scan & Value"
         
         # Update Summary
         summary_elem = latest_card.find('span', class_='report-summary')
         if summary_elem: 
-            summary_elem.string = "Análisis actualizado con datos reales de mercado. Oportunidades Value (RSI) y Momentum detectadas por el escáner."
+            summary_elem.string = "Updated analysis with real market data. Value (RSI) and Momentum opportunities detected."
     else:
         print("⚠️ Warning: Could not find 'Latest Report' card to update.")
 
@@ -93,7 +93,7 @@ def update_hub():
             try:
                 date_str = report_file.replace('daily_market_report_', '').replace('.html', '')
                 report_date = datetime.datetime.strptime(date_str, "%Y_%m_%d")
-                formatted_date = report_date.strftime("%d de %B, %Y").title()
+                formatted_date = report_date.strftime("%B %d, %Y")
             except Exception as e:
                 formatted_date = date_str
             
@@ -104,7 +104,7 @@ def update_hub():
             date_span.string = formatted_date
             
             link.append(date_span)
-            link.append(f" Informe Diario - Market Scan & Value")
+            link.append(f" Daily Report - Market Scan & Value")
             new_item.append(link)
             archive_list.append(new_item)
             

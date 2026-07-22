@@ -241,7 +241,7 @@ def generate_signal_card(signal, is_momentum=False):
                 <p class="metric-context">{notes}</p>
                 <div class="trade-levels">
                     <div class="entry">
-                        <span class="level-label">Entrada</span>
+                        <span class="level-label">Entry</span>
                         <span class="level-value">{entry}</span>
                     </div>
                     <div class="stop">
