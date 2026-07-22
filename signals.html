@@ -212,12 +212,12 @@
         <header>
             <a href="index.html" class="logo">Antigravity Hub</a>
             <nav>
-                <a href="index.html" class="nav-link">Inicio</a>
-                <a href="#" class="nav-link active">Monitor de Señales</a>
+                <a href="index.html" class="nav-link">Main Hub</a>
+                <a href="#" class="nav-link active">Signals Monitor</a>
             </nav>
         </header>
 
-        <h1 style="margin-bottom: 2rem;">Rendimiento de Señales (Últimos 7 Días)</h1>
+        <h1 style="margin-bottom: 2rem;">Signals Performance (Last 7 Days)</h1>
 
         <!-- Stats Overview -->
         <div class="stats-grid">
@@ -227,15 +227,15 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="total-signals">--</div>
-                <div class="stat-label">Señales Totales</div>
+                <div class="stat-label">Total Signals</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="active-signals" style="color: var(--primary);">--</div>
-                <div class="stat-label">Activas / Pendientes</div>
+                <div class="stat-label">Active / Pending</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="pnl-factor" style="color: var(--success);">--</div>
-                <div class="stat-label">Ganadas / Perdidas</div>
+                <div class="stat-label">Wins / Losses</div>
             </div>
         </div>
 
@@ -244,21 +244,20 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Ticker / Tipo</th>
-                        <th>Contexto</th>
-                        <th>Entrada</th>
-                        <th>Objetivo</th>
-                        <th>Stop</th>
-                        <th>Estado</th>
-                        <th>Notas</th>
+                        <th>Date</th>
+                        <th>Ticker / Type</th>
+                        <th>Context</th>
+                        <th>Entry</th>
+                        <th>Target</th>
+                        <th>Stop Loss</th>
+                        <th>Status</th>
+                        <th>Notes</th>
                     </tr>
                 </thead>
                 <tbody id="signals-body">
                     <!-- Javascript will populate this -->
                     <tr>
-                        <td colspan="8" style="text-align: center; padding: 3rem; color: var(--text-muted);">Cargando
-                            señales...</td>
+                        <td colspan="8" style="text-align: center; padding: 3rem; color: var(--text-muted);">Loading signals...</td>
                     </tr>
                 </tbody>
             </table>
