@@ -298,5 +298,17 @@
         "context": "OVERBOUGHT_REJECTION",
         "target_price": 0.57896,
         "stop_loss": 0.58303
+    },
+    {
+        "id": "20260722_NZDUSD",
+        "date": "2026-07-22",
+        "ticker": "NZDUSD",
+        "entry_price": 0.58204,
+        "status": "PENDING",
+        "notes": "RSI Overbought (74.8). Reversion play.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "target_price": 0.57913,
+        "stop_loss": 0.5832
     }
 ]

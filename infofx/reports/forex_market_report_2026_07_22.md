@@ -2,34 +2,28 @@
 July 22, 2026
 
 ## 1. Contexto Macro & Sentiment
-El Índice Dólar (DXY) en 101.10 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
+El Índice Dólar (DXY) en 101.12 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
 
 **VIX (Volatilidad)**
-17.42
-+2.17% respecto ayer
+17.50
++2.64% respecto ayer
 
 **Bonos 10Y (TNX)**
 4.63%
 +0.65% Yield
 
 **DXY (Dólar)**
-101.10
--0.08% Fuerza USD
+101.12
+-0.06% Fuerza USD
 
 ## 2. Value Plays: Reversiones y Soportes
 Selección de pares en zonas de agotamiento (RSI) con potencial de giro.
 
-### USDCAD
-- Entrada: 1.40934
-- Target: 1.41639
-- Stop: 1.40652
-- Nota: RSI Oversold (30.0). Reversion play.
-
 ### NZDUSD
-- Entrada: 0.58187
-- Target: 0.57896
-- Stop: 0.58303
-- Nota: RSI Overbought (74.4). Reversion play.
+- Entrada: 0.58204
+- Target: 0.57913
+- Stop: 0.58320
+- Nota: RSI Overbought (74.8). Reversion play.
 
 ## 3. Momentum & Seguimiento de Tendencia
 Pares con fuerza relativa y confirmación de tendencia.
@@ -61,7 +55,7 @@ Pares con fuerza relativa y confirmación de tendencia.
 ## 5. Auditoría
 Señales generadas algorítmicamente y auditadas en tiempo real.
 
-Total Señales Hoy: 5
+Total Señales Hoy: 4
 
 ---
 Generado por Antigravity Forex System

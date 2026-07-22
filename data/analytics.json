@@ -1,23 +1,23 @@
 {
-    "last_updated": "2026-07-22 10:54:26",
+    "last_updated": "2026-07-22 11:00:02",
     "global": {
-        "total_signals": 114,
-        "closed_trades": 76,
+        "total_signals": 117,
+        "closed_trades": 81,
         "wins": 26,
-        "losses": 50,
-        "win_rate": 34.2,
-        "total_r": -0.83,
-        "profit_factor": 0.94
+        "losses": 55,
+        "win_rate": 32.1,
+        "total_r": -5.83,
+        "profit_factor": 0.85
     },
     "by_market": {
         "Stocks": {
-            "total": 73,
+            "total": 75,
             "wins": 19,
-            "losses": 35,
-            "pending": 3,
+            "losses": 38,
+            "pending": 2,
             "active": 16,
-            "win_rate": 35.2,
-            "total_r": -3.31
+            "win_rate": 33.3,
+            "total_r": -6.31
         },
         "Crypto": {
             "total": 16,
@@ -29,13 +29,13 @@
             "total_r": -2.0
         },
         "Forex": {
-            "total": 25,
+            "total": 26,
             "wins": 7,
-            "losses": 13,
-            "pending": 2,
+            "losses": 15,
+            "pending": 1,
             "active": 3,
-            "win_rate": 35.0,
-            "total_r": 4.48
+            "win_rate": 31.8,
+            "total_r": 2.48
         }
     },
     "equity_curve": [
@@ -451,277 +451,295 @@
             "date": "2026-07-22",
             "ticker": "COIN",
             "market": "Stocks",
-            "cumulative_r": -2.31
+            "cumulative_r": -3.31
         },
         {
             "date": "2026-07-22",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": -3.31
+            "cumulative_r": -4.31
         },
         {
             "date": "2026-07-22",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -3.31
+            "cumulative_r": -5.31
         },
         {
             "date": "2026-07-22",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -3.31
+            "cumulative_r": -6.31
         },
         {
             "date": "2026-07-22",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": -3.31
+            "cumulative_r": -6.31
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "INTC",
+            "market": "Stocks",
+            "cumulative_r": -6.31
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "CAT",
+            "market": "Stocks",
+            "cumulative_r": -6.31
         },
         {
             "date": "2026-07-16",
             "ticker": "BTC",
             "market": "Crypto",
-            "cumulative_r": -4.31
+            "cumulative_r": -7.31
         },
         {
             "date": "2026-07-16",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": -4.31
+            "cumulative_r": -7.31
         },
         {
             "date": "2026-07-16",
             "ticker": "SOL",
             "market": "Crypto",
-            "cumulative_r": -4.31
+            "cumulative_r": -7.31
         },
         {
             "date": "2026-07-16",
             "ticker": "AVAX",
             "market": "Crypto",
-            "cumulative_r": -4.31
+            "cumulative_r": -7.31
         },
         {
             "date": "2026-07-16",
             "ticker": "LINK",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-16",
             "ticker": "SHIB",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-17",
             "ticker": "XRP",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-17",
             "ticker": "ADA",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-17",
             "ticker": "DOGE",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-17",
             "ticker": "DOT",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-17",
             "ticker": "NEAR",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-17",
             "ticker": "BCH",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-20",
             "ticker": "BNB",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-20",
             "ticker": "LINK",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-20",
             "ticker": "LTC",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-21",
             "ticker": "BTC",
             "market": "Crypto",
-            "cumulative_r": -5.31
+            "cumulative_r": -8.31
         },
         {
             "date": "2026-07-16",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -6.31
+            "cumulative_r": -9.31
         },
         {
             "date": "2026-07-16",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": -3.81
+            "cumulative_r": -6.81
         },
         {
             "date": "2026-07-16",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -1.31
+            "cumulative_r": -4.31
         },
         {
             "date": "2026-07-16",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": 1.18
+            "cumulative_r": -1.82
         },
         {
             "date": "2026-07-16",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": 0.18
+            "cumulative_r": -2.82
         },
         {
             "date": "2026-07-16",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": -0.82
+            "cumulative_r": -3.82
         },
         {
             "date": "2026-07-17",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": 1.67
+            "cumulative_r": -1.33
         },
         {
             "date": "2026-07-17",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": 0.67
+            "cumulative_r": -2.33
         },
         {
             "date": "2026-07-17",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -0.33
+            "cumulative_r": -3.33
         },
         {
             "date": "2026-07-17",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -0.33
+            "cumulative_r": -3.33
         },
         {
             "date": "2026-07-17",
             "ticker": "GBPJPY",
+            "market": "Forex",
+            "cumulative_r": -0.83
+        },
+        {
+            "date": "2026-07-20",
+            "ticker": "NZDUSD",
+            "market": "Forex",
+            "cumulative_r": -1.83
+        },
+        {
+            "date": "2026-07-20",
+            "ticker": "EURGBP",
+            "market": "Forex",
+            "cumulative_r": -2.83
+        },
+        {
+            "date": "2026-07-20",
+            "ticker": "GBPJPY",
+            "market": "Forex",
+            "cumulative_r": -0.33
+        },
+        {
+            "date": "2026-07-21",
+            "ticker": "NZDUSD",
             "market": "Forex",
             "cumulative_r": 2.17
         },
         {
-            "date": "2026-07-20",
-            "ticker": "NZDUSD",
+            "date": "2026-07-21",
+            "ticker": "EURGBP",
             "market": "Forex",
             "cumulative_r": 1.17
-        },
-        {
-            "date": "2026-07-20",
-            "ticker": "EURGBP",
-            "market": "Forex",
-            "cumulative_r": 0.17
-        },
-        {
-            "date": "2026-07-20",
-            "ticker": "GBPJPY",
-            "market": "Forex",
-            "cumulative_r": 2.67
-        },
-        {
-            "date": "2026-07-21",
-            "ticker": "NZDUSD",
-            "market": "Forex",
-            "cumulative_r": 5.17
-        },
-        {
-            "date": "2026-07-21",
-            "ticker": "EURGBP",
-            "market": "Forex",
-            "cumulative_r": 4.17
         },
         {
             "date": "2026-07-22",
             "ticker": "USDJPY",
             "market": "Forex",
-            "cumulative_r": 4.17
-        },
-        {
-            "date": "2026-07-22",
-            "ticker": "NZDUSD",
-            "market": "Forex",
-            "cumulative_r": 3.17
-        },
-        {
-            "date": "2026-07-22",
-            "ticker": "GBPJPY",
-            "market": "Forex",
-            "cumulative_r": 3.17
-        },
-        {
-            "date": "2026-07-22",
-            "ticker": "GBPUSD",
-            "market": "Forex",
-            "cumulative_r": 2.17
-        },
-        {
-            "date": "2026-07-22",
-            "ticker": "NZDUSD",
-            "market": "Forex",
             "cumulative_r": 1.17
         },
         {
             "date": "2026-07-22",
-            "ticker": "GBPUSD",
+            "ticker": "NZDUSD",
             "market": "Forex",
             "cumulative_r": 0.17
         },
         {
             "date": "2026-07-22",
-            "ticker": "NZDUSD",
+            "ticker": "GBPJPY",
+            "market": "Forex",
+            "cumulative_r": 0.17
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "GBPUSD",
             "market": "Forex",
             "cumulative_r": -0.83
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "NZDUSD",
+            "market": "Forex",
+            "cumulative_r": -1.83
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "GBPUSD",
+            "market": "Forex",
+            "cumulative_r": -2.83
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "NZDUSD",
+            "market": "Forex",
+            "cumulative_r": -3.83
         },
         {
             "date": "2026-07-22",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": -0.83
+            "cumulative_r": -4.83
         },
         {
             "date": "2026-07-22",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -0.83
+            "cumulative_r": -5.83
+        },
+        {
+            "date": "2026-07-22",
+            "ticker": "NZDUSD",
+            "market": "Forex",
+            "cumulative_r": -5.83
         }
     ],
     "recent_signals": [
@@ -954,7 +972,7 @@
             "date": "2026-07-22",
             "ticker": "COIN",
             "entry_price": 175.85,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "SMA 50 Breakout. Bullish momentum.",
             "type": "LONG",
             "context": "MOMENTUM_BREAKOUT",
@@ -982,6 +1000,48 @@
             "date": "2026-07-22",
             "ticker": "INTC",
             "entry_price": 105.45,
+            "status": "HIT_STOP",
+            "notes": "RSI Deep Oversold (26.5). Strong value rebound setup.",
+            "type": "LONG",
+            "context": "VALUE_OVERSOLD",
+            "target_price": 111.78,
+            "stop_loss": 102.81,
+            "market": "Stocks",
+            "rr_ratio": 2.4
+        },
+        {
+            "id": "20260722_CAT",
+            "date": "2026-07-22",
+            "ticker": "CAT",
+            "entry_price": 889.97,
+            "status": "HIT_STOP",
+            "notes": "RSI Deep Oversold (20.3). Strong value rebound setup.",
+            "type": "LONG",
+            "context": "VALUE_OVERSOLD",
+            "target_price": 943.37,
+            "stop_loss": 867.72,
+            "market": "Stocks",
+            "rr_ratio": 2.4
+        },
+        {
+            "id": "20260722_GE",
+            "date": "2026-07-22",
+            "ticker": "GE",
+            "entry_price": 340.7,
+            "status": "ACTIVE",
+            "notes": "RSI Deep Oversold (26.7). Strong value rebound setup.",
+            "type": "LONG",
+            "context": "VALUE_OVERSOLD",
+            "target_price": 361.14,
+            "stop_loss": 332.18,
+            "market": "Stocks",
+            "rr_ratio": 2.4
+        },
+        {
+            "id": "20260722_INTC",
+            "date": "2026-07-22",
+            "ticker": "INTC",
+            "entry_price": 105.45,
             "status": "PENDING",
             "notes": "RSI Deep Oversold (26.5). Strong value rebound setup.",
             "type": "LONG",
@@ -1002,20 +1062,6 @@
             "context": "VALUE_OVERSOLD",
             "target_price": 943.37,
             "stop_loss": 867.72,
-            "market": "Stocks",
-            "rr_ratio": 2.4
-        },
-        {
-            "id": "20260722_GE",
-            "date": "2026-07-22",
-            "ticker": "GE",
-            "entry_price": 340.7,
-            "status": "PENDING",
-            "notes": "RSI Deep Oversold (26.7). Strong value rebound setup.",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "target_price": 361.14,
-            "stop_loss": 332.18,
             "market": "Stocks",
             "rr_ratio": 2.4
         },
@@ -1114,34 +1160,6 @@
             "context": "OVERBOUGHT_REJECTION",
             "target_price": 0.57893,
             "stop_loss": 0.583,
-            "market": "Forex",
-            "rr_ratio": 2.51
-        },
-        {
-            "id": "20260722_USDCAD",
-            "date": "2026-07-22",
-            "ticker": "USDCAD",
-            "entry_price": 1.40934,
-            "status": "PENDING",
-            "notes": "RSI Oversold (30.0). Reversion play.",
-            "type": "LONG",
-            "context": "OVERSOLD_BOUNCE",
-            "target_price": 1.41639,
-            "stop_loss": 1.40652,
-            "market": "Forex",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260722_NZDUSD",
-            "date": "2026-07-22",
-            "ticker": "NZDUSD",
-            "entry_price": 0.58187,
-            "status": "PENDING",
-            "notes": "RSI Overbought (74.4). Reversion play.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "target_price": 0.57896,
-            "stop_loss": 0.58303,
             "market": "Forex",
             "rr_ratio": 2.51
         }

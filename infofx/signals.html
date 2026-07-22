@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor de Señales Crypto - Antigravity</title>
+    <title>Signals Monitor Crypto - Antigravity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -227,7 +227,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="total-signals">--</div>
-                <div class="stat-label">Señales Totales</div>
+                <div class="stat-label">Total Signals</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="active-signals" style="color: var(--primary);">--</div>
@@ -247,7 +247,7 @@
                         <th>Fecha</th>
                         <th>Ticker / Tipo</th>
                         <th>Contexto</th>
-                        <th>Entrada</th>
+                        <th>Entry</th>
                         <th>Objetivo</th>
                         <th>Stop</th>
                         <th>Estado</th>
@@ -258,7 +258,7 @@
                     <!-- Javascript will populate this -->
                     <tr>
                         <td colspan="8" style="text-align: center; padding: 3rem; color: var(--text-muted);">Cargando
-                            señales...</td>
+                            signals...</td>
                     </tr>
                 </tbody>
             </table>
@@ -549,7 +549,7 @@
         "date": "2026-07-22",
         "ticker": "USDCAD",
         "entry_price": 1.40934,
-        "status": "PENDING",
+        "status": "HIT_STOP",
         "notes": "RSI Oversold (30.0). Reversion play.",
         "type": "LONG",
         "context": "OVERSOLD_BOUNCE",
@@ -561,12 +561,24 @@
         "date": "2026-07-22",
         "ticker": "NZDUSD",
         "entry_price": 0.58187,
-        "status": "PENDING",
+        "status": "HIT_STOP",
         "notes": "RSI Overbought (74.4). Reversion play.",
         "type": "SHORT",
         "context": "OVERBOUGHT_REJECTION",
         "target_price": 0.57896,
         "stop_loss": 0.58303
+    },
+    {
+        "id": "20260722_NZDUSD",
+        "date": "2026-07-22",
+        "ticker": "NZDUSD",
+        "entry_price": 0.58204,
+        "status": "PENDING",
+        "notes": "RSI Overbought (74.8). Reversion play.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "target_price": 0.57913,
+        "stop_loss": 0.5832
     }
 ];
 
@@ -640,7 +652,7 @@
             } catch (error) {
                 console.error('Error loading signals:', error);
                 document.getElementById('signals-body').innerHTML = `
-                    <tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">Error cargando las señales. Verifique el formato de los datos.</td></tr>
+                    <tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">Error loading signals. Please check data format.</td></tr>
                 `;
             }
         }

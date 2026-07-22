@@ -292,7 +292,7 @@ def generate_signal_card(signal, is_momentum=False):
                         rightPriceScale: {{ borderVisible: false }}
                     }});
                     const line = chart.addLineSeries({{ color: '{'#10b981' if direction == 'LONG' else '#ef4444'}', lineWidth: 2 }});
-                    line.createPriceLine({{ price: {raw_entry}, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRADA' }});
+                    line.createPriceLine({{ price: {raw_entry}, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' }});
                     line.createPriceLine({{ price: {raw_target}, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' }});
                     line.createPriceLine({{ price: {raw_stop}, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' }});
                 }}
