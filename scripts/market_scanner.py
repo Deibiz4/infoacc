@@ -44,16 +44,19 @@ def calculate_indicators(df):
     return df
 
 def generate_signal(ticker, df):
-    """Generate trading signal based on technical analysis."""
-    if df.empty or len(df) < 50:
+    """Generate high-probability trading signals with volume & trend filtering."""
+    if df.empty or len(df) < 200:
         return None
         
     last_row = df.iloc[-1]
     prev_row = df.iloc[-2]
     
     price = last_row['Close']
+    volume = last_row['Volume']
+    vol_avg = last_row['Vol_Avg']
     rsi = last_row['RSI']
     sma50 = last_row['SMA_50']
+    sma200 = last_row['SMA_200']
     
     signal = {
         "id": f"{datetime.datetime.now().strftime('%Y%m%d')}_{ticker}",
@@ -64,55 +67,56 @@ def generate_signal(ticker, df):
         "notes": ""
     }
     
-    # --- Strategies ---
-
+    # Volume filter: Demand volume > 1.1x 20-day average volume for breakouts
+    high_volume = volume > (vol_avg * 1.1)
+    
     # ---- LONG STRATEGIES ----
 
-    # 1. RSI Oversold (Value Play)
-    if rsi < 30:
+    # 1. RSI Extreme Oversold (High Probability Value Rebound)
+    if rsi < 28:
         signal["type"] = "LONG"
         signal["context"] = "VALUE_OVERSOLD"
-        signal["target_price"] = round(price * 1.05, 2)
-        signal["stop_loss"] = round(price * 0.97, 2)
-        signal["notes"] = f"RSI Oversold ({rsi:.1f}). Rebound potential."
+        signal["target_price"] = round(price * 1.06, 2)  # Target: +6.0%
+        signal["stop_loss"] = round(price * 0.975, 2)    # Stop: -2.5% (R:R = 2.4)
+        signal["notes"] = f"RSI Deep Oversold ({rsi:.1f}). Strong value rebound setup."
         return signal
 
-    # 2. SMA 50 Breakout (Momentum)
-    elif price > sma50 and prev_row['Close'] <= prev_row['SMA_50']:
+    # 2. SMA 50 Volume Breakout (Trading WITH 200 SMA Bullish Trend)
+    elif price > sma50 and prev_row['Close'] <= prev_row['SMA_50'] and price > sma200 and high_volume:
         signal["type"] = "LONG"
         signal["context"] = "MOMENTUM_BREAKOUT"
-        signal["target_price"] = round(price * 1.08, 2)
-        signal["stop_loss"] = round(price * 0.95, 2)
-        signal["notes"] = "SMA 50 Breakout. Bullish momentum."
+        signal["target_price"] = round(price * 1.08, 2)  # Target: +8.0%
+        signal["stop_loss"] = round(price * 0.97, 2)     # Stop: -3.0% (R:R = 2.66)
+        signal["notes"] = f"SMA 50 High-Volume Breakout above 200 SMA. Volume: +{((volume/vol_avg)-1)*100:.0f}% above avg."
         return signal
 
-    # 3. Pullback to SMA 50 (Trend Continuation)
-    elif price > sma50 and price < sma50 * 1.02 and rsi > 40 and rsi < 60:
+    # 3. Pullback to SMA 50 in Strong Uptrend
+    elif price > sma50 and price < sma50 * 1.02 and rsi > 42 and rsi < 58 and price > sma200:
         signal["type"] = "LONG"
         signal["context"] = "TREND_PULLBACK"
-        signal["target_price"] = round(price * 1.06, 2)
-        signal["stop_loss"] = round(sma50 * 0.98, 2)
-        signal["notes"] = "Pullback to SMA 50 support."
+        signal["target_price"] = round(price * 1.06, 2)  # Target: +6.0%
+        signal["stop_loss"] = round(sma50 * 0.98, 2)    # Stop: -2.0% (R:R = 3.0)
+        signal["notes"] = "Healthy pullback to SMA 50 support in confirmed 200-SMA uptrend."
         return signal
 
     # ---- SHORT STRATEGIES ----
 
-    # 4. RSI Overbought (Mean Reversion Short)
-    elif rsi > 70:
+    # 4. RSI Extreme Overbought (Rejection Short)
+    elif rsi > 72:
         signal["type"] = "SHORT"
         signal["context"] = "OVERBOUGHT_REJECTION"
-        signal["target_price"] = round(price * 0.95, 2)  # target: -5%
-        signal["stop_loss"] = round(price * 1.03, 2)     # stop: +3%
-        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Mean reversion short opportunity."
+        signal["target_price"] = round(price * 0.94, 2)  # Target: -6.0%
+        signal["stop_loss"] = round(price * 1.025, 2)    # Stop: +2.5% (R:R = 2.4)
+        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Mean reversion short setup."
         return signal
 
-    # 5. SMA 50 Breakdown (Bearish Momentum)
-    elif price < sma50 and prev_row['Close'] >= prev_row['SMA_50']:
+    # 5. SMA 50 Volume Breakdown (Trading WITH 200 SMA Bearish Trend)
+    elif price < sma50 and prev_row['Close'] >= prev_row['SMA_50'] and price < sma200 and high_volume:
         signal["type"] = "SHORT"
         signal["context"] = "BREAKDOWN_SHORT"
-        signal["target_price"] = round(price * 0.92, 2)  # target: -8%
-        signal["stop_loss"] = round(price * 1.05, 2)     # stop: +5%
-        signal["notes"] = "SMA 50 Breakdown. Bearish momentum confirmed."
+        signal["target_price"] = round(price * 0.92, 2)  # Target: -8.0%
+        signal["stop_loss"] = round(price * 1.03, 2)     # Stop: +3.0% (R:R = 2.66)
+        signal["notes"] = f"SMA 50 High-Volume Breakdown below 200 SMA. Volume: +{((volume/vol_avg)-1)*100:.0f}% above avg."
         return signal
 
     return None
