@@ -2,6 +2,5 @@ schedule
 requests
 yfinance
 pandas
-ta-lib-binary
 gspread
 beautifulsoup4
