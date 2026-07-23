@@ -46,5 +46,5 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add .
-          git diff-index --quiet HEAD || (git commit -m "auto: Daily Market Intelligence Report update [skip ci]" && git push)
+          git diff-index --quiet HEAD || (git commit -m "auto: Daily Market Intelligence Report update" && git push)
 
