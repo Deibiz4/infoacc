@@ -91,6 +91,10 @@ def main():
     logging.info(f"Analytics: {'✅' if success_analytics else '❌'}")
     logging.info(f"Total Duration: {duration}")
     logging.info("===============================")
+    
+    if not all([success_stocks, success_crypto, success_forex, success_history, success_analytics]):
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
+
