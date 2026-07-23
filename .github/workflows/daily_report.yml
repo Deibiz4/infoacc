@@ -28,11 +28,14 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Create credentials.json from GitHub Secret
-        if: "${{ secrets.GOOGLE_CREDENTIALS != '' }}"
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
-          echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
-          cp credentials.json infocryptos/credentials.json || true
-          cp credentials.json infofx/credentials.json || true
+          if [ -n "$GOOGLE_CREDENTIALS" ]; then
+            echo "$GOOGLE_CREDENTIALS" > credentials.json
+            cp credentials.json infocryptos/credentials.json || true
+            cp credentials.json infofx/credentials.json || true
+          fi
 
       - name: Run Master Market Workflow
         run: |
