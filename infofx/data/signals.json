@@ -304,11 +304,35 @@
         "date": "2026-07-22",
         "ticker": "NZDUSD",
         "entry_price": 0.58204,
-        "status": "PENDING",
+        "status": "HIT_STOP",
         "notes": "RSI Overbought (74.8). Reversion play.",
         "type": "SHORT",
         "context": "OVERBOUGHT_REJECTION",
         "target_price": 0.57913,
         "stop_loss": 0.5832
+    },
+    {
+        "id": "20260723_USDCHF",
+        "date": "2026-07-23",
+        "ticker": "USDCHF",
+        "entry_price": 0.81432,
+        "status": "PENDING",
+        "notes": "Above SMA 50 with steady momentum.",
+        "type": "LONG",
+        "context": "TREND_CONTINUATION",
+        "target_price": 0.82083,
+        "stop_loss": 0.79928
+    },
+    {
+        "id": "20260723_NZDUSD",
+        "date": "2026-07-23",
+        "ticker": "NZDUSD",
+        "entry_price": 0.58133,
+        "status": "PENDING",
+        "notes": "RSI Overbought (71.4). Reversion play.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "target_price": 0.57842,
+        "stop_loss": 0.58249
     }
 ]
