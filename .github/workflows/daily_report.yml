@@ -2,8 +2,8 @@ name: Daily Market Intelligence Report
 
 on:
   schedule:
-    # Runs at 07:00 AM UTC every weekday (Monday through Friday)
-    - cron: '0 7 * * 1-5'
+    # Runs at 06:45 AM UTC (08:45 AM CEST) every weekday to avoid :00 queue delay
+    - cron: '45 6 * * 1-5'
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 permissions:
