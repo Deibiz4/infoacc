@@ -23,11 +23,11 @@ TICKERS = [
 ]
 
 def calculate_indicators(df):
-    """Calculate RSI, SMAs, and Volume Avg."""
+    """Calculate RSI, SMAs, ATR, and Volume Avg."""
     if len(df) < 200:
         return df # Not enough data
     
-    # SMS
+    # SMAs
     df['SMA_50'] = df['Close'].rolling(window=50).mean()
     df['SMA_200'] = df['Close'].rolling(window=200).mean()
     
@@ -37,6 +37,14 @@ def calculate_indicators(df):
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
     rs = gain / loss
     df['RSI'] = 100 - (100 / (1 + rs))
+    df['RSI'] = df['RSI'].fillna(50)
+    
+    # ATR (14)
+    high_low = df['High'] - df['Low']
+    high_close = (df['High'] - df['Close'].shift()).abs()
+    low_close = (df['Low'] - df['Close'].shift()).abs()
+    tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+    df['ATR'] = tr.rolling(window=14).mean()
     
     # Avg Volume
     df['Vol_Avg'] = df['Volume'].rolling(window=20).mean()
@@ -44,19 +52,21 @@ def calculate_indicators(df):
     return df
 
 def generate_signal(ticker, df):
-    """Generate high-probability trading signals with volume & trend filtering."""
+    """Generate high-probability trading signals with ATR risk management & 200 SMA trend filtering."""
     if df.empty or len(df) < 200:
         return None
         
     last_row = df.iloc[-1]
     prev_row = df.iloc[-2]
     
-    price = last_row['Close']
-    volume = last_row['Volume']
-    vol_avg = last_row['Vol_Avg']
-    rsi = last_row['RSI']
-    sma50 = last_row['SMA_50']
-    sma200 = last_row['SMA_200']
+    price = float(last_row['Close'])
+    volume = float(last_row['Volume'])
+    vol_avg = float(last_row['Vol_Avg'])
+    rsi = float(last_row['RSI'])
+    rsi_prev = float(prev_row['RSI'])
+    sma50 = float(last_row['SMA_50'])
+    sma200 = float(last_row['SMA_200'])
+    atr = float(last_row['ATR']) if not pd.isna(last_row['ATR']) and last_row['ATR'] > 0 else price * 0.02
     
     signal = {
         "id": f"{datetime.datetime.now().strftime('%Y%m%d')}_{ticker}",
@@ -67,57 +77,66 @@ def generate_signal(ticker, df):
         "notes": ""
     }
     
-    # Volume filter: Demand volume > 1.1x 20-day average volume for breakouts
-    high_volume = volume > (vol_avg * 1.1)
+    high_volume = volume > (vol_avg * 1.15)
     
-    # ---- LONG STRATEGIES ----
+    # ---- LONG STRATEGIES (MUST BE ABOVE 200 SMA) ----
+    if price > sma200:
+        # 1. RSI Value Oversold Rebound (Price > 200 SMA & RSI < 33 & RSI Turning Up)
+        if rsi < 33 and rsi > rsi_prev:
+            stop_dist = max(1.5 * atr, price * 0.02)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "LONG"
+            signal["context"] = "VALUE_OVERSOLD"
+            signal["stop_loss"] = round(price - stop_dist, 2)
+            signal["target_price"] = round(price + target_dist, 2)
+            signal["notes"] = f"Bullish trend value rebound above 200-SMA. RSI Oversold ({rsi:.1f}) turning up. Risk-Reward 1:2.5 (ATR: ${atr:.2f})."
+            return signal
 
-    # 1. RSI Extreme Oversold (High Probability Value Rebound)
-    if rsi < 28:
-        signal["type"] = "LONG"
-        signal["context"] = "VALUE_OVERSOLD"
-        signal["target_price"] = round(price * 1.06, 2)  # Target: +6.0%
-        signal["stop_loss"] = round(price * 0.975, 2)    # Stop: -2.5% (R:R = 2.4)
-        signal["notes"] = f"RSI Deep Oversold ({rsi:.1f}). Strong value rebound setup."
-        return signal
+        # 2. SMA 50 Volume Breakout (Trading WITH 200 SMA Bullish Trend)
+        elif price > sma50 and prev_row['Close'] <= prev_row['SMA_50'] and high_volume:
+            stop_dist = max(1.5 * atr, price * 0.025)
+            target_dist = stop_dist * 2.66
+            signal["type"] = "LONG"
+            signal["context"] = "MOMENTUM_BREAKOUT"
+            signal["stop_loss"] = round(price - stop_dist, 2)
+            signal["target_price"] = round(price + target_dist, 2)
+            signal["notes"] = f"SMA 50 High-Volume Breakout above 200 SMA. Volume +{((volume/vol_avg)-1)*100:.0f}% vs avg. Risk-Reward 1:2.66."
+            return signal
 
-    # 2. SMA 50 Volume Breakout (Trading WITH 200 SMA Bullish Trend)
-    elif price > sma50 and prev_row['Close'] <= prev_row['SMA_50'] and price > sma200 and high_volume:
-        signal["type"] = "LONG"
-        signal["context"] = "MOMENTUM_BREAKOUT"
-        signal["target_price"] = round(price * 1.08, 2)  # Target: +8.0%
-        signal["stop_loss"] = round(price * 0.97, 2)     # Stop: -3.0% (R:R = 2.66)
-        signal["notes"] = f"SMA 50 High-Volume Breakout above 200 SMA. Volume: +{((volume/vol_avg)-1)*100:.0f}% above avg."
-        return signal
+        # 3. Pullback to SMA 50 in Confirmed Uptrend
+        elif price > sma50 and price <= sma50 * 1.018 and rsi > 42 and rsi < 58:
+            stop_dist = max(1.4 * atr, (price - sma50) + 1.2 * atr)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "LONG"
+            signal["context"] = "TREND_PULLBACK"
+            signal["stop_loss"] = round(price - stop_dist, 2)
+            signal["target_price"] = round(price + target_dist, 2)
+            signal["notes"] = f"Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5."
+            return signal
 
-    # 3. Pullback to SMA 50 in Strong Uptrend
-    elif price > sma50 and price < sma50 * 1.02 and rsi > 42 and rsi < 58 and price > sma200:
-        signal["type"] = "LONG"
-        signal["context"] = "TREND_PULLBACK"
-        signal["target_price"] = round(price * 1.06, 2)  # Target: +6.0%
-        signal["stop_loss"] = round(sma50 * 0.98, 2)    # Stop: -2.0% (R:R = 3.0)
-        signal["notes"] = "Healthy pullback to SMA 50 support in confirmed 200-SMA uptrend."
-        return signal
+    # ---- SHORT STRATEGIES (MUST BE BELOW 200 SMA) ----
+    elif price < sma200:
+        # 4. RSI Overbought Rejection in Downtrend (Price < 200 SMA & RSI > 67 & RSI Turning Down)
+        if rsi > 67 and rsi < rsi_prev:
+            stop_dist = max(1.5 * atr, price * 0.02)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "SHORT"
+            signal["context"] = "OVERBOUGHT_REJECTION"
+            signal["stop_loss"] = round(price + stop_dist, 2)
+            signal["target_price"] = round(price - target_dist, 2)
+            signal["notes"] = f"Bearish mean-reversion short rejection below 200-SMA. RSI Overbought ({rsi:.1f}) turning down. Risk-Reward 1:2.5."
+            return signal
 
-    # ---- SHORT STRATEGIES ----
-
-    # 4. RSI Extreme Overbought (Rejection Short)
-    elif rsi > 72:
-        signal["type"] = "SHORT"
-        signal["context"] = "OVERBOUGHT_REJECTION"
-        signal["target_price"] = round(price * 0.94, 2)  # Target: -6.0%
-        signal["stop_loss"] = round(price * 1.025, 2)    # Stop: +2.5% (R:R = 2.4)
-        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Mean reversion short setup."
-        return signal
-
-    # 5. SMA 50 Volume Breakdown (Trading WITH 200 SMA Bearish Trend)
-    elif price < sma50 and prev_row['Close'] >= prev_row['SMA_50'] and price < sma200 and high_volume:
-        signal["type"] = "SHORT"
-        signal["context"] = "BREAKDOWN_SHORT"
-        signal["target_price"] = round(price * 0.92, 2)  # Target: -8.0%
-        signal["stop_loss"] = round(price * 1.03, 2)     # Stop: +3.0% (R:R = 2.66)
-        signal["notes"] = f"SMA 50 High-Volume Breakdown below 200 SMA. Volume: +{((volume/vol_avg)-1)*100:.0f}% above avg."
-        return signal
+        # 5. SMA 50 Volume Breakdown (Trading WITH 200 SMA Bearish Trend)
+        elif price < sma50 and prev_row['Close'] >= prev_row['SMA_50'] and high_volume:
+            stop_dist = max(1.5 * atr, price * 0.025)
+            target_dist = stop_dist * 2.66
+            signal["type"] = "SHORT"
+            signal["context"] = "BREAKDOWN_SHORT"
+            signal["stop_loss"] = round(price + stop_dist, 2)
+            signal["target_price"] = round(price - target_dist, 2)
+            signal["notes"] = f"SMA 50 High-Volume Breakdown below 200 SMA. Volume +{((volume/vol_avg)-1)*100:.0f}% vs avg. Risk-Reward 1:2.66."
+            return signal
 
     return None
 

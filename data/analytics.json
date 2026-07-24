@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-07-24 07:31:19",
+    "last_updated": "2026-07-24 09:56:56",
     "global": {
         "total_signals": 126,
         "closed_trades": 92,
@@ -509,13 +509,13 @@
         },
         {
             "date": "2026-07-24",
-            "ticker": "MCD",
+            "ticker": "INTC",
             "market": "Stocks",
             "cumulative_r": -12.64
         },
         {
             "date": "2026-07-24",
-            "ticker": "NFLX",
+            "ticker": "CAT",
             "market": "Stocks",
             "cumulative_r": -12.64
         },
@@ -791,39 +791,39 @@
         },
         {
             "date": "2026-07-24",
-            "ticker": "USDCAD",
+            "ticker": "EURUSD",
             "market": "Forex",
             "cumulative_r": -14.16
         }
     ],
     "recent_signals": [
         {
-            "id": "20260724_MCD",
+            "id": "20260724_INTC",
             "date": "2026-07-24",
-            "ticker": "MCD",
-            "entry_price": 262.8,
+            "ticker": "INTC",
+            "entry_price": 100.23,
             "status": "PENDING",
-            "notes": "RSI Deep Oversold (27.9). Strong value rebound setup.",
+            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (32.8) turning up. Risk-Reward 1:2.5 (ATR: $7.47).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
-            "target_price": 278.57,
-            "stop_loss": 256.23,
+            "stop_loss": 89.03,
+            "target_price": 128.24,
             "market": "Stocks",
-            "rr_ratio": 2.4
+            "rr_ratio": 2.5
         },
         {
-            "id": "20260724_NFLX",
+            "id": "20260724_CAT",
             "date": "2026-07-24",
-            "ticker": "NFLX",
-            "entry_price": 68.89,
+            "ticker": "CAT",
+            "entry_price": 894.54,
             "status": "PENDING",
-            "notes": "RSI Deep Oversold (19.8). Strong value rebound setup.",
+            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (32.8) turning up. Risk-Reward 1:2.5 (ATR: $38.22).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
-            "target_price": 73.02,
-            "stop_loss": 67.17,
+            "stop_loss": 837.22,
+            "target_price": 1037.85,
             "market": "Stocks",
-            "rr_ratio": 2.4
+            "rr_ratio": 2.5
         },
         {
             "id": "20260724_LMT",
@@ -831,25 +831,25 @@
             "ticker": "LMT",
             "entry_price": 568.59,
             "status": "PENDING",
-            "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume: +159% above avg.",
+            "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +159% vs avg. Risk-Reward 1:2.66.",
             "type": "LONG",
             "context": "MOMENTUM_BREAKOUT",
-            "target_price": 614.08,
-            "stop_loss": 551.53,
+            "stop_loss": 544.45,
+            "target_price": 632.8,
             "market": "Stocks",
-            "rr_ratio": 2.67
+            "rr_ratio": 2.66
         },
         {
-            "id": "20260724_USDCAD",
+            "id": "20260724_EURUSD",
             "date": "2026-07-24",
-            "ticker": "USDCAD",
-            "entry_price": 1.40669,
+            "ticker": "EURUSD",
+            "entry_price": 1.1396,
             "status": "PENDING",
-            "notes": "RSI Oversold (28.4). Reversion play.",
-            "type": "LONG",
-            "context": "OVERSOLD_BOUNCE",
-            "target_price": 1.41372,
-            "stop_loss": 1.40388,
+            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 1.14623,
+            "target_price": 1.12303,
             "market": "Forex",
             "rr_ratio": 2.5
         },

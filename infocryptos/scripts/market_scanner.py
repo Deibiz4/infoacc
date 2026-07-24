@@ -23,11 +23,11 @@ SIGNALS_FILE = os.path.join(DATA_DIR, 'signals.json')
 CSV_FILE = os.path.join(DATA_DIR, 'market_scan.csv')
 
 def calculate_indicators(df):
-    """Calculate RSI, SMAs, and Volume Avg."""
+    """Calculate RSI, SMAs, and ATR."""
     if len(df) < 50:
         return df # Not enough data
     
-    # SMS
+    # SMAs
     df['SMA_50'] = df['Close'].rolling(window=50).mean()
     df['SMA_200'] = df['Close'].rolling(window=200).mean()
     
@@ -39,18 +39,29 @@ def calculate_indicators(df):
     df['RSI'] = 100 - (100 / (1 + rs))
     df['RSI'] = df['RSI'].fillna(50)
     
+    # ATR (14)
+    high_low = df['High'] - df['Low']
+    high_close = (df['High'] - df['Close'].shift()).abs()
+    low_close = (df['Low'] - df['Close'].shift()).abs()
+    tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+    df['ATR'] = tr.rolling(window=14).mean()
+    
     return df
 
 def generate_signal(ticker, df):
-    """Generate trading signal based on technical analysis."""
+    """Generate trading signal based on ATR risk management & 200 SMA trend filtering."""
     if df.empty or len(df) < 50:
         return None
         
     last_row = df.iloc[-1]
+    prev_row = df.iloc[-2]
     
-    price = last_row['Close']
-    rsi = last_row['RSI']
-    sma50 = last_row['SMA_50']
+    price = float(last_row['Close'])
+    rsi = float(last_row['RSI'])
+    rsi_prev = float(prev_row['RSI'])
+    sma50 = float(last_row['SMA_50']) if not pd.isna(last_row['SMA_50']) else price
+    sma200 = float(last_row['SMA_200']) if not pd.isna(last_row['SMA_200']) else sma50
+    atr = float(last_row['ATR']) if not pd.isna(last_row['ATR']) and last_row['ATR'] > 0 else price * 0.04
     
     signal = {
         "id": f"{datetime.datetime.now().strftime('%Y%m%d')}_{ticker}",
@@ -61,47 +72,53 @@ def generate_signal(ticker, df):
         "notes": ""
     }
     
-    # Strategies (Bidirectional for Crypto)
+    # ---- LONG STRATEGIES (MUST BE ABOVE 200 SMA OR 50 SMA) ----
+    if price > sma200 or price > sma50:
+        # 1. RSI Oversold Rebound in Bullish Context
+        if rsi < 36 and rsi > rsi_prev:
+            stop_dist = max(1.8 * atr, price * 0.04)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "LONG"
+            signal["context"] = "VALUE_OVERSOLD"
+            signal["stop_loss"] = round(price - stop_dist, 4)
+            signal["target_price"] = round(price + target_dist, 4)
+            signal["notes"] = f"Crypto bullish dip rebound. RSI ({rsi:.1f}) turning up. Risk-Reward 1:2.5 (ATR: ${atr:.4g})."
+            return signal
 
-    # ---- LONG STRATEGIES ----
+        # 2. Strong Momentum Trend
+        elif price > sma50 and rsi > 54 and rsi < 72 and prev_row['RSI'] <= 54:
+            stop_dist = max(1.6 * atr, price * 0.035)
+            target_dist = stop_dist * 2.6
+            signal["type"] = "LONG"
+            signal["context"] = "MOMENTUM_TREND"
+            signal["stop_loss"] = round(price - stop_dist, 4)
+            signal["target_price"] = round(price + target_dist, 4)
+            signal["notes"] = f"Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6."
+            return signal
 
-    # 1. RSI Oversold (Value Play)
-    if rsi < 35: # Crypto runs hotter/colder
-        signal["type"] = "LONG"
-        signal["context"] = "VALUE_OVERSOLD"
-        signal["target_price"] = round(price * 1.08, 4)
-        signal["stop_loss"] = round(price * 0.95, 4)
-        signal["notes"] = f"RSI Oversold ({rsi:.1f}). Dip buy opportunity."
-        return signal
+    # ---- SHORT STRATEGIES (MUST BE BELOW 200 SMA OR 50 SMA) ----
+    if price < sma200 or price < sma50:
+        # 3. RSI Overbought Rejection in Bearish Context
+        if rsi > 68 and rsi < rsi_prev:
+            stop_dist = max(1.8 * atr, price * 0.04)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "SHORT"
+            signal["context"] = "OVERBOUGHT_REJECTION"
+            signal["stop_loss"] = round(price + stop_dist, 4)
+            signal["target_price"] = round(price - target_dist, 4)
+            signal["notes"] = f"Crypto overbought short rejection. RSI ({rsi:.1f}) turning down. Risk-Reward 1:2.5."
+            return signal
 
-    # 2. Momentum / Breakout
-    elif price > sma50 and rsi > 55 and rsi < 75:
-        signal["type"] = "LONG"
-        signal["context"] = "MOMENTUM_TREND"
-        signal["target_price"] = round(price * 1.10, 4)
-        signal["stop_loss"] = round(sma50 * 0.98, 4)
-        signal["notes"] = "Above SMA 50 with strong momentum."
-        return signal
-
-    # ---- SHORT STRATEGIES ----
-
-    # 3. RSI Overbought (Mean Reversion Short)
-    elif rsi > 75: # Higher threshold for crypto's natural volatility
-        signal["type"] = "SHORT"
-        signal["context"] = "OVERBOUGHT_REJECTION"
-        signal["target_price"] = round(price * 0.92, 4)  # target: -8%
-        signal["stop_loss"] = round(price * 1.05, 4)     # stop: +5%
-        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Mean reversion short opportunity."
-        return signal
-
-    # 4. SMA 50 Breakdown (Bearish Momentum)
-    elif price < sma50 and rsi < 45:
-        signal["type"] = "SHORT"
-        signal["context"] = "BREAKDOWN_SHORT"
-        signal["target_price"] = round(price * 0.90, 4)  # target: -10%
-        signal["stop_loss"] = round(sma50 * 1.02, 4)     # stop: just above SMA50
-        signal["notes"] = "Below SMA 50 with bearish pressure. Short momentum."
-        return signal
+        # 4. SMA 50 Breakdown (Bearish Momentum)
+        elif price < sma50 and rsi < 44 and prev_row['RSI'] >= 44:
+            stop_dist = max(1.6 * atr, price * 0.035)
+            target_dist = stop_dist * 2.6
+            signal["type"] = "SHORT"
+            signal["context"] = "BREAKDOWN_SHORT"
+            signal["stop_loss"] = round(price + stop_dist, 4)
+            signal["target_price"] = round(price - target_dist, 4)
+            signal["notes"] = f"Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6."
+            return signal
 
     return None
 

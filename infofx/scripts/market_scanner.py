@@ -23,11 +23,11 @@ SIGNALS_FILE = os.path.join(DATA_DIR, 'signals.json')
 CSV_FILE = os.path.join(DATA_DIR, 'market_scan.csv')
 
 def calculate_indicators(df):
-    """Calculate RSI, SMAs."""
+    """Calculate RSI, SMAs, and ATR."""
     if len(df) < 50:
         return df # Not enough data
     
-    # SMS
+    # SMAs
     df['SMA_50'] = df['Close'].rolling(window=50).mean()
     df['SMA_200'] = df['Close'].rolling(window=200).mean()
     
@@ -39,18 +39,29 @@ def calculate_indicators(df):
     df['RSI'] = 100 - (100 / (1 + rs))
     df['RSI'] = df['RSI'].fillna(50)
     
+    # ATR (14)
+    high_low = df['High'] - df['Low']
+    high_close = (df['High'] - df['Close'].shift()).abs()
+    low_close = (df['Low'] - df['Close'].shift()).abs()
+    tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+    df['ATR'] = tr.rolling(window=14).mean()
+    
     return df
 
 def generate_signal(ticker, df):
-    """Generate trading signal based on technical analysis."""
+    """Generate Forex trading signal with ATR risk management & 200 SMA trend filtering."""
     if df.empty or len(df) < 50:
         return None
         
     last_row = df.iloc[-1]
+    prev_row = df.iloc[-2]
     
-    price = last_row['Close']
-    rsi = last_row['RSI']
-    sma50 = last_row['SMA_50']
+    price = float(last_row['Close'])
+    rsi = float(last_row['RSI'])
+    rsi_prev = float(prev_row['RSI'])
+    sma50 = float(last_row['SMA_50']) if not pd.isna(last_row['SMA_50']) else price
+    sma200 = float(last_row['SMA_200']) if not pd.isna(last_row['SMA_200']) else sma50
+    atr = float(last_row['ATR']) if not pd.isna(last_row['ATR']) and last_row['ATR'] > 0 else price * 0.005
     
     clean_ticker = ticker.replace("=X", "")
     
@@ -63,31 +74,53 @@ def generate_signal(ticker, df):
         "notes": ""
     }
     
-    # Strategies (Forex)
-    # 1. RSI Extremes
-    if rsi < 30: 
-        signal["type"] = "LONG"
-        signal["context"] = "OVERSOLD_BOUNCE"
-        signal["target_price"] = round(price * 1.005, 5) # Smaller targets for FX
-        signal["stop_loss"] = round(price * 0.998, 5)
-        signal["notes"] = f"RSI Oversold ({rsi:.1f}). Reversion play."
-        return signal
-    elif rsi > 70:
-        signal["type"] = "SHORT"
-        signal["context"] = "OVERBOUGHT_REJECTION"
-        signal["target_price"] = round(price * 0.995, 5)
-        signal["stop_loss"] = round(price * 1.002, 5)
-        signal["notes"] = f"RSI Overbought ({rsi:.1f}). Reversion play."
-        return signal
-        
-    # 2. Trend Following
-    elif price > sma50 and rsi > 55 and rsi < 65:
-        signal["type"] = "LONG"
-        signal["context"] = "TREND_CONTINUATION"
-        signal["target_price"] = round(price * 1.008, 5)
-        signal["stop_loss"] = round(sma50, 5)
-        signal["notes"] = "Above SMA 50 with steady momentum."
-        return signal
+    # ---- LONG STRATEGIES (MUST BE ABOVE 200 SMA OR 50 SMA) ----
+    if price > sma200 or price > sma50:
+        # 1. RSI Oversold Bounce in Bullish Trend
+        if rsi < 32 and rsi > rsi_prev:
+            stop_dist = max(1.5 * atr, price * 0.003)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "LONG"
+            signal["context"] = "OVERSOLD_BOUNCE"
+            signal["stop_loss"] = round(price - stop_dist, 5)
+            signal["target_price"] = round(price + target_dist, 5)
+            signal["notes"] = f"Forex bullish dip bounce. RSI ({rsi:.1f}) turning up. Risk-Reward 1:2.5 (ATR: {atr:.5f})."
+            return signal
+
+        # 2. Trend Continuation
+        elif price > sma50 and rsi > 53 and rsi < 66 and prev_row['RSI'] <= 53:
+            stop_dist = max(1.4 * atr, price * 0.0025)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "LONG"
+            signal["context"] = "TREND_CONTINUATION"
+            signal["stop_loss"] = round(price - stop_dist, 5)
+            signal["target_price"] = round(price + target_dist, 5)
+            signal["notes"] = f"Forex trend continuation above 50-SMA. Risk-Reward 1:2.5."
+            return signal
+
+    # ---- SHORT STRATEGIES (MUST BE BELOW 200 SMA OR 50 SMA) ----
+    if price < sma200 or price < sma50:
+        # 3. RSI Overbought Rejection in Bearish Trend
+        if rsi > 68 and rsi < rsi_prev:
+            stop_dist = max(1.5 * atr, price * 0.003)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "SHORT"
+            signal["context"] = "OVERBOUGHT_REJECTION"
+            signal["stop_loss"] = round(price + stop_dist, 5)
+            signal["target_price"] = round(price - target_dist, 5)
+            signal["notes"] = f"Forex overbought short rejection. RSI ({rsi:.1f}) turning down. Risk-Reward 1:2.5."
+            return signal
+
+        # 4. Bearish Trend Breakdown
+        elif price < sma50 and rsi < 47 and prev_row['RSI'] >= 47:
+            stop_dist = max(1.4 * atr, price * 0.0025)
+            target_dist = stop_dist * 2.5
+            signal["type"] = "SHORT"
+            signal["context"] = "BREAKDOWN_SHORT"
+            signal["stop_loss"] = round(price + stop_dist, 5)
+            signal["target_price"] = round(price - target_dist, 5)
+            signal["notes"] = f"Forex breakdown below 50-SMA. Risk-Reward 1:2.5."
+            return signal
 
     return None
 

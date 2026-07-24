@@ -2,28 +2,24 @@
 July 24, 2026
 
 ## 1. Contexto Macro & Sentiment
-El Índice Dólar (DXY) en 101.31 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
+El Índice Dólar (DXY) en 101.33 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
 
 **VIX (Volatilidad)**
-18.96
-+1.39% respecto ayer
+18.90
++1.07% respecto ayer
 
 **Bonos 10Y (TNX)**
 4.70%
 +0.99% Yield
 
 **DXY (Dólar)**
-101.31
--0.12% Fuerza USD
+101.33
+-0.09% Fuerza USD
 
 ## 2. Value Plays: Reversiones y Soportes
 Selección de pares en zonas de agotamiento (RSI) con potencial de giro.
 
-### USDCAD
-- Entrada: 1.40669
-- Target: 1.41372
-- Stop: 1.40388
-- Nota: RSI Oversold (28.4). Reversion play.
+No se encontraron oportunidades de valor hoy.
 
 ## 3. Momentum & Seguimiento de Tendencia
 Pares con fuerza relativa y confirmación de tendencia.
