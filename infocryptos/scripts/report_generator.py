@@ -1,3 +1,10 @@
+import sys
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except AttributeError:
+    pass
+
 import json
 import datetime
 import os
@@ -194,6 +201,38 @@ def fetch_macro_data():
         print(f"⚠️ Error fetching macro data: {e}")
         
     return macro
+
+def fetch_crypto_fear_and_greed():
+    """Fetches the Crypto Fear & Greed Index from alternative.me API."""
+    result = {
+        "value": "50",
+        "classification": "Neutral",
+        "color": "var(--warning)"
+    }
+    try:
+        import requests
+        response = requests.get("https://api.alternative.me/fng/", timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            fng_data = data.get("data", [])[0]
+            val = int(fng_data.get("value", 50))
+            classification = fng_data.get("value_classification", "Neutral")
+            
+            color = "var(--warning)"
+            if val >= 60:
+                color = "var(--success)"
+            elif val <= 40:
+                color = "var(--danger)"
+                
+            result = {
+                "value": str(val),
+                "classification": classification,
+                "color": color
+            }
+    except Exception as e:
+        print(f"⚠️ Error fetching Crypto Fear & Greed Index: {e}")
+        
+    return result
 
 def generate_signal_card(signal, is_momentum=False):
     ticker = signal.get("ticker")

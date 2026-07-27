@@ -340,7 +340,7 @@
         "date": "2026-07-24",
         "ticker": "EURUSD",
         "entry_price": 1.1396,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",
