@@ -2,19 +2,19 @@
 July 27, 2026
 
 ## 1. Contexto Macro & Sentiment
-El Índice Dólar (DXY) en 101.15 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
+El Índice Dólar (DXY) en 101.27 marca la pauta. Un DXY fuerte presiona a pares como EURUSD y GBPUSD a la baja.
 
 **VIX (Volatilidad)**
-18.70
-+12.38% respecto ayer
+17.58
+-5.38% respecto ayer
 
 **Bonos 10Y (TNX)**
-4.70%
-+0.99% Yield
+4.68%
+-0.51% Yield
 
 **DXY (Dólar)**
-101.15
--0.27% Fuerza USD
+101.27
+-0.20% Fuerza USD
 
 ## 2. Value Plays: Reversiones y Soportes
 Selección de pares en zonas de agotamiento (RSI) con potencial de giro.

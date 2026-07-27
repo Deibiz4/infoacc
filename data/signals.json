@@ -136,7 +136,7 @@
         "date": "2026-07-16",
         "ticker": "DE",
         "entry_price": 589.48,
-        "status": "ACTIVE",
+        "status": "HIT_TARGET",
         "notes": "Pullback to SMA 50 support.",
         "type": "LONG",
         "context": "TREND_PULLBACK",
@@ -964,11 +964,35 @@
         "date": "2026-07-24",
         "ticker": "LMT",
         "entry_price": 568.59,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +159% vs avg. Risk-Reward 1:2.66.",
         "type": "LONG",
         "context": "MOMENTUM_BREAKOUT",
         "stop_loss": 544.45,
         "target_price": 632.8
+    },
+    {
+        "id": "20260727_AXP",
+        "date": "2026-07-27",
+        "ticker": "AXP",
+        "entry_price": 326.17,
+        "status": "PENDING",
+        "notes": "SMA 50 High-Volume Breakdown below 200 SMA. Volume +95% vs avg. Risk-Reward 1:2.66.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 340.8,
+        "target_price": 287.24
+    },
+    {
+        "id": "20260727_SLB",
+        "date": "2026-07-27",
+        "ticker": "SLB",
+        "entry_price": 52.42,
+        "status": "PENDING",
+        "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +127% vs avg. Risk-Reward 1:2.66.",
+        "type": "LONG",
+        "context": "MOMENTUM_BREAKOUT",
+        "stop_loss": 50.28,
+        "target_price": 58.1
     }
 ]
