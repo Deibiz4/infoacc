@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Market Report - July 28, 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        
+    :root {
+        --bg-color: #0f172a;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        --accent-color: #3b82f6;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --success: #10b981;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        background-image: radial-gradient(circle at top right, #1e293b 0%, transparent 40%);
+    }
+
+    h1, h2, h3 {
+        font-family: 'Outfit', sans-serif;
+        color: white;
+        margin-top: 0.5em;
+    }
+
+    h1 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+    h2 { font-size: 1.75rem; border-bottom: 1px solid var(--text-secondary); padding-bottom: 0.5rem; margin-top: 3rem; color: var(--accent-color); }
+    h3 { font-size: 1.25rem; color: #cbd5e1; }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        border: var(--glass-border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .metric-value { font-size: 1.5rem; font-weight: 700; color: white; display: block; margin-bottom: 0.5rem; }
+    .metric-context { font-size: 0.9rem; color: var(--text-secondary); }
+
+    .positive { color: var(--success); }
+    .negative { color: var(--danger); }
+
+    .plan-card {
+        border-left: 4px solid var(--accent-color);
+        background: linear-gradient(90deg, rgba(59,130,246,0.1) 0%, transparent 100%);
+    }
+
+    .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .plan-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .plan-price { font-size: 1.1em; font-weight: bold; }
+
+    .risk-reward {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+
+    .trade-levels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+        font-size: 0.9em;
+    }
+
+    .level-label { color: var(--text-secondary); display: block; margin-bottom: 0.2rem; }
+    .level-value { color: white; font-weight: 600; }
+
+    .entry { border-left: 2px solid var(--accent-color); padding-left: 0.5rem; }
+    .stop { border-left: 2px solid var(--danger); padding-left: 0.5rem; }
+    .target { border-left: 2px solid var(--success); padding-left: 0.5rem; }
+
+    ul { list-style-type: none; padding: 0; }
+    li { margin-bottom: 0.5rem; padding-left: 1.2rem; position: relative; }
+    li::before { content: "•"; color: var(--accent-color); position: absolute; left: 0; font-weight: bold; }
+
+    .footer {
+        text-align: center;
+        margin-top: 4rem;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 2rem;
+    }
+    
+    .badge {
+        font-size: 0.7em; 
+        padding: 2px 6px; 
+        border-radius: 4px; 
+        vertical-align: middle; 
+        color: #000; 
+        font-weight: bold;
+    }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav style="margin-bottom: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--glass-border); display:flex; justify-content:space-between;">
+        <a href="../index.html" style="color: var(--accent-color); text-decoration: none; font-weight: 600;">&#8592; Back to Hub</a>
+        <a href="../analytics.html" style="color: var(--success); text-decoration: none; font-weight: 600;">📊 View Analytics & Win Rate</a>
+    </nav>
+
+    <header>
+        <h1>Daily Market Intelligence Report</h1>
+        <p style="text-align: center; color: var(--text-secondary); margin-top: -1.5rem; margin-bottom: 1rem;">July 28, 2026</p>
+        <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:3rem; flex-wrap:wrap;">
+            <span style="background:#10b98122; color:#10b981; border:1px solid #10b98144; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9650; 9 LONG</span>
+            <span style="background:#ef444422; color:#ef4444; border:1px solid #ef444444; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">&#9660; 5 SHORT</span>
+            <span style="background:rgba(255,255,255,0.05); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.1); padding:6px 18px; border-radius:20px; font-size:0.85rem;">VIX 18.85 &bull; MODERATE</span>
+            <span style="background:#f59e0b22; color:#f59e0b; border:1px solid #f59e0b44; padding:6px 18px; border-radius:20px; font-weight:700; font-size:0.85rem;">Sentiment: Neutral (50/100)</span>
+        </div>
+    </header>
+
+    <!-- SECTION 1: MACRO & SENTIMENT -->
+    <section>
+        <h2>1. Macroeconomic Context & Market Sentiment</h2>
+        <div class="details-grid">
+            <div class="card">
+                <h3>VIX Index (Volatility)</h3>
+                <span class="metric-value" style="color: var(--text-primary)">18.85</span>
+                <span class="metric-context">+0.96% vs yesterday</span>
+            </div>
+            <div class="card">
+                <h3>10Y Treasury Yield (TNX)</h3>
+                <span class="metric-value">4.64%</span>
+                <span class="metric-context">-0.81% Yield</span>
+            </div>
+            <div class="card">
+                <h3>US Dollar Index (DXY)</h3>
+                <span class="metric-value">101.53</span>
+                <span class="metric-context">+0.06% USD Strength</span>
+            </div>
+        </div>
+
+        <!-- ECONOMIC CALENDAR CARD -->
+        <div class="card" style="margin-top:1.5rem; border-left: 4px solid var(--accent-color);">
+            <h3>📅 Key Economic Calendar Events Today</h3>
+            
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <div>
+                <strong style="color:white;">Weekly Macro Flows & Market Volatility Scan</strong>
+                <div style="font-size:0.8rem; color:var(--text-secondary);">Market Open &bull; GLOBAL</div>
+            </div>
+            <span style="background:var(--accent-color)22; color:var(--accent-color); border:1px solid var(--accent-color)44; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:bold;">MEDIUM IMPACT</span>
+        </div>
+        
+        </div>
+    </section>
+
+    <!-- SECTION 2: LONG SIGNALS -->
+    <section>
+        <h2 style="color: #10b981;">&#9650; 2. LONG Signals &mdash; Buy / Bullish Setups</h2>
+        <p style="color: var(--text-secondary);">Assets displaying bullish technical setups: oversold bounce, breakout or trend continuation.</p>
+        <div class="plan-grid">
+            
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">PG</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$148.05</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_PG" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$148.05</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$140.65</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$159.89</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_PG");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 148.05, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 159.89, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 140.65, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">CVX</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$183.86</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_CVX" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$183.86</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$174.67</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$198.57</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_CVX");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 183.86, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 198.57, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 174.67, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">KO</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Trend Pullback</span>
+                    </div>
+                    <span class="plan-price">$81.56</span>
+                </div>
+                <p class="metric-context">Pullback to SMA 50 support.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_KO" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$81.56</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$79.17</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$86.45</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:2.0</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_KO");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 81.56, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 86.45, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 79.17, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">XOM</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$147.36</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_XOM" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$147.36</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$139.99</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$159.15</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_XOM");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 147.36, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 159.15, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 139.99, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">COP</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Momentum Breakout</span>
+                    </div>
+                    <span class="plan-price">$114.71</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakout. Bullish momentum.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_COP" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$114.71</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$108.97</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$123.89</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_COP");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 114.71, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 123.89, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 108.97, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">CAT</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$894.54</span>
+                </div>
+                <p class="metric-context">Bullish trend value rebound above 200-SMA. RSI Oversold (32.8) turning up. Risk-Reward 1:2.5 (ATR: $38.22).</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_CAT" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$894.54</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$837.22</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$1037.85</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:2.5</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_CAT");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 894.54, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 1037.85, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 837.22, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">GOOGL</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$326.56</span>
+                </div>
+                <p class="metric-context">Bullish trend value rebound above 200-SMA. RSI Oversold (30.8) turning up. Risk-Reward 1:2.5 (ATR: $11.79).</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_GOOGL" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$326.56</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$308.88</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$370.77</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:2.5</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_GOOGL");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 326.56, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 370.77, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 308.88, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">INTC</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Value Oversold</span>
+                    </div>
+                    <span class="plan-price">$91.67</span>
+                </div>
+                <p class="metric-context">Bullish trend value rebound above 200-SMA. RSI Oversold (32.5) turning up. Risk-Reward 1:2.5 (ATR: $7.28).</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_INTC" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$91.67</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$80.75</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$118.97</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:2.5</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_INTC");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 91.67, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 118.97, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 80.75, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--success);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">GS</h3>
+                        <span style="background: var(--success); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9650; LONG</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Trend Pullback</span>
+                    </div>
+                    <span class="plan-price">$1048.23</span>
+                </div>
+                <p class="metric-context">Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_GS" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$1048.23</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$991.33</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$1190.47</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--success)20; color: var(--success); border: 1px solid var(--success)40;">R:R 1:2.5</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_GS");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#10b981', lineWidth: 2 });
+                    line.createPriceLine({ price: 1048.23, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 1190.47, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 991.33, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+        </div>
+    </section>
+
+    <!-- SECTION 3: SHORT SIGNALS -->
+    <section>
+        <h2 style="color: #ef4444;">&#9660; 3. SHORT Signals &mdash; Sell / Bearish Setups</h2>
+        <p style="color: var(--text-secondary);">Assets in extreme overbought territory or breaking down below key moving averages.</p>
+        <div class="plan-grid">
+            
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">NVDA</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Breakdown Short</span>
+                    </div>
+                    <span class="plan-price">$207.40</span>
+                </div>
+                <p class="metric-context">SMA 50 Breakdown. Bearish momentum confirmed.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_NVDA" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$207.40</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$217.77</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$190.81</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.6</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_NVDA");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#ef4444', lineWidth: 2 });
+                    line.createPriceLine({ price: 207.4, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 190.81, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 217.77, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">V</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$365.14</span>
+                </div>
+                <p class="metric-context">RSI Overbought (75.1). Mean reversion short opportunity.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_V" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$365.14</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$376.09</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$346.88</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_V");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#ef4444', lineWidth: 2 });
+                    line.createPriceLine({ price: 365.14, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 346.88, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 376.09, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">BAC</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$61.22</span>
+                </div>
+                <p class="metric-context">RSI Overbought (70.9). Mean reversion short opportunity.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_BAC" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$61.22</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$63.06</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$58.16</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:1.7</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_BAC");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#ef4444', lineWidth: 2 });
+                    line.createPriceLine({ price: 61.22, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 58.16, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 63.06, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">AXP</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Breakdown Short</span>
+                    </div>
+                    <span class="plan-price">$326.17</span>
+                </div>
+                <p class="metric-context">SMA 50 High-Volume Breakdown below 200 SMA. Volume +95% vs avg. Risk-Reward 1:2.66.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_AXP" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$326.17</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$340.80</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$287.24</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:2.7</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_AXP");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#ef4444', lineWidth: 2 });
+                    line.createPriceLine({ price: 326.17, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 287.24, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 340.8, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+            <div class="card plan-card" style="border-left: 4px solid var(--danger);">
+                <div class="plan-header">
+                    <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                        <h3 style="margin:0;">PFE</h3>
+                        <span style="background: var(--danger); color: white; font-size:0.75rem; font-weight:700; padding:3px 10px; border-radius:20px; letter-spacing:0.05em;">&#9660; SHORT</span>
+                        <span style="background:rgba(255,255,255,0.08); color:var(--text-secondary); font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:12px;">Overbought Rejection</span>
+                    </div>
+                    <span class="plan-price">$24.67</span>
+                </div>
+                <p class="metric-context">Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (68.5) turning down. Risk-Reward 1:2.5.</p>
+                
+                <!-- TradingView Lightweight Chart Container -->
+                <div id="tv_chart_PFE" style="width: 100%; height: 160px; margin: 1rem 0; border-radius: 8px; overflow: hidden; background: #0f172a; border: 1px solid rgba(255,255,255,0.05);"></div>
+
+                <div class="trade-levels">
+                    <div class="entry">
+                        <span class="level-label">Entry</span>
+                        <span class="level-value">$24.67</span>
+                    </div>
+                    <div class="stop">
+                        <span class="level-label">Stop Loss</span>
+                        <span class="level-value">$25.30</span>
+                    </div>
+                    <div class="target">
+                        <span class="level-label">Target</span>
+                        <span class="level-value">$23.08</span>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <span class="risk-reward" style="background: var(--danger)20; color: var(--danger); border: 1px solid var(--danger)40;">R:R 1:2.5</span>
+                </div>
+            </div>
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const el = document.getElementById("tv_chart_PFE");
+                if (el && typeof LightweightCharts !== 'undefined') {
+                    const chart = LightweightCharts.createChart(el, {
+                        layout: { backgroundColor: '#0f172a', textColor: '#94a3b8' },
+                        grid: { vertLines: { color: 'rgba(255, 255, 255, 0.03)' }, horzLines: { color: 'rgba(255, 255, 255, 0.03)' } },
+                        timeScale: { visible: false },
+                        rightPriceScale: { borderVisible: false }
+                    });
+                    const line = chart.addLineSeries({ color: '#ef4444', lineWidth: 2 });
+                    line.createPriceLine({ price: 24.67, color: '#3b82f6', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Solid, title: 'ENTRY' });
+                    line.createPriceLine({ price: 23.08, color: '#10b981', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'TARGET (TP)' });
+                    line.createPriceLine({ price: 25.3, color: '#ef4444', lineWidth: 2, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'STOP (SL)' });
+                }
+            });
+            </script>
+    
+        </div>
+    </section>
+
+    <!-- SECTION 4: RISK MANAGEMENT -->
+    
+    <section>
+        <h2>4. Risk & Capital Management</h2>
+        <div class="card" style="border-left: 4px solid var(--accent-color);">
+            <ul>
+                <li><strong>Position Sizing:</strong> Maintain risk per trade at 1-2% of total account capital.</li>
+                <li><strong>Total Exposure:</strong> Maximum 3 simultaneous positions to avoid correlated drawdown.</li>
+                
+            </ul>
+        </div>
+    </section>
+    
+
+    <!-- SECTION 5: SIGNALS AUDIT -->
+    <section>
+        <h2>5. Audit & Tracking</h2>
+        <div class="card">
+            <p>Signals algorithmically generated and tracked in real-time. Target prices are calculated using ATR and technical pivot levels.</p>
+            <p><small style="color: var(--text-secondary)">Total Signals Today: 14 (9 LONG / 5 SHORT)</small></p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>Generated by Antigravity Autonomous Trading System &bull; July 28, 2026</p>
+    </div>
+</div>
+
+</body>
+</html>
