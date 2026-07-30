@@ -1,23 +1,23 @@
 {
-    "last_updated": "2026-07-29 09:29:16",
+    "last_updated": "2026-07-30 09:18:51",
     "global": {
-        "total_signals": 133,
-        "closed_trades": 100,
-        "wins": 30,
-        "losses": 70,
-        "win_rate": 30.0,
-        "total_r": -12.65,
-        "profit_factor": 0.77
+        "total_signals": 134,
+        "closed_trades": 108,
+        "wins": 33,
+        "losses": 75,
+        "win_rate": 30.6,
+        "total_r": -11.81,
+        "profit_factor": 0.79
     },
     "by_market": {
         "Stocks": {
-            "total": 87,
-            "wins": 23,
-            "losses": 51,
-            "pending": 0,
-            "active": 13,
-            "win_rate": 31.1,
-            "total_r": -11.13
+            "total": 88,
+            "wins": 25,
+            "losses": 55,
+            "pending": 1,
+            "active": 7,
+            "win_rate": 31.2,
+            "total_r": -11.48
         },
         "Crypto": {
             "total": 17,
@@ -30,12 +30,12 @@
         },
         "Forex": {
             "total": 29,
-            "wins": 7,
-            "losses": 17,
+            "wins": 8,
+            "losses": 18,
             "pending": 0,
-            "active": 5,
-            "win_rate": 29.2,
-            "total_r": 0.48
+            "active": 3,
+            "win_rate": 30.8,
+            "total_r": 1.67
         }
     },
     "equity_curve": [
@@ -97,748 +97,768 @@
             "date": "2026-07-16",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": 1.66
+            "cumulative_r": 0.66
         },
         {
             "date": "2026-07-16",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": 0.66
+            "cumulative_r": -0.34
         },
         {
             "date": "2026-07-16",
             "ticker": "DE",
             "market": "Stocks",
-            "cumulative_r": 2.37
+            "cumulative_r": 1.37
         },
         {
             "date": "2026-07-16",
             "ticker": "PLTR",
             "market": "Stocks",
-            "cumulative_r": 4.04
+            "cumulative_r": 3.04
         },
         {
             "date": "2026-07-16",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": 3.04
+            "cumulative_r": 2.04
         },
         {
             "date": "2026-07-17",
             "ticker": "MSFT",
-            "market": "Stocks",
-            "cumulative_r": 4.71
-        },
-        {
-            "date": "2026-07-17",
-            "ticker": "NVDA",
-            "market": "Stocks",
-            "cumulative_r": 4.71
-        },
-        {
-            "date": "2026-07-17",
-            "ticker": "AMD",
             "market": "Stocks",
             "cumulative_r": 3.71
         },
         {
             "date": "2026-07-17",
+            "ticker": "NVDA",
+            "market": "Stocks",
+            "cumulative_r": 5.31
+        },
+        {
+            "date": "2026-07-17",
+            "ticker": "AMD",
+            "market": "Stocks",
+            "cumulative_r": 4.31
+        },
+        {
+            "date": "2026-07-17",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": 5.38
+            "cumulative_r": 5.98
         },
         {
             "date": "2026-07-17",
             "ticker": "QCOM",
             "market": "Stocks",
-            "cumulative_r": 4.38
+            "cumulative_r": 4.98
         },
         {
             "date": "2026-07-17",
             "ticker": "TXN",
             "market": "Stocks",
-            "cumulative_r": 3.38
+            "cumulative_r": 3.98
         },
         {
             "date": "2026-07-17",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": 5.05
+            "cumulative_r": 5.65
         },
         {
             "date": "2026-07-17",
             "ticker": "ARM",
             "market": "Stocks",
-            "cumulative_r": 4.05
+            "cumulative_r": 4.65
         },
         {
             "date": "2026-07-17",
             "ticker": "SMCI",
             "market": "Stocks",
-            "cumulative_r": 5.71
+            "cumulative_r": 6.31
         },
         {
             "date": "2026-07-17",
             "ticker": "V",
             "market": "Stocks",
-            "cumulative_r": 5.71
+            "cumulative_r": 6.31
         },
         {
             "date": "2026-07-17",
             "ticker": "MA",
             "market": "Stocks",
-            "cumulative_r": 7.38
+            "cumulative_r": 7.98
         },
         {
             "date": "2026-07-17",
             "ticker": "CVX",
             "market": "Stocks",
-            "cumulative_r": 7.38
+            "cumulative_r": 7.98
         },
         {
             "date": "2026-07-17",
             "ticker": "UBER",
             "market": "Stocks",
-            "cumulative_r": 6.38
+            "cumulative_r": 6.98
         },
         {
             "date": "2026-07-17",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": 5.38
+            "cumulative_r": 5.98
         },
         {
             "date": "2026-07-17",
             "ticker": "PLTR",
             "market": "Stocks",
-            "cumulative_r": 7.05
+            "cumulative_r": 7.65
         },
         {
             "date": "2026-07-17",
             "ticker": "SOFI",
             "market": "Stocks",
-            "cumulative_r": 6.05
+            "cumulative_r": 6.65
         },
         {
             "date": "2026-07-17",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": 5.05
+            "cumulative_r": 5.65
         },
         {
             "date": "2026-07-20",
             "ticker": "AMD",
             "market": "Stocks",
-            "cumulative_r": 4.05
+            "cumulative_r": 4.65
         },
         {
             "date": "2026-07-20",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": 3.05
+            "cumulative_r": 3.65
         },
         {
             "date": "2026-07-20",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": 4.72
+            "cumulative_r": 5.32
         },
         {
             "date": "2026-07-20",
             "ticker": "SMCI",
             "market": "Stocks",
-            "cumulative_r": 3.72
+            "cumulative_r": 4.32
         },
         {
             "date": "2026-07-20",
             "ticker": "KO",
             "market": "Stocks",
-            "cumulative_r": 3.72
+            "cumulative_r": 6.37
         },
         {
             "date": "2026-07-20",
             "ticker": "XOM",
             "market": "Stocks",
-            "cumulative_r": 3.72
+            "cumulative_r": 6.37
         },
         {
             "date": "2026-07-20",
             "ticker": "COP",
             "market": "Stocks",
-            "cumulative_r": 3.72
+            "cumulative_r": 6.37
         },
         {
             "date": "2026-07-20",
             "ticker": "PLTR",
             "market": "Stocks",
-            "cumulative_r": 5.39
+            "cumulative_r": 8.04
         },
         {
             "date": "2026-07-20",
             "ticker": "SOFI",
             "market": "Stocks",
-            "cumulative_r": 4.39
+            "cumulative_r": 7.04
         },
         {
             "date": "2026-07-20",
             "ticker": "MARA",
             "market": "Stocks",
-            "cumulative_r": 6.05
+            "cumulative_r": 8.7
         },
         {
             "date": "2026-07-20",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": 5.05
+            "cumulative_r": 7.7
         },
         {
             "date": "2026-07-21",
             "ticker": "MSFT",
             "market": "Stocks",
-            "cumulative_r": 4.05
+            "cumulative_r": 6.7
         },
         {
             "date": "2026-07-21",
             "ticker": "AMD",
             "market": "Stocks",
-            "cumulative_r": 3.05
+            "cumulative_r": 5.7
         },
         {
             "date": "2026-07-21",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": 2.05
+            "cumulative_r": 4.7
         },
         {
             "date": "2026-07-21",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": 1.05
+            "cumulative_r": 3.7
         },
         {
             "date": "2026-07-21",
             "ticker": "ARM",
             "market": "Stocks",
-            "cumulative_r": 2.72
+            "cumulative_r": 5.37
         },
         {
             "date": "2026-07-21",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": 1.72
+            "cumulative_r": 4.37
         },
         {
             "date": "2026-07-21",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": 3.39
+            "cumulative_r": 6.04
         },
         {
             "date": "2026-07-21",
             "ticker": "PLTR",
             "market": "Stocks",
-            "cumulative_r": 2.39
+            "cumulative_r": 5.04
         },
         {
             "date": "2026-07-21",
             "ticker": "SOFI",
             "market": "Stocks",
-            "cumulative_r": 1.39
+            "cumulative_r": 4.04
         },
         {
             "date": "2026-07-21",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": 0.39
+            "cumulative_r": 3.04
         },
         {
             "date": "2026-07-22",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -0.61
+            "cumulative_r": 2.04
         },
         {
             "date": "2026-07-22",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": -1.61
+            "cumulative_r": 1.04
         },
         {
             "date": "2026-07-22",
             "ticker": "BAC",
             "market": "Stocks",
-            "cumulative_r": -1.61
+            "cumulative_r": 1.04
         },
         {
             "date": "2026-07-22",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": 0.06
+            "cumulative_r": 2.71
         },
         {
             "date": "2026-07-22",
             "ticker": "COIN",
             "market": "Stocks",
-            "cumulative_r": -0.94
+            "cumulative_r": 1.71
         },
         {
             "date": "2026-07-22",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": -1.94
+            "cumulative_r": 0.71
         },
         {
             "date": "2026-07-22",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -2.94
+            "cumulative_r": -0.29
         },
         {
             "date": "2026-07-22",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": -3.94
+            "cumulative_r": -1.29
         },
         {
             "date": "2026-07-22",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -2.27
+            "cumulative_r": 0.38
         },
         {
             "date": "2026-07-22",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": -0.6
+            "cumulative_r": 2.05
         },
         {
             "date": "2026-07-22",
             "ticker": "SOFI",
             "market": "Stocks",
-            "cumulative_r": -1.6
+            "cumulative_r": 1.05
         },
         {
             "date": "2026-07-22",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": -2.6
+            "cumulative_r": 0.05
         },
         {
             "date": "2026-07-22",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -3.6
+            "cumulative_r": -0.95
         },
         {
             "date": "2026-07-22",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": -4.6
+            "cumulative_r": -1.95
         },
         {
             "date": "2026-07-22",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -2.93
+            "cumulative_r": -0.28
         },
         {
             "date": "2026-07-22",
             "ticker": "SOFI",
             "market": "Stocks",
-            "cumulative_r": -3.93
+            "cumulative_r": -1.28
         },
         {
             "date": "2026-07-22",
             "ticker": "COIN",
             "market": "Stocks",
-            "cumulative_r": -4.93
+            "cumulative_r": -2.28
         },
         {
             "date": "2026-07-22",
             "ticker": "RIOT",
             "market": "Stocks",
-            "cumulative_r": -5.93
+            "cumulative_r": -3.28
         },
         {
             "date": "2026-07-22",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -6.93
+            "cumulative_r": -4.28
         },
         {
             "date": "2026-07-22",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -7.93
+            "cumulative_r": -5.28
         },
         {
             "date": "2026-07-22",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": -5.53
+            "cumulative_r": -2.88
         },
         {
             "date": "2026-07-22",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -6.53
+            "cumulative_r": -3.88
         },
         {
             "date": "2026-07-22",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -7.53
+            "cumulative_r": -4.88
         },
         {
             "date": "2026-07-23",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": -8.53
+            "cumulative_r": -5.88
         },
         {
             "date": "2026-07-23",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -9.53
+            "cumulative_r": -6.88
         },
         {
             "date": "2026-07-23",
             "ticker": "DKNG",
             "market": "Stocks",
-            "cumulative_r": -7.13
+            "cumulative_r": -4.48
         },
         {
             "date": "2026-07-24",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -8.13
+            "cumulative_r": -5.48
         },
         {
             "date": "2026-07-24",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -8.13
+            "cumulative_r": -6.48
         },
         {
             "date": "2026-07-24",
             "ticker": "LMT",
             "market": "Stocks",
-            "cumulative_r": -9.13
+            "cumulative_r": -7.48
         },
         {
             "date": "2026-07-27",
             "ticker": "AXP",
             "market": "Stocks",
-            "cumulative_r": -10.13
+            "cumulative_r": -8.48
         },
         {
             "date": "2026-07-27",
             "ticker": "SLB",
             "market": "Stocks",
-            "cumulative_r": -11.13
+            "cumulative_r": -9.48
         },
         {
             "date": "2026-07-28",
             "ticker": "GOOGL",
             "market": "Stocks",
-            "cumulative_r": -11.13
+            "cumulative_r": -9.48
         },
         {
             "date": "2026-07-28",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -11.13
+            "cumulative_r": -9.48
         },
         {
             "date": "2026-07-28",
             "ticker": "GS",
             "market": "Stocks",
-            "cumulative_r": -11.13
+            "cumulative_r": -10.48
         },
         {
             "date": "2026-07-28",
             "ticker": "PFE",
             "market": "Stocks",
-            "cumulative_r": -11.13
+            "cumulative_r": -11.48
+        },
+        {
+            "date": "2026-07-30",
+            "ticker": "BA",
+            "market": "Stocks",
+            "cumulative_r": -11.48
         },
         {
             "date": "2026-07-16",
             "ticker": "BTC",
             "market": "Crypto",
-            "cumulative_r": -12.13
+            "cumulative_r": -12.48
         },
         {
             "date": "2026-07-16",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": -12.13
+            "cumulative_r": -12.48
         },
         {
             "date": "2026-07-16",
             "ticker": "SOL",
             "market": "Crypto",
-            "cumulative_r": -12.13
+            "cumulative_r": -12.48
         },
         {
             "date": "2026-07-16",
             "ticker": "AVAX",
             "market": "Crypto",
-            "cumulative_r": -12.13
+            "cumulative_r": -12.48
         },
         {
             "date": "2026-07-16",
             "ticker": "LINK",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-16",
             "ticker": "SHIB",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-17",
             "ticker": "XRP",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-17",
             "ticker": "ADA",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-17",
             "ticker": "DOGE",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-17",
             "ticker": "DOT",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-17",
             "ticker": "NEAR",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-17",
             "ticker": "BCH",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-20",
             "ticker": "BNB",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-20",
             "ticker": "LINK",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-20",
             "ticker": "LTC",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-21",
             "ticker": "BTC",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-27",
             "ticker": "TRX",
             "market": "Crypto",
-            "cumulative_r": -13.13
+            "cumulative_r": -13.48
         },
         {
             "date": "2026-07-16",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -14.13
+            "cumulative_r": -14.48
         },
         {
             "date": "2026-07-16",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": -11.63
+            "cumulative_r": -11.98
         },
         {
             "date": "2026-07-16",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -9.13
+            "cumulative_r": -9.48
         },
         {
             "date": "2026-07-16",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -6.64
+            "cumulative_r": -6.99
         },
         {
             "date": "2026-07-16",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -7.64
+            "cumulative_r": -7.99
         },
         {
             "date": "2026-07-16",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": -8.64
+            "cumulative_r": -8.99
         },
         {
             "date": "2026-07-17",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": -6.15
+            "cumulative_r": -6.5
         },
         {
             "date": "2026-07-17",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -7.15
+            "cumulative_r": -7.5
         },
         {
             "date": "2026-07-17",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -8.15
+            "cumulative_r": -8.5
         },
         {
             "date": "2026-07-17",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -8.15
+            "cumulative_r": -6.31
         },
         {
             "date": "2026-07-17",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": -5.65
+            "cumulative_r": -3.81
         },
         {
             "date": "2026-07-20",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -6.65
+            "cumulative_r": -4.81
         },
         {
             "date": "2026-07-20",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -7.65
+            "cumulative_r": -5.81
         },
         {
             "date": "2026-07-20",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": -5.15
+            "cumulative_r": -3.31
         },
         {
             "date": "2026-07-21",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -2.65
+            "cumulative_r": -0.81
         },
         {
             "date": "2026-07-21",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -3.65
+            "cumulative_r": -1.81
         },
         {
             "date": "2026-07-22",
             "ticker": "USDJPY",
             "market": "Forex",
-            "cumulative_r": -3.65
+            "cumulative_r": -1.81
         },
         {
             "date": "2026-07-22",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -4.65
+            "cumulative_r": -2.81
         },
         {
             "date": "2026-07-22",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": -4.65
+            "cumulative_r": -2.81
         },
         {
             "date": "2026-07-22",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -5.65
+            "cumulative_r": -3.81
         },
         {
             "date": "2026-07-22",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -6.65
+            "cumulative_r": -4.81
         },
         {
             "date": "2026-07-22",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -7.65
+            "cumulative_r": -5.81
         },
         {
             "date": "2026-07-22",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -8.65
+            "cumulative_r": -6.81
         },
         {
             "date": "2026-07-22",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": -9.65
+            "cumulative_r": -7.81
         },
         {
             "date": "2026-07-22",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -10.65
+            "cumulative_r": -8.81
         },
         {
             "date": "2026-07-22",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -11.65
+            "cumulative_r": -9.81
         },
         {
             "date": "2026-07-23",
             "ticker": "USDCHF",
             "market": "Forex",
-            "cumulative_r": -11.65
+            "cumulative_r": -9.81
         },
         {
             "date": "2026-07-23",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -12.65
+            "cumulative_r": -10.81
         },
         {
             "date": "2026-07-24",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": -12.65
+            "cumulative_r": -11.81
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260730_BA",
+            "date": "2026-07-30",
+            "ticker": "BA",
+            "entry_price": 214.01,
+            "status": "PENDING",
+            "notes": "SMA 50 High-Volume Breakdown below 200 SMA. Volume +62% vs avg. Risk-Reward 1:2.66.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 223.94,
+            "target_price": 187.6,
+            "market": "Stocks",
+            "rr_ratio": 2.66
+        },
         {
             "id": "20260728_GOOGL",
             "date": "2026-07-28",
@@ -872,7 +892,7 @@
             "date": "2026-07-28",
             "ticker": "GS",
             "entry_price": 1048.23,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -886,7 +906,7 @@
             "date": "2026-07-28",
             "ticker": "PFE",
             "entry_price": 24.67,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (68.5) turning down. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "OVERBOUGHT_REJECTION",
@@ -956,7 +976,7 @@
             "date": "2026-07-24",
             "ticker": "CAT",
             "entry_price": 894.54,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (32.8) turning up. Risk-Reward 1:2.5 (ATR: $38.22).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -984,7 +1004,7 @@
             "date": "2026-07-24",
             "ticker": "EURUSD",
             "entry_price": 1.1396,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -1244,20 +1264,6 @@
             "stop_loss": 102.29,
             "market": "Stocks",
             "rr_ratio": 1.67
-        },
-        {
-            "id": "20260722_MU",
-            "date": "2026-07-22",
-            "ticker": "MU",
-            "entry_price": 970.82,
-            "status": "HIT_STOP",
-            "notes": "SMA 50 Breakout. Bullish momentum.",
-            "type": "LONG",
-            "context": "MOMENTUM_BREAKOUT",
-            "target_price": 1048.49,
-            "stop_loss": 922.28,
-            "market": "Stocks",
-            "rr_ratio": 1.6
         }
     ]
 }
