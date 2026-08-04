@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-08-04 10:02:39",
+    "last_updated": "2026-08-04 10:32:16",
     "global": {
-        "total_signals": 24,
+        "total_signals": 27,
         "closed_trades": 2,
         "wins": 0,
         "losses": 2,
@@ -20,15 +20,17 @@
             "losses": 2,
             "pending": 8,
             "active": 5,
+            "expired": 0,
             "win_rate": 0.0,
             "total_r": -2.0
         },
         "Crypto": {
-            "total": 3,
+            "total": 6,
             "wins": 0,
             "losses": 0,
-            "pending": 3,
+            "pending": 6,
             "active": 0,
+            "expired": 0,
             "win_rate": 0.0,
             "total_r": 0.0
         },
@@ -38,8 +40,35 @@
             "losses": 0,
             "pending": 3,
             "active": 3,
+            "expired": 0,
             "win_rate": 0.0,
             "total_r": 0.0
+        }
+    },
+    "by_mode": {
+        "baseline": {
+            "signals": 25,
+            "closed": 2,
+            "wins": 0,
+            "losses": 2,
+            "win_rate": 0.0,
+            "total_r": -2.0,
+            "expectancy_r": -1.0,
+            "profit_factor": 0.0,
+            "expired": 0,
+            "fill_rate": 40.0
+        },
+        "stop_hold": {
+            "signals": 2,
+            "closed": 0,
+            "wins": 0,
+            "losses": 0,
+            "win_rate": 0.0,
+            "total_r": 0.0,
+            "expectancy_r": 0.0,
+            "profit_factor": 0.0,
+            "expired": 0,
+            "fill_rate": 0.0
         }
     },
     "equity_curve": [
@@ -84,6 +113,51 @@
             "target_price": 8.0894,
             "market": "Crypto",
             "rr_ratio": 2.6
+        },
+        {
+            "id": "20260804_SHIB-USD",
+            "date": "2026-08-04",
+            "ticker": "SHIB",
+            "entry_price": 0.0,
+            "status": "PENDING",
+            "notes": "Crypto overbought short rejection. RSI (95.2) turning down. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 0.0,
+            "target_price": 0.0,
+            "mode": "baseline",
+            "market": "Crypto",
+            "rr_ratio": null
+        },
+        {
+            "id": "20260804_XRP-USD_SH",
+            "date": "2026-08-04",
+            "ticker": "XRP",
+            "entry_price": 1.1207,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (1.121), original target held. Paired with 20260804_XRP-USD.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 1.1673,
+            "target_price": 0.9529,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.6
+        },
+        {
+            "id": "20260804_TRX-USD_SH",
+            "date": "2026-08-04",
+            "ticker": "TRX",
+            "entry_price": 0.3178,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (0.3178), original target held. Paired with 20260804_TRX-USD.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 0.3063,
+            "target_price": 0.3593,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.61
         },
         {
             "id": "20260803_AMZN",

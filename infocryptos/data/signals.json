@@ -34,5 +34,44 @@
         "context": "MOMENTUM_TREND",
         "stop_loss": 6.3955,
         "target_price": 8.0894
+    },
+    {
+        "id": "20260804_SHIB-USD",
+        "date": "2026-08-04",
+        "ticker": "SHIB",
+        "entry_price": 0.0,
+        "status": "PENDING",
+        "notes": "Crypto overbought short rejection. RSI (95.2) turning down. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "stop_loss": 0.0,
+        "target_price": 0.0,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260804_XRP-USD_SH",
+        "date": "2026-08-04",
+        "ticker": "XRP",
+        "entry_price": 1.1207,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.121), original target held. Paired with 20260804_XRP-USD.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 1.1673,
+        "target_price": 0.9529,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260804_TRX-USD_SH",
+        "date": "2026-08-04",
+        "ticker": "TRX",
+        "entry_price": 0.3178,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (0.3178), original target held. Paired with 20260804_TRX-USD.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 0.3063,
+        "target_price": 0.3593,
+        "mode": "stop_hold"
     }
 ]

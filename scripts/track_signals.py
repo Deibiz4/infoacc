@@ -34,12 +34,18 @@ YF_TICKER_MAPPING = {
 }
 
 # Long enough to survive weekends, holidays and skipped workflow runs.
-TRACKING_PERIOD = "1mo"
+TRACKING_PERIOD = "3mo"
+
+# Sessions an unfilled signal waits for its entry before being written off. The
+# pullback variant only fills about 40% of the time, and without an expiry the
+# rest would hold concentration slots forever. Backtested across 5, 10, 20, 40
+# and unlimited; results were stable, so this is not a tuned number.
+EXPIRY_SESSIONS = 10
 
 def get_yf_ticker(ticker):
     return YF_TICKER_MAPPING.get(ticker, ticker)
 
-def resolve_signal(s, df, start_status=None):
+def resolve_signal(s, df, start_status=None, expiry=EXPIRY_SESSIONS):
     """Advance a signal's status against a daily OHLC frame.
 
     Only sessions strictly after the signal date are considered. The entry price
@@ -68,6 +74,7 @@ def resolve_signal(s, df, start_status=None):
     if future.empty:
         return status
 
+    sessions = 0
     for _, row in future.iterrows():
         try:
             high, low = float(row["High"]), float(row["Low"])
@@ -104,6 +111,11 @@ def resolve_signal(s, df, start_status=None):
 
             if status in ("HIT_STOP", "HIT_TARGET"):
                 break
+
+        # Only sessions the signal actually waited unfilled count towards expiry.
+        sessions += 1
+        if expiry and status == "PENDING" and sessions >= expiry:
+            return "EXPIRED"
 
     return status
 

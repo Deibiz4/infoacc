@@ -47,9 +47,9 @@ def generate_analytics_data():
     
     all_signals = []
     market_stats = {
-        "Stocks": {"total": 0, "wins": 0, "losses": 0, "pending": 0, "active": 0, "win_rate": 0.0, "total_r": 0.0},
-        "Crypto": {"total": 0, "wins": 0, "losses": 0, "pending": 0, "active": 0, "win_rate": 0.0, "total_r": 0.0},
-        "Forex":  {"total": 0, "wins": 0, "losses": 0, "pending": 0, "active": 0, "win_rate": 0.0, "total_r": 0.0}
+        "Stocks": {"total": 0, "wins": 0, "losses": 0, "pending": 0, "active": 0, "expired": 0, "win_rate": 0.0, "total_r": 0.0},
+        "Crypto": {"total": 0, "wins": 0, "losses": 0, "pending": 0, "active": 0, "expired": 0, "win_rate": 0.0, "total_r": 0.0},
+        "Forex":  {"total": 0, "wins": 0, "losses": 0, "pending": 0, "active": 0, "expired": 0, "win_rate": 0.0, "total_r": 0.0}
     }
     
     total_wins = 0
@@ -103,6 +103,9 @@ def generate_analytics_data():
                 closed_trades.append((s.get("date", ""), market_name, s.get("ticker"), -1.0))
             elif status == "ACTIVE":
                 market_stats[market_name]["active"] += 1
+            elif status == "EXPIRED":
+                # Never filled within the entry window; not a trade either way.
+                market_stats[market_name]["expired"] += 1
             else:
                 market_stats[market_name]["pending"] += 1
 
@@ -127,6 +130,38 @@ def generate_analytics_data():
         market_stats[m]["win_rate"] = round((market_stats[m]["wins"] / closed) * 100, 1) if closed else 0.0
         market_stats[m]["total_r"] = round(market_stats[m]["total_r"], 2)
 
+    # Two entry modes run side by side: the original engine and the pullback
+    # variant that enters at the baseline stop. They are different strategies,
+    # so the point of the dashboard is to keep their records apart.
+    by_mode = {}
+    for mode in ("baseline", "stop_hold"):
+        sub = [s for s in all_signals if s.get("mode", "baseline") == mode]
+        w = l = 0
+        gp = gl = 0.0
+        for s in sub:
+            rr = s.get("rr_ratio")
+            if s.get("status") in ("HIT_TARGET", "CLOSED_WIN") and rr:
+                w += 1
+                gp += rr
+            elif s.get("status") in ("HIT_STOP", "CLOSED_LOSS") and rr:
+                l += 1
+                gl += 1.0
+        closed_n = w + l
+        filled = sum(1 for s in sub
+                     if s.get("status") not in ("PENDING", "EXPIRED"))
+        by_mode[mode] = {
+            "signals": len(sub),
+            "closed": closed_n,
+            "wins": w,
+            "losses": l,
+            "win_rate": round(100.0 * w / closed_n, 1) if closed_n else 0.0,
+            "total_r": round(gp - gl, 2),
+            "expectancy_r": round((gp - gl) / closed_n, 3) if closed_n else 0.0,
+            "profit_factor": round(gp / gl, 2) if gl else 0.0,
+            "expired": sum(1 for s in sub if s.get("status") == "EXPIRED"),
+            "fill_rate": round(100.0 * filled / len(sub), 1) if sub else 0.0,
+        }
+
     total_closed = total_wins + total_losses
     global_win_rate = round((total_wins / total_closed) * 100, 1) if total_closed > 0 else 0.0
     # Real profit factor: R won divided by R lost.
@@ -149,6 +184,7 @@ def generate_analytics_data():
             "invalid_signals": invalid_signals
         },
         "by_market": market_stats,
+        "by_mode": by_mode,
         "equity_curve": equity_curve,
         "recent_signals": sorted(all_signals, key=lambda x: x.get("date", ""), reverse=True)[:30]
     }

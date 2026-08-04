@@ -25,8 +25,10 @@ TICKERS = [
 # Risk concentration limits. These tickers are heavily correlated, so an
 # unbounded scan opens dozens of near-identical bets at once (28 in one day in
 # July 2026) and the book becomes a single directional wager on the index.
-MAX_OPEN_POSITIONS = 10      # total PENDING + ACTIVE at any time
-MAX_NEW_SIGNALS_PER_RUN = 4  # new entries admitted per scan
+MAX_OPEN_POSITIONS = 10      # total PENDING + ACTIVE at any time, per entry mode
+MAX_NEW_SIGNALS_PER_RUN = 4  # new entries admitted per scan, per entry mode
+
+PRICE_DECIMALS = 2
 
 def calculate_indicators(df):
     """Calculate RSI, SMAs, ATR, and Volume Avg."""
@@ -146,6 +148,56 @@ def generate_signal(ticker, df):
 
     return None
 
+def signal_mode(s):
+    """Entry mode of a stored signal. Signals predating modes are baseline."""
+    return s.get("mode", "baseline")
+
+def make_stop_hold(sig):
+    """Derive the pullback variant of a signal, or None if it degenerates.
+
+    The premise, backed by scripts/backtest.py over 6 years: the setups call
+    direction reasonably but enter early, and price often dips to the stop
+    before going the intended way. So enter at the original stop instead, one
+    risk unit better, keeping the original target. Risk distance is unchanged,
+    which lifts reward/risk from 2.5 to 3.5 and drops the win rate needed to
+    break even from 28.6% to 22.2%.
+
+    Runs alongside the baseline signal, not instead of it, so the two can be
+    compared on live results.
+    """
+    try:
+        entry = float(sig["entry_price"])
+        stop = float(sig["stop_loss"])
+        target = float(sig["target_price"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+    risk = abs(entry - stop)
+    if risk <= abs(entry) * 0.001:
+        return None
+
+    long = sig.get("type") == "LONG"
+    new_entry = stop
+    new_stop = stop - risk if long else stop + risk
+
+    # The original target must still sit on the profitable side of the new entry.
+    if long and not (new_stop < new_entry < target):
+        return None
+    if not long and not (new_stop > new_entry > target):
+        return None
+
+    variant = dict(sig)
+    variant["id"] = f"{sig['id']}_SH"
+    variant["mode"] = "stop_hold"
+    variant["entry_price"] = round(new_entry, PRICE_DECIMALS)
+    variant["stop_loss"] = round(new_stop, PRICE_DECIMALS)
+    variant["target_price"] = round(target, PRICE_DECIMALS)
+    variant["notes"] = (
+        f"Pullback entry at the baseline stop ({new_entry:.2f}), original target "
+        f"held. Risk-Reward 1:3.5. Paired with {sig['id']}."
+    )
+    return variant
+
 def signal_rr(s):
     """Reward/risk of a candidate signal, 0 if undefined."""
     try:
@@ -179,7 +231,9 @@ def scan_market():
     # Load existing signals to keep history/active state and prevent duplicates
     today = datetime.datetime.now().strftime("%Y-%m-%d")
     existing_signals = []
-    blocked_tickers = set()
+    # Blocking is per entry mode: the baseline and the pullback variant of the
+    # same setup are different trades and must not shut each other out.
+    blocked = {"baseline": set(), "stop_hold": set()}
     if os.path.exists(SIGNALS_FILE):
         try:
             with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
@@ -188,15 +242,14 @@ def scan_market():
                 # signalled today. Without the second condition a signal closed
                 # by the tracker earlier in the day gets re-emitted on the next
                 # run, duplicating the same trade in the P&L.
-                blocked_tickers = {
-                    s.get("ticker") for s in existing_signals
-                    if s.get("status") in ["PENDING", "ACTIVE"] or s.get("date") == today
-                }
+                for s in existing_signals:
+                    if s.get("status") in ["PENDING", "ACTIVE"] or s.get("date") == today:
+                        blocked.setdefault(signal_mode(s), set()).add(s.get("ticker"))
         except Exception as e:
             print(f"⚠️ Error loading existing signals: {e}")
             existing_signals = []
-    
-    new_signals = []
+
+    candidates = {"baseline": [], "stop_hold": []}
     market_data_rows = []
     
     # Bulk download for speed
@@ -214,12 +267,18 @@ def scan_market():
             last_row = df.iloc[-1]
             
             # 1. Generate Signal Logic (Only if ticker has no open or same-day signal)
-            if ticker in blocked_tickers:
+            sig = generate_signal(ticker, df) if (
+                ticker not in blocked["baseline"] or ticker not in blocked["stop_hold"]
+            ) else None
+            if sig:
+                sig["mode"] = "baseline"
+                if ticker not in blocked["baseline"]:
+                    candidates["baseline"].append(sig)
+                variant = make_stop_hold(sig)
+                if variant and ticker not in blocked["stop_hold"]:
+                    candidates["stop_hold"].append(variant)
+            elif ticker in blocked["baseline"] and ticker in blocked["stop_hold"]:
                 print(f"⏭️ Skipping {ticker}: open position or already signalled today.")
-            else:
-                sig = generate_signal(ticker, df)
-                if sig:
-                    new_signals.append(sig)
             
             # 2. Prepare CSV Row (Google Sheets format)
             # Ticker;Name;Price;Change%;Sparkline;Entry;Target;Stop;Date;Status;Type;Notes
@@ -260,10 +319,17 @@ def scan_market():
             print(f"Error processing {ticker}: {e}")
             continue
 
-    # Apply concentration limits before committing. Best reward/risk first, so
-    # the cap keeps the strongest setups rather than whichever ticker the loop
-    # happened to reach first.
-    new_signals = apply_risk_limits(new_signals, existing_signals)
+    # Apply concentration limits before committing, each mode against its own
+    # book. Best reward/risk first, so the cap keeps the strongest setups rather
+    # than whichever ticker the loop happened to reach first.
+    new_signals = []
+    for mode, cands in candidates.items():
+        if not cands:
+            continue
+        book = [s for s in existing_signals if signal_mode(s) == mode]
+        admitted = apply_risk_limits(cands, book)
+        print(f"   {mode}: {len(admitted)} admitted of {len(cands)} candidates.")
+        new_signals.extend(admitted)
 
     # Combine existing and new signals
     combined_signals = existing_signals + new_signals
