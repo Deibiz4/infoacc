@@ -76,23 +76,30 @@ def resolve_signal(s, df, start_status=None):
         if pd.isna(high) or pd.isna(low):
             continue
 
+        just_filled = False
         if status == "PENDING":
             # Filled once price trades through the entry level.
             if low <= entry <= high:
                 status = "ACTIVE"
+                just_filled = True
 
         if status == "ACTIVE":
             # Daily bars cannot tell us which level was touched first, so assume
             # the stop. Resolving ties as wins inflates the win rate.
+            #
+            # On the bar that filled the order the target is not counted at all:
+            # booking a win there assumes the bar's extreme came after the fill,
+            # and it usually came before. The stop still counts, keeping the
+            # pessimistic convention consistent.
             if direction == "LONG":
                 if low <= stop:
                     status = "HIT_STOP"
-                elif high >= target:
+                elif not just_filled and high >= target:
                     status = "HIT_TARGET"
             else:  # SHORT
                 if high >= stop:
                     status = "HIT_STOP"
-                elif low <= target:
+                elif not just_filled and low <= target:
                     status = "HIT_TARGET"
 
             if status in ("HIT_STOP", "HIT_TARGET"):

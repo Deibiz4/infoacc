@@ -71,6 +71,49 @@ SCANNERS = {
 
 dropped_by_cap = defaultdict(int)
 
+# --- Entry modes ------------------------------------------------------------
+# The engine's entry is the close of the day the setup appeared. The premise of
+# the alternative modes is that the direction is often right but the entry is
+# early: price frequently dips to the stop and only then goes the intended way.
+# So instead of buying the close, wait for the original stop level and enter
+# there, one risk unit better.
+#
+#   baseline    entry E, stop S, target T, as production does today.
+#   stop_entry  entry S, target E, stop S-(E-S). Reward equals risk, so 1:1.
+#   stop_hold   entry S, target T (the original), stop S-(E-S). Wider payoff.
+MODES = ("baseline", "stop_entry", "stop_hold")
+
+
+def transform_signal(sig, mode):
+    """Rewrite a signal's levels for the chosen entry mode."""
+    if mode == "baseline":
+        return sig
+
+    entry = float(sig["entry_price"])
+    stop = float(sig["stop_loss"])
+    target = float(sig["target_price"])
+    risk = abs(entry - stop)
+    if risk <= abs(entry) * 0.001:
+        return None
+
+    long = sig.get("type") == "LONG"
+    new_entry = stop
+    new_stop = stop - risk if long else stop + risk
+    new_target = entry if mode == "stop_entry" else target
+
+    # A target that is not on the profitable side of the new entry is not a
+    # trade; can happen if the original target sat inside the risk band.
+    if long and not (new_stop < new_entry < new_target):
+        return None
+    if not long and not (new_stop > new_entry > new_target):
+        return None
+
+    sig = dict(sig)
+    sig["entry_price"] = new_entry
+    sig["stop_loss"] = new_stop
+    sig["target_price"] = new_target
+    return sig
+
 
 def signal_name(market, yf_ticker):
     """The ticker as the scanner would store it."""
@@ -104,21 +147,31 @@ def fetch(tickers, years):
     return frames
 
 
-def advance(sig, high, low):
-    """Move one signal forward over a single bar. Mirrors resolve_signal."""
+def advance(sig, high, low, same_bar_exit=True):
+    """Move one signal forward over a single bar. Mirrors resolve_signal.
+
+    same_bar_exit=False refuses to book a win on the bar that filled the order.
+    A daily bar gives no intrabar sequence, so when price dips to the entry and
+    the same bar's high already sits at the target, crediting a win assumes the
+    high came after the fill — it usually came before. The stop is still honoured
+    on the fill bar, keeping the pessimistic convention used everywhere else.
+    """
     status = sig["status"]
+    just_filled = False
     if status == "PENDING" and low <= sig["entry_price"] <= high:
         status = "ACTIVE"
+        just_filled = True
     if status == "ACTIVE":
+        allow_target = same_bar_exit or not just_filled
         if sig["type"] == "LONG":
             if low <= sig["stop_loss"]:
                 status = "HIT_STOP"
-            elif high >= sig["target_price"]:
+            elif allow_target and high >= sig["target_price"]:
                 status = "HIT_TARGET"
         else:
             if high >= sig["stop_loss"]:
                 status = "HIT_STOP"
-            elif low <= sig["target_price"]:
+            elif allow_target and low <= sig["target_price"]:
                 status = "HIT_TARGET"
     return status
 
@@ -130,9 +183,11 @@ def rr_of(sig):
     return min(abs(sig["target_price"] - sig["entry_price"]) / risk, 5.0)
 
 
-def run_market(market, years, warmup):
+def run_market(market, years, warmup, mode="baseline", expiry=10, frames=None,
+               same_bar_exit=True):
     scanner = SCANNERS[market]
-    frames = fetch(list(scanner.TICKERS), years)
+    if frames is None:
+        frames = fetch(list(scanner.TICKERS), years)
     if not frames:
         return []
 
@@ -170,12 +225,29 @@ def run_market(market, years, warmup):
             if pd.isna(high) or pd.isna(low):
                 still_open.append(sig)
                 continue
-            sig["status"] = advance(sig, high, low)
+
+            before = sig["status"]
+            sig["status"] = advance(sig, high, low, same_bar_exit=same_bar_exit)
+            if before == "PENDING" and sig["status"] != "PENDING":
+                sig["_filled"] = True
+                sig["_fill_day"] = day
+
             if sig["status"] in ("HIT_STOP", "HIT_TARGET"):
                 sig["_closed"] = day
+                sig["_same_bar"] = sig.get("_fill_day") == day
                 closed.append(sig)
-            else:
-                still_open.append(sig)
+                continue
+
+            # An unfilled signal cannot wait forever: it would hold a slot the
+            # concentration cap could give to a live setup.
+            sig["_age"] += 1
+            if expiry and sig["status"] == "PENDING" and sig["_age"] >= expiry:
+                sig["status"] = "EXPIRED"
+                sig["_closed"] = day
+                closed.append(sig)
+                continue
+
+            still_open.append(sig)
         positions = still_open
 
         # 2. Generate today's candidates, with the same blocking the scanner uses.
@@ -195,10 +267,15 @@ def run_market(market, years, warmup):
                 continue
             if not sig:
                 continue
+            sig = transform_signal(sig, mode)
+            if not sig:
+                continue
             sig["date"] = day.strftime("%Y-%m-%d")
             sig["_created"] = day
             sig["_yf"] = yf_ticker
             sig["status"] = "PENDING"
+            sig["_age"] = 0
+            sig["_filled"] = False
             candidates.append(sig)
 
         if not candidates:
@@ -245,7 +322,11 @@ def score(signals):
             losses += 1
             gross_loss += 1.0
     n = wins + losses
+    generated = len(signals)
+    filled = sum(1 for s in signals if s.get("_filled"))
     return {
+        "signals": generated,
+        "fill_rate": 100.0 * filled / generated if generated else 0.0,
         "trades": n,
         "wins": wins,
         "losses": losses,
@@ -313,12 +394,93 @@ HEADER = "  {:<26} {:>5}  {:>6}  {:>8}  {:>7}  {:>5}".format(
 )
 
 
+def compare_modes(markets, years, warmup, expiry, same_bar_exit=True):
+    """Run every entry mode over identical data and lay the results side by side."""
+    # Download once; the modes must see exactly the same bars or the comparison
+    # is meaningless.
+    cache = {m: fetch(list(SCANNERS[m].TICKERS), years) for m in markets}
+
+    results = {}
+    for mode in MODES:
+        print(f"\n--- simulating mode: {mode} ---")
+        sigs = []
+        for market in markets:
+            sigs.extend(
+                run_market(market, years, warmup, mode=mode, expiry=expiry,
+                           frames=cache[market], same_bar_exit=same_bar_exit)
+            )
+        results[mode] = sigs
+
+    print("\n" + "=" * 78)
+    print("SAME-BAR EXITS  (wins booked on the very bar that filled the order)")
+    print("=" * 78)
+    print("  {:<14} {:>8} {:>14} {:>12}".format("MODE", "WINS", "SAME-BAR", "SHARE"))
+    for mode in MODES:
+        wins = [s for s in results[mode] if s["status"] == "HIT_TARGET"]
+        sb = sum(1 for s in wins if s.get("_same_bar"))
+        share = 100.0 * sb / len(wins) if wins else 0.0
+        print(f"  {mode:<14} {len(wins):>8} {sb:>14} {share:>11.1f}%")
+    print("\n  A daily bar carries no intrabar sequence. When the fill and the")
+    print("  target sit inside one bar, calling it a win assumes the high came")
+    print("  after the dip, which is usually backwards.")
+
+    hdr = "  {:<14} {:>8} {:>7} {:>7} {:>7} {:>9} {:>8} {:>6}".format(
+        "MODE", "SIGNALS", "FILL%", "TRADES", "WIN%", "TOTAL R", "EXP R", "PF")
+
+    print("\n" + "=" * 78)
+    print("ENTRY MODE COMPARISON")
+    print("=" * 78)
+    print(hdr)
+    for mode in MODES:
+        m = score(results[mode])
+        print(f"  {mode:<14} {m['signals']:>8} {m['fill_rate']:>6.1f}% "
+              f"{m['trades']:>7} {m['win_rate']:>6.1f}% {m['total_r']:>+9.1f} "
+              f"{m['expectancy']:>+8.3f} {m['profit_factor']:>6.2f}")
+
+    print("\n" + "=" * 78)
+    print("BREAK-EVEN COST AND CONFIDENCE  (does any mode actually have an edge?)")
+    print("=" * 78)
+    print("  {:<14} {:>7} {:>10} {:>24}".format("MODE", "TRADES", "BE COST", "95% CI on mean R"))
+    for mode in MODES:
+        r = trade_returns(results[mode])
+        if len(r) < 2:
+            continue
+        lo, hi = bootstrap_ci(r)
+        mean = sum(r) / len(r)
+        flag = "" if lo > 0 else ("  includes zero" if hi > 0 else "  negative")
+        print(f"  {mode:<14} {len(r):>7} {mean:>+10.4f}   [{lo:+.3f}, {hi:+.3f}]{flag}")
+
+    print("\n" + "=" * 78)
+    print("BY STRATEGY, PER MODE  (total R)")
+    print("=" * 78)
+    keys = sorted({(s["market"], s.get("context", "?"))
+                   for sigs in results.values() for s in sigs})
+    print("  {:<30} {:>12} {:>12} {:>12}".format("STRATEGY", *MODES))
+    for k in keys:
+        cells = []
+        for mode in MODES:
+            sub = [s for s in results[mode]
+                   if s["market"] == k[0] and s.get("context") == k[1]]
+            m = score(sub)
+            cells.append(f"{m['total_r']:+.1f} ({m['trades']})" if m["trades"] else "-")
+        print(f"  {k[0][:6]:<6} {k[1]:<23} {cells[0]:>12} {cells[1]:>12} {cells[2]:>12}")
+
+    return results
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--years", type=int, default=6)
     ap.add_argument("--warmup", type=int, default=220,
                     help="Sessions reserved for indicator warm-up (200-SMA needs 200)")
     ap.add_argument("--market", choices=list(SCANNERS), help="Limit to one market")
+    ap.add_argument("--mode", choices=MODES, default="baseline")
+    ap.add_argument("--compare", action="store_true",
+                    help="Run every entry mode over identical data")
+    ap.add_argument("--strict-fill", action="store_true",
+                    help="Refuse to book a win on the bar that filled the order")
+    ap.add_argument("--expiry", type=int, default=10,
+                    help="Sessions an unfilled signal waits before expiring (0 = forever)")
     ap.add_argument("--by-year", action="store_true")
     ap.add_argument("--out", default=os.path.join(BASE_DIR, "data", "backtest.json"))
     args = ap.parse_args()
@@ -326,11 +488,21 @@ def main():
     markets = [args.market] if args.market else list(SCANNERS)
 
     print("=== WALK-FORWARD BACKTEST ===")
-    print(f"History: {args.years}y   Warm-up: {args.warmup} sessions\n")
+    print(f"History: {args.years}y   Warm-up: {args.warmup} sessions   "
+          f"Expiry: {args.expiry or 'none'}\n")
 
+    if args.compare:
+        compare_modes(markets, args.years, args.warmup, args.expiry,
+                      same_bar_exit=not args.strict_fill)
+        return
+
+    print(f"Entry mode: {args.mode}\n")
     all_signals = []
     for market in markets:
-        all_signals.extend(run_market(market, args.years, args.warmup))
+        all_signals.extend(
+            run_market(market, args.years, args.warmup, mode=args.mode,
+                       expiry=args.expiry, same_bar_exit=not args.strict_fill)
+        )
 
     resolved = [s for s in all_signals if s["status"] in ("HIT_STOP", "HIT_TARGET")]
     if not resolved:
