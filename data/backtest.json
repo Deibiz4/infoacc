@@ -1,0 +1,199 @@
+{
+    "generated": "2026-08-04 08:59:08",
+    "gross_total_r": -1.2,
+    "trades": 958,
+    "breakeven_cost_r": -0.0013,
+    "years": 6,
+    "overall": {
+        "trades": 958,
+        "wins": 269,
+        "losses": 689,
+        "win_rate": 28.079331941544886,
+        "total_r": -1.2024198890713933,
+        "expectancy": -0.00125513558358183,
+        "profit_factor": 0.9982548332524362,
+        "unresolved": 21,
+        "invalid": 0
+    },
+    "max_drawdown_r": -60.96,
+    "by_market": {
+        "Stocks": {
+            "trades": 364,
+            "wins": 106,
+            "losses": 258,
+            "win_rate": 29.12087912087912,
+            "total_r": 14.624515753794014,
+            "expectancy": 0.04017724108185169,
+            "profit_factor": 1.0566841695883489,
+            "unresolved": 10,
+            "invalid": 0
+        },
+        "Crypto": {
+            "trades": 372,
+            "wins": 105,
+            "losses": 267,
+            "win_rate": 28.225806451612904,
+            "total_r": 3.168213591097526,
+            "expectancy": 0.008516703201875071,
+            "profit_factor": 1.0118659685059832,
+            "unresolved": 5,
+            "invalid": 0
+        },
+        "Forex": {
+            "trades": 222,
+            "wins": 58,
+            "losses": 164,
+            "win_rate": 26.126126126126128,
+            "total_r": -18.99514923396319,
+            "expectancy": -0.08556373528812247,
+            "profit_factor": 0.8841759193051025,
+            "unresolved": 6,
+            "invalid": 0
+        }
+    },
+    "by_strategy": {
+        "Stocks|BREAKDOWN_SHORT": {
+            "trades": 73,
+            "wins": 16,
+            "losses": 57,
+            "win_rate": 21.91780821917808,
+            "total_r": -14.417387003719185,
+            "expectancy": -0.19749845210574227,
+            "profit_factor": 0.7470633858996635,
+            "unresolved": 1,
+            "invalid": 0
+        },
+        "Stocks|MOMENTUM_BREAKOUT": {
+            "trades": 98,
+            "wins": 30,
+            "losses": 68,
+            "win_rate": 30.612244897959183,
+            "total_r": 11.85192298575734,
+            "expectancy": 0.12093798965058511,
+            "profit_factor": 1.1742929850846668,
+            "unresolved": 1,
+            "invalid": 0
+        },
+        "Stocks|VALUE_OVERSOLD": {
+            "trades": 62,
+            "wins": 18,
+            "losses": 44,
+            "win_rate": 29.032258064516128,
+            "total_r": 1.0543944707892194,
+            "expectancy": 0.017006362432084185,
+            "profit_factor": 1.0239635106997549,
+            "unresolved": 4,
+            "invalid": 0
+        },
+        "Stocks|TREND_PULLBACK": {
+            "trades": 97,
+            "wins": 33,
+            "losses": 64,
+            "win_rate": 34.02061855670103,
+            "total_r": 18.585559632420015,
+            "expectancy": 0.1916037075507218,
+            "profit_factor": 1.2903993692565627,
+            "unresolved": 3,
+            "invalid": 0
+        },
+        "Stocks|OVERBOUGHT_REJECTION": {
+            "trades": 34,
+            "wins": 9,
+            "losses": 25,
+            "win_rate": 26.470588235294116,
+            "total_r": -2.4499743314534754,
+            "expectancy": -0.07205806857216104,
+            "profit_factor": 0.902001026741861,
+            "unresolved": 1,
+            "invalid": 0
+        },
+        "Crypto|MOMENTUM_TREND": {
+            "trades": 139,
+            "wins": 46,
+            "losses": 93,
+            "win_rate": 33.093525179856115,
+            "total_r": 26.517755245504688,
+            "expectancy": 0.1907752175935589,
+            "profit_factor": 1.2851371531774698,
+            "unresolved": 2,
+            "invalid": 0
+        },
+        "Crypto|BREAKDOWN_SHORT": {
+            "trades": 132,
+            "wins": 30,
+            "losses": 102,
+            "win_rate": 22.727272727272727,
+            "total_r": -23.947420684787545,
+            "expectancy": -0.1814198536726329,
+            "profit_factor": 0.7652213658354162,
+            "unresolved": 2,
+            "invalid": 0
+        },
+        "Crypto|VALUE_OVERSOLD": {
+            "trades": 44,
+            "wins": 13,
+            "losses": 31,
+            "win_rate": 29.545454545454547,
+            "total_r": 1.5455082103736615,
+            "expectancy": 0.0351251865994014,
+            "profit_factor": 1.0498551035604407,
+            "unresolved": 1,
+            "invalid": 0
+        },
+        "Crypto|OVERBOUGHT_REJECTION": {
+            "trades": 57,
+            "wins": 16,
+            "losses": 41,
+            "win_rate": 28.07017543859649,
+            "total_r": -0.9476291799932568,
+            "expectancy": -0.016625073333215033,
+            "profit_factor": 0.9768870931708962,
+            "unresolved": 0,
+            "invalid": 0
+        },
+        "Forex|TREND_CONTINUATION": {
+            "trades": 82,
+            "wins": 23,
+            "losses": 59,
+            "win_rate": 28.048780487804876,
+            "total_r": -1.498615690324364,
+            "expectancy": -0.018275801101516633,
+            "profit_factor": 0.9745997340622989,
+            "unresolved": 4,
+            "invalid": 0
+        },
+        "Forex|BREAKDOWN_SHORT": {
+            "trades": 93,
+            "wins": 23,
+            "losses": 70,
+            "win_rate": 24.731182795698924,
+            "total_r": -12.497433002261253,
+            "expectancy": -0.13438100002431455,
+            "profit_factor": 0.8214652428248392,
+            "unresolved": 1,
+            "invalid": 0
+        },
+        "Forex|OVERSOLD_BOUNCE": {
+            "trades": 20,
+            "wins": 5,
+            "losses": 15,
+            "win_rate": 25.0,
+            "total_r": -2.498960204141632,
+            "expectancy": -0.1249480102070816,
+            "profit_factor": 0.8334026530572245,
+            "unresolved": 1,
+            "invalid": 0
+        },
+        "Forex|OVERBOUGHT_REJECTION": {
+            "trades": 27,
+            "wins": 7,
+            "losses": 20,
+            "win_rate": 25.925925925925927,
+            "total_r": -2.5001403372359654,
+            "expectancy": -0.09259779026799872,
+            "profit_factor": 0.8749929831382017,
+            "unresolved": 0,
+            "invalid": 0
+        }
+    }
+}
