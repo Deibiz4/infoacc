@@ -16,6 +16,11 @@ TICKERS = [
 ]
 MAX_HISTORY = "1y"
 
+# Risk concentration limits. Crypto is the most correlated universe here — most
+# alts track BTC — so the caps are tighter than for stocks.
+MAX_OPEN_POSITIONS = 5
+MAX_NEW_SIGNALS_PER_RUN = 2
+
 # File Paths (Relative to script execution)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
@@ -122,6 +127,31 @@ def generate_signal(ticker, df):
 
     return None
 
+def signal_rr(s):
+    """Reward/risk of a candidate signal, 0 if undefined."""
+    try:
+        risk = abs(float(s["entry_price"]) - float(s["stop_loss"]))
+        return abs(float(s["target_price"]) - float(s["entry_price"])) / risk if risk else 0.0
+    except (KeyError, TypeError, ValueError, ZeroDivisionError):
+        return 0.0
+
+def apply_risk_limits(new_signals, existing_signals):
+    """Trim a scan's candidates down to the concentration limits."""
+    open_positions = sum(
+        1 for s in existing_signals if s.get("status") in ("PENDING", "ACTIVE")
+    )
+    allowed = min(max(0, MAX_OPEN_POSITIONS - open_positions), MAX_NEW_SIGNALS_PER_RUN)
+
+    if len(new_signals) <= allowed:
+        return new_signals
+
+    ranked = sorted(new_signals, key=signal_rr, reverse=True)
+    print(
+        f"🛑 Risk limit: {open_positions} open, keeping {allowed} of "
+        f"{len(new_signals)} new signals (dropped {len(new_signals) - allowed} by reward/risk)."
+    )
+    return ranked[:allowed]
+
 def scan_market():
     print(f"Scanning {len(TICKERS)} tickers...")
     
@@ -129,15 +159,20 @@ def scan_market():
         os.makedirs(DATA_DIR)
 
     # Load existing signals to keep history/active state and prevent duplicates
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
     existing_signals = []
-    active_or_pending_tickers = set()
+    blocked_tickers = set()
     if os.path.exists(SIGNALS_FILE):
         try:
             with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
                 existing_signals = json.load(f)
-                active_or_pending_tickers = {
-                    s.get("ticker") for s in existing_signals 
-                    if s.get("status") in ["PENDING", "ACTIVE"]
+                # A ticker is blocked if it has an open position OR was already
+                # signalled today. Without the second condition a signal closed
+                # by the tracker earlier in the day gets re-emitted on the next
+                # run, duplicating the same trade in the P&L.
+                blocked_tickers = {
+                    s.get("ticker") for s in existing_signals
+                    if s.get("status") in ["PENDING", "ACTIVE"] or s.get("date") == today
                 }
         except Exception as e:
             print(f"⚠️ Error loading existing signals: {e}")
@@ -161,8 +196,8 @@ def scan_market():
             
             # 1. Generate Signal Logic (Only if ticker has no active/pending signal)
             clean_ticker = ticker.replace("-USD", "")
-            if clean_ticker in active_or_pending_tickers:
-                print(f"⏭️ Skipping {clean_ticker}: Already has an active or pending signal.")
+            if clean_ticker in blocked_tickers:
+                print(f"⏭️ Skipping {clean_ticker}: open position or already signalled today.")
             else:
                 sig = generate_signal(ticker, df)
                 if sig:
@@ -193,6 +228,8 @@ def scan_market():
         except Exception as e:
             print(f"Error processing {ticker}: {e}")
             continue
+
+    new_signals = apply_risk_limits(new_signals, existing_signals)
 
     # Combine existing and new signals
     combined_signals = existing_signals + new_signals

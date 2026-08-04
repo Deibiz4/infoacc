@@ -29,11 +29,76 @@ YF_TICKER_MAPPING = {
     "GBPJPY": "GBPJPY=X", "GC": "GC=F", "SI": "SI=F",
     # Crypto
     "BTC": "BTC-USD", "ETH": "ETH-USD", "SOL": "SOL-USD",
-    "AVAX": "AVAX-USD", "LINK": "LINK-USD", "SHIB": "SHIB-USD"
+    "AVAX": "AVAX-USD", "LINK": "LINK-USD", "SHIB": "SHIB-USD",
+    "GOLD": "GC=F", "SILVER": "SI=F"
 }
+
+# Long enough to survive weekends, holidays and skipped workflow runs.
+TRACKING_PERIOD = "1mo"
 
 def get_yf_ticker(ticker):
     return YF_TICKER_MAPPING.get(ticker, ticker)
+
+def resolve_signal(s, df, start_status=None):
+    """Advance a signal's status against a daily OHLC frame.
+
+    Only sessions strictly after the signal date are considered. The entry price
+    is that day's close, so the signal did not exist while its own candle was
+    forming, and earlier candles predate it entirely — replaying those closes
+    signals against price action that never could have filled them.
+    """
+    status = start_status if start_status is not None else s.get("status", "PENDING")
+    if status not in ("PENDING", "ACTIVE"):
+        return status
+
+    try:
+        entry = float(s["entry_price"])
+        stop = float(s["stop_loss"])
+        target = float(s["target_price"])
+        signal_day = pd.Timestamp(s.get("date")).normalize()
+    except (KeyError, TypeError, ValueError):
+        return status
+
+    direction = s.get("type", "LONG").upper()
+
+    if df is None or df.empty:
+        return status
+
+    future = df[df.index.normalize() > signal_day]
+    if future.empty:
+        return status
+
+    for _, row in future.iterrows():
+        try:
+            high, low = float(row["High"]), float(row["Low"])
+        except (TypeError, ValueError):
+            continue
+        if pd.isna(high) or pd.isna(low):
+            continue
+
+        if status == "PENDING":
+            # Filled once price trades through the entry level.
+            if low <= entry <= high:
+                status = "ACTIVE"
+
+        if status == "ACTIVE":
+            # Daily bars cannot tell us which level was touched first, so assume
+            # the stop. Resolving ties as wins inflates the win rate.
+            if direction == "LONG":
+                if low <= stop:
+                    status = "HIT_STOP"
+                elif high >= target:
+                    status = "HIT_TARGET"
+            else:  # SHORT
+                if high >= stop:
+                    status = "HIT_STOP"
+                elif low <= target:
+                    status = "HIT_TARGET"
+
+            if status in ("HIT_STOP", "HIT_TARGET"):
+                break
+
+    return status
 
 def track_market_signals(market_name, file_path):
     if not os.path.exists(file_path):
@@ -59,7 +124,7 @@ def track_market_signals(market_name, file_path):
     
     try:
         # Download data
-        data = yf.download(tickers_to_query, period="5d", progress=False)
+        data = yf.download(tickers_to_query, period=TRACKING_PERIOD, progress=False)
         if data.empty:
             print("⚠️ yfinance returned empty data.")
             return
@@ -75,12 +140,7 @@ def track_market_signals(market_name, file_path):
             updated_signals.append(s)
             continue
 
-        ticker = s.get("ticker")
-        yf_ticker = get_yf_ticker(ticker)
-        entry = s.get("entry_price")
-        target = s.get("target_price")
-        stop = s.get("stop_loss")
-        direction = s.get("type", "LONG").upper()
+        yf_ticker = get_yf_ticker(s.get("ticker"))
 
         # Handle multi-index data vs single ticker data from yfinance
         try:
@@ -97,48 +157,10 @@ def track_market_signals(market_name, file_path):
             updated_signals.append(s)
             continue
 
-        # Get High, Low and Close prices
-        high_prices = df['High'].tolist()
-        low_prices = df['Low'].tolist()
-        close_prices = df['Close'].tolist()
-
-        status = s.get("status", "PENDING")
-
-        # Track price crossings
-        for high, low, close in zip(high_prices, low_prices, close_prices):
-            if status == "PENDING":
-                # For LONG: Triggered if Low <= Entry <= High
-                # For SHORT: Triggered if Low <= Entry <= High
-                # If price crossed or touched entry, we move to ACTIVE
-                if low <= entry <= high:
-                    status = "ACTIVE"
-                    changes_made = True
-
-            if status == "ACTIVE":
-                if direction == "LONG":
-                    # Target hit
-                    if high >= target:
-                        status = "HIT_TARGET"
-                        changes_made = True
-                        break
-                    # Stop hit
-                    elif low <= stop:
-                        status = "HIT_STOP"
-                        changes_made = True
-                        break
-                else:  # SHORT
-                    # Target hit (price went down to target)
-                    if low <= target:
-                        status = "HIT_TARGET"
-                        changes_made = True
-                        break
-                    # Stop hit (price went up to stop)
-                    if high >= stop:
-                        status = "HIT_STOP"
-                        changes_made = True
-                        break
-
-        s["status"] = status
+        new_status = resolve_signal(s, df)
+        if new_status != s.get("status"):
+            changes_made = True
+        s["status"] = new_status
         updated_signals.append(s)
 
     if changes_made:

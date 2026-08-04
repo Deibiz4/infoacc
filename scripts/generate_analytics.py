@@ -20,19 +20,27 @@ MARKET_FILES = {
 
 ANALYTICS_JSON = os.path.join(BASE_DIR, "data", "analytics.json")
 
+MAX_RR = 5.0
+
 def calculate_rr(entry, stop, target, direction="LONG"):
+    """Reward/risk of a signal, or None if it is not measurable.
+
+    Returning None (rather than a placeholder) keeps malformed signals out of
+    the P&L instead of crediting them with an invented ratio.
+    """
     try:
         entry = float(entry)
         stop = float(stop)
         target = float(target)
-        risk = abs(entry - stop)
-        reward = abs(target - entry)
-        if risk == 0:
-            return 1.0
-        rr = round(reward / risk, 2)
-        return min(rr, 5.0) # Cap max R:R at 5.0 as safety rule
-    except Exception:
-        return 1.5
+    except (TypeError, ValueError):
+        return None
+
+    risk = abs(entry - stop)
+    reward = abs(target - entry)
+    # A stop within 0.1% of entry is rounding noise, not a real risk level.
+    if risk <= abs(entry) * 0.001 or risk == 0:
+        return None
+    return min(round(reward / risk, 2), MAX_RR)
 
 def generate_analytics_data():
     print("📊 Generating Analytics & Performance Data...")
@@ -47,10 +55,12 @@ def generate_analytics_data():
     total_wins = 0
     total_losses = 0
     total_r = 0.0
-    
-    equity_curve = []
-    cumulative_r = 0.0
-    
+    gross_profit_r = 0.0   # sum of R won, for the real profit factor
+    gross_loss_r = 0.0     # sum of R lost (positive number)
+    invalid_signals = 0
+
+    closed_trades = []     # (date, market, ticker, r) built into the equity curve
+
     for market_name, file_path in MARKET_FILES.items():
         if not os.path.exists(file_path):
             continue
@@ -68,46 +78,60 @@ def generate_analytics_data():
             s['rr_ratio'] = rr
             
             market_stats[market_name]["total"] += 1
-            
+
+            is_closed = status in ["HIT_TARGET", "CLOSED_WIN", "HIT_STOP", "CLOSED_LOSS"]
+            if is_closed and rr is None:
+                # Cannot score a trade whose risk is undefined; count it, but
+                # keep it out of the win rate and the R totals.
+                invalid_signals += 1
+                all_signals.append(s)
+                continue
+
             if status in ["HIT_TARGET", "CLOSED_WIN"]:
                 market_stats[market_name]["wins"] += 1
                 market_stats[market_name]["total_r"] += rr
                 total_wins += 1
                 total_r += rr
-                cumulative_r += rr
+                gross_profit_r += rr
+                closed_trades.append((s.get("date", ""), market_name, s.get("ticker"), rr))
             elif status in ["HIT_STOP", "CLOSED_LOSS"]:
                 market_stats[market_name]["losses"] += 1
                 market_stats[market_name]["total_r"] -= 1.0
                 total_losses += 1
                 total_r -= 1.0
-                cumulative_r -= 1.0
+                gross_loss_r += 1.0
+                closed_trades.append((s.get("date", ""), market_name, s.get("ticker"), -1.0))
             elif status == "ACTIVE":
                 market_stats[market_name]["active"] += 1
             else:
                 market_stats[market_name]["pending"] += 1
-                
-            equity_curve.append({
-                "date": s.get("date", datetime.datetime.now().strftime("%Y-%m-%d")),
-                "ticker": s.get("ticker"),
-                "market": market_name,
-                "cumulative_r": round(cumulative_r, 2)
-            })
-            
+
             all_signals.append(s)
 
-    # Calculate Win Rates
+    # Equity curve in chronological order, one point per closed trade. Open
+    # signals contribute nothing until they resolve.
+    equity_curve = []
+    cumulative_r = 0.0
+    for date, market_name, ticker, r in sorted(closed_trades, key=lambda x: x[0]):
+        cumulative_r += r
+        equity_curve.append({
+            "date": date,
+            "ticker": ticker,
+            "market": market_name,
+            "cumulative_r": round(cumulative_r, 2)
+        })
+
+    # Win rates. With no closed trades the honest value is zero, not a guess.
     for m in market_stats:
         closed = market_stats[m]["wins"] + market_stats[m]["losses"]
-        if closed > 0:
-            market_stats[m]["win_rate"] = round((market_stats[m]["wins"] / closed) * 100, 1)
-        else:
-            # Baseline win rate estimate if early stage
-            market_stats[m]["win_rate"] = 65.0
-            
+        market_stats[m]["win_rate"] = round((market_stats[m]["wins"] / closed) * 100, 1) if closed else 0.0
         market_stats[m]["total_r"] = round(market_stats[m]["total_r"], 2)
 
     total_closed = total_wins + total_losses
-    global_win_rate = round((total_wins / total_closed) * 100, 1) if total_closed > 0 else 66.7
+    global_win_rate = round((total_wins / total_closed) * 100, 1) if total_closed > 0 else 0.0
+    # Real profit factor: R won divided by R lost.
+    profit_factor = round(gross_profit_r / gross_loss_r, 2) if gross_loss_r > 0 else 0.0
+    expectancy = round(total_r / total_closed, 3) if total_closed > 0 else 0.0
 
     analytics_summary = {
         "last_updated": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -118,7 +142,11 @@ def generate_analytics_data():
             "losses": total_losses,
             "win_rate": global_win_rate,
             "total_r": round(total_r, 2),
-            "profit_factor": round(total_wins * 1.8 / (total_losses if total_losses > 0 else 1), 2)
+            "profit_factor": profit_factor,
+            "gross_profit_r": round(gross_profit_r, 2),
+            "gross_loss_r": round(gross_loss_r, 2),
+            "expectancy_r": expectancy,
+            "invalid_signals": invalid_signals
         },
         "by_market": market_stats,
         "equity_curve": equity_curve,

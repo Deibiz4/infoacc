@@ -16,6 +16,7 @@ client_secret.json
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # Operating System
 .DS_Store

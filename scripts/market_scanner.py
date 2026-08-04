@@ -22,6 +22,12 @@ TICKERS = [
     "PLTR", "SOFI", "COIN", "MARA", "RIOT", "DKNG"
 ]
 
+# Risk concentration limits. These tickers are heavily correlated, so an
+# unbounded scan opens dozens of near-identical bets at once (28 in one day in
+# July 2026) and the book becomes a single directional wager on the index.
+MAX_OPEN_POSITIONS = 10      # total PENDING + ACTIVE at any time
+MAX_NEW_SIGNALS_PER_RUN = 4  # new entries admitted per scan
+
 def calculate_indicators(df):
     """Calculate RSI, SMAs, ATR, and Volume Avg."""
     if len(df) < 200:
@@ -140,19 +146,51 @@ def generate_signal(ticker, df):
 
     return None
 
+def signal_rr(s):
+    """Reward/risk of a candidate signal, 0 if undefined."""
+    try:
+        risk = abs(float(s["entry_price"]) - float(s["stop_loss"]))
+        return abs(float(s["target_price"]) - float(s["entry_price"])) / risk if risk else 0.0
+    except (KeyError, TypeError, ValueError, ZeroDivisionError):
+        return 0.0
+
+def apply_risk_limits(new_signals, existing_signals):
+    """Trim a scan's candidates down to the concentration limits."""
+    open_positions = sum(
+        1 for s in existing_signals if s.get("status") in ("PENDING", "ACTIVE")
+    )
+    room = max(0, MAX_OPEN_POSITIONS - open_positions)
+    allowed = min(room, MAX_NEW_SIGNALS_PER_RUN)
+
+    if len(new_signals) <= allowed:
+        return new_signals
+
+    ranked = sorted(new_signals, key=signal_rr, reverse=True)
+    dropped = len(new_signals) - allowed
+    print(
+        f"🛑 Risk limit: {open_positions} open, keeping {allowed} of "
+        f"{len(new_signals)} new signals (dropped {dropped} by reward/risk)."
+    )
+    return ranked[:allowed]
+
 def scan_market():
     print(f"Scanning {len(TICKERS)} tickers...")
     
     # Load existing signals to keep history/active state and prevent duplicates
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
     existing_signals = []
-    active_or_pending_tickers = set()
+    blocked_tickers = set()
     if os.path.exists(SIGNALS_FILE):
         try:
             with open(SIGNALS_FILE, 'r', encoding='utf-8') as f:
                 existing_signals = json.load(f)
-                active_or_pending_tickers = {
-                    s.get("ticker") for s in existing_signals 
-                    if s.get("status") in ["PENDING", "ACTIVE"]
+                # A ticker is blocked if it has an open position OR was already
+                # signalled today. Without the second condition a signal closed
+                # by the tracker earlier in the day gets re-emitted on the next
+                # run, duplicating the same trade in the P&L.
+                blocked_tickers = {
+                    s.get("ticker") for s in existing_signals
+                    if s.get("status") in ["PENDING", "ACTIVE"] or s.get("date") == today
                 }
         except Exception as e:
             print(f"⚠️ Error loading existing signals: {e}")
@@ -175,9 +213,9 @@ def scan_market():
             df = calculate_indicators(df)
             last_row = df.iloc[-1]
             
-            # 1. Generate Signal Logic (Only if ticker has no active/pending signal)
-            if ticker in active_or_pending_tickers:
-                print(f"⏭️ Skipping {ticker}: Already has an active or pending signal.")
+            # 1. Generate Signal Logic (Only if ticker has no open or same-day signal)
+            if ticker in blocked_tickers:
+                print(f"⏭️ Skipping {ticker}: open position or already signalled today.")
             else:
                 sig = generate_signal(ticker, df)
                 if sig:
@@ -221,6 +259,11 @@ def scan_market():
         except Exception as e:
             print(f"Error processing {ticker}: {e}")
             continue
+
+    # Apply concentration limits before committing. Best reward/risk first, so
+    # the cap keeps the strongest setups rather than whichever ticker the loop
+    # happened to reach first.
+    new_signals = apply_risk_limits(new_signals, existing_signals)
 
     # Combine existing and new signals
     combined_signals = existing_signals + new_signals
