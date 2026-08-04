@@ -147,6 +147,78 @@ def fetch(tickers, years):
     return frames
 
 
+def fetch_intraday(tickers, days=725):
+    """Hourly bars for resolving signals inside the day.
+
+    Yahoo does not serve a 4h interval and caps intraday history at 730 days, so
+    this uses 60m — finer than 4h, which only helps: the whole point is to see
+    which level price reached first, and the daily bar cannot say.
+    """
+    print(f"Downloading {len(tickers)} tickers, {days}d of 60m bars...")
+    raw = yf.download(tickers, period=f"{days}d", interval="60m",
+                      group_by="ticker", progress=False, auto_adjust=False)
+    frames = {}
+    for t in tickers:
+        try:
+            if isinstance(raw.columns, pd.MultiIndex):
+                level = 0 if t in raw.columns.get_level_values(0) else 1
+                df = raw.xs(t, level=level, axis=1)
+            else:
+                df = raw
+            df = df.dropna(subset=["High", "Low"])
+        except Exception:
+            continue
+        if df.empty:
+            continue
+        # Compare against tz-naive daily dates.
+        idx = df.index
+        if getattr(idx, "tz", None) is not None:
+            df = df.copy()
+            df.index = idx.tz_localize(None)
+        frames[t] = df
+    got = sum(len(d) for d in frames.values())
+    print(f"  got {len(frames)}/{len(tickers)} tickers, {got} hourly bars")
+    return frames
+
+
+def resolve_intraday(sig, bars, expiry):
+    """Walk hourly bars in order; the first level actually touched wins.
+
+    With intraday bars there is no need for the pessimistic same-bar convention
+    the daily engine has to use. Ambiguity survives only inside a single hour,
+    where the stop is still assumed.
+    """
+    status = sig["status"]
+    entry, stop = sig["entry_price"], sig["stop_loss"]
+    target = sig["target_price"]
+    long = sig["type"] == "LONG"
+    seen_days = set()
+
+    for ts, high, low in bars:
+        seen_days.add(ts.date())
+        if status == "PENDING":
+            if low <= entry <= high:
+                status = "ACTIVE"
+                sig["_filled"] = True
+                sig["_fill_day"] = ts
+            elif expiry and len(seen_days) > expiry:
+                return "EXPIRED"
+
+        if status == "ACTIVE":
+            if long:
+                if low <= stop:
+                    return "HIT_STOP"
+                if high >= target:
+                    return "HIT_TARGET"
+            else:
+                if high >= stop:
+                    return "HIT_STOP"
+                if low <= target:
+                    return "HIT_TARGET"
+
+    return status
+
+
 def advance(sig, high, low, same_bar_exit=True):
     """Move one signal forward over a single bar. Mirrors resolve_signal.
 
@@ -183,8 +255,37 @@ def rr_of(sig):
     return min(abs(sig["target_price"] - sig["entry_price"]) / risk, 5.0)
 
 
+def step_intraday(sig, bars):
+    """Advance one signal through a single day's hourly bars, in order."""
+    status = sig["status"]
+    entry, stop = sig["entry_price"], sig["stop_loss"]
+    target = sig["target_price"]
+    long = sig["type"] == "LONG"
+
+    for _ts, high, low in bars:
+        if status == "PENDING" and low <= entry <= high:
+            status = "ACTIVE"
+            sig["_filled"] = True
+
+        if status == "ACTIVE":
+            # Order is known down to the hour, so whichever level price reaches
+            # first decides. Only a single hour spanning both stays ambiguous,
+            # and there the stop is still assumed.
+            if long:
+                if low <= stop:
+                    return "HIT_STOP"
+                if high >= target:
+                    return "HIT_TARGET"
+            else:
+                if high >= stop:
+                    return "HIT_STOP"
+                if low <= target:
+                    return "HIT_TARGET"
+    return status
+
+
 def run_market(market, years, warmup, mode="baseline", expiry=10, frames=None,
-               same_bar_exit=True):
+               same_bar_exit=True, intraday=None, since=None):
     scanner = SCANNERS[market]
     if frames is None:
         frames = fetch(list(scanner.TICKERS), years)
@@ -205,6 +306,31 @@ def run_market(market, years, warmup, mode="baseline", expiry=10, frames=None,
         return []
     calendar = calendar[warmup:]
 
+    # Pinning the start date lets a daily-resolved run cover exactly the same
+    # sessions as an intraday one, so the two are actually comparable.
+    if since is not None:
+        calendar = [d for d in calendar if d.date() >= since]
+
+    # Hourly bars indexed by ticker and calendar day, for intraday resolution.
+    intraday_by_day = {}
+    if intraday:
+        for t, df in intraday.items():
+            per_day = {}
+            for ts, high, low in zip(df.index, df["High"].to_numpy(),
+                                     df["Low"].to_numpy()):
+                if pd.isna(high) or pd.isna(low):
+                    continue
+                per_day.setdefault(ts.date(), []).append((ts, float(high), float(low)))
+            intraday_by_day[t] = per_day
+        # Intraday history is capped at ~2 years, so the simulation cannot start
+        # before it does.
+        first = min((min(d) for d in intraday_by_day.values() if d), default=None)
+        if first:
+            calendar = [d for d in calendar if d.date() >= first]
+        if not calendar:
+            print(f"  {market}: no overlap between daily and intraday history.")
+            return []
+
     positions = []   # open signals
     closed = []
     signalled_on = defaultdict(set)  # date -> tickers already signalled
@@ -216,20 +342,32 @@ def run_market(market, years, warmup, mode="baseline", expiry=10, frames=None,
         # 1. Advance the open book on this bar, before anything new is added.
         still_open = []
         for sig in positions:
-            df = prepared[sig["_yf"]]
-            if day not in df.index or day <= sig["_created"]:
-                still_open.append(sig)
-                continue
-            row = df.loc[day]
-            high, low = float(row["High"]), float(row["Low"])
-            if pd.isna(high) or pd.isna(low):
+            if day <= sig["_created"]:
                 still_open.append(sig)
                 continue
 
             before = sig["status"]
-            sig["status"] = advance(sig, high, low, same_bar_exit=same_bar_exit)
+            if intraday_by_day:
+                bars = intraday_by_day.get(sig["_yf"], {}).get(day.date())
+                if not bars:
+                    still_open.append(sig)
+                    continue
+                sig["status"] = step_intraday(sig, bars)
+            else:
+                df = prepared[sig["_yf"]]
+                if day not in df.index:
+                    still_open.append(sig)
+                    continue
+                row = df.loc[day]
+                high, low = float(row["High"]), float(row["Low"])
+                if pd.isna(high) or pd.isna(low):
+                    still_open.append(sig)
+                    continue
+                sig["status"] = advance(sig, high, low, same_bar_exit=same_bar_exit)
+                if before == "PENDING" and sig["status"] != "PENDING":
+                    sig["_filled"] = True
+
             if before == "PENDING" and sig["status"] != "PENDING":
-                sig["_filled"] = True
                 sig["_fill_day"] = day
 
             if sig["status"] in ("HIT_STOP", "HIT_TARGET"):
@@ -394,11 +532,15 @@ HEADER = "  {:<26} {:>5}  {:>6}  {:>8}  {:>7}  {:>5}".format(
 )
 
 
-def compare_modes(markets, years, warmup, expiry, same_bar_exit=True):
+def compare_modes(markets, years, warmup, expiry, same_bar_exit=True,
+                  intraday=False):
     """Run every entry mode over identical data and lay the results side by side."""
     # Download once; the modes must see exactly the same bars or the comparison
     # is meaningless.
     cache = {m: fetch(list(SCANNERS[m].TICKERS), years) for m in markets}
+    hourly = {}
+    if intraday:
+        hourly = {m: fetch_intraday(list(SCANNERS[m].TICKERS)) for m in markets}
 
     results = {}
     for mode in MODES:
@@ -407,7 +549,8 @@ def compare_modes(markets, years, warmup, expiry, same_bar_exit=True):
         for market in markets:
             sigs.extend(
                 run_market(market, years, warmup, mode=mode, expiry=expiry,
-                           frames=cache[market], same_bar_exit=same_bar_exit)
+                           frames=cache[market], same_bar_exit=same_bar_exit,
+                           intraday=hourly.get(market))
             )
         results[mode] = sigs
 
@@ -477,6 +620,9 @@ def main():
     ap.add_argument("--mode", choices=MODES, default="baseline")
     ap.add_argument("--compare", action="store_true",
                     help="Run every entry mode over identical data")
+    ap.add_argument("--intraday", action="store_true",
+                    help="Resolve signals on 60m bars instead of daily "
+                         "(honest intrabar order; only ~2 years of history)")
     ap.add_argument("--strict-fill", action="store_true",
                     help="Refuse to book a win on the bar that filled the order")
     ap.add_argument("--expiry", type=int, default=10,
@@ -493,15 +639,18 @@ def main():
 
     if args.compare:
         compare_modes(markets, args.years, args.warmup, args.expiry,
-                      same_bar_exit=not args.strict_fill)
+                      same_bar_exit=not args.strict_fill, intraday=args.intraday)
         return
 
-    print(f"Entry mode: {args.mode}\n")
+    print(f"Entry mode: {args.mode}   "
+          f"Resolution: {'60m intraday' if args.intraday else 'daily'}\n")
     all_signals = []
     for market in markets:
+        hourly = fetch_intraday(list(SCANNERS[market].TICKERS)) if args.intraday else None
         all_signals.extend(
             run_market(market, args.years, args.warmup, mode=args.mode,
-                       expiry=args.expiry, same_bar_exit=not args.strict_fill)
+                       expiry=args.expiry, same_bar_exit=not args.strict_fill,
+                       intraday=hourly)
         )
 
     resolved = [s for s in all_signals if s["status"] in ("HIT_STOP", "HIT_TARGET")]

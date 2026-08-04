@@ -42,8 +42,101 @@ TRACKING_PERIOD = "3mo"
 # and unlimited; results were stable, so this is not a tuned number.
 EXPIRY_SESSIONS = 10
 
+# Hourly bars are used to decide outcomes when available. Yahoo caps intraday
+# history at 730 days, which comfortably covers any open signal given the
+# expiry above. Falls back to daily bars per ticker when intraday is missing.
+INTRADAY_PERIOD = "60d"
+INTRADAY_INTERVAL = "60m"
+
+
+def fetch_intraday(tickers):
+    """Hourly bars per ticker; empty dict if the download fails entirely."""
+    try:
+        raw = yf.download(tickers, period=INTRADAY_PERIOD,
+                          interval=INTRADAY_INTERVAL, group_by="ticker",
+                          progress=False, auto_adjust=False)
+    except Exception as e:
+        print(f"⚠️ Intraday download failed, falling back to daily bars: {e}")
+        return {}
+    if raw is None or raw.empty:
+        return {}
+
+    frames = {}
+    for t in tickers:
+        try:
+            if isinstance(raw.columns, pd.MultiIndex):
+                level = 0 if t in raw.columns.get_level_values(0) else 1
+                df = raw.xs(t, level=level, axis=1)
+            else:
+                df = raw
+            df = df.dropna(subset=["High", "Low"])
+        except Exception:
+            continue
+        if df.empty:
+            continue
+        if getattr(df.index, "tz", None) is not None:
+            df = df.copy()
+            df.index = df.index.tz_localize(None)
+        frames[t] = df
+    return frames
+
 def get_yf_ticker(ticker):
     return YF_TICKER_MAPPING.get(ticker, ticker)
+
+def resolve_intraday(s, bars, start_status=None, expiry=EXPIRY_SESSIONS):
+    """Resolve a signal against hourly bars, in chronological order.
+
+    A daily bar hides the order of events: when price touches both the stop and
+    the target in one session, the daily engine has to guess, and guesses the
+    stop. Hourly bars remove most of that guessing — whichever level price
+    actually reached first decides. Ambiguity survives only inside a single
+    hour, where the stop is still assumed.
+    """
+    status = start_status if start_status is not None else s.get("status", "PENDING")
+    if status not in ("PENDING", "ACTIVE"):
+        return status
+
+    try:
+        entry = float(s["entry_price"])
+        stop = float(s["stop_loss"])
+        target = float(s["target_price"])
+        signal_day = pd.Timestamp(s.get("date")).normalize()
+    except (KeyError, TypeError, ValueError):
+        return status
+
+    long = s.get("type", "LONG").upper() == "LONG"
+    future = bars[bars.index.normalize() > signal_day]
+    if future.empty:
+        return status
+
+    seen_days = set()
+    for ts, high, low in zip(future.index, future["High"].to_numpy(),
+                             future["Low"].to_numpy()):
+        if pd.isna(high) or pd.isna(low):
+            continue
+        high, low = float(high), float(low)
+        seen_days.add(ts.date())
+
+        if status == "PENDING":
+            if low <= entry <= high:
+                status = "ACTIVE"
+            elif expiry and len(seen_days) > expiry:
+                return "EXPIRED"
+
+        if status == "ACTIVE":
+            if long:
+                if low <= stop:
+                    return "HIT_STOP"
+                if high >= target:
+                    return "HIT_TARGET"
+            else:
+                if high >= stop:
+                    return "HIT_STOP"
+                if low <= target:
+                    return "HIT_TARGET"
+
+    return status
+
 
 def resolve_signal(s, df, start_status=None, expiry=EXPIRY_SESSIONS):
     """Advance a signal's status against a daily OHLC frame.
@@ -137,10 +230,9 @@ def track_market_signals(market_name, file_path):
         print(f"✅ No active or pending signals to track in {market_name}.")
         return
 
-    # Download recent 5 days of data for the active tickers
     tickers_to_query = list(set(get_yf_ticker(s.get("ticker")) for s in active_or_pending))
     print(f"☁️ Fetching market data from yfinance for: {tickers_to_query}")
-    
+
     try:
         # Download data
         data = yf.download(tickers_to_query, period=TRACKING_PERIOD, progress=False)
@@ -150,6 +242,10 @@ def track_market_signals(market_name, file_path):
     except Exception as e:
         print(f"❌ Error fetching tracking data from yfinance: {e}")
         return
+
+    hourly = fetch_intraday(tickers_to_query)
+    print(f"🕐 Hourly bars available for {len(hourly)}/{len(tickers_to_query)} tickers; "
+          f"the rest resolve on daily bars.")
 
     updated_signals = []
     changes_made = False
@@ -176,7 +272,14 @@ def track_market_signals(market_name, file_path):
             updated_signals.append(s)
             continue
 
-        new_status = resolve_signal(s, df)
+        # Prefer hourly bars: they show which level price reached first, so the
+        # outcome is observed rather than assumed.
+        bars = hourly.get(yf_ticker)
+        if bars is not None and not bars.empty:
+            new_status = resolve_intraday(s, bars)
+        else:
+            new_status = resolve_signal(s, df)
+
         if new_status != s.get("status"):
             changes_made = True
         s["status"] = new_status
