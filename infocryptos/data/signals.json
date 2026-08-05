@@ -73,5 +73,44 @@
         "stop_loss": 0.3063,
         "target_price": 0.3593,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20260805_DOGE-USD",
+        "date": "2026-08-05",
+        "ticker": "DOGE",
+        "entry_price": 0.0699,
+        "status": "PENDING",
+        "notes": "Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 0.0735,
+        "target_price": 0.0605,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260805_DOGE-USD_SH",
+        "date": "2026-08-05",
+        "ticker": "DOGE",
+        "entry_price": 0.0735,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (0.0735), original target held. Paired with 20260805_DOGE-USD.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 0.0771,
+        "target_price": 0.0605,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260805_NEAR-USD_SH",
+        "date": "2026-08-05",
+        "ticker": "NEAR",
+        "entry_price": 1.5799,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.58), original target held. Paired with 20260805_NEAR-USD.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "stop_loss": 1.4489,
+        "target_price": 2.0383,
+        "mode": "stop_hold"
     }
 ]
