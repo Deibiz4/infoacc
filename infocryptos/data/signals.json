@@ -112,5 +112,18 @@
         "stop_loss": 1.4489,
         "target_price": 2.0383,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20260806_AVAX-USD_SH",
+        "date": "2026-08-06",
+        "ticker": "AVAX",
+        "entry_price": 6.1831,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (6.183), original target held. Paired with 20260806_AVAX-USD.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 5.7512,
+        "target_price": 7.738,
+        "mode": "stop_hold"
     }
 ]
