@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-08-07 07:59:35",
+    "last_updated": "2026-08-10 08:17:06",
     "global": {
-        "total_signals": 45,
-        "closed_trades": 4,
+        "total_signals": 48,
+        "closed_trades": 6,
         "wins": 0,
-        "losses": 4,
+        "losses": 6,
         "win_rate": 0.0,
-        "total_r": -4.0,
+        "total_r": -6.0,
         "profit_factor": 0.0,
         "gross_profit_r": 0.0,
-        "gross_loss_r": 4.0,
+        "gross_loss_r": 6.0,
         "expectancy_r": -1.0,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 24,
+            "total": 25,
             "wins": 0,
-            "losses": 4,
+            "losses": 5,
             "pending": 13,
             "active": 7,
             "expired": 0,
             "win_rate": 0.0,
-            "total_r": -4.0
+            "total_r": -5.0
         },
         "Crypto": {
             "total": 10,
@@ -35,31 +35,31 @@
             "total_r": 0.0
         },
         "Forex": {
-            "total": 11,
+            "total": 13,
             "wins": 0,
-            "losses": 0,
-            "pending": 7,
-            "active": 4,
+            "losses": 1,
+            "pending": 9,
+            "active": 3,
             "expired": 0,
             "win_rate": 0.0,
-            "total_r": 0.0
+            "total_r": -1.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 26,
-            "closed": 4,
+            "signals": 27,
+            "closed": 6,
             "wins": 0,
-            "losses": 4,
+            "losses": 6,
             "win_rate": 0.0,
-            "total_r": -4.0,
+            "total_r": -6.0,
             "expectancy_r": -1.0,
             "profit_factor": 0.0,
             "expired": 0,
-            "fill_rate": 53.8
+            "fill_rate": 51.9
         },
         "stop_hold": {
-            "signals": 19,
+            "signals": 21,
             "closed": 0,
             "wins": 0,
             "losses": 0,
@@ -68,36 +68,93 @@
             "expectancy_r": 0.0,
             "profit_factor": 0.0,
             "expired": 0,
-            "fill_rate": 5.3
+            "fill_rate": 9.5
         }
     },
     "equity_curve": [
         {
-            "date": "2026-07-28",
-            "ticker": "GS",
+            "date": "2026-07-27",
+            "ticker": "SLB",
             "market": "Stocks",
             "cumulative_r": -1.0
         },
         {
             "date": "2026-07-28",
-            "ticker": "PFE",
+            "ticker": "GS",
             "market": "Stocks",
             "cumulative_r": -2.0
+        },
+        {
+            "date": "2026-07-28",
+            "ticker": "PFE",
+            "market": "Stocks",
+            "cumulative_r": -3.0
         },
         {
             "date": "2026-07-30",
             "ticker": "BA",
             "market": "Stocks",
-            "cumulative_r": -3.0
+            "cumulative_r": -4.0
         },
         {
             "date": "2026-07-31",
             "ticker": "PFE",
             "market": "Stocks",
-            "cumulative_r": -4.0
+            "cumulative_r": -5.0
+        },
+        {
+            "date": "2026-08-03",
+            "ticker": "EURJPY",
+            "market": "Forex",
+            "cumulative_r": -6.0
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260810_AXP_SH",
+            "date": "2026-08-10",
+            "ticker": "AXP",
+            "entry_price": 326.78,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (326.78), original target held. Risk-Reward 1:3.5. Paired with 20260810_AXP.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 312.65,
+            "target_price": 376.24,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.5
+        },
+        {
+            "id": "20260810_EURGBP",
+            "date": "2026-08-10",
+            "ticker": "EURGBP",
+            "entry_price": 0.85636,
+            "status": "PENDING",
+            "notes": "Forex overbought short rejection. RSI (70.0) turning down. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 0.85978,
+            "target_price": 0.84781,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260810_GBPUSD_SH",
+            "date": "2026-08-10",
+            "ticker": "GBPUSD",
+            "entry_price": 1.33987,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (1.33987), original target held. Paired with 20260810_GBPUSD.",
+            "type": "LONG",
+            "context": "TREND_CONTINUATION",
+            "stop_loss": 1.32943,
+            "target_price": 1.37642,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
         {
             "id": "20260807_PG_SH",
             "date": "2026-08-07",
@@ -178,7 +235,7 @@
             "date": "2026-08-06",
             "ticker": "UBER",
             "entry_price": 71.8,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (71.80), original target held. Risk-Reward 1:3.5. Paired with 20260806_UBER.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -474,7 +531,7 @@
             "date": "2026-08-03",
             "ticker": "EURJPY",
             "entry_price": 180.854,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -496,48 +553,6 @@
             "target_price": 514.43,
             "market": "Stocks",
             "rr_ratio": 2.66
-        },
-        {
-            "id": "20260731_TXN",
-            "date": "2026-07-31",
-            "ticker": "TXN",
-            "entry_price": 278.76,
-            "status": "ACTIVE",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (30.0) turning up. Risk-Reward 1:2.5 (ATR: $12.54).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 259.95,
-            "target_price": 325.78,
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260731_ARM",
-            "date": "2026-07-31",
-            "ticker": "ARM",
-            "entry_price": 241.54,
-            "status": "ACTIVE",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (27.7) turning up. Risk-Reward 1:2.5 (ATR: $23.89).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 205.7,
-            "target_price": 331.14,
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260731_PFE",
-            "date": "2026-07-31",
-            "ticker": "PFE",
-            "entry_price": 24.91,
-            "status": "HIT_STOP",
-            "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (67.1) turning down. Risk-Reward 1:2.5.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 25.62,
-            "target_price": 23.14,
-            "market": "Stocks",
-            "rr_ratio": 2.49
         }
     ]
 }

@@ -333,7 +333,7 @@
         "date": "2026-08-03",
         "ticker": "EURJPY",
         "entry_price": 180.854,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",
@@ -403,6 +403,32 @@
         "context": "OVERSOLD_BOUNCE",
         "stop_loss": 153.46314,
         "target_price": 164.61607,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260810_EURGBP",
+        "date": "2026-08-10",
+        "ticker": "EURGBP",
+        "entry_price": 0.85636,
+        "status": "PENDING",
+        "notes": "Forex overbought short rejection. RSI (70.0) turning down. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "stop_loss": 0.85978,
+        "target_price": 0.84781,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260810_GBPUSD_SH",
+        "date": "2026-08-10",
+        "ticker": "GBPUSD",
+        "entry_price": 1.33987,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.33987), original target held. Paired with 20260810_GBPUSD.",
+        "type": "LONG",
+        "context": "TREND_CONTINUATION",
+        "stop_loss": 1.32943,
+        "target_price": 1.37642,
         "mode": "stop_hold"
     }
 ];
