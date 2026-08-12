@@ -4,7 +4,7 @@
         "date": "2026-07-27",
         "ticker": "TRX",
         "entry_price": 0.3311,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
@@ -118,12 +118,25 @@
         "date": "2026-08-06",
         "ticker": "AVAX",
         "entry_price": 6.1831,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Pullback entry at the baseline stop (6.183), original target held. Paired with 20260806_AVAX-USD.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
         "stop_loss": 5.7512,
         "target_price": 7.738,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20260812_ADA-USD",
+        "date": "2026-08-12",
+        "ticker": "ADA",
+        "entry_price": 0.1853,
+        "status": "PENDING",
+        "notes": "Crypto overbought short rejection. RSI (68.4) turning down. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "stop_loss": 0.2023,
+        "target_price": 0.1426,
+        "mode": "baseline"
     }
 ]
