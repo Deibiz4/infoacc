@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-08-12 08:04:27",
+    "last_updated": "2026-08-13 08:05:33",
     "global": {
         "total_signals": 53,
         "closed_trades": 9,
@@ -18,9 +18,9 @@
             "total": 27,
             "wins": 0,
             "losses": 6,
-            "pending": 14,
+            "pending": 13,
             "active": 6,
-            "expired": 1,
+            "expired": 2,
             "win_rate": 0.0,
             "total_r": -6.0
         },
@@ -55,7 +55,7 @@
             "total_r": -3.5,
             "expectancy_r": -0.5,
             "profit_factor": 0.42,
-            "expired": 2,
+            "expired": 3,
             "fill_rate": 53.3
         },
         "stop_hold": {
