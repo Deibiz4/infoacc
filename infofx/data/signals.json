@@ -167,7 +167,7 @@
         "date": "2026-08-12",
         "ticker": "USDCAD",
         "entry_price": 1.3928,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Forex bullish dip bounce. RSI (27.6) turning up. Risk-Reward 1:2.5 (ATR: 0.00588).",
         "type": "LONG",
         "context": "OVERSOLD_BOUNCE",
