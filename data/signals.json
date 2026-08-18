@@ -88,7 +88,7 @@
         "date": "2026-07-31",
         "ticker": "MSFT",
         "entry_price": 451.1,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +212% vs avg. Risk-Reward 1:2.66.",
         "type": "LONG",
         "context": "MOMENTUM_BREAKOUT",

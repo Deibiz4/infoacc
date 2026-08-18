@@ -187,5 +187,18 @@
         "stop_loss": 1.37516,
         "target_price": 1.41484,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20260818_EURUSD",
+        "date": "2026-08-18",
+        "ticker": "EURUSD",
+        "entry_price": 1.15768,
+        "status": "PENDING",
+        "notes": "Forex overbought short rejection. RSI (74.9) turning down. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "stop_loss": 1.16566,
+        "target_price": 1.13771,
+        "mode": "baseline"
     }
 ]

@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-08-17 07:38:57",
+    "last_updated": "2026-08-18 07:24:28",
     "global": {
-        "total_signals": 56,
+        "total_signals": 57,
         "closed_trades": 9,
         "wins": 1,
         "losses": 8,
@@ -18,9 +18,9 @@
             "total": 28,
             "wins": 0,
             "losses": 6,
-            "pending": 12,
+            "pending": 11,
             "active": 8,
-            "expired": 2,
+            "expired": 3,
             "win_rate": 0.0,
             "total_r": -6.0
         },
@@ -28,17 +28,17 @@
             "total": 13,
             "wins": 0,
             "losses": 0,
-            "pending": 9,
-            "active": 1,
+            "pending": 8,
+            "active": 2,
             "expired": 3,
             "win_rate": 0.0,
             "total_r": 0.0
         },
         "Forex": {
-            "total": 15,
+            "total": 16,
             "wins": 1,
             "losses": 2,
-            "pending": 7,
+            "pending": 8,
             "active": 4,
             "expired": 1,
             "win_rate": 33.3,
@@ -47,7 +47,7 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 33,
+            "signals": 34,
             "closed": 7,
             "wins": 1,
             "losses": 6,
@@ -55,8 +55,8 @@
             "total_r": -3.5,
             "expectancy_r": -0.5,
             "profit_factor": 0.42,
-            "expired": 6,
-            "fill_rate": 51.5
+            "expired": 7,
+            "fill_rate": 52.9
         },
         "stop_hold": {
             "signals": 23,
@@ -129,11 +129,26 @@
     ],
     "recent_signals": [
         {
+            "id": "20260818_EURUSD",
+            "date": "2026-08-18",
+            "ticker": "EURUSD",
+            "entry_price": 1.15768,
+            "status": "PENDING",
+            "notes": "Forex overbought short rejection. RSI (74.9) turning down. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 1.16566,
+            "target_price": 1.13771,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
             "id": "20260817_ETH-USD",
             "date": "2026-08-17",
             "ticker": "ETH",
             "entry_price": 1901.7,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
             "type": "LONG",
             "context": "MOMENTUM_TREND",
@@ -562,20 +577,6 @@
             "mode": "stop_hold",
             "market": "Forex",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20260804_XRP-USD",
-            "date": "2026-08-04",
-            "ticker": "XRP",
-            "entry_price": 1.0762,
-            "status": "PENDING",
-            "notes": "Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 1.1228,
-            "target_price": 0.955,
-            "market": "Crypto",
-            "rr_ratio": 2.6
         }
     ]
 }

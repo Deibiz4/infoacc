@@ -144,7 +144,7 @@
         "date": "2026-08-17",
         "ticker": "ETH",
         "entry_price": 1901.7,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
