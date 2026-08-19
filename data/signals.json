@@ -172,7 +172,7 @@
         "date": "2026-08-03",
         "ticker": "DE",
         "entry_price": 592.67,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
         "type": "LONG",
         "context": "TREND_PULLBACK",
@@ -236,7 +236,7 @@
         "date": "2026-08-06",
         "ticker": "GOOGL",
         "entry_price": 340.73,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Pullback entry at the baseline stop (340.73), original target held. Risk-Reward 1:3.5. Paired with 20260806_GOOGL.",
         "type": "LONG",
         "context": "TREND_PULLBACK",
@@ -346,6 +346,19 @@
         "context": "TREND_PULLBACK",
         "stop_loss": 343.73,
         "target_price": 402.92,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260819_BA",
+        "date": "2026-08-19",
+        "ticker": "BA",
+        "entry_price": 223.06,
+        "status": "PENDING",
+        "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+        "type": "LONG",
+        "context": "TREND_PULLBACK",
+        "stop_loss": 213.66,
+        "target_price": 246.57,
         "mode": "baseline"
     }
 ]
