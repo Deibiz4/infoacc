@@ -105,7 +105,7 @@
         "date": "2026-08-05",
         "ticker": "NEAR",
         "entry_price": 1.5799,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Pullback entry at the baseline stop (1.58), original target held. Paired with 20260805_NEAR-USD.",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
@@ -215,6 +215,19 @@
         "context": "MOMENTUM_TREND",
         "stop_loss": 43.5704,
         "target_price": 51.1133,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260821_ADA-USD_SH",
+        "date": "2026-08-21",
+        "ticker": "ADA",
+        "entry_price": 0.1984,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (0.1984), original target held. Paired with 20260821_ADA-USD.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 0.1856,
+        "target_price": 0.2444,
         "mode": "stop_hold"
     }
 ]

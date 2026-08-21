@@ -1,74 +1,74 @@
 {
-    "last_updated": "2026-08-20 07:27:53",
+    "last_updated": "2026-08-21 07:29:12",
     "global": {
-        "total_signals": 69,
-        "closed_trades": 14,
+        "total_signals": 74,
+        "closed_trades": 16,
         "wins": 3,
-        "losses": 11,
-        "win_rate": 21.4,
-        "total_r": -3.4,
-        "profit_factor": 0.69,
+        "losses": 13,
+        "win_rate": 18.8,
+        "total_r": -5.4,
+        "profit_factor": 0.58,
         "gross_profit_r": 7.6,
-        "gross_loss_r": 11.0,
-        "expectancy_r": -0.243,
+        "gross_loss_r": 13.0,
+        "expectancy_r": -0.338,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 31,
+            "total": 35,
             "wins": 1,
-            "losses": 7,
-            "pending": 11,
-            "active": 9,
-            "expired": 3,
-            "win_rate": 12.5,
-            "total_r": -4.5
+            "losses": 8,
+            "pending": 12,
+            "active": 8,
+            "expired": 6,
+            "win_rate": 11.1,
+            "total_r": -5.5
         },
         "Crypto": {
-            "total": 17,
+            "total": 18,
             "wins": 1,
             "losses": 0,
             "pending": 9,
             "active": 1,
-            "expired": 6,
+            "expired": 7,
             "win_rate": 100.0,
             "total_r": 2.6
         },
         "Forex": {
             "total": 21,
             "wins": 1,
-            "losses": 4,
-            "pending": 6,
+            "losses": 5,
+            "pending": 5,
             "active": 5,
             "expired": 5,
-            "win_rate": 20.0,
-            "total_r": -1.5
+            "win_rate": 16.7,
+            "total_r": -2.5
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 40,
-            "closed": 11,
+            "signals": 41,
+            "closed": 12,
             "wins": 3,
-            "losses": 8,
-            "win_rate": 27.3,
-            "total_r": -0.4,
-            "expectancy_r": -0.036,
-            "profit_factor": 0.95,
+            "losses": 9,
+            "win_rate": 25.0,
+            "total_r": -1.4,
+            "expectancy_r": -0.117,
+            "profit_factor": 0.84,
             "expired": 8,
-            "fill_rate": 55.0
+            "fill_rate": 56.1
         },
         "stop_hold": {
-            "signals": 29,
-            "closed": 3,
+            "signals": 33,
+            "closed": 4,
             "wins": 0,
-            "losses": 3,
+            "losses": 4,
             "win_rate": 0.0,
-            "total_r": -3.0,
+            "total_r": -4.0,
             "expectancy_r": -1.0,
             "profit_factor": 0.0,
-            "expired": 6,
-            "fill_rate": 24.1
+            "expired": 10,
+            "fill_rate": 21.2
         }
     },
     "equity_curve": [
@@ -145,19 +145,106 @@
             "cumulative_r": -5.0
         },
         {
+            "date": "2026-08-12",
+            "ticker": "USDCAD",
+            "market": "Forex",
+            "cumulative_r": -6.0
+        },
+        {
+            "date": "2026-08-14",
+            "ticker": "GE",
+            "market": "Stocks",
+            "cumulative_r": -7.0
+        },
+        {
             "date": "2026-08-17",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": -2.4
+            "cumulative_r": -4.4
         },
         {
             "date": "2026-08-18",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": -3.4
+            "cumulative_r": -5.4
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260821_WMT",
+            "date": "2026-08-21",
+            "ticker": "WMT",
+            "entry_price": 103.84,
+            "status": "PENDING",
+            "notes": "SMA 50 High-Volume Breakdown below 200 SMA. Volume +234% vs avg. Risk-Reward 1:2.66.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 108.25,
+            "target_price": 92.1,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.66
+        },
+        {
+            "id": "20260821_WMT_SH",
+            "date": "2026-08-21",
+            "ticker": "WMT",
+            "entry_price": 108.25,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (108.25), original target held. Risk-Reward 1:3.5. Paired with 20260821_WMT.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 112.66,
+            "target_price": 92.1,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.66
+        },
+        {
+            "id": "20260821_BA_SH",
+            "date": "2026-08-21",
+            "ticker": "BA",
+            "entry_price": 224.34,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (224.34), original target held. Risk-Reward 1:3.5. Paired with 20260821_BA.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 233.58,
+            "target_price": 190.52,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.66
+        },
+        {
+            "id": "20260821_DE_SH",
+            "date": "2026-08-21",
+            "ticker": "DE",
+            "entry_price": 593.62,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (593.62), original target held. Risk-Reward 1:3.5. Paired with 20260821_DE.",
+            "type": "LONG",
+            "context": "MOMENTUM_BREAKOUT",
+            "stop_loss": 566.3,
+            "target_price": 693.61,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.66
+        },
+        {
+            "id": "20260821_ADA-USD_SH",
+            "date": "2026-08-21",
+            "ticker": "ADA",
+            "entry_price": 0.1984,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (0.1984), original target held. Paired with 20260821_ADA-USD.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 0.1856,
+            "target_price": 0.2444,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.59
+        },
         {
             "id": "20260820_COST",
             "date": "2026-08-20",
@@ -253,7 +340,7 @@
             "date": "2026-08-20",
             "ticker": "USDCHF",
             "entry_price": 0.79997,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -388,7 +475,7 @@
             "date": "2026-08-14",
             "ticker": "GE",
             "entry_price": 360.64,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -463,7 +550,7 @@
             "date": "2026-08-12",
             "ticker": "USDCAD",
             "entry_price": 1.38398,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Pullback entry at the baseline stop (1.38398), original target held. Paired with 20260812_USDCAD.",
             "type": "LONG",
             "context": "OVERSOLD_BOUNCE",
@@ -532,81 +619,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20260807_USDJPY_SH",
-            "date": "2026-08-07",
-            "ticker": "USDJPY",
-            "entry_price": 155.94157,
-            "status": "EXPIRED",
-            "notes": "Pullback entry at the baseline stop (155.94157), original target held. Paired with 20260807_USDJPY.",
-            "type": "LONG",
-            "context": "OVERSOLD_BOUNCE",
-            "stop_loss": 153.46314,
-            "target_price": 164.61607,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260806_GOOGL_SH",
-            "date": "2026-08-06",
-            "ticker": "GOOGL",
-            "entry_price": 340.73,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (340.73), original target held. Risk-Reward 1:3.5. Paired with 20260806_GOOGL.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 319.03,
-            "target_price": 416.67,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260806_LLY_SH",
-            "date": "2026-08-06",
-            "ticker": "LLY",
-            "entry_price": 1109.54,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (1109.54), original target held. Risk-Reward 1:3.5. Paired with 20260806_LLY.",
-            "type": "LONG",
-            "context": "MOMENTUM_BREAKOUT",
-            "stop_loss": 1049.22,
-            "target_price": 1330.32,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.66
-        },
-        {
-            "id": "20260806_COP_SH",
-            "date": "2026-08-06",
-            "ticker": "COP",
-            "entry_price": 109.35,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (109.35), original target held. Risk-Reward 1:3.5. Paired with 20260806_COP.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 103.66,
-            "target_price": 129.25,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260806_UBER_SH",
-            "date": "2026-08-06",
-            "ticker": "UBER",
-            "entry_price": 71.8,
-            "status": "HIT_STOP",
-            "notes": "Pullback entry at the baseline stop (71.80), original target held. Risk-Reward 1:3.5. Paired with 20260806_UBER.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 75.42,
-            "target_price": 58.54,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.66
         }
     ]
 }
