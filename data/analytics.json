@@ -1,16 +1,16 @@
 {
-    "last_updated": "2026-08-27 17:54:47",
+    "last_updated": "2026-08-28 19:01:06",
     "global": {
         "total_signals": 87,
-        "closed_trades": 23,
+        "closed_trades": 24,
         "wins": 5,
-        "losses": 18,
-        "win_rate": 21.7,
-        "total_r": -4.3,
-        "profit_factor": 0.76,
+        "losses": 19,
+        "win_rate": 20.8,
+        "total_r": -5.3,
+        "profit_factor": 0.72,
         "gross_profit_r": 13.7,
-        "gross_loss_r": 18.0,
-        "expectancy_r": -0.187,
+        "gross_loss_r": 19.0,
+        "expectancy_r": -0.221,
         "invalid_signals": 0
     },
     "by_market": {
@@ -18,8 +18,8 @@
             "total": 45,
             "wins": 2,
             "losses": 12,
-            "pending": 13,
-            "active": 7,
+            "pending": 12,
+            "active": 8,
             "expired": 11,
             "win_rate": 14.3,
             "total_r": -7.0
@@ -37,26 +37,26 @@
         "Forex": {
             "total": 23,
             "wins": 1,
-            "losses": 6,
-            "pending": 4,
+            "losses": 7,
+            "pending": 3,
             "active": 6,
             "expired": 6,
-            "win_rate": 14.3,
-            "total_r": -3.5
+            "win_rate": 12.5,
+            "total_r": -4.5
         }
     },
     "by_mode": {
         "baseline": {
             "signals": 47,
-            "closed": 17,
+            "closed": 18,
             "wins": 4,
-            "losses": 13,
-            "win_rate": 23.5,
-            "total_r": -2.9,
-            "expectancy_r": -0.171,
-            "profit_factor": 0.78,
+            "losses": 14,
+            "win_rate": 22.2,
+            "total_r": -3.9,
+            "expectancy_r": -0.217,
+            "profit_factor": 0.72,
             "expired": 9,
-            "fill_rate": 57.4
+            "fill_rate": 59.6
         },
         "stop_hold": {
             "signals": 40,
@@ -68,7 +68,7 @@
             "expectancy_r": -0.233,
             "profit_factor": 0.72,
             "expired": 15,
-            "fill_rate": 22.5
+            "fill_rate": 25.0
         }
     },
     "equity_curve": [
@@ -205,10 +205,16 @@
             "cumulative_r": -3.3
         },
         {
+            "date": "2026-08-20",
+            "ticker": "USDCHF",
+            "market": "Forex",
+            "cumulative_r": -4.3
+        },
+        {
             "date": "2026-08-25",
             "ticker": "COIN",
             "market": "Stocks",
-            "cumulative_r": -4.3
+            "cumulative_r": -5.3
         }
     ],
     "recent_signals": [
@@ -217,7 +223,7 @@
             "date": "2026-08-27",
             "ticker": "AVGO",
             "entry_price": 368.46,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (20.5) turning up. Risk-Reward 1:2.5 (ATR: $13.17).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -577,7 +583,7 @@
             "date": "2026-08-20",
             "ticker": "USDCHF",
             "entry_price": 0.79997,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -607,7 +613,7 @@
             "date": "2026-08-20",
             "ticker": "USDCHF",
             "entry_price": 0.80861,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (0.80861), original target held. Paired with 20260820_USDCHF.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
