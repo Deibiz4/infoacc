@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-09-01 12:01:53",
+    "last_updated": "2026-09-02 11:44:15",
     "global": {
         "total_signals": 87,
         "closed_trades": 24,
@@ -18,8 +18,8 @@
             "total": 45,
             "wins": 2,
             "losses": 12,
-            "pending": 9,
-            "active": 11,
+            "pending": 8,
+            "active": 12,
             "expired": 11,
             "win_rate": 14.3,
             "total_r": -7.0
@@ -28,9 +28,9 @@
             "total": 19,
             "wins": 2,
             "losses": 0,
-            "pending": 10,
+            "pending": 9,
             "active": 0,
-            "expired": 7,
+            "expired": 8,
             "win_rate": 100.0,
             "total_r": 6.2
         },
@@ -55,8 +55,8 @@
             "total_r": -3.9,
             "expectancy_r": -0.217,
             "profit_factor": 0.72,
-            "expired": 9,
-            "fill_rate": 63.8
+            "expired": 10,
+            "fill_rate": 66.0
         },
         "stop_hold": {
             "signals": 40,
@@ -238,7 +238,7 @@
             "date": "2026-08-27",
             "ticker": "LLY",
             "entry_price": 1187.37,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
