@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-09-02 11:44:15",
+    "last_updated": "2026-09-03 11:44:15",
     "global": {
-        "total_signals": 87,
-        "closed_trades": 24,
+        "total_signals": 94,
+        "closed_trades": 28,
         "wins": 5,
-        "losses": 19,
-        "win_rate": 20.8,
-        "total_r": -5.3,
-        "profit_factor": 0.72,
+        "losses": 23,
+        "win_rate": 17.9,
+        "total_r": -9.3,
+        "profit_factor": 0.6,
         "gross_profit_r": 13.7,
-        "gross_loss_r": 19.0,
-        "expectancy_r": -0.221,
+        "gross_loss_r": 23.0,
+        "expectancy_r": -0.332,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 45,
+            "total": 46,
             "wins": 2,
-            "losses": 12,
+            "losses": 13,
             "pending": 8,
             "active": 12,
             "expired": 11,
-            "win_rate": 14.3,
-            "total_r": -7.0
+            "win_rate": 13.3,
+            "total_r": -8.0
         },
         "Crypto": {
             "total": 19,
@@ -35,40 +35,40 @@
             "total_r": 6.2
         },
         "Forex": {
-            "total": 23,
+            "total": 29,
             "wins": 1,
-            "losses": 7,
-            "pending": 2,
-            "active": 7,
+            "losses": 10,
+            "pending": 7,
+            "active": 5,
             "expired": 6,
-            "win_rate": 12.5,
-            "total_r": -4.5
+            "win_rate": 9.1,
+            "total_r": -7.5
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 47,
-            "closed": 18,
+            "signals": 51,
+            "closed": 21,
             "wins": 4,
-            "losses": 14,
-            "win_rate": 22.2,
-            "total_r": -3.9,
-            "expectancy_r": -0.217,
-            "profit_factor": 0.72,
+            "losses": 17,
+            "win_rate": 19.0,
+            "total_r": -6.9,
+            "expectancy_r": -0.329,
+            "profit_factor": 0.59,
             "expired": 10,
-            "fill_rate": 66.0
+            "fill_rate": 60.8
         },
         "stop_hold": {
-            "signals": 40,
-            "closed": 6,
+            "signals": 43,
+            "closed": 7,
             "wins": 1,
-            "losses": 5,
-            "win_rate": 16.7,
-            "total_r": -1.4,
-            "expectancy_r": -0.233,
-            "profit_factor": 0.72,
+            "losses": 6,
+            "win_rate": 14.3,
+            "total_r": -2.4,
+            "expectancy_r": -0.343,
+            "profit_factor": 0.6,
             "expired": 15,
-            "fill_rate": 30.0
+            "fill_rate": 32.6
         }
     },
     "equity_curve": [
@@ -169,15 +169,15 @@
             "cumulative_r": -0.9
         },
         {
-            "date": "2026-08-12",
-            "ticker": "NFLX",
-            "market": "Stocks",
+            "date": "2026-08-10",
+            "ticker": "EURGBP",
+            "market": "Forex",
             "cumulative_r": -1.9
         },
         {
             "date": "2026-08-12",
-            "ticker": "USDCAD",
-            "market": "Forex",
+            "ticker": "NFLX",
+            "market": "Stocks",
             "cumulative_r": -2.9
         },
         {
@@ -187,37 +187,166 @@
             "cumulative_r": -3.9
         },
         {
+            "date": "2026-08-12",
+            "ticker": "USDCAD",
+            "market": "Forex",
+            "cumulative_r": -4.9
+        },
+        {
             "date": "2026-08-14",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": -4.9
+            "cumulative_r": -5.9
         },
         {
             "date": "2026-08-17",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": -2.3
+            "cumulative_r": -3.3
         },
         {
             "date": "2026-08-18",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": -3.3
+            "cumulative_r": -4.3
+        },
+        {
+            "date": "2026-08-20",
+            "ticker": "COST",
+            "market": "Stocks",
+            "cumulative_r": -5.3
         },
         {
             "date": "2026-08-20",
             "ticker": "USDCHF",
             "market": "Forex",
-            "cumulative_r": -4.3
+            "cumulative_r": -6.3
+        },
+        {
+            "date": "2026-08-20",
+            "ticker": "EURJPY",
+            "market": "Forex",
+            "cumulative_r": -7.3
+        },
+        {
+            "date": "2026-08-20",
+            "ticker": "EURJPY",
+            "market": "Forex",
+            "cumulative_r": -8.3
         },
         {
             "date": "2026-08-25",
             "ticker": "COIN",
             "market": "Stocks",
-            "cumulative_r": -5.3
+            "cumulative_r": -9.3
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260903_MU",
+            "date": "2026-09-03",
+            "ticker": "MU",
+            "entry_price": 956.08,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 888.15,
+            "target_price": 1125.91,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260903_USDJPY",
+            "date": "2026-09-03",
+            "ticker": "USDJPY",
+            "entry_price": 156.214,
+            "status": "PENDING",
+            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 157.7588,
+            "target_price": 152.35201,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260903_EURJPY",
+            "date": "2026-09-03",
+            "ticker": "EURJPY",
+            "entry_price": 181.334,
+            "status": "PENDING",
+            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 182.7705,
+            "target_price": 177.74275,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260903_GBPJPY",
+            "date": "2026-09-03",
+            "ticker": "GBPJPY",
+            "entry_price": 210.731,
+            "status": "PENDING",
+            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 212.66595,
+            "target_price": 205.89362,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260903_USDJPY_SH",
+            "date": "2026-09-03",
+            "ticker": "USDJPY",
+            "entry_price": 157.7588,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (157.75880), original target held. Paired with 20260903_USDJPY.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 159.3036,
+            "target_price": 152.35201,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
+        {
+            "id": "20260903_EURJPY_SH",
+            "date": "2026-09-03",
+            "ticker": "EURJPY",
+            "entry_price": 182.7705,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (182.77050), original target held. Paired with 20260903_EURJPY.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 184.207,
+            "target_price": 177.74275,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
+        {
+            "id": "20260903_GBPJPY_SH",
+            "date": "2026-09-03",
+            "ticker": "GBPJPY",
+            "entry_price": 212.66595,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (212.66595), original target held. Paired with 20260903_GBPJPY.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 214.6009,
+            "target_price": 205.89362,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
         {
             "id": "20260827_AVGO",
             "date": "2026-08-27",
@@ -493,7 +622,7 @@
             "date": "2026-08-20",
             "ticker": "COST",
             "entry_price": 956.99,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -508,7 +637,7 @@
             "date": "2026-08-20",
             "ticker": "COST",
             "entry_price": 928.84,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (928.84), original target held. Risk-Reward 1:3.5. Paired with 20260820_COST.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -562,111 +691,6 @@
             "mode": "stop_hold",
             "market": "Crypto",
             "rr_ratio": 3.6
-        },
-        {
-            "id": "20260820_LTC-USD_SH",
-            "date": "2026-08-20",
-            "ticker": "LTC",
-            "entry_price": 45.2102,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (45.21), original target held. Paired with 20260820_LTC-USD.",
-            "type": "LONG",
-            "context": "MOMENTUM_TREND",
-            "stop_loss": 43.5704,
-            "target_price": 51.1133,
-            "mode": "stop_hold",
-            "market": "Crypto",
-            "rr_ratio": 3.6
-        },
-        {
-            "id": "20260820_USDCHF",
-            "date": "2026-08-20",
-            "ticker": "USDCHF",
-            "entry_price": 0.79997,
-            "status": "HIT_STOP",
-            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 0.80861,
-            "target_price": 0.77836,
-            "mode": "baseline",
-            "market": "Forex",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260820_EURJPY",
-            "date": "2026-08-20",
-            "ticker": "EURJPY",
-            "entry_price": 185.145,
-            "status": "ACTIVE",
-            "notes": "Forex trend continuation above 50-SMA. Risk-Reward 1:2.5.",
-            "type": "LONG",
-            "context": "TREND_CONTINUATION",
-            "stop_loss": 183.5251,
-            "target_price": 189.19476,
-            "mode": "baseline",
-            "market": "Forex",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260820_USDCHF_SH",
-            "date": "2026-08-20",
-            "ticker": "USDCHF",
-            "entry_price": 0.80861,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (0.80861), original target held. Paired with 20260820_USDCHF.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 0.81725,
-            "target_price": 0.77836,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260820_EURGBP_SH",
-            "date": "2026-08-20",
-            "ticker": "EURGBP",
-            "entry_price": 0.85511,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (0.85511), original target held. Paired with 20260820_EURGBP.",
-            "type": "LONG",
-            "context": "TREND_CONTINUATION",
-            "stop_loss": 0.85236,
-            "target_price": 0.86474,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260820_EURJPY_SH",
-            "date": "2026-08-20",
-            "ticker": "EURJPY",
-            "entry_price": 183.5251,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (183.52510), original target held. Paired with 20260820_EURJPY.",
-            "type": "LONG",
-            "context": "TREND_CONTINUATION",
-            "stop_loss": 181.9052,
-            "target_price": 189.19476,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260819_BA",
-            "date": "2026-08-19",
-            "ticker": "BA",
-            "entry_price": 223.06,
-            "status": "PENDING",
-            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 213.66,
-            "target_price": 246.57,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
         }
     ]
 }
