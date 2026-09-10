@@ -369,5 +369,18 @@
         "stop_loss": 214.6009,
         "target_price": 205.89362,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20260910_EURGBP",
+        "date": "2026-09-10",
+        "ticker": "EURGBP",
+        "entry_price": 0.85892,
+        "status": "PENDING",
+        "notes": "Forex trend continuation above 50-SMA. Risk-Reward 1:2.5.",
+        "type": "LONG",
+        "context": "TREND_CONTINUATION",
+        "stop_loss": 0.85626,
+        "target_price": 0.86556,
+        "mode": "baseline"
     }
 ]
