@@ -375,7 +375,7 @@
         "date": "2026-09-10",
         "ticker": "EURGBP",
         "entry_price": 0.85892,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Forex trend continuation above 50-SMA. Risk-Reward 1:2.5.",
         "type": "LONG",
         "context": "TREND_CONTINUATION",
