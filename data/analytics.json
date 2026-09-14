@@ -1,34 +1,34 @@
 {
-    "last_updated": "2026-09-11 11:49:28",
+    "last_updated": "2026-09-14 13:22:06",
     "global": {
-        "total_signals": 108,
-        "closed_trades": 33,
-        "wins": 6,
-        "losses": 27,
-        "win_rate": 18.2,
-        "total_r": -10.8,
-        "profit_factor": 0.6,
-        "gross_profit_r": 16.2,
-        "gross_loss_r": 27.0,
-        "expectancy_r": -0.327,
+        "total_signals": 111,
+        "closed_trades": 36,
+        "wins": 7,
+        "losses": 29,
+        "win_rate": 19.4,
+        "total_r": -10.3,
+        "profit_factor": 0.64,
+        "gross_profit_r": 18.7,
+        "gross_loss_r": 29.0,
+        "expectancy_r": -0.286,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 56,
-            "wins": 2,
+            "total": 57,
+            "wins": 3,
             "losses": 17,
-            "pending": 9,
-            "active": 11,
+            "pending": 10,
+            "active": 10,
             "expired": 17,
-            "win_rate": 10.5,
-            "total_r": -12.0
+            "win_rate": 15.0,
+            "total_r": -9.5
         },
         "Crypto": {
-            "total": 22,
+            "total": 24,
             "wins": 2,
             "losses": 0,
-            "pending": 7,
+            "pending": 9,
             "active": 0,
             "expired": 13,
             "win_rate": 100.0,
@@ -37,38 +37,38 @@
         "Forex": {
             "total": 30,
             "wins": 2,
-            "losses": 10,
+            "losses": 12,
             "pending": 3,
-            "active": 8,
+            "active": 6,
             "expired": 7,
-            "win_rate": 16.7,
-            "total_r": -5.0
+            "win_rate": 14.3,
+            "total_r": -7.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 59,
-            "closed": 25,
-            "wins": 5,
-            "losses": 20,
-            "win_rate": 20.0,
-            "total_r": -7.4,
-            "expectancy_r": -0.296,
-            "profit_factor": 0.63,
+            "signals": 61,
+            "closed": 27,
+            "wins": 6,
+            "losses": 21,
+            "win_rate": 22.2,
+            "total_r": -5.9,
+            "expectancy_r": -0.219,
+            "profit_factor": 0.72,
             "expired": 14,
-            "fill_rate": 62.7
+            "fill_rate": 60.7
         },
         "stop_hold": {
-            "signals": 49,
-            "closed": 8,
+            "signals": 50,
+            "closed": 9,
             "wins": 1,
-            "losses": 7,
-            "win_rate": 12.5,
-            "total_r": -3.4,
-            "expectancy_r": -0.425,
-            "profit_factor": 0.51,
+            "losses": 8,
+            "win_rate": 11.1,
+            "total_r": -4.4,
+            "expectancy_r": -0.489,
+            "profit_factor": 0.45,
             "expired": 23,
-            "fill_rate": 30.6
+            "fill_rate": 30.0
         }
     },
     "equity_curve": [
@@ -242,36 +242,99 @@
         },
         {
             "date": "2026-08-20",
-            "ticker": "EURJPY",
+            "ticker": "USDCHF",
             "market": "Forex",
             "cumulative_r": -6.8
+        },
+        {
+            "date": "2026-08-20",
+            "ticker": "EURJPY",
+            "market": "Forex",
+            "cumulative_r": -7.8
         },
         {
             "date": "2026-08-21",
             "ticker": "WMT",
             "market": "Stocks",
-            "cumulative_r": -7.8
+            "cumulative_r": -8.8
+        },
+        {
+            "date": "2026-08-25",
+            "ticker": "AAPL",
+            "market": "Stocks",
+            "cumulative_r": -6.3
         },
         {
             "date": "2026-08-25",
             "ticker": "COIN",
             "market": "Stocks",
-            "cumulative_r": -8.8
+            "cumulative_r": -7.3
         },
         {
             "date": "2026-08-27",
             "ticker": "AVGO",
             "market": "Stocks",
-            "cumulative_r": -9.8
+            "cumulative_r": -8.3
         },
         {
             "date": "2026-08-27",
             "ticker": "LLY",
             "market": "Stocks",
-            "cumulative_r": -10.8
+            "cumulative_r": -9.3
+        },
+        {
+            "date": "2026-09-10",
+            "ticker": "EURGBP",
+            "market": "Forex",
+            "cumulative_r": -10.3
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260914_AMZN",
+            "date": "2026-09-14",
+            "ticker": "AMZN",
+            "entry_price": 256.78,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 248.5,
+            "target_price": 277.49,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260914_TRX-USD",
+            "date": "2026-09-14",
+            "ticker": "TRX",
+            "entry_price": 0.3403,
+            "status": "PENDING",
+            "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 0.3284,
+            "target_price": 0.3713,
+            "mode": "baseline",
+            "market": "Crypto",
+            "rr_ratio": 2.61
+        },
+        {
+            "id": "20260914_TRX-USD_SH",
+            "date": "2026-09-14",
+            "ticker": "TRX",
+            "entry_price": 0.3284,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (0.3284), original target held. Paired with 20260914_TRX-USD.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 0.3165,
+            "target_price": 0.3713,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.61
+        },
         {
             "id": "20260911_JPM",
             "date": "2026-09-11",
@@ -367,7 +430,7 @@
             "date": "2026-09-10",
             "ticker": "EURGBP",
             "entry_price": 0.85892,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Forex trend continuation above 50-SMA. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_CONTINUATION",
@@ -652,7 +715,7 @@
             "date": "2026-08-25",
             "ticker": "AAPL",
             "entry_price": 310.34,
-            "status": "ACTIVE",
+            "status": "HIT_TARGET",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -676,51 +739,6 @@
             "mode": "baseline",
             "market": "Stocks",
             "rr_ratio": 2.5
-        },
-        {
-            "id": "20260825_COIN",
-            "date": "2026-08-25",
-            "ticker": "COIN",
-            "entry_price": 179.48,
-            "status": "HIT_STOP",
-            "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (67.3) turning down. Risk-Reward 1:2.5.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 193.18,
-            "target_price": 145.24,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260825_AAPL_SH",
-            "date": "2026-08-25",
-            "ticker": "AAPL",
-            "entry_price": 301.91,
-            "status": "EXPIRED",
-            "notes": "Pullback entry at the baseline stop (301.91), original target held. Risk-Reward 1:3.5. Paired with 20260825_AAPL.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 293.48,
-            "target_price": 331.42,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260825_NVDA_SH",
-            "date": "2026-08-25",
-            "ticker": "NVDA",
-            "entry_price": 200.24,
-            "status": "EXPIRED",
-            "notes": "Pullback entry at the baseline stop (200.24), original target held. Risk-Reward 1:3.5. Paired with 20260825_NVDA.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 192.0,
-            "target_price": 229.09,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
         }
     ]
 }
