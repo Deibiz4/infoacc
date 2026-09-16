@@ -382,5 +382,44 @@
         "stop_loss": 0.85626,
         "target_price": 0.86556,
         "mode": "baseline"
+    },
+    {
+        "id": "20260916_EURUSD",
+        "date": "2026-09-16",
+        "ticker": "EURUSD",
+        "entry_price": 1.15407,
+        "status": "PENDING",
+        "notes": "Forex bullish dip bounce. RSI (31.0) turning up. Risk-Reward 1:2.5 (ATR: 0.00490).",
+        "type": "LONG",
+        "context": "OVERSOLD_BOUNCE",
+        "stop_loss": 1.14672,
+        "target_price": 1.17243,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260916_EURUSD_SH",
+        "date": "2026-09-16",
+        "ticker": "EURUSD",
+        "entry_price": 1.14672,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.14672), original target held. Paired with 20260916_EURUSD.",
+        "type": "LONG",
+        "context": "OVERSOLD_BOUNCE",
+        "stop_loss": 1.13937,
+        "target_price": 1.17243,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260916_GBPUSD_SH",
+        "date": "2026-09-16",
+        "ticker": "GBPUSD",
+        "entry_price": 1.33714,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.33714), original target held. Paired with 20260916_GBPUSD.",
+        "type": "LONG",
+        "context": "OVERSOLD_BOUNCE",
+        "stop_loss": 1.32857,
+        "target_price": 1.36716,
+        "mode": "stop_hold"
     }
 ]

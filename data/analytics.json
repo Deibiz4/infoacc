@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-09-15 12:08:40",
+    "last_updated": "2026-09-16 12:04:49",
     "global": {
-        "total_signals": 113,
-        "closed_trades": 38,
+        "total_signals": 118,
+        "closed_trades": 40,
         "wins": 7,
-        "losses": 31,
-        "win_rate": 18.4,
-        "total_r": -12.3,
-        "profit_factor": 0.6,
+        "losses": 33,
+        "win_rate": 17.5,
+        "total_r": -14.3,
+        "profit_factor": 0.57,
         "gross_profit_r": 18.7,
-        "gross_loss_r": 31.0,
-        "expectancy_r": -0.324,
+        "gross_loss_r": 33.0,
+        "expectancy_r": -0.358,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 59,
+            "total": 61,
             "wins": 3,
-            "losses": 19,
-            "pending": 9,
-            "active": 11,
+            "losses": 21,
+            "pending": 10,
+            "active": 10,
             "expired": 17,
-            "win_rate": 13.6,
-            "total_r": -11.5
+            "win_rate": 12.5,
+            "total_r": -13.5
         },
         "Crypto": {
             "total": 24,
@@ -35,10 +35,10 @@
             "total_r": 6.2
         },
         "Forex": {
-            "total": 30,
+            "total": 33,
             "wins": 2,
             "losses": 12,
-            "pending": 3,
+            "pending": 6,
             "active": 6,
             "expired": 7,
             "win_rate": 14.3,
@@ -47,19 +47,19 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 61,
-            "closed": 27,
+            "signals": 64,
+            "closed": 29,
             "wins": 6,
-            "losses": 21,
-            "win_rate": 22.2,
-            "total_r": -5.9,
-            "expectancy_r": -0.219,
-            "profit_factor": 0.72,
+            "losses": 23,
+            "win_rate": 20.7,
+            "total_r": -7.9,
+            "expectancy_r": -0.272,
+            "profit_factor": 0.66,
             "expired": 14,
-            "fill_rate": 63.9
+            "fill_rate": 62.5
         },
         "stop_hold": {
-            "signals": 52,
+            "signals": 54,
             "closed": 11,
             "wins": 1,
             "losses": 10,
@@ -68,7 +68,7 @@
             "expectancy_r": -0.582,
             "profit_factor": 0.36,
             "expired": 23,
-            "fill_rate": 30.8
+            "fill_rate": 29.6
         }
     },
     "equity_curve": [
@@ -295,13 +295,100 @@
             "cumulative_r": -11.3
         },
         {
+            "date": "2026-09-04",
+            "ticker": "PG",
+            "market": "Stocks",
+            "cumulative_r": -12.3
+        },
+        {
             "date": "2026-09-10",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -12.3
+            "cumulative_r": -13.3
+        },
+        {
+            "date": "2026-09-11",
+            "ticker": "JPM",
+            "market": "Stocks",
+            "cumulative_r": -14.3
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260916_JPM",
+            "date": "2026-09-16",
+            "ticker": "JPM",
+            "entry_price": 352.49,
+            "status": "PENDING",
+            "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +125% vs avg. Risk-Reward 1:2.66.",
+            "type": "LONG",
+            "context": "MOMENTUM_BREAKOUT",
+            "stop_loss": 343.08,
+            "target_price": 377.52,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.66
+        },
+        {
+            "id": "20260916_LLY",
+            "date": "2026-09-16",
+            "ticker": "LLY",
+            "entry_price": 1136.11,
+            "status": "PENDING",
+            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (17.5) turning up. Risk-Reward 1:2.5 (ATR: $27.89).",
+            "type": "LONG",
+            "context": "VALUE_OVERSOLD",
+            "stop_loss": 1094.28,
+            "target_price": 1240.68,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260916_EURUSD",
+            "date": "2026-09-16",
+            "ticker": "EURUSD",
+            "entry_price": 1.15407,
+            "status": "PENDING",
+            "notes": "Forex bullish dip bounce. RSI (31.0) turning up. Risk-Reward 1:2.5 (ATR: 0.00490).",
+            "type": "LONG",
+            "context": "OVERSOLD_BOUNCE",
+            "stop_loss": 1.14672,
+            "target_price": 1.17243,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260916_EURUSD_SH",
+            "date": "2026-09-16",
+            "ticker": "EURUSD",
+            "entry_price": 1.14672,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (1.14672), original target held. Paired with 20260916_EURUSD.",
+            "type": "LONG",
+            "context": "OVERSOLD_BOUNCE",
+            "stop_loss": 1.13937,
+            "target_price": 1.17243,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
+        {
+            "id": "20260916_GBPUSD_SH",
+            "date": "2026-09-16",
+            "ticker": "GBPUSD",
+            "entry_price": 1.33714,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (1.33714), original target held. Paired with 20260916_GBPUSD.",
+            "type": "LONG",
+            "context": "OVERSOLD_BOUNCE",
+            "stop_loss": 1.32857,
+            "target_price": 1.36716,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
         {
             "id": "20260915_RIOT_SH",
             "date": "2026-09-15",
@@ -382,7 +469,7 @@
             "date": "2026-09-11",
             "ticker": "JPM",
             "entry_price": 353.56,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -532,7 +619,7 @@
             "date": "2026-09-07",
             "ticker": "TSLA",
             "entry_price": 354.08,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "SMA 50 High-Volume Breakdown below 200 SMA. Volume +71% vs avg. Risk-Reward 1:2.66.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -562,7 +649,7 @@
             "date": "2026-09-04",
             "ticker": "PG",
             "entry_price": 146.92,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -675,81 +762,6 @@
             "target_price": 177.74275,
             "mode": "stop_hold",
             "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260903_GBPJPY_SH",
-            "date": "2026-09-03",
-            "ticker": "GBPJPY",
-            "entry_price": 212.66595,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (212.66595), original target held. Paired with 20260903_GBPJPY.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 214.6009,
-            "target_price": 205.89362,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260827_AVGO",
-            "date": "2026-08-27",
-            "ticker": "AVGO",
-            "entry_price": 368.46,
-            "status": "HIT_STOP",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (20.5) turning up. Risk-Reward 1:2.5 (ATR: $13.17).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 348.71,
-            "target_price": 417.84,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260827_LLY",
-            "date": "2026-08-27",
-            "ticker": "LLY",
-            "entry_price": 1187.37,
-            "status": "HIT_STOP",
-            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 1133.02,
-            "target_price": 1323.26,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260826_GS_SH",
-            "date": "2026-08-26",
-            "ticker": "GS",
-            "entry_price": 1023.84,
-            "status": "HIT_STOP",
-            "notes": "Pullback entry at the baseline stop (1023.84), original target held. Risk-Reward 1:3.5. Paired with 20260826_GS.",
-            "type": "LONG",
-            "context": "MOMENTUM_BREAKOUT",
-            "stop_loss": 988.8,
-            "target_price": 1152.1,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.66
-        },
-        {
-            "id": "20260826_GE_SH",
-            "date": "2026-08-26",
-            "ticker": "GE",
-            "entry_price": 335.32,
-            "status": "HIT_STOP",
-            "notes": "Pullback entry at the baseline stop (335.32), original target held. Risk-Reward 1:3.5. Paired with 20260826_GE.",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 321.1,
-            "target_price": 385.1,
-            "mode": "stop_hold",
-            "market": "Stocks",
             "rr_ratio": 3.5
         }
     ]
