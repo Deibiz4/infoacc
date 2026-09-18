@@ -248,7 +248,7 @@
         "date": "2026-09-07",
         "ticker": "SHIB",
         "entry_price": 0.0,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
@@ -306,6 +306,32 @@
         "context": "MOMENTUM_TREND",
         "stop_loss": 0.3165,
         "target_price": 0.3713,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260918_ETH-USD",
+        "date": "2026-09-18",
+        "ticker": "ETH",
+        "entry_price": 2505.3,
+        "status": "PENDING",
+        "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 2364.1595,
+        "target_price": 2872.2655,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260918_ETH-USD_SH",
+        "date": "2026-09-18",
+        "ticker": "ETH",
+        "entry_price": 2364.1595,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (2364), original target held. Paired with 20260918_ETH-USD.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 2223.019,
+        "target_price": 2872.2655,
         "mode": "stop_hold"
     }
 ]

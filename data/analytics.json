@@ -1,16 +1,16 @@
 {
-    "last_updated": "2026-09-17 12:06:30",
+    "last_updated": "2026-09-18 11:50:15",
     "global": {
-        "total_signals": 118,
-        "closed_trades": 40,
+        "total_signals": 121,
+        "closed_trades": 41,
         "wins": 7,
-        "losses": 33,
-        "win_rate": 17.5,
-        "total_r": -14.3,
-        "profit_factor": 0.57,
+        "losses": 34,
+        "win_rate": 17.1,
+        "total_r": -15.3,
+        "profit_factor": 0.55,
         "gross_profit_r": 18.7,
-        "gross_loss_r": 33.0,
-        "expectancy_r": -0.358,
+        "gross_loss_r": 34.0,
+        "expectancy_r": -0.373,
         "invalid_signals": 0
     },
     "by_market": {
@@ -18,48 +18,48 @@
             "total": 61,
             "wins": 3,
             "losses": 21,
-            "pending": 10,
-            "active": 10,
+            "pending": 9,
+            "active": 11,
             "expired": 17,
             "win_rate": 12.5,
             "total_r": -13.5
         },
         "Crypto": {
-            "total": 24,
+            "total": 26,
             "wins": 2,
             "losses": 0,
-            "pending": 9,
+            "pending": 10,
             "active": 0,
-            "expired": 13,
+            "expired": 14,
             "win_rate": 100.0,
             "total_r": 6.2
         },
         "Forex": {
-            "total": 33,
+            "total": 34,
             "wins": 2,
-            "losses": 12,
-            "pending": 4,
-            "active": 8,
-            "expired": 7,
-            "win_rate": 14.3,
-            "total_r": -7.0
+            "losses": 13,
+            "pending": 2,
+            "active": 7,
+            "expired": 10,
+            "win_rate": 13.3,
+            "total_r": -8.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 64,
-            "closed": 29,
+            "signals": 66,
+            "closed": 30,
             "wins": 6,
-            "losses": 23,
-            "win_rate": 20.7,
-            "total_r": -7.9,
-            "expectancy_r": -0.272,
-            "profit_factor": 0.66,
-            "expired": 14,
-            "fill_rate": 62.5
+            "losses": 24,
+            "win_rate": 20.0,
+            "total_r": -8.9,
+            "expectancy_r": -0.297,
+            "profit_factor": 0.63,
+            "expired": 15,
+            "fill_rate": 62.1
         },
         "stop_hold": {
-            "signals": 54,
+            "signals": 55,
             "closed": 11,
             "wins": 1,
             "losses": 10,
@@ -67,8 +67,8 @@
             "total_r": -6.4,
             "expectancy_r": -0.582,
             "profit_factor": 0.36,
-            "expired": 23,
-            "fill_rate": 33.3
+            "expired": 26,
+            "fill_rate": 32.7
         }
     },
     "equity_curve": [
@@ -295,31 +295,82 @@
             "cumulative_r": -11.3
         },
         {
+            "date": "2026-09-03",
+            "ticker": "USDJPY",
+            "market": "Forex",
+            "cumulative_r": -12.3
+        },
+        {
             "date": "2026-09-04",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": -12.3
+            "cumulative_r": -13.3
         },
         {
             "date": "2026-09-10",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -13.3
+            "cumulative_r": -14.3
         },
         {
             "date": "2026-09-11",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -14.3
+            "cumulative_r": -15.3
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260918_ETH-USD",
+            "date": "2026-09-18",
+            "ticker": "ETH",
+            "entry_price": 2505.3,
+            "status": "PENDING",
+            "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 2364.1595,
+            "target_price": 2872.2655,
+            "mode": "baseline",
+            "market": "Crypto",
+            "rr_ratio": 2.6
+        },
+        {
+            "id": "20260918_ETH-USD_SH",
+            "date": "2026-09-18",
+            "ticker": "ETH",
+            "entry_price": 2364.1595,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (2364), original target held. Paired with 20260918_ETH-USD.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 2223.019,
+            "target_price": 2872.2655,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.6
+        },
+        {
+            "id": "20260918_EURGBP",
+            "date": "2026-09-18",
+            "ticker": "EURGBP",
+            "entry_price": 0.85864,
+            "status": "PENDING",
+            "notes": "Forex trend continuation above 50-SMA. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_CONTINUATION",
+            "stop_loss": 0.8554,
+            "target_price": 0.86675,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
         {
             "id": "20260916_JPM",
             "date": "2026-09-16",
             "ticker": "JPM",
             "entry_price": 352.49,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +125% vs avg. Risk-Reward 1:2.66.",
             "type": "LONG",
             "context": "MOMENTUM_BREAKOUT",
@@ -634,7 +685,7 @@
             "date": "2026-09-07",
             "ticker": "SHIB",
             "entry_price": 0.0,
-            "status": "PENDING",
+            "status": "EXPIRED",
             "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
             "type": "LONG",
             "context": "MOMENTUM_TREND",
@@ -694,7 +745,7 @@
             "date": "2026-09-03",
             "ticker": "USDJPY",
             "entry_price": 156.214,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -718,51 +769,6 @@
             "mode": "baseline",
             "market": "Forex",
             "rr_ratio": 2.5
-        },
-        {
-            "id": "20260903_GBPJPY",
-            "date": "2026-09-03",
-            "ticker": "GBPJPY",
-            "entry_price": 210.731,
-            "status": "ACTIVE",
-            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 212.66595,
-            "target_price": 205.89362,
-            "mode": "baseline",
-            "market": "Forex",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260903_USDJPY_SH",
-            "date": "2026-09-03",
-            "ticker": "USDJPY",
-            "entry_price": 157.7588,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (157.75880), original target held. Paired with 20260903_USDJPY.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 159.3036,
-            "target_price": 152.35201,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260903_EURJPY_SH",
-            "date": "2026-09-03",
-            "ticker": "EURJPY",
-            "entry_price": 182.7705,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (182.77050), original target held. Paired with 20260903_EURJPY.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 184.207,
-            "target_price": 177.74275,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
         }
     ]
 }
