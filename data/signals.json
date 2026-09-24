@@ -821,7 +821,7 @@
         "date": "2026-09-22",
         "ticker": "AMZN",
         "entry_price": 250.46,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Pullback entry at the baseline stop (250.46), original target held. Risk-Reward 1:3.5. Paired with 20260922_AMZN.",
         "type": "LONG",
         "context": "MOMENTUM_BREAKOUT",
