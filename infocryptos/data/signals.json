@@ -287,7 +287,7 @@
         "date": "2026-09-14",
         "ticker": "TRX",
         "entry_price": 0.3403,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
@@ -300,7 +300,7 @@
         "date": "2026-09-14",
         "ticker": "TRX",
         "entry_price": 0.3284,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Pullback entry at the baseline stop (0.3284), original target held. Paired with 20260914_TRX-USD.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
@@ -332,6 +332,32 @@
         "context": "MOMENTUM_TREND",
         "stop_loss": 2223.019,
         "target_price": 2872.2655,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20260930_TRX-USD",
+        "date": "2026-09-30",
+        "ticker": "TRX",
+        "entry_price": 0.3401,
+        "status": "PENDING",
+        "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 0.3282,
+        "target_price": 0.3711,
+        "mode": "baseline"
+    },
+    {
+        "id": "20260930_TRX-USD_SH",
+        "date": "2026-09-30",
+        "ticker": "TRX",
+        "entry_price": 0.3282,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (0.3282), original target held. Paired with 20260930_TRX-USD.",
+        "type": "LONG",
+        "context": "MOMENTUM_TREND",
+        "stop_loss": 0.3163,
+        "target_price": 0.3711,
         "mode": "stop_hold"
     }
 ]

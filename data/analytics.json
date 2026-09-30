@@ -1,65 +1,65 @@
 {
-    "last_updated": "2026-09-29 13:20:26",
+    "last_updated": "2026-09-30 13:01:09",
     "global": {
-        "total_signals": 137,
-        "closed_trades": 54,
-        "wins": 11,
-        "losses": 43,
-        "win_rate": 20.4,
-        "total_r": -13.14,
-        "profit_factor": 0.69,
-        "gross_profit_r": 29.86,
-        "gross_loss_r": 43.0,
-        "expectancy_r": -0.243,
+        "total_signals": 141,
+        "closed_trades": 56,
+        "wins": 12,
+        "losses": 44,
+        "win_rate": 21.4,
+        "total_r": -11.64,
+        "profit_factor": 0.74,
+        "gross_profit_r": 32.36,
+        "gross_loss_r": 44.0,
+        "expectancy_r": -0.208,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 73,
+            "total": 74,
             "wins": 6,
             "losses": 26,
-            "pending": 11,
+            "pending": 12,
             "active": 8,
             "expired": 22,
             "win_rate": 18.8,
             "total_r": -9.84
         },
         "Crypto": {
-            "total": 26,
+            "total": 28,
             "wins": 2,
             "losses": 0,
             "pending": 8,
             "active": 0,
-            "expired": 16,
+            "expired": 18,
             "win_rate": 100.0,
             "total_r": 6.2
         },
         "Forex": {
-            "total": 38,
-            "wins": 3,
-            "losses": 17,
-            "pending": 2,
-            "active": 6,
+            "total": 39,
+            "wins": 4,
+            "losses": 18,
+            "pending": 3,
+            "active": 4,
             "expired": 10,
-            "win_rate": 15.0,
-            "total_r": -9.5
+            "win_rate": 18.2,
+            "total_r": -8.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 74,
-            "closed": 39,
-            "wins": 9,
-            "losses": 30,
-            "win_rate": 23.1,
-            "total_r": -7.4,
-            "expectancy_r": -0.19,
-            "profit_factor": 0.75,
-            "expired": 17,
-            "fill_rate": 64.9
+            "signals": 77,
+            "closed": 41,
+            "wins": 10,
+            "losses": 31,
+            "win_rate": 24.4,
+            "total_r": -5.9,
+            "expectancy_r": -0.144,
+            "profit_factor": 0.81,
+            "expired": 18,
+            "fill_rate": 62.3
         },
         "stop_hold": {
-            "signals": 63,
+            "signals": 64,
             "closed": 15,
             "wins": 2,
             "losses": 13,
@@ -67,8 +67,8 @@
             "total_r": -5.74,
             "expectancy_r": -0.383,
             "profit_factor": 0.56,
-            "expired": 31,
-            "fill_rate": 31.7
+            "expired": 32,
+            "fill_rate": 31.2
         }
     },
     "equity_curve": [
@@ -331,73 +331,145 @@
             "cumulative_r": -6.8
         },
         {
+            "date": "2026-09-03",
+            "ticker": "EURJPY",
+            "market": "Forex",
+            "cumulative_r": -4.3
+        },
+        {
             "date": "2026-09-04",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": -7.8
+            "cumulative_r": -5.3
         },
         {
             "date": "2026-09-07",
             "ticker": "TSLA",
             "market": "Stocks",
-            "cumulative_r": -8.8
+            "cumulative_r": -6.3
         },
         {
             "date": "2026-09-09",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -5.14
+            "cumulative_r": -2.64
         },
         {
             "date": "2026-09-10",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -6.14
+            "cumulative_r": -3.64
         },
         {
             "date": "2026-09-11",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -7.14
+            "cumulative_r": -4.64
         },
         {
             "date": "2026-09-14",
             "ticker": "AMZN",
             "market": "Stocks",
-            "cumulative_r": -8.14
+            "cumulative_r": -5.64
         },
         {
             "date": "2026-09-16",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -9.14
+            "cumulative_r": -6.64
         },
         {
             "date": "2026-09-16",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": -10.14
+            "cumulative_r": -7.64
         },
         {
             "date": "2026-09-16",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -11.14
+            "cumulative_r": -8.64
+        },
+        {
+            "date": "2026-09-18",
+            "ticker": "EURGBP",
+            "market": "Forex",
+            "cumulative_r": -9.64
         },
         {
             "date": "2026-09-22",
             "ticker": "MA",
             "market": "Stocks",
-            "cumulative_r": -12.14
+            "cumulative_r": -10.64
         },
         {
             "date": "2026-09-24",
             "ticker": "USDJPY",
             "market": "Forex",
-            "cumulative_r": -13.14
+            "cumulative_r": -11.64
         }
     ],
     "recent_signals": [
+        {
+            "id": "20260930_RIOT",
+            "date": "2026-09-30",
+            "ticker": "RIOT",
+            "entry_price": 21.39,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 19.44,
+            "target_price": 26.27,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20260930_TRX-USD",
+            "date": "2026-09-30",
+            "ticker": "TRX",
+            "entry_price": 0.3401,
+            "status": "PENDING",
+            "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 0.3282,
+            "target_price": 0.3711,
+            "mode": "baseline",
+            "market": "Crypto",
+            "rr_ratio": 2.61
+        },
+        {
+            "id": "20260930_TRX-USD_SH",
+            "date": "2026-09-30",
+            "ticker": "TRX",
+            "entry_price": 0.3282,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (0.3282), original target held. Paired with 20260930_TRX-USD.",
+            "type": "LONG",
+            "context": "MOMENTUM_TREND",
+            "stop_loss": 0.3163,
+            "target_price": 0.3711,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.61
+        },
+        {
+            "id": "20260930_EURGBP",
+            "date": "2026-09-30",
+            "ticker": "EURGBP",
+            "entry_price": 0.85533,
+            "status": "PENDING",
+            "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 0.85926,
+            "target_price": 0.84551,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
         {
             "id": "20260928_V",
             "date": "2026-09-28",
@@ -673,7 +745,7 @@
             "date": "2026-09-18",
             "ticker": "EURGBP",
             "entry_price": 0.85864,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Forex trend continuation above 50-SMA. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_CONTINUATION",
@@ -787,66 +859,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20260914_AMZN",
-            "date": "2026-09-14",
-            "ticker": "AMZN",
-            "entry_price": 256.78,
-            "status": "HIT_STOP",
-            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 248.5,
-            "target_price": 277.49,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20260914_TRX-USD",
-            "date": "2026-09-14",
-            "ticker": "TRX",
-            "entry_price": 0.3403,
-            "status": "PENDING",
-            "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
-            "type": "LONG",
-            "context": "MOMENTUM_TREND",
-            "stop_loss": 0.3284,
-            "target_price": 0.3713,
-            "mode": "baseline",
-            "market": "Crypto",
-            "rr_ratio": 2.61
-        },
-        {
-            "id": "20260914_TRX-USD_SH",
-            "date": "2026-09-14",
-            "ticker": "TRX",
-            "entry_price": 0.3284,
-            "status": "PENDING",
-            "notes": "Pullback entry at the baseline stop (0.3284), original target held. Paired with 20260914_TRX-USD.",
-            "type": "LONG",
-            "context": "MOMENTUM_TREND",
-            "stop_loss": 0.3165,
-            "target_price": 0.3713,
-            "mode": "stop_hold",
-            "market": "Crypto",
-            "rr_ratio": 3.61
-        },
-        {
-            "id": "20260911_JPM",
-            "date": "2026-09-11",
-            "ticker": "JPM",
-            "entry_price": 353.56,
-            "status": "HIT_STOP",
-            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 344.51,
-            "target_price": 376.19,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
         }
     ]
 }
