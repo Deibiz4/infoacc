@@ -657,7 +657,7 @@
         "date": "2026-09-16",
         "ticker": "EURUSD",
         "entry_price": 1.15407,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Forex bullish dip bounce. RSI (31.0) turning up. Risk-Reward 1:2.5 (ATR: 0.00490).",
         "type": "LONG",
         "context": "OVERSOLD_BOUNCE",
@@ -735,7 +735,7 @@
         "date": "2026-09-28",
         "ticker": "AUDUSD",
         "entry_price": 0.70269,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Forex bullish dip bounce. RSI (17.6) turning up. Risk-Reward 1:2.5 (ATR: 0.00474).",
         "type": "LONG",
         "context": "OVERSOLD_BOUNCE",
@@ -748,7 +748,7 @@
         "date": "2026-09-28",
         "ticker": "AUDUSD",
         "entry_price": 0.69558,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Pullback entry at the baseline stop (0.69558), original target held. Paired with 20260928_AUDUSD.",
         "type": "LONG",
         "context": "OVERSOLD_BOUNCE",
@@ -768,6 +768,45 @@
         "stop_loss": 0.85926,
         "target_price": 0.84551,
         "mode": "baseline"
+    },
+    {
+        "id": "20261001_USDJPY",
+        "date": "2026-10-01",
+        "ticker": "USDJPY",
+        "entry_price": 157.95399,
+        "status": "PENDING",
+        "notes": "Forex overbought short rejection. RSI (70.5) turning down. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "stop_loss": 160.02721,
+        "target_price": 152.77096,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261001_EURJPY",
+        "date": "2026-10-01",
+        "ticker": "EURJPY",
+        "entry_price": 178.408,
+        "status": "PENDING",
+        "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 180.29011,
+        "target_price": 173.70275,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261001_EURJPY_SH",
+        "date": "2026-10-01",
+        "ticker": "EURJPY",
+        "entry_price": 180.29011,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (180.29011), original target held. Paired with 20261001_EURJPY.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 182.17222,
+        "target_price": 173.70275,
+        "mode": "stop_hold"
     }
 ];
 
