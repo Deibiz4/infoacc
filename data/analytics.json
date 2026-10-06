@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-10-05 15:17:27",
+    "last_updated": "2026-10-06 13:38:30",
     "global": {
         "total_signals": 148,
         "closed_trades": 58,
@@ -18,8 +18,8 @@
             "total": 76,
             "wins": 6,
             "losses": 26,
-            "pending": 9,
-            "active": 11,
+            "pending": 8,
+            "active": 12,
             "expired": 24,
             "win_rate": 18.8,
             "total_r": -9.84
@@ -56,7 +56,7 @@
             "expectancy_r": -0.164,
             "profit_factor": 0.78,
             "expired": 19,
-            "fill_rate": 61.2
+            "fill_rate": 62.5
         },
         "stop_hold": {
             "signals": 68,
@@ -592,7 +592,7 @@
             "date": "2026-09-28",
             "ticker": "V",
             "entry_price": 368.65,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
