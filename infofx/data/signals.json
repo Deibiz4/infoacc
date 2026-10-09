@@ -538,5 +538,18 @@
         "stop_loss": 182.17222,
         "target_price": 173.70275,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20261009_GBPJPY_SH",
+        "date": "2026-10-09",
+        "ticker": "GBPJPY",
+        "entry_price": 211.4238,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (211.42380), original target held. Paired with 20261009_GBPJPY.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 213.4656,
+        "target_price": 204.2775,
+        "mode": "stop_hold"
     }
 ]
