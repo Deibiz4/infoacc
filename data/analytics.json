@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-10-13 14:35:31",
+    "last_updated": "2026-10-14 12:24:11",
     "global": {
-        "total_signals": 160,
-        "closed_trades": 65,
-        "wins": 14,
-        "losses": 51,
-        "win_rate": 21.5,
-        "total_r": -12.64,
-        "profit_factor": 0.75,
-        "gross_profit_r": 38.36,
-        "gross_loss_r": 51.0,
-        "expectancy_r": -0.194,
+        "total_signals": 162,
+        "closed_trades": 67,
+        "wins": 15,
+        "losses": 52,
+        "win_rate": 22.4,
+        "total_r": -11.14,
+        "profit_factor": 0.79,
+        "gross_profit_r": 40.86,
+        "gross_loss_r": 52.0,
+        "expectancy_r": -0.166,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 87,
-            "wins": 8,
-            "losses": 31,
-            "pending": 9,
-            "active": 11,
+            "total": 89,
+            "wins": 9,
+            "losses": 32,
+            "pending": 11,
+            "active": 9,
             "expired": 28,
-            "win_rate": 20.5,
-            "total_r": -8.84
+            "win_rate": 22.0,
+            "total_r": -7.34
         },
         "Crypto": {
             "total": 30,
@@ -47,28 +47,28 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 87,
-            "closed": 47,
-            "wins": 11,
+            "signals": 88,
+            "closed": 48,
+            "wins": 12,
             "losses": 36,
-            "win_rate": 23.4,
-            "total_r": -8.4,
-            "expectancy_r": -0.179,
-            "profit_factor": 0.77,
+            "win_rate": 25.0,
+            "total_r": -5.9,
+            "expectancy_r": -0.123,
+            "profit_factor": 0.84,
             "expired": 21,
-            "fill_rate": 62.1
+            "fill_rate": 61.4
         },
         "stop_hold": {
-            "signals": 73,
-            "closed": 18,
+            "signals": 74,
+            "closed": 19,
             "wins": 3,
-            "losses": 15,
-            "win_rate": 16.7,
-            "total_r": -4.24,
-            "expectancy_r": -0.236,
-            "profit_factor": 0.72,
+            "losses": 16,
+            "win_rate": 15.8,
+            "total_r": -5.24,
+            "expectancy_r": -0.276,
+            "profit_factor": 0.67,
             "expired": 36,
-            "fill_rate": 35.6
+            "fill_rate": 35.1
         }
     },
     "equity_curve": [
@@ -457,13 +457,55 @@
             "cumulative_r": -11.64
         },
         {
+            "date": "2026-10-02",
+            "ticker": "CAT",
+            "market": "Stocks",
+            "cumulative_r": -12.64
+        },
+        {
+            "date": "2026-10-07",
+            "ticker": "V",
+            "market": "Stocks",
+            "cumulative_r": -10.14
+        },
+        {
             "date": "2026-10-07",
             "ticker": "JNJ",
             "market": "Stocks",
-            "cumulative_r": -12.64
+            "cumulative_r": -11.14
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261014_DE",
+            "date": "2026-10-14",
+            "ticker": "DE",
+            "entry_price": 650.0,
+            "status": "PENDING",
+            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (31.5) turning up. Risk-Reward 1:2.5 (ATR: $20.16).",
+            "type": "LONG",
+            "context": "VALUE_OVERSOLD",
+            "stop_loss": 619.77,
+            "target_price": 725.58,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20261014_COST_SH",
+            "date": "2026-10-14",
+            "ticker": "COST",
+            "entry_price": 978.68,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (978.68), original target held. Risk-Reward 1:3.5. Paired with 20261014_COST.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 1002.73,
+            "target_price": 894.5,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.5
+        },
         {
             "id": "20261013_NVDA",
             "date": "2026-10-13",
@@ -604,7 +646,7 @@
             "date": "2026-10-07",
             "ticker": "V",
             "entry_price": 371.62,
-            "status": "ACTIVE",
+            "status": "HIT_TARGET",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -649,7 +691,7 @@
             "date": "2026-10-02",
             "ticker": "CAT",
             "entry_price": 796.01,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Pullback entry at the baseline stop (796.01), original target held. Risk-Reward 1:3.5. Paired with 20261002_CAT.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -883,36 +925,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.51
-        },
-        {
-            "id": "20260928_SLB_SH",
-            "date": "2026-09-28",
-            "ticker": "SLB",
-            "entry_price": 48.85,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (48.85), original target held. Risk-Reward 1:3.5. Paired with 20260928_SLB.",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 46.27,
-            "target_price": 57.87,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20260928_ABNB_SH",
-            "date": "2026-09-28",
-            "ticker": "ABNB",
-            "entry_price": 149.65,
-            "status": "EXPIRED",
-            "notes": "Pullback entry at the baseline stop (149.65), original target held. Risk-Reward 1:3.5. Paired with 20260928_ABNB.",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 141.76,
-            "target_price": 177.27,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
         }
     ]
 }

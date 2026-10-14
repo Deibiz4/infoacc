@@ -964,7 +964,7 @@
         "date": "2026-10-02",
         "ticker": "CAT",
         "entry_price": 796.01,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Pullback entry at the baseline stop (796.01), original target held. Risk-Reward 1:3.5. Paired with 20261002_CAT.",
         "type": "LONG",
         "context": "TREND_PULLBACK",
@@ -977,7 +977,7 @@
         "date": "2026-10-07",
         "ticker": "V",
         "entry_price": 371.62,
-        "status": "ACTIVE",
+        "status": "HIT_TARGET",
         "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
         "type": "LONG",
         "context": "TREND_PULLBACK",
@@ -1113,6 +1113,32 @@
         "context": "VALUE_OVERSOLD",
         "stop_loss": 84.35,
         "target_price": 120.85,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20261014_DE",
+        "date": "2026-10-14",
+        "ticker": "DE",
+        "entry_price": 650.0,
+        "status": "PENDING",
+        "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (31.5) turning up. Risk-Reward 1:2.5 (ATR: $20.16).",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "stop_loss": 619.77,
+        "target_price": 725.58,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261014_COST_SH",
+        "date": "2026-10-14",
+        "ticker": "COST",
+        "entry_price": 978.68,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (978.68), original target held. Risk-Reward 1:3.5. Paired with 20261014_COST.",
+        "type": "SHORT",
+        "context": "OVERBOUGHT_REJECTION",
+        "stop_loss": 1002.73,
+        "target_price": 894.5,
         "mode": "stop_hold"
     }
 ]
