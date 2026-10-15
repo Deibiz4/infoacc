@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-10-14 12:24:11",
+    "last_updated": "2026-10-15 12:08:27",
     "global": {
-        "total_signals": 162,
-        "closed_trades": 67,
+        "total_signals": 163,
+        "closed_trades": 68,
         "wins": 15,
-        "losses": 52,
-        "win_rate": 22.4,
-        "total_r": -11.14,
-        "profit_factor": 0.79,
+        "losses": 53,
+        "win_rate": 22.1,
+        "total_r": -12.14,
+        "profit_factor": 0.77,
         "gross_profit_r": 40.86,
-        "gross_loss_r": 52.0,
-        "expectancy_r": -0.166,
+        "gross_loss_r": 53.0,
+        "expectancy_r": -0.179,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 89,
+            "total": 90,
             "wins": 9,
-            "losses": 32,
-            "pending": 11,
-            "active": 9,
+            "losses": 33,
+            "pending": 10,
+            "active": 10,
             "expired": 28,
-            "win_rate": 22.0,
-            "total_r": -7.34
+            "win_rate": 21.4,
+            "total_r": -8.34
         },
         "Crypto": {
             "total": 30,
@@ -38,25 +38,25 @@
             "total": 43,
             "wins": 4,
             "losses": 20,
-            "pending": 4,
+            "pending": 3,
             "active": 4,
-            "expired": 11,
+            "expired": 12,
             "win_rate": 16.7,
             "total_r": -10.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 88,
-            "closed": 48,
+            "signals": 89,
+            "closed": 49,
             "wins": 12,
-            "losses": 36,
-            "win_rate": 25.0,
-            "total_r": -5.9,
-            "expectancy_r": -0.123,
-            "profit_factor": 0.84,
-            "expired": 21,
-            "fill_rate": 61.4
+            "losses": 37,
+            "win_rate": 24.5,
+            "total_r": -6.9,
+            "expectancy_r": -0.141,
+            "profit_factor": 0.81,
+            "expired": 22,
+            "fill_rate": 62.9
         },
         "stop_hold": {
             "signals": 74,
@@ -128,86 +128,86 @@
         },
         {
             "date": "2026-07-31",
+            "ticker": "CAT",
+            "market": "Stocks",
+            "cumulative_r": 0.5
+        },
+        {
+            "date": "2026-07-31",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": 0.5
+            "cumulative_r": -0.5
         },
         {
             "date": "2026-07-31",
             "ticker": "AUDUSD",
             "market": "Forex",
-            "cumulative_r": 3.0
+            "cumulative_r": 2.0
         },
         {
             "date": "2026-07-31",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": 5.5
+            "cumulative_r": 4.5
         },
         {
             "date": "2026-07-31",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": 4.5
+            "cumulative_r": 3.5
         },
         {
             "date": "2026-08-03",
             "ticker": "AMZN",
             "market": "Stocks",
-            "cumulative_r": 3.5
+            "cumulative_r": 2.5
         },
         {
             "date": "2026-08-03",
             "ticker": "DE",
             "market": "Stocks",
-            "cumulative_r": 6.0
+            "cumulative_r": 5.0
         },
         {
             "date": "2026-08-03",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": 5.0
+            "cumulative_r": 4.0
         },
         {
             "date": "2026-08-05",
             "ticker": "AVGO",
             "market": "Stocks",
-            "cumulative_r": 4.0
+            "cumulative_r": 3.0
         },
         {
             "date": "2026-08-05",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": 3.0
+            "cumulative_r": 2.0
         },
         {
             "date": "2026-08-06",
             "ticker": "UBER",
             "market": "Stocks",
-            "cumulative_r": 2.0
+            "cumulative_r": 1.0
         },
         {
             "date": "2026-08-06",
             "ticker": "AVAX",
             "market": "Crypto",
-            "cumulative_r": 5.6
+            "cumulative_r": 4.6
         },
         {
             "date": "2026-08-10",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": 4.6
+            "cumulative_r": 3.6
         },
         {
             "date": "2026-08-12",
             "ticker": "NFLX",
             "market": "Stocks",
-            "cumulative_r": 3.6
-        },
-        {
-            "date": "2026-08-12",
-            "ticker": "USDCAD",
-            "market": "Forex",
             "cumulative_r": 2.6
         },
         {
@@ -217,27 +217,27 @@
             "cumulative_r": 1.6
         },
         {
+            "date": "2026-08-12",
+            "ticker": "USDCAD",
+            "market": "Forex",
+            "cumulative_r": 0.6
+        },
+        {
             "date": "2026-08-14",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": 0.6
+            "cumulative_r": -0.4
         },
         {
             "date": "2026-08-17",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": 3.2
+            "cumulative_r": 2.2
         },
         {
             "date": "2026-08-18",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": 2.2
-        },
-        {
-            "date": "2026-08-20",
-            "ticker": "COST",
-            "market": "Stocks",
             "cumulative_r": 1.2
         },
         {
@@ -248,38 +248,38 @@
         },
         {
             "date": "2026-08-20",
-            "ticker": "USDCHF",
-            "market": "Forex",
+            "ticker": "COST",
+            "market": "Stocks",
             "cumulative_r": -0.8
         },
         {
             "date": "2026-08-20",
-            "ticker": "EURJPY",
+            "ticker": "USDCHF",
             "market": "Forex",
             "cumulative_r": -1.8
         },
         {
             "date": "2026-08-20",
-            "ticker": "USDCHF",
+            "ticker": "EURJPY",
             "market": "Forex",
             "cumulative_r": -2.8
         },
         {
             "date": "2026-08-20",
-            "ticker": "EURGBP",
+            "ticker": "USDCHF",
             "market": "Forex",
             "cumulative_r": -3.8
         },
         {
             "date": "2026-08-20",
-            "ticker": "EURJPY",
+            "ticker": "EURGBP",
             "market": "Forex",
             "cumulative_r": -4.8
         },
         {
-            "date": "2026-08-21",
-            "ticker": "WMT",
-            "market": "Stocks",
+            "date": "2026-08-20",
+            "ticker": "EURJPY",
+            "market": "Forex",
             "cumulative_r": -5.8
         },
         {
@@ -289,14 +289,14 @@
             "cumulative_r": -6.8
         },
         {
-            "date": "2026-08-25",
-            "ticker": "AAPL",
+            "date": "2026-08-21",
+            "ticker": "WMT",
             "market": "Stocks",
-            "cumulative_r": -4.3
+            "cumulative_r": -7.8
         },
         {
             "date": "2026-08-25",
-            "ticker": "COIN",
+            "ticker": "AAPL",
             "market": "Stocks",
             "cumulative_r": -5.3
         },
@@ -308,174 +308,195 @@
         },
         {
             "date": "2026-08-25",
+            "ticker": "COIN",
+            "market": "Stocks",
+            "cumulative_r": -7.3
+        },
+        {
+            "date": "2026-08-25",
             "ticker": "USDCAD",
             "market": "Forex",
-            "cumulative_r": -3.8
+            "cumulative_r": -4.8
         },
         {
             "date": "2026-08-26",
             "ticker": "GS",
             "market": "Stocks",
-            "cumulative_r": -4.8
+            "cumulative_r": -5.8
         },
         {
             "date": "2026-08-26",
             "ticker": "GE",
             "market": "Stocks",
-            "cumulative_r": -5.8
+            "cumulative_r": -6.8
         },
         {
             "date": "2026-08-27",
             "ticker": "AVGO",
             "market": "Stocks",
-            "cumulative_r": -6.8
+            "cumulative_r": -7.8
         },
         {
             "date": "2026-08-27",
             "ticker": "LLY",
             "market": "Stocks",
-            "cumulative_r": -7.8
+            "cumulative_r": -8.8
         },
         {
             "date": "2026-09-03",
             "ticker": "USDJPY",
             "market": "Forex",
-            "cumulative_r": -8.8
+            "cumulative_r": -9.8
         },
         {
             "date": "2026-09-03",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -6.3
+            "cumulative_r": -7.3
         },
         {
             "date": "2026-09-04",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": -7.3
+            "cumulative_r": -8.3
         },
         {
             "date": "2026-09-04",
             "ticker": "MARA",
             "market": "Stocks",
-            "cumulative_r": -8.3
+            "cumulative_r": -9.3
         },
         {
             "date": "2026-09-07",
             "ticker": "TSLA",
             "market": "Stocks",
-            "cumulative_r": -9.3
+            "cumulative_r": -10.3
         },
         {
             "date": "2026-09-09",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -5.64
+            "cumulative_r": -6.64
         },
         {
             "date": "2026-09-10",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -6.64
+            "cumulative_r": -7.64
         },
         {
             "date": "2026-09-11",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -7.64
+            "cumulative_r": -8.64
         },
         {
             "date": "2026-09-14",
             "ticker": "AMZN",
             "market": "Stocks",
-            "cumulative_r": -8.64
+            "cumulative_r": -9.64
         },
         {
             "date": "2026-09-16",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -9.64
+            "cumulative_r": -10.64
         },
         {
             "date": "2026-09-16",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": -10.64
+            "cumulative_r": -11.64
         },
         {
             "date": "2026-09-16",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -11.64
+            "cumulative_r": -12.64
         },
         {
             "date": "2026-09-18",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -12.64
+            "cumulative_r": -13.64
         },
         {
             "date": "2026-09-22",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": -10.14
+            "cumulative_r": -11.14
         },
         {
             "date": "2026-09-22",
             "ticker": "MA",
             "market": "Stocks",
-            "cumulative_r": -11.14
+            "cumulative_r": -12.14
         },
         {
             "date": "2026-09-24",
             "ticker": "USDJPY",
             "market": "Forex",
-            "cumulative_r": -12.14
-        },
-        {
-            "date": "2026-09-28",
-            "ticker": "V",
-            "market": "Stocks",
             "cumulative_r": -13.14
         },
         {
             "date": "2026-09-28",
-            "ticker": "KO",
+            "ticker": "V",
             "market": "Stocks",
             "cumulative_r": -14.14
         },
         {
             "date": "2026-09-28",
+            "ticker": "KO",
+            "market": "Stocks",
+            "cumulative_r": -15.14
+        },
+        {
+            "date": "2026-09-28",
             "ticker": "V",
             "market": "Stocks",
-            "cumulative_r": -10.64
+            "cumulative_r": -11.64
         },
         {
             "date": "2026-09-28",
             "ticker": "AUDUSD",
             "market": "Forex",
-            "cumulative_r": -11.64
+            "cumulative_r": -12.64
         },
         {
             "date": "2026-10-02",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -12.64
+            "cumulative_r": -13.64
         },
         {
             "date": "2026-10-07",
             "ticker": "V",
             "market": "Stocks",
-            "cumulative_r": -10.14
+            "cumulative_r": -11.14
         },
         {
             "date": "2026-10-07",
             "ticker": "JNJ",
             "market": "Stocks",
-            "cumulative_r": -11.14
+            "cumulative_r": -12.14
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261015_GOOGL",
+            "date": "2026-10-15",
+            "ticker": "GOOGL",
+            "entry_price": 347.64,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 335.44,
+            "target_price": 378.15,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
         {
             "id": "20261014_DE",
             "date": "2026-10-14",
@@ -511,7 +532,7 @@
             "date": "2026-10-13",
             "ticker": "NVDA",
             "entry_price": 225.54,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -526,7 +547,7 @@
             "date": "2026-10-13",
             "ticker": "INTC",
             "entry_price": 100.57,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (23.4) turning up. Risk-Reward 1:2.5 (ATR: $5.41).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -841,7 +862,7 @@
             "date": "2026-09-30",
             "ticker": "EURGBP",
             "entry_price": 0.85533,
-            "status": "PENDING",
+            "status": "EXPIRED",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -910,21 +931,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20260928_KO_SH",
-            "date": "2026-09-28",
-            "ticker": "KO",
-            "entry_price": 85.79,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (85.79), original target held. Risk-Reward 1:3.5. Paired with 20260928_KO.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 83.99,
-            "target_price": 92.1,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.51
         }
     ]
 }

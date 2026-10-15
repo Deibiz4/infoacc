@@ -148,7 +148,7 @@
         "date": "2026-07-31",
         "ticker": "CAT",
         "entry_price": 809.14,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (23.4) turning up. Risk-Reward 1:2.5 (ATR: $40.68).",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
@@ -1055,7 +1055,7 @@
         "date": "2026-10-13",
         "ticker": "NVDA",
         "entry_price": 225.54,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
         "type": "LONG",
         "context": "TREND_PULLBACK",
@@ -1068,7 +1068,7 @@
         "date": "2026-10-13",
         "ticker": "INTC",
         "entry_price": 100.57,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (23.4) turning up. Risk-Reward 1:2.5 (ATR: $5.41).",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
@@ -1140,5 +1140,18 @@
         "stop_loss": 1002.73,
         "target_price": 894.5,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20261015_GOOGL",
+        "date": "2026-10-15",
+        "ticker": "GOOGL",
+        "entry_price": 347.64,
+        "status": "PENDING",
+        "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+        "type": "LONG",
+        "context": "TREND_PULLBACK",
+        "stop_loss": 335.44,
+        "target_price": 378.15,
+        "mode": "baseline"
     }
 ]
