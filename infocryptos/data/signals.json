@@ -339,7 +339,7 @@
         "date": "2026-09-30",
         "ticker": "TRX",
         "entry_price": 0.3401,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Bullish momentum breakout above 50-SMA. Risk-Reward 1:2.6.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
@@ -352,7 +352,7 @@
         "date": "2026-09-30",
         "ticker": "TRX",
         "entry_price": 0.3282,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Pullback entry at the baseline stop (0.3282), original target held. Paired with 20260930_TRX-USD.",
         "type": "LONG",
         "context": "MOMENTUM_TREND",
@@ -384,6 +384,32 @@
         "context": "OVERBOUGHT_REJECTION",
         "stop_loss": 389.782,
         "target_price": 206.7176,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20261016_XRP-USD",
+        "date": "2026-10-16",
+        "ticker": "XRP",
+        "entry_price": 1.3453,
+        "status": "PENDING",
+        "notes": "Crypto bullish dip rebound. RSI (30.1) turning up. Risk-Reward 1:2.5 (ATR: $0.04896).",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "stop_loss": 1.2572,
+        "target_price": 1.5656,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261016_XRP-USD_SH",
+        "date": "2026-10-16",
+        "ticker": "XRP",
+        "entry_price": 1.2572,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.257), original target held. Paired with 20261016_XRP-USD.",
+        "type": "LONG",
+        "context": "VALUE_OVERSOLD",
+        "stop_loss": 1.1691,
+        "target_price": 1.5656,
         "mode": "stop_hold"
     }
 ]
