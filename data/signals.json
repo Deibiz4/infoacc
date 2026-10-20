@@ -1159,7 +1159,7 @@
         "date": "2026-10-16",
         "ticker": "INTC",
         "entry_price": 95.37,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (15.8) turning up. Risk-Reward 1:2.5 (ATR: $5.58).",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
