@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-10-20 12:13:36",
+    "last_updated": "2026-10-21 12:26:34",
     "global": {
-        "total_signals": 174,
-        "closed_trades": 73,
-        "wins": 17,
+        "total_signals": 175,
+        "closed_trades": 74,
+        "wins": 18,
         "losses": 56,
-        "win_rate": 23.3,
-        "total_r": -9.13,
-        "profit_factor": 0.84,
-        "gross_profit_r": 46.87,
+        "win_rate": 24.3,
+        "total_r": -6.62,
+        "profit_factor": 0.88,
+        "gross_profit_r": 49.38,
         "gross_loss_r": 56.0,
-        "expectancy_r": -0.125,
+        "expectancy_r": -0.089,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 97,
-            "wins": 11,
+            "total": 98,
+            "wins": 12,
             "losses": 36,
             "pending": 9,
             "active": 11,
             "expired": 30,
-            "win_rate": 23.4,
-            "total_r": -5.33
+            "win_rate": 25.0,
+            "total_r": -2.82
         },
         "Crypto": {
             "total": 34,
@@ -38,8 +38,8 @@
             "total": 43,
             "wins": 4,
             "losses": 20,
-            "pending": 1,
-            "active": 4,
+            "pending": 0,
+            "active": 5,
             "expired": 14,
             "win_rate": 16.7,
             "total_r": -10.0
@@ -47,16 +47,16 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 95,
-            "closed": 52,
-            "wins": 13,
+            "signals": 96,
+            "closed": 53,
+            "wins": 14,
             "losses": 39,
-            "win_rate": 25.0,
-            "total_r": -6.4,
-            "expectancy_r": -0.123,
-            "profit_factor": 0.84,
+            "win_rate": 26.4,
+            "total_r": -3.89,
+            "expectancy_r": -0.073,
+            "profit_factor": 0.9,
             "expired": 26,
-            "fill_rate": 63.2
+            "fill_rate": 63.5
         },
         "stop_hold": {
             "signals": 79,
@@ -68,7 +68,7 @@
             "expectancy_r": -0.13,
             "profit_factor": 0.84,
             "expired": 40,
-            "fill_rate": 36.7
+            "fill_rate": 38.0
         }
     },
     "equity_curve": [
@@ -493,31 +493,52 @@
             "cumulative_r": -6.13
         },
         {
+            "date": "2026-10-08",
+            "ticker": "PFE",
+            "market": "Stocks",
+            "cumulative_r": -3.62
+        },
+        {
             "date": "2026-10-13",
             "ticker": "NVDA",
             "market": "Stocks",
-            "cumulative_r": -7.13
+            "cumulative_r": -4.62
         },
         {
             "date": "2026-10-13",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -8.13
+            "cumulative_r": -5.62
         },
         {
             "date": "2026-10-14",
             "ticker": "COST",
             "market": "Stocks",
-            "cumulative_r": -9.13
+            "cumulative_r": -6.62
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261021_SPOT",
+            "date": "2026-10-21",
+            "ticker": "SPOT",
+            "entry_price": 526.08,
+            "status": "PENDING",
+            "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +19% vs avg. Risk-Reward 1:2.66.",
+            "type": "LONG",
+            "context": "MOMENTUM_BREAKOUT",
+            "stop_loss": 499.85,
+            "target_price": 595.84,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.66
+        },
         {
             "id": "20261019_TXN",
             "date": "2026-10-19",
             "ticker": "TXN",
             "entry_price": 276.83,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -832,7 +853,7 @@
             "date": "2026-10-09",
             "ticker": "GBPJPY",
             "entry_price": 211.4238,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (211.42380), original target held. Paired with 20261009_GBPJPY.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -847,7 +868,7 @@
             "date": "2026-10-08",
             "ticker": "PFE",
             "entry_price": 27.82,
-            "status": "ACTIVE",
+            "status": "HIT_TARGET",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -946,21 +967,6 @@
             "mode": "baseline",
             "market": "Crypto",
             "rr_ratio": 2.5
-        },
-        {
-            "id": "20261001_BCH-USD_SH",
-            "date": "2026-10-01",
-            "ticker": "BCH",
-            "entry_price": 349.101,
-            "status": "EXPIRED",
-            "notes": "Pullback entry at the baseline stop (349.1), original target held. Paired with 20261001_BCH-USD.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 389.782,
-            "target_price": 206.7176,
-            "mode": "stop_hold",
-            "market": "Crypto",
-            "rr_ratio": 3.5
         }
     ]
 }
