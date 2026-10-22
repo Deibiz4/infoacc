@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-10-21 12:26:34",
+    "last_updated": "2026-10-22 12:27:50",
     "global": {
-        "total_signals": 175,
-        "closed_trades": 74,
+        "total_signals": 176,
+        "closed_trades": 75,
         "wins": 18,
-        "losses": 56,
-        "win_rate": 24.3,
-        "total_r": -6.62,
-        "profit_factor": 0.88,
+        "losses": 57,
+        "win_rate": 24.0,
+        "total_r": -7.62,
+        "profit_factor": 0.87,
         "gross_profit_r": 49.38,
-        "gross_loss_r": 56.0,
-        "expectancy_r": -0.089,
+        "gross_loss_r": 57.0,
+        "expectancy_r": -0.102,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 98,
+            "total": 99,
             "wins": 12,
-            "losses": 36,
-            "pending": 9,
-            "active": 11,
+            "losses": 37,
+            "pending": 10,
+            "active": 10,
             "expired": 30,
-            "win_rate": 25.0,
-            "total_r": -2.82
+            "win_rate": 24.5,
+            "total_r": -3.82
         },
         "Crypto": {
             "total": 34,
@@ -47,16 +47,16 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 96,
-            "closed": 53,
+            "signals": 97,
+            "closed": 54,
             "wins": 14,
-            "losses": 39,
-            "win_rate": 26.4,
-            "total_r": -3.89,
-            "expectancy_r": -0.073,
-            "profit_factor": 0.9,
+            "losses": 40,
+            "win_rate": 25.9,
+            "total_r": -4.89,
+            "expectancy_r": -0.091,
+            "profit_factor": 0.88,
             "expired": 26,
-            "fill_rate": 63.5
+            "fill_rate": 62.9
         },
         "stop_hold": {
             "signals": 79,
@@ -515,9 +515,30 @@
             "ticker": "COST",
             "market": "Stocks",
             "cumulative_r": -6.62
+        },
+        {
+            "date": "2026-10-15",
+            "ticker": "GOOGL",
+            "market": "Stocks",
+            "cumulative_r": -7.62
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261022_WMT",
+            "date": "2026-10-22",
+            "ticker": "WMT",
+            "entry_price": 117.8,
+            "status": "PENDING",
+            "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (89.5) turning down. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 121.36,
+            "target_price": 108.89,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
         {
             "id": "20261021_SPOT",
             "date": "2026-10-21",
@@ -703,7 +724,7 @@
             "date": "2026-10-15",
             "ticker": "GOOGL",
             "entry_price": 347.64,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -952,21 +973,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20261001_BCH-USD",
-            "date": "2026-10-01",
-            "ticker": "BCH",
-            "entry_price": 308.42,
-            "status": "EXPIRED",
-            "notes": "Crypto overbought short rejection. RSI (72.0) turning down. Risk-Reward 1:2.5.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 349.101,
-            "target_price": 206.7176,
-            "mode": "baseline",
-            "market": "Crypto",
-            "rr_ratio": 2.5
         }
     ]
 }
