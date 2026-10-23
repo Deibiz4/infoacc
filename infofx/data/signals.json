@@ -551,5 +551,57 @@
         "stop_loss": 213.4656,
         "target_price": 204.2775,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20261023_EURUSD",
+        "date": "2026-10-23",
+        "ticker": "EURUSD",
+        "entry_price": 1.11932,
+        "status": "PENDING",
+        "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 1.12807,
+        "target_price": 1.09744,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261023_EURJPY",
+        "date": "2026-10-23",
+        "ticker": "EURJPY",
+        "entry_price": 175.46001,
+        "status": "PENDING",
+        "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 177.0978,
+        "target_price": 171.36551,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261023_EURUSD_SH",
+        "date": "2026-10-23",
+        "ticker": "EURUSD",
+        "entry_price": 1.12807,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.12807), original target held. Paired with 20261023_EURUSD.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 1.13682,
+        "target_price": 1.09744,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20261023_EURJPY_SH",
+        "date": "2026-10-23",
+        "ticker": "EURJPY",
+        "entry_price": 177.0978,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (177.09780), original target held. Paired with 20261023_EURJPY.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 178.73559,
+        "target_price": 171.36551,
+        "mode": "stop_hold"
     }
 ]
