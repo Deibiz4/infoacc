@@ -1276,7 +1276,7 @@
         "date": "2026-10-23",
         "ticker": "JNJ",
         "entry_price": 267.61,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +29% vs avg. Risk-Reward 1:2.66.",
         "type": "LONG",
         "context": "MOMENTUM_BREAKOUT",

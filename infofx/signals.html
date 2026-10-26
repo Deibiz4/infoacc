@@ -826,7 +826,7 @@
         "date": "2026-10-23",
         "ticker": "EURUSD",
         "entry_price": 1.11932,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",
@@ -871,6 +871,32 @@
         "context": "BREAKDOWN_SHORT",
         "stop_loss": 178.73559,
         "target_price": 171.36551,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20261026_USDCAD",
+        "date": "2026-10-26",
+        "ticker": "USDCAD",
+        "entry_price": 1.40352,
+        "status": "PENDING",
+        "notes": "Forex bullish dip bounce. RSI (27.1) turning up. Risk-Reward 1:2.5 (ATR: 0.00750).",
+        "type": "LONG",
+        "context": "OVERSOLD_BOUNCE",
+        "stop_loss": 1.39227,
+        "target_price": 1.43166,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261026_USDCAD_SH",
+        "date": "2026-10-26",
+        "ticker": "USDCAD",
+        "entry_price": 1.39227,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.39227), original target held. Paired with 20261026_USDCAD.",
+        "type": "LONG",
+        "context": "OVERSOLD_BOUNCE",
+        "stop_loss": 1.38102,
+        "target_price": 1.43166,
         "mode": "stop_hold"
     }
 ];

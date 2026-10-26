@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-10-23 12:08:07",
+    "last_updated": "2026-10-26 13:35:04",
     "global": {
-        "total_signals": 181,
+        "total_signals": 183,
         "closed_trades": 76,
         "wins": 18,
         "losses": 58,
@@ -18,8 +18,8 @@
             "total": 100,
             "wins": 12,
             "losses": 38,
-            "pending": 10,
-            "active": 10,
+            "pending": 9,
+            "active": 11,
             "expired": 30,
             "win_rate": 24.0,
             "total_r": -4.82
@@ -35,11 +35,11 @@
             "total_r": 6.2
         },
         "Forex": {
-            "total": 47,
+            "total": 49,
             "wins": 4,
             "losses": 20,
-            "pending": 4,
-            "active": 5,
+            "pending": 5,
+            "active": 6,
             "expired": 14,
             "win_rate": 16.7,
             "total_r": -10.0
@@ -47,7 +47,7 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 100,
+            "signals": 101,
             "closed": 55,
             "wins": 14,
             "losses": 41,
@@ -56,10 +56,10 @@
             "expectancy_r": -0.107,
             "profit_factor": 0.86,
             "expired": 26,
-            "fill_rate": 61.0
+            "fill_rate": 62.4
         },
         "stop_hold": {
-            "signals": 81,
+            "signals": 82,
             "closed": 21,
             "wins": 4,
             "losses": 17,
@@ -68,7 +68,7 @@
             "expectancy_r": -0.13,
             "profit_factor": 0.84,
             "expired": 40,
-            "fill_rate": 38.3
+            "fill_rate": 37.8
         }
     },
     "equity_curve": [
@@ -531,11 +531,41 @@
     ],
     "recent_signals": [
         {
+            "id": "20261026_USDCAD",
+            "date": "2026-10-26",
+            "ticker": "USDCAD",
+            "entry_price": 1.40352,
+            "status": "PENDING",
+            "notes": "Forex bullish dip bounce. RSI (27.1) turning up. Risk-Reward 1:2.5 (ATR: 0.00750).",
+            "type": "LONG",
+            "context": "OVERSOLD_BOUNCE",
+            "stop_loss": 1.39227,
+            "target_price": 1.43166,
+            "mode": "baseline",
+            "market": "Forex",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20261026_USDCAD_SH",
+            "date": "2026-10-26",
+            "ticker": "USDCAD",
+            "entry_price": 1.39227,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (1.39227), original target held. Paired with 20261026_USDCAD.",
+            "type": "LONG",
+            "context": "OVERSOLD_BOUNCE",
+            "stop_loss": 1.38102,
+            "target_price": 1.43166,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
+        {
             "id": "20261023_JNJ",
             "date": "2026-10-23",
             "ticker": "JNJ",
             "entry_price": 267.61,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "SMA 50 High-Volume Breakout above 200 SMA. Volume +29% vs avg. Risk-Reward 1:2.66.",
             "type": "LONG",
             "context": "MOMENTUM_BREAKOUT",
@@ -550,7 +580,7 @@
             "date": "2026-10-23",
             "ticker": "EURUSD",
             "entry_price": 1.11932,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -949,36 +979,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20261009_GBPJPY_SH",
-            "date": "2026-10-09",
-            "ticker": "GBPJPY",
-            "entry_price": 211.4238,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (211.42380), original target held. Paired with 20261009_GBPJPY.",
-            "type": "SHORT",
-            "context": "BREAKDOWN_SHORT",
-            "stop_loss": 213.4656,
-            "target_price": 204.2775,
-            "mode": "stop_hold",
-            "market": "Forex",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20261008_PFE",
-            "date": "2026-10-08",
-            "ticker": "PFE",
-            "entry_price": 27.82,
-            "status": "HIT_TARGET",
-            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
-            "type": "LONG",
-            "context": "TREND_PULLBACK",
-            "stop_loss": 26.93,
-            "target_price": 30.05,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.51
         }
     ]
 }
