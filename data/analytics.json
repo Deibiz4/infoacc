@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-10-28 13:33:02",
+    "last_updated": "2026-10-29 13:44:20",
     "global": {
         "total_signals": 187,
-        "closed_trades": 77,
-        "wins": 18,
-        "losses": 59,
-        "win_rate": 23.4,
-        "total_r": -9.62,
-        "profit_factor": 0.84,
-        "gross_profit_r": 49.38,
-        "gross_loss_r": 59.0,
-        "expectancy_r": -0.125,
+        "closed_trades": 80,
+        "wins": 19,
+        "losses": 61,
+        "win_rate": 23.8,
+        "total_r": -8.12,
+        "profit_factor": 0.87,
+        "gross_profit_r": 52.88,
+        "gross_loss_r": 61.0,
+        "expectancy_r": -0.102,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
             "total": 104,
-            "wins": 12,
-            "losses": 39,
+            "wins": 13,
+            "losses": 41,
             "pending": 9,
-            "active": 11,
+            "active": 8,
             "expired": 33,
-            "win_rate": 23.5,
-            "total_r": -5.82
+            "win_rate": 24.1,
+            "total_r": -4.32
         },
         "Crypto": {
             "total": 34,
@@ -48,25 +48,25 @@
     "by_mode": {
         "baseline": {
             "signals": 103,
-            "closed": 55,
+            "closed": 56,
             "wins": 14,
-            "losses": 41,
-            "win_rate": 25.5,
-            "total_r": -5.89,
-            "expectancy_r": -0.107,
-            "profit_factor": 0.86,
+            "losses": 42,
+            "win_rate": 25.0,
+            "total_r": -6.89,
+            "expectancy_r": -0.123,
+            "profit_factor": 0.84,
             "expired": 28,
             "fill_rate": 64.1
         },
         "stop_hold": {
             "signals": 84,
-            "closed": 22,
-            "wins": 4,
-            "losses": 18,
-            "win_rate": 18.2,
-            "total_r": -3.73,
-            "expectancy_r": -0.17,
-            "profit_factor": 0.79,
+            "closed": 24,
+            "wins": 5,
+            "losses": 19,
+            "win_rate": 20.8,
+            "total_r": -1.23,
+            "expectancy_r": -0.051,
+            "profit_factor": 0.94,
             "expired": 41,
             "fill_rate": 36.9
         }
@@ -445,94 +445,112 @@
             "cumulative_r": -10.64
         },
         {
-            "date": "2026-09-24",
-            "ticker": "USDJPY",
-            "market": "Forex",
+            "date": "2026-09-22",
+            "ticker": "AMZN",
+            "market": "Stocks",
             "cumulative_r": -11.64
         },
         {
-            "date": "2026-09-28",
-            "ticker": "V",
-            "market": "Stocks",
+            "date": "2026-09-24",
+            "ticker": "USDJPY",
+            "market": "Forex",
             "cumulative_r": -12.64
         },
         {
             "date": "2026-09-28",
-            "ticker": "KO",
+            "ticker": "V",
             "market": "Stocks",
             "cumulative_r": -13.64
         },
         {
             "date": "2026-09-28",
+            "ticker": "KO",
+            "market": "Stocks",
+            "cumulative_r": -14.64
+        },
+        {
+            "date": "2026-09-28",
             "ticker": "V",
             "market": "Stocks",
-            "cumulative_r": -10.14
+            "cumulative_r": -11.14
         },
         {
             "date": "2026-09-28",
             "ticker": "KO",
             "market": "Stocks",
-            "cumulative_r": -6.63
+            "cumulative_r": -7.63
         },
         {
             "date": "2026-09-28",
             "ticker": "AUDUSD",
             "market": "Forex",
-            "cumulative_r": -7.63
+            "cumulative_r": -8.63
         },
         {
             "date": "2026-10-02",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -8.63
+            "cumulative_r": -9.63
         },
         {
             "date": "2026-10-07",
             "ticker": "V",
             "market": "Stocks",
-            "cumulative_r": -6.13
+            "cumulative_r": -7.13
         },
         {
             "date": "2026-10-07",
             "ticker": "JNJ",
             "market": "Stocks",
-            "cumulative_r": -7.13
+            "cumulative_r": -8.13
+        },
+        {
+            "date": "2026-10-07",
+            "ticker": "JNJ",
+            "market": "Stocks",
+            "cumulative_r": -4.63
         },
         {
             "date": "2026-10-08",
             "ticker": "PFE",
             "market": "Stocks",
-            "cumulative_r": -4.62
+            "cumulative_r": -2.12
         },
         {
             "date": "2026-10-13",
             "ticker": "NVDA",
             "market": "Stocks",
-            "cumulative_r": -5.62
+            "cumulative_r": -3.12
         },
         {
             "date": "2026-10-13",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -6.62
+            "cumulative_r": -4.12
         },
         {
             "date": "2026-10-14",
             "ticker": "COST",
             "market": "Stocks",
-            "cumulative_r": -7.62
+            "cumulative_r": -5.12
         },
         {
             "date": "2026-10-15",
             "ticker": "GOOGL",
             "market": "Stocks",
-            "cumulative_r": -8.62
+            "cumulative_r": -6.12
         },
         {
             "date": "2026-10-16",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -9.62
+            "cumulative_r": -7.12
+        },
+        {
+            "date": "2026-10-16",
+            "ticker": "MU",
+            "market": "Stocks",
+            "cumulative_r": -8.12
         }
     ],
     "recent_signals": [
@@ -826,7 +844,7 @@
             "date": "2026-10-16",
             "ticker": "MU",
             "entry_price": 931.24,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (28.9) turning up. Risk-Reward 1:2.5 (ATR: $46.99).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
