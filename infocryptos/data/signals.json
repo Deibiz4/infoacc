@@ -456,7 +456,7 @@
         "date": "2026-11-02",
         "ticker": "ETH",
         "entry_price": 2271.1499,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Crypto bullish dip rebound. RSI (33.5) turning up. Risk-Reward 1:2.5 (ATR: $74.49).",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",

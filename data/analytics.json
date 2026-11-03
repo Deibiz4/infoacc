@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-11-02 16:34:17",
+    "last_updated": "2026-11-03 14:40:27",
     "global": {
-        "total_signals": 194,
+        "total_signals": 196,
         "closed_trades": 85,
         "wins": 19,
         "losses": 66,
@@ -15,12 +15,12 @@
     },
     "by_market": {
         "Stocks": {
-            "total": 108,
+            "total": 110,
             "wins": 13,
             "losses": 44,
-            "pending": 10,
-            "active": 7,
-            "expired": 34,
+            "pending": 8,
+            "active": 9,
+            "expired": 36,
             "win_rate": 22.8,
             "total_r": -7.32
         },
@@ -28,8 +28,8 @@
             "total": 37,
             "wins": 2,
             "losses": 1,
-            "pending": 9,
-            "active": 1,
+            "pending": 8,
+            "active": 2,
             "expired": 24,
             "win_rate": 66.7,
             "total_r": 5.2
@@ -47,7 +47,7 @@
     },
     "by_mode": {
         "baseline": {
-            "signals": 107,
+            "signals": 108,
             "closed": 59,
             "wins": 14,
             "losses": 45,
@@ -56,10 +56,10 @@
             "expectancy_r": -0.168,
             "profit_factor": 0.78,
             "expired": 30,
-            "fill_rate": 62.6
+            "fill_rate": 63.9
         },
         "stop_hold": {
-            "signals": 87,
+            "signals": 88,
             "closed": 26,
             "wins": 5,
             "losses": 21,
@@ -67,8 +67,8 @@
             "total_r": -3.23,
             "expectancy_r": -0.124,
             "profit_factor": 0.85,
-            "expired": 42,
-            "fill_rate": 39.1
+            "expired": 44,
+            "fill_rate": 39.8
         }
     },
     "equity_curve": [
@@ -585,11 +585,41 @@
     ],
     "recent_signals": [
         {
+            "id": "20261103_PEP",
+            "date": "2026-11-03",
+            "ticker": "PEP",
+            "entry_price": 138.63,
+            "status": "PENDING",
+            "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (67.3) turning down. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 143.43,
+            "target_price": 126.64,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20261103_MCD_SH",
+            "date": "2026-11-03",
+            "ticker": "MCD",
+            "entry_price": 268.82,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (268.82), original target held. Risk-Reward 1:3.5. Paired with 20261103_MCD.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 276.56,
+            "target_price": 241.73,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.5
+        },
+        {
             "id": "20261102_NVDA",
             "date": "2026-11-02",
             "ticker": "NVDA",
             "entry_price": 207.11,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (31.3) turning up. Risk-Reward 1:2.5 (ATR: $6.52).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -634,7 +664,7 @@
             "date": "2026-11-02",
             "ticker": "PLTR",
             "entry_price": 170.8,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (170.80), original target held. Risk-Reward 1:3.5. Paired with 20261102_PLTR.",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -649,7 +679,7 @@
             "date": "2026-11-02",
             "ticker": "ETH",
             "entry_price": 2271.1499,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Crypto bullish dip rebound. RSI (33.5) turning up. Risk-Reward 1:2.5 (ATR: $74.49).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -904,7 +934,7 @@
             "date": "2026-10-19",
             "ticker": "TXN",
             "entry_price": 261.92,
-            "status": "PENDING",
+            "status": "EXPIRED",
             "notes": "Pullback entry at the baseline stop (261.92), original target held. Risk-Reward 1:3.5. Paired with 20261019_TXN.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -919,7 +949,7 @@
             "date": "2026-10-19",
             "ticker": "SMCI",
             "entry_price": 29.0,
-            "status": "PENDING",
+            "status": "EXPIRED",
             "notes": "Pullback entry at the baseline stop (29.00), original target held. Risk-Reward 1:3.5. Paired with 20261019_SMCI.",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -1002,36 +1032,6 @@
             "target_price": 307.56,
             "mode": "baseline",
             "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20261016_MU_SH",
-            "date": "2026-10-16",
-            "ticker": "MU",
-            "entry_price": 860.75,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (860.75), original target held. Risk-Reward 1:3.5. Paired with 20261016_MU.",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 790.26,
-            "target_price": 1107.47,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20261016_XRP-USD",
-            "date": "2026-10-16",
-            "ticker": "XRP",
-            "entry_price": 1.3453,
-            "status": "EXPIRED",
-            "notes": "Crypto bullish dip rebound. RSI (30.1) turning up. Risk-Reward 1:2.5 (ATR: $0.04896).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 1.2572,
-            "target_price": 1.5656,
-            "mode": "baseline",
-            "market": "Crypto",
             "rr_ratio": 2.5
         }
     ]
