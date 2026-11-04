@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-11-03 14:40:27",
+    "last_updated": "2026-11-04 14:53:04",
     "global": {
-        "total_signals": 196,
-        "closed_trades": 85,
-        "wins": 19,
-        "losses": 66,
-        "win_rate": 22.4,
-        "total_r": -13.12,
-        "profit_factor": 0.8,
-        "gross_profit_r": 52.88,
-        "gross_loss_r": 66.0,
-        "expectancy_r": -0.154,
+        "total_signals": 199,
+        "closed_trades": 88,
+        "wins": 20,
+        "losses": 68,
+        "win_rate": 22.7,
+        "total_r": -12.62,
+        "profit_factor": 0.81,
+        "gross_profit_r": 55.38,
+        "gross_loss_r": 68.0,
+        "expectancy_r": -0.143,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 110,
-            "wins": 13,
+            "total": 113,
+            "wins": 14,
             "losses": 44,
-            "pending": 8,
+            "pending": 10,
             "active": 9,
             "expired": 36,
-            "win_rate": 22.8,
-            "total_r": -7.32
+            "win_rate": 24.1,
+            "total_r": -4.82
         },
         "Crypto": {
             "total": 37,
@@ -37,38 +37,38 @@
         "Forex": {
             "total": 49,
             "wins": 4,
-            "losses": 21,
+            "losses": 23,
             "pending": 2,
-            "active": 8,
+            "active": 6,
             "expired": 14,
-            "win_rate": 16.0,
-            "total_r": -11.0
+            "win_rate": 14.8,
+            "total_r": -13.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 108,
-            "closed": 59,
-            "wins": 14,
-            "losses": 45,
-            "win_rate": 23.7,
-            "total_r": -9.89,
-            "expectancy_r": -0.168,
-            "profit_factor": 0.78,
+            "signals": 109,
+            "closed": 61,
+            "wins": 15,
+            "losses": 46,
+            "win_rate": 24.6,
+            "total_r": -8.39,
+            "expectancy_r": -0.138,
+            "profit_factor": 0.82,
             "expired": 30,
-            "fill_rate": 63.9
+            "fill_rate": 63.3
         },
         "stop_hold": {
-            "signals": 88,
-            "closed": 26,
+            "signals": 90,
+            "closed": 27,
             "wins": 5,
-            "losses": 21,
-            "win_rate": 19.2,
-            "total_r": -3.23,
-            "expectancy_r": -0.124,
-            "profit_factor": 0.85,
+            "losses": 22,
+            "win_rate": 18.5,
+            "total_r": -4.23,
+            "expectancy_r": -0.157,
+            "profit_factor": 0.81,
             "expired": 44,
-            "fill_rate": 39.8
+            "fill_rate": 40.0
         }
     },
     "equity_curve": [
@@ -361,146 +361,146 @@
             "cumulative_r": -8.3
         },
         {
+            "date": "2026-09-03",
+            "ticker": "GBPJPY",
+            "market": "Forex",
+            "cumulative_r": -9.3
+        },
+        {
             "date": "2026-09-04",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": -9.3
+            "cumulative_r": -10.3
         },
         {
             "date": "2026-09-04",
             "ticker": "MARA",
             "market": "Stocks",
-            "cumulative_r": -10.3
+            "cumulative_r": -11.3
         },
         {
             "date": "2026-09-07",
             "ticker": "TSLA",
             "market": "Stocks",
-            "cumulative_r": -11.3
+            "cumulative_r": -12.3
         },
         {
             "date": "2026-09-09",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -7.64
+            "cumulative_r": -8.64
         },
         {
             "date": "2026-09-10",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -8.64
+            "cumulative_r": -9.64
         },
         {
             "date": "2026-09-11",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -9.64
+            "cumulative_r": -10.64
         },
         {
             "date": "2026-09-14",
             "ticker": "AMZN",
             "market": "Stocks",
-            "cumulative_r": -10.64
+            "cumulative_r": -11.64
         },
         {
             "date": "2026-09-16",
             "ticker": "JPM",
             "market": "Stocks",
-            "cumulative_r": -11.64
+            "cumulative_r": -12.64
         },
         {
             "date": "2026-09-16",
             "ticker": "LLY",
             "market": "Stocks",
-            "cumulative_r": -9.14
+            "cumulative_r": -10.14
         },
         {
             "date": "2026-09-16",
             "ticker": "EURUSD",
             "market": "Forex",
-            "cumulative_r": -10.14
+            "cumulative_r": -11.14
         },
         {
             "date": "2026-09-16",
             "ticker": "GBPUSD",
             "market": "Forex",
-            "cumulative_r": -11.14
+            "cumulative_r": -12.14
         },
         {
             "date": "2026-09-18",
             "ticker": "EURGBP",
             "market": "Forex",
-            "cumulative_r": -12.14
+            "cumulative_r": -13.14
         },
         {
             "date": "2026-09-22",
             "ticker": "PG",
             "market": "Stocks",
-            "cumulative_r": -9.64
+            "cumulative_r": -10.64
         },
         {
             "date": "2026-09-22",
             "ticker": "MA",
             "market": "Stocks",
-            "cumulative_r": -10.64
+            "cumulative_r": -11.64
         },
         {
             "date": "2026-09-22",
             "ticker": "AMZN",
             "market": "Stocks",
-            "cumulative_r": -11.64
+            "cumulative_r": -12.64
         },
         {
             "date": "2026-09-24",
             "ticker": "USDJPY",
             "market": "Forex",
-            "cumulative_r": -12.64
-        },
-        {
-            "date": "2026-09-28",
-            "ticker": "V",
-            "market": "Stocks",
             "cumulative_r": -13.64
         },
         {
             "date": "2026-09-28",
-            "ticker": "KO",
+            "ticker": "V",
             "market": "Stocks",
             "cumulative_r": -14.64
         },
         {
             "date": "2026-09-28",
+            "ticker": "KO",
+            "market": "Stocks",
+            "cumulative_r": -15.64
+        },
+        {
+            "date": "2026-09-28",
             "ticker": "V",
             "market": "Stocks",
-            "cumulative_r": -11.14
+            "cumulative_r": -12.14
         },
         {
             "date": "2026-09-28",
             "ticker": "KO",
             "market": "Stocks",
-            "cumulative_r": -7.63
+            "cumulative_r": -8.63
         },
         {
             "date": "2026-09-28",
             "ticker": "AUDUSD",
             "market": "Forex",
-            "cumulative_r": -8.63
+            "cumulative_r": -9.63
         },
         {
             "date": "2026-10-02",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -9.63
+            "cumulative_r": -10.63
         },
         {
             "date": "2026-10-07",
             "ticker": "V",
-            "market": "Stocks",
-            "cumulative_r": -7.13
-        },
-        {
-            "date": "2026-10-07",
-            "ticker": "JNJ",
             "market": "Stocks",
             "cumulative_r": -8.13
         },
@@ -508,24 +508,24 @@
             "date": "2026-10-07",
             "ticker": "JNJ",
             "market": "Stocks",
-            "cumulative_r": -4.63
+            "cumulative_r": -9.13
+        },
+        {
+            "date": "2026-10-07",
+            "ticker": "JNJ",
+            "market": "Stocks",
+            "cumulative_r": -5.63
         },
         {
             "date": "2026-10-08",
             "ticker": "PFE",
             "market": "Stocks",
-            "cumulative_r": -2.12
-        },
-        {
-            "date": "2026-10-13",
-            "ticker": "NVDA",
-            "market": "Stocks",
             "cumulative_r": -3.12
         },
         {
-            "date": "2026-10-13",
-            "ticker": "INTC",
-            "market": "Stocks",
+            "date": "2026-10-09",
+            "ticker": "GBPJPY",
+            "market": "Forex",
             "cumulative_r": -4.12
         },
         {
@@ -541,49 +541,112 @@
             "cumulative_r": -6.12
         },
         {
+            "date": "2026-10-13",
+            "ticker": "NVDA",
+            "market": "Stocks",
+            "cumulative_r": -7.12
+        },
+        {
+            "date": "2026-10-13",
+            "ticker": "INTC",
+            "market": "Stocks",
+            "cumulative_r": -8.12
+        },
+        {
             "date": "2026-10-14",
             "ticker": "COST",
             "market": "Stocks",
-            "cumulative_r": -7.12
+            "cumulative_r": -9.12
         },
         {
             "date": "2026-10-15",
             "ticker": "GOOGL",
             "market": "Stocks",
-            "cumulative_r": -8.12
+            "cumulative_r": -10.12
         },
         {
             "date": "2026-10-16",
             "ticker": "INTC",
             "market": "Stocks",
-            "cumulative_r": -9.12
+            "cumulative_r": -11.12
         },
         {
             "date": "2026-10-16",
             "ticker": "MU",
             "market": "Stocks",
-            "cumulative_r": -10.12
+            "cumulative_r": -12.12
+        },
+        {
+            "date": "2026-10-19",
+            "ticker": "TXN",
+            "market": "Stocks",
+            "cumulative_r": -9.62
         },
         {
             "date": "2026-10-19",
             "ticker": "LINK",
             "market": "Crypto",
-            "cumulative_r": -11.12
+            "cumulative_r": -10.62
         },
         {
             "date": "2026-10-23",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -12.12
+            "cumulative_r": -11.62
         },
         {
             "date": "2026-10-28",
             "ticker": "SMCI",
             "market": "Stocks",
-            "cumulative_r": -13.12
+            "cumulative_r": -12.62
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261104_SOFI",
+            "date": "2026-11-04",
+            "ticker": "SOFI",
+            "entry_price": 17.59,
+            "status": "PENDING",
+            "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (67.9) turning down. Risk-Reward 1:2.5.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 18.85,
+            "target_price": 14.45,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.49
+        },
+        {
+            "id": "20261104_DE_SH",
+            "date": "2026-11-04",
+            "ticker": "DE",
+            "entry_price": 641.08,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (641.08), original target held. Risk-Reward 1:3.5. Paired with 20261104_DE.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 616.45,
+            "target_price": 727.28,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.5
+        },
+        {
+            "id": "20261104_SOFI_SH",
+            "date": "2026-11-04",
+            "ticker": "SOFI",
+            "entry_price": 18.85,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (18.85), original target held. Risk-Reward 1:3.5. Paired with 20261104_SOFI.",
+            "type": "SHORT",
+            "context": "OVERBOUGHT_REJECTION",
+            "stop_loss": 20.11,
+            "target_price": 14.45,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.49
+        },
         {
             "id": "20261103_PEP",
             "date": "2026-11-03",
@@ -604,7 +667,7 @@
             "date": "2026-11-03",
             "ticker": "MCD",
             "entry_price": 268.82,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (268.82), original target held. Risk-Reward 1:3.5. Paired with 20261103_MCD.",
             "type": "SHORT",
             "context": "OVERBOUGHT_REJECTION",
@@ -919,7 +982,7 @@
             "date": "2026-10-19",
             "ticker": "TXN",
             "entry_price": 276.83,
-            "status": "ACTIVE",
+            "status": "HIT_TARGET",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -988,51 +1051,6 @@
             "mode": "stop_hold",
             "market": "Crypto",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20261016_INTC",
-            "date": "2026-10-16",
-            "ticker": "INTC",
-            "entry_price": 95.37,
-            "status": "HIT_STOP",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (15.8) turning up. Risk-Reward 1:2.5 (ATR: $5.58).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 87.01,
-            "target_price": 116.28,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20261016_MU",
-            "date": "2026-10-16",
-            "ticker": "MU",
-            "entry_price": 931.24,
-            "status": "HIT_STOP",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (28.9) turning up. Risk-Reward 1:2.5 (ATR: $46.99).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 860.75,
-            "target_price": 1107.47,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20261016_ARM",
-            "date": "2026-10-16",
-            "ticker": "ARM",
-            "entry_price": 244.79,
-            "status": "EXPIRED",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (25.9) turning up. Risk-Reward 1:2.5 (ATR: $16.74).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 219.68,
-            "target_price": 307.56,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
         }
     ]
 }
