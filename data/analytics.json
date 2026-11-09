@@ -1,62 +1,62 @@
 {
-    "last_updated": "2026-11-06 14:37:34",
+    "last_updated": "2026-11-09 16:52:21",
     "global": {
-        "total_signals": 212,
-        "closed_trades": 94,
+        "total_signals": 214,
+        "closed_trades": 96,
         "wins": 20,
-        "losses": 74,
-        "win_rate": 21.3,
-        "total_r": -18.62,
-        "profit_factor": 0.75,
+        "losses": 76,
+        "win_rate": 20.8,
+        "total_r": -20.62,
+        "profit_factor": 0.73,
         "gross_profit_r": 55.38,
-        "gross_loss_r": 74.0,
-        "expectancy_r": -0.198,
+        "gross_loss_r": 76.0,
+        "expectancy_r": -0.215,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 121,
+            "total": 122,
             "wins": 14,
-            "losses": 49,
+            "losses": 50,
             "pending": 15,
             "active": 5,
             "expired": 38,
-            "win_rate": 22.2,
-            "total_r": -9.82
+            "win_rate": 21.9,
+            "total_r": -10.82
         },
         "Crypto": {
-            "total": 37,
+            "total": 38,
             "wins": 2,
-            "losses": 1,
+            "losses": 2,
             "pending": 8,
             "active": 2,
             "expired": 24,
-            "win_rate": 66.7,
-            "total_r": 5.2
+            "win_rate": 50.0,
+            "total_r": 4.2
         },
         "Forex": {
             "total": 54,
             "wins": 4,
             "losses": 24,
-            "pending": 7,
-            "active": 5,
-            "expired": 14,
+            "pending": 4,
+            "active": 7,
+            "expired": 15,
             "win_rate": 14.3,
             "total_r": -14.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 115,
-            "closed": 62,
+            "signals": 117,
+            "closed": 64,
             "wins": 15,
-            "losses": 47,
-            "win_rate": 24.2,
-            "total_r": -9.39,
-            "expectancy_r": -0.151,
-            "profit_factor": 0.8,
+            "losses": 49,
+            "win_rate": 23.4,
+            "total_r": -11.39,
+            "expectancy_r": -0.178,
+            "profit_factor": 0.77,
             "expired": 32,
-            "fill_rate": 60.9
+            "fill_rate": 60.7
         },
         "stop_hold": {
             "signals": 97,
@@ -67,8 +67,8 @@
             "total_r": -9.23,
             "expectancy_r": -0.288,
             "profit_factor": 0.66,
-            "expired": 44,
-            "fill_rate": 37.1
+            "expired": 45,
+            "fill_rate": 40.2
         }
     },
     "equity_curve": [
@@ -631,13 +631,55 @@
             "cumulative_r": -17.62
         },
         {
+            "date": "2026-11-02",
+            "ticker": "ETH",
+            "market": "Crypto",
+            "cumulative_r": -18.62
+        },
+        {
+            "date": "2026-11-03",
+            "ticker": "PEP",
+            "market": "Stocks",
+            "cumulative_r": -19.62
+        },
+        {
             "date": "2026-11-03",
             "ticker": "MCD",
             "market": "Stocks",
-            "cumulative_r": -18.62
+            "cumulative_r": -20.62
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261109_JPM",
+            "date": "2026-11-09",
+            "ticker": "JPM",
+            "entry_price": 341.62,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 330.52,
+            "target_price": 369.37,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20261109_BTC-USD",
+            "date": "2026-11-09",
+            "ticker": "BTC",
+            "entry_price": 74901.4922,
+            "status": "PENDING",
+            "notes": "Crypto bullish dip rebound. RSI (35.7) turning up. Risk-Reward 1:2.5 (ATR: $2335).",
+            "type": "LONG",
+            "context": "VALUE_OVERSOLD",
+            "stop_loss": 70699.349,
+            "target_price": 85406.8502,
+            "mode": "baseline",
+            "market": "Crypto",
+            "rr_ratio": 2.5
+        },
         {
             "id": "20261106_AAPL",
             "date": "2026-11-06",
@@ -703,7 +745,7 @@
             "date": "2026-11-06",
             "ticker": "MCD",
             "entry_price": 280.12,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (280.12), original target held. Risk-Reward 1:3.5. Paired with 20261106_MCD.",
             "type": "SHORT",
             "context": "OVERBOUGHT_REJECTION",
@@ -748,7 +790,7 @@
             "date": "2026-11-06",
             "ticker": "EURJPY",
             "entry_price": 176.508,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -763,7 +805,7 @@
             "date": "2026-11-06",
             "ticker": "NZDUSD",
             "entry_price": 0.56083,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (0.56083), original target held. Paired with 20261106_NZDUSD.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -883,7 +925,7 @@
             "date": "2026-11-03",
             "ticker": "PEP",
             "entry_price": 138.63,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (67.3) turning down. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "OVERBOUGHT_REJECTION",
@@ -973,7 +1015,7 @@
             "date": "2026-11-02",
             "ticker": "ETH",
             "entry_price": 2271.1499,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Crypto bullish dip rebound. RSI (33.5) turning up. Risk-Reward 1:2.5 (ATR: $74.49).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -988,7 +1030,7 @@
             "date": "2026-11-02",
             "ticker": "ETH",
             "entry_price": 2137.0619,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Pullback entry at the baseline stop (2137), original target held. Paired with 20261102_ETH-USD.",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -1057,36 +1099,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20261027_PEP_SH",
-            "date": "2026-10-27",
-            "ticker": "PEP",
-            "entry_price": 140.32,
-            "status": "HIT_STOP",
-            "notes": "Pullback entry at the baseline stop (140.32), original target held. Risk-Reward 1:3.5. Paired with 20261027_PEP.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 145.18,
-            "target_price": 123.32,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20261026_USDCAD",
-            "date": "2026-10-26",
-            "ticker": "USDCAD",
-            "entry_price": 1.40352,
-            "status": "ACTIVE",
-            "notes": "Forex bullish dip bounce. RSI (27.1) turning up. Risk-Reward 1:2.5 (ATR: 0.00750).",
-            "type": "LONG",
-            "context": "OVERSOLD_BOUNCE",
-            "stop_loss": 1.39227,
-            "target_price": 1.43166,
-            "mode": "baseline",
-            "market": "Forex",
-            "rr_ratio": 2.5
         }
     ]
 }
