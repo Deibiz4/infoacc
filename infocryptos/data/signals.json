@@ -482,7 +482,7 @@
         "date": "2026-11-09",
         "ticker": "BTC",
         "entry_price": 74901.4922,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Crypto bullish dip rebound. RSI (35.7) turning up. Risk-Reward 1:2.5 (ATR: $2335).",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
