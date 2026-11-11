@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-11-10 15:14:38",
+    "last_updated": "2026-11-11 14:43:34",
     "global": {
-        "total_signals": 215,
+        "total_signals": 216,
         "closed_trades": 96,
         "wins": 20,
         "losses": 76,
@@ -18,8 +18,8 @@
             "total": 122,
             "wins": 14,
             "losses": 50,
-            "pending": 15,
-            "active": 5,
+            "pending": 14,
+            "active": 6,
             "expired": 38,
             "win_rate": 21.9,
             "total_r": -10.82
@@ -35,10 +35,10 @@
             "total_r": 4.2
         },
         "Forex": {
-            "total": 55,
+            "total": 56,
             "wins": 4,
             "losses": 24,
-            "pending": 4,
+            "pending": 5,
             "active": 7,
             "expired": 16,
             "win_rate": 14.3,
@@ -56,10 +56,10 @@
             "expectancy_r": -0.178,
             "profit_factor": 0.77,
             "expired": 32,
-            "fill_rate": 61.5
+            "fill_rate": 62.4
         },
         "stop_hold": {
-            "signals": 98,
+            "signals": 99,
             "closed": 32,
             "wins": 5,
             "losses": 27,
@@ -68,7 +68,7 @@
             "expectancy_r": -0.288,
             "profit_factor": 0.66,
             "expired": 46,
-            "fill_rate": 39.8
+            "fill_rate": 39.4
         }
     },
     "equity_curve": [
@@ -651,6 +651,21 @@
     ],
     "recent_signals": [
         {
+            "id": "20261111_GBPUSD_SH",
+            "date": "2026-11-11",
+            "ticker": "GBPUSD",
+            "entry_price": 1.33995,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (1.33995), original target held. Paired with 20261111_GBPUSD.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 1.35262,
+            "target_price": 1.2956,
+            "mode": "stop_hold",
+            "market": "Forex",
+            "rr_ratio": 3.5
+        },
+        {
             "id": "20261110_USDCAD_SH",
             "date": "2026-11-10",
             "ticker": "USDCAD",
@@ -670,7 +685,7 @@
             "date": "2026-11-09",
             "ticker": "JPM",
             "entry_price": 341.62,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -1081,21 +1096,6 @@
             "context": "VALUE_OVERSOLD",
             "stop_loss": 31.85,
             "target_price": 44.83,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20261028_MCD",
-            "date": "2026-10-28",
-            "ticker": "MCD",
-            "entry_price": 249.8,
-            "status": "PENDING",
-            "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (72.7) turning down. Risk-Reward 1:2.5.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 256.11,
-            "target_price": 234.03,
             "mode": "baseline",
             "market": "Stocks",
             "rr_ratio": 2.5

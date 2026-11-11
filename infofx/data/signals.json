@@ -707,5 +707,18 @@
         "stop_loss": 1.39772,
         "target_price": 1.44128,
         "mode": "stop_hold"
+    },
+    {
+        "id": "20261111_GBPUSD_SH",
+        "date": "2026-11-11",
+        "ticker": "GBPUSD",
+        "entry_price": 1.33995,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (1.33995), original target held. Paired with 20261111_GBPUSD.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 1.35262,
+        "target_price": 1.2956,
+        "mode": "stop_hold"
     }
 ]
