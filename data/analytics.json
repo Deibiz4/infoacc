@@ -1,16 +1,16 @@
 {
-    "last_updated": "2026-11-12 15:36:57",
+    "last_updated": "2026-11-13 14:55:32",
     "global": {
-        "total_signals": 219,
-        "closed_trades": 97,
+        "total_signals": 221,
+        "closed_trades": 100,
         "wins": 20,
-        "losses": 77,
-        "win_rate": 20.6,
-        "total_r": -21.62,
-        "profit_factor": 0.72,
+        "losses": 80,
+        "win_rate": 20.0,
+        "total_r": -24.62,
+        "profit_factor": 0.69,
         "gross_profit_r": 55.38,
-        "gross_loss_r": 77.0,
-        "expectancy_r": -0.223,
+        "gross_loss_r": 80.0,
+        "expectancy_r": -0.246,
         "invalid_signals": 0
     },
     "by_market": {
@@ -18,57 +18,57 @@
             "total": 124,
             "wins": 14,
             "losses": 50,
-            "pending": 14,
-            "active": 6,
+            "pending": 13,
+            "active": 7,
             "expired": 40,
             "win_rate": 21.9,
             "total_r": -10.82
         },
         "Crypto": {
-            "total": 39,
+            "total": 41,
             "wins": 2,
-            "losses": 3,
-            "pending": 8,
-            "active": 2,
+            "losses": 5,
+            "pending": 10,
+            "active": 0,
             "expired": 24,
-            "win_rate": 40.0,
-            "total_r": 3.2
+            "win_rate": 28.6,
+            "total_r": 1.2
         },
         "Forex": {
             "total": 56,
             "wins": 4,
-            "losses": 24,
-            "pending": 5,
+            "losses": 25,
+            "pending": 4,
             "active": 7,
             "expired": 16,
-            "win_rate": 14.3,
-            "total_r": -14.0
+            "win_rate": 13.8,
+            "total_r": -15.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 118,
-            "closed": 64,
+            "signals": 119,
+            "closed": 66,
             "wins": 15,
-            "losses": 49,
-            "win_rate": 23.4,
-            "total_r": -11.39,
-            "expectancy_r": -0.178,
-            "profit_factor": 0.77,
+            "losses": 51,
+            "win_rate": 22.7,
+            "total_r": -13.39,
+            "expectancy_r": -0.203,
+            "profit_factor": 0.74,
             "expired": 33,
-            "fill_rate": 61.9
+            "fill_rate": 63.0
         },
         "stop_hold": {
-            "signals": 101,
-            "closed": 33,
+            "signals": 102,
+            "closed": 34,
             "wins": 5,
-            "losses": 28,
-            "win_rate": 15.2,
-            "total_r": -10.23,
-            "expectancy_r": -0.31,
-            "profit_factor": 0.63,
+            "losses": 29,
+            "win_rate": 14.7,
+            "total_r": -11.23,
+            "expectancy_r": -0.33,
+            "profit_factor": 0.61,
             "expired": 47,
-            "fill_rate": 38.6
+            "fill_rate": 38.2
         }
     },
     "equity_curve": [
@@ -499,20 +499,20 @@
             "cumulative_r": -10.63
         },
         {
+            "date": "2026-10-01",
+            "ticker": "USDJPY",
+            "market": "Forex",
+            "cumulative_r": -11.63
+        },
+        {
             "date": "2026-10-02",
             "ticker": "CAT",
             "market": "Stocks",
-            "cumulative_r": -11.63
+            "cumulative_r": -12.63
         },
         {
             "date": "2026-10-07",
             "ticker": "V",
-            "market": "Stocks",
-            "cumulative_r": -9.13
-        },
-        {
-            "date": "2026-10-07",
-            "ticker": "JNJ",
             "market": "Stocks",
             "cumulative_r": -10.13
         },
@@ -520,65 +520,65 @@
             "date": "2026-10-07",
             "ticker": "JNJ",
             "market": "Stocks",
-            "cumulative_r": -6.63
+            "cumulative_r": -11.13
+        },
+        {
+            "date": "2026-10-07",
+            "ticker": "JNJ",
+            "market": "Stocks",
+            "cumulative_r": -7.63
         },
         {
             "date": "2026-10-08",
             "ticker": "PFE",
             "market": "Stocks",
-            "cumulative_r": -4.12
+            "cumulative_r": -5.12
         },
         {
             "date": "2026-10-09",
             "ticker": "GBPJPY",
             "market": "Forex",
-            "cumulative_r": -5.12
-        },
-        {
-            "date": "2026-10-13",
-            "ticker": "NVDA",
-            "market": "Stocks",
             "cumulative_r": -6.12
         },
         {
             "date": "2026-10-13",
-            "ticker": "INTC",
+            "ticker": "NVDA",
             "market": "Stocks",
             "cumulative_r": -7.12
         },
         {
             "date": "2026-10-13",
-            "ticker": "NVDA",
+            "ticker": "INTC",
             "market": "Stocks",
             "cumulative_r": -8.12
         },
         {
             "date": "2026-10-13",
-            "ticker": "INTC",
+            "ticker": "NVDA",
             "market": "Stocks",
             "cumulative_r": -9.12
+        },
+        {
+            "date": "2026-10-13",
+            "ticker": "INTC",
+            "market": "Stocks",
+            "cumulative_r": -10.12
         },
         {
             "date": "2026-10-14",
             "ticker": "COST",
             "market": "Stocks",
-            "cumulative_r": -10.12
+            "cumulative_r": -11.12
         },
         {
             "date": "2026-10-15",
             "ticker": "GOOGL",
             "market": "Stocks",
-            "cumulative_r": -11.12
-        },
-        {
-            "date": "2026-10-16",
-            "ticker": "INTC",
-            "market": "Stocks",
             "cumulative_r": -12.12
         },
         {
             "date": "2026-10-16",
-            "ticker": "MU",
+            "ticker": "INTC",
             "market": "Stocks",
             "cumulative_r": -13.12
         },
@@ -589,79 +589,127 @@
             "cumulative_r": -14.12
         },
         {
+            "date": "2026-10-16",
+            "ticker": "MU",
+            "market": "Stocks",
+            "cumulative_r": -15.12
+        },
+        {
             "date": "2026-10-19",
             "ticker": "TXN",
             "market": "Stocks",
-            "cumulative_r": -11.62
+            "cumulative_r": -12.62
         },
         {
             "date": "2026-10-19",
             "ticker": "LINK",
             "market": "Crypto",
-            "cumulative_r": -12.62
+            "cumulative_r": -13.62
+        },
+        {
+            "date": "2026-10-19",
+            "ticker": "LINK",
+            "market": "Crypto",
+            "cumulative_r": -14.62
         },
         {
             "date": "2026-10-23",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -13.62
+            "cumulative_r": -15.62
         },
         {
             "date": "2026-10-27",
             "ticker": "PEP",
             "market": "Stocks",
-            "cumulative_r": -14.62
+            "cumulative_r": -16.62
         },
         {
             "date": "2026-10-28",
             "ticker": "SMCI",
             "market": "Stocks",
-            "cumulative_r": -15.62
+            "cumulative_r": -17.62
         },
         {
             "date": "2026-11-02",
             "ticker": "NVDA",
             "market": "Stocks",
-            "cumulative_r": -16.62
+            "cumulative_r": -18.62
         },
         {
             "date": "2026-11-02",
             "ticker": "PLTR",
             "market": "Stocks",
-            "cumulative_r": -17.62
-        },
-        {
-            "date": "2026-11-02",
-            "ticker": "ETH",
-            "market": "Crypto",
-            "cumulative_r": -18.62
-        },
-        {
-            "date": "2026-11-02",
-            "ticker": "ETH",
-            "market": "Crypto",
             "cumulative_r": -19.62
+        },
+        {
+            "date": "2026-11-02",
+            "ticker": "ETH",
+            "market": "Crypto",
+            "cumulative_r": -20.62
+        },
+        {
+            "date": "2026-11-02",
+            "ticker": "ETH",
+            "market": "Crypto",
+            "cumulative_r": -21.62
         },
         {
             "date": "2026-11-03",
             "ticker": "PEP",
             "market": "Stocks",
-            "cumulative_r": -20.62
+            "cumulative_r": -22.62
         },
         {
             "date": "2026-11-03",
             "ticker": "MCD",
             "market": "Stocks",
-            "cumulative_r": -21.62
+            "cumulative_r": -23.62
+        },
+        {
+            "date": "2026-11-09",
+            "ticker": "BTC",
+            "market": "Crypto",
+            "cumulative_r": -24.62
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261113_LINK-USD",
+            "date": "2026-11-13",
+            "ticker": "LINK",
+            "entry_price": 10.047,
+            "status": "PENDING",
+            "notes": "Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 10.9315,
+            "target_price": 7.7473,
+            "mode": "baseline",
+            "market": "Crypto",
+            "rr_ratio": 2.6
+        },
+        {
+            "id": "20261113_LINK-USD_SH",
+            "date": "2026-11-13",
+            "ticker": "LINK",
+            "entry_price": 10.9315,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (10.93), original target held. Paired with 20261113_LINK-USD.",
+            "type": "SHORT",
+            "context": "BREAKDOWN_SHORT",
+            "stop_loss": 11.816,
+            "target_price": 7.7473,
+            "mode": "stop_hold",
+            "market": "Crypto",
+            "rr_ratio": 3.6
+        },
         {
             "id": "20261112_RIOT",
             "date": "2026-11-12",
             "ticker": "RIOT",
             "entry_price": 17.68,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (70.1) turning down. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "OVERBOUGHT_REJECTION",
@@ -751,7 +799,7 @@
             "date": "2026-11-09",
             "ticker": "BTC",
             "entry_price": 74901.4922,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Crypto bullish dip rebound. RSI (35.7) turning up. Risk-Reward 1:2.5 (ATR: $2335).",
             "type": "LONG",
             "context": "VALUE_OVERSOLD",
@@ -856,7 +904,7 @@
             "date": "2026-11-06",
             "ticker": "NZDUSD",
             "entry_price": 0.55402,
-            "status": "PENDING",
+            "status": "ACTIVE",
             "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -1075,36 +1123,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20261102_PLTR_SH",
-            "date": "2026-11-02",
-            "ticker": "PLTR",
-            "entry_price": 170.8,
-            "status": "HIT_STOP",
-            "notes": "Pullback entry at the baseline stop (170.80), original target held. Risk-Reward 1:3.5. Paired with 20261102_PLTR.",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 156.89,
-            "target_price": 219.48,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20261102_ETH-USD",
-            "date": "2026-11-02",
-            "ticker": "ETH",
-            "entry_price": 2271.1499,
-            "status": "HIT_STOP",
-            "notes": "Crypto bullish dip rebound. RSI (33.5) turning up. Risk-Reward 1:2.5 (ATR: $74.49).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 2137.0619,
-            "target_price": 2606.37,
-            "mode": "baseline",
-            "market": "Crypto",
-            "rr_ratio": 2.5
         }
     ]
 }

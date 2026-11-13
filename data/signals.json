@@ -1575,7 +1575,7 @@
         "date": "2026-11-12",
         "ticker": "RIOT",
         "entry_price": 17.68,
-        "status": "PENDING",
+        "status": "ACTIVE",
         "notes": "Bearish mean-reversion short rejection below 200-SMA. RSI Overbought (70.1) turning down. Risk-Reward 1:2.5.",
         "type": "SHORT",
         "context": "OVERBOUGHT_REJECTION",

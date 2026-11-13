@@ -699,7 +699,7 @@
         "date": "2026-10-19",
         "ticker": "LINK",
         "entry_price": 10.8649,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Pullback entry at the baseline stop (10.86), original target held. Paired with 20261019_LINK-USD.",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
@@ -751,7 +751,7 @@
         "date": "2026-11-09",
         "ticker": "BTC",
         "entry_price": 74901.4922,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Crypto bullish dip rebound. RSI (35.7) turning up. Risk-Reward 1:2.5 (ATR: $2335).",
         "type": "LONG",
         "context": "VALUE_OVERSOLD",
@@ -770,6 +770,32 @@
         "context": "VALUE_OVERSOLD",
         "stop_loss": 2.2748,
         "target_price": 4.7292,
+        "mode": "stop_hold"
+    },
+    {
+        "id": "20261113_LINK-USD",
+        "date": "2026-11-13",
+        "ticker": "LINK",
+        "entry_price": 10.047,
+        "status": "PENDING",
+        "notes": "Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 10.9315,
+        "target_price": 7.7473,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261113_LINK-USD_SH",
+        "date": "2026-11-13",
+        "ticker": "LINK",
+        "entry_price": 10.9315,
+        "status": "PENDING",
+        "notes": "Pullback entry at the baseline stop (10.93), original target held. Paired with 20261113_LINK-USD.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 11.816,
+        "target_price": 7.7473,
         "mode": "stop_hold"
     }
 ];
