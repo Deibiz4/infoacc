@@ -661,7 +661,7 @@
         "date": "2026-11-06",
         "ticker": "NZDUSD",
         "entry_price": 0.55402,
-        "status": "ACTIVE",
+        "status": "HIT_STOP",
         "notes": "Forex breakdown below 50-SMA. Risk-Reward 1:2.5.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",
