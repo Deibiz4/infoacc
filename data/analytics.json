@@ -1,28 +1,28 @@
 {
-    "last_updated": "2026-11-16 16:26:29",
+    "last_updated": "2026-11-17 16:29:45",
     "global": {
-        "total_signals": 222,
-        "closed_trades": 101,
-        "wins": 20,
-        "losses": 81,
-        "win_rate": 19.8,
-        "total_r": -25.62,
-        "profit_factor": 0.68,
-        "gross_profit_r": 55.38,
-        "gross_loss_r": 81.0,
-        "expectancy_r": -0.254,
+        "total_signals": 224,
+        "closed_trades": 103,
+        "wins": 21,
+        "losses": 82,
+        "win_rate": 20.4,
+        "total_r": -24.12,
+        "profit_factor": 0.71,
+        "gross_profit_r": 57.88,
+        "gross_loss_r": 82.0,
+        "expectancy_r": -0.234,
         "invalid_signals": 0
     },
     "by_market": {
         "Stocks": {
-            "total": 124,
+            "total": 126,
             "wins": 14,
-            "losses": 50,
+            "losses": 51,
             "pending": 13,
-            "active": 7,
-            "expired": 40,
-            "win_rate": 21.9,
-            "total_r": -10.82
+            "active": 6,
+            "expired": 42,
+            "win_rate": 21.5,
+            "total_r": -11.82
         },
         "Crypto": {
             "total": 42,
@@ -36,30 +36,30 @@
         },
         "Forex": {
             "total": 56,
-            "wins": 4,
+            "wins": 5,
             "losses": 26,
             "pending": 4,
-            "active": 6,
+            "active": 5,
             "expired": 16,
-            "win_rate": 13.3,
-            "total_r": -16.0
+            "win_rate": 16.1,
+            "total_r": -13.5
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 120,
-            "closed": 67,
-            "wins": 15,
-            "losses": 52,
-            "win_rate": 22.4,
-            "total_r": -14.39,
-            "expectancy_r": -0.215,
-            "profit_factor": 0.72,
-            "expired": 34,
-            "fill_rate": 62.5
+            "signals": 121,
+            "closed": 69,
+            "wins": 16,
+            "losses": 53,
+            "win_rate": 23.2,
+            "total_r": -12.89,
+            "expectancy_r": -0.187,
+            "profit_factor": 0.76,
+            "expired": 35,
+            "fill_rate": 62.0
         },
         "stop_hold": {
-            "signals": 102,
+            "signals": 103,
             "closed": 34,
             "wins": 5,
             "losses": 29,
@@ -67,8 +67,8 @@
             "total_r": -11.23,
             "expectancy_r": -0.33,
             "profit_factor": 0.61,
-            "expired": 47,
-            "fill_rate": 38.2
+            "expired": 48,
+            "fill_rate": 37.9
         }
     },
     "equity_curve": [
@@ -614,72 +614,114 @@
         },
         {
             "date": "2026-10-23",
+            "ticker": "EURUSD",
+            "market": "Forex",
+            "cumulative_r": -12.12
+        },
+        {
+            "date": "2026-10-23",
             "ticker": "EURJPY",
             "market": "Forex",
-            "cumulative_r": -15.62
+            "cumulative_r": -13.12
         },
         {
             "date": "2026-10-27",
             "ticker": "PEP",
             "market": "Stocks",
-            "cumulative_r": -16.62
+            "cumulative_r": -14.12
         },
         {
             "date": "2026-10-28",
             "ticker": "SMCI",
             "market": "Stocks",
-            "cumulative_r": -17.62
+            "cumulative_r": -15.12
         },
         {
             "date": "2026-11-02",
             "ticker": "NVDA",
             "market": "Stocks",
-            "cumulative_r": -18.62
+            "cumulative_r": -16.12
         },
         {
             "date": "2026-11-02",
             "ticker": "PLTR",
             "market": "Stocks",
-            "cumulative_r": -19.62
+            "cumulative_r": -17.12
         },
         {
             "date": "2026-11-02",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": -20.62
+            "cumulative_r": -18.12
         },
         {
             "date": "2026-11-02",
             "ticker": "ETH",
             "market": "Crypto",
-            "cumulative_r": -21.62
+            "cumulative_r": -19.12
         },
         {
             "date": "2026-11-03",
             "ticker": "PEP",
             "market": "Stocks",
-            "cumulative_r": -22.62
+            "cumulative_r": -20.12
         },
         {
             "date": "2026-11-03",
             "ticker": "MCD",
             "market": "Stocks",
-            "cumulative_r": -23.62
+            "cumulative_r": -21.12
         },
         {
             "date": "2026-11-06",
             "ticker": "NZDUSD",
             "market": "Forex",
-            "cumulative_r": -24.62
+            "cumulative_r": -22.12
+        },
+        {
+            "date": "2026-11-09",
+            "ticker": "JPM",
+            "market": "Stocks",
+            "cumulative_r": -23.12
         },
         {
             "date": "2026-11-09",
             "ticker": "BTC",
             "market": "Crypto",
-            "cumulative_r": -25.62
+            "cumulative_r": -24.12
         }
     ],
     "recent_signals": [
+        {
+            "id": "20261117_AMZN",
+            "date": "2026-11-17",
+            "ticker": "AMZN",
+            "entry_price": 255.55,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 239.85,
+            "target_price": 294.79,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
+            "id": "20261117_AMZN_SH",
+            "date": "2026-11-17",
+            "ticker": "AMZN",
+            "entry_price": 239.85,
+            "status": "PENDING",
+            "notes": "Pullback entry at the baseline stop (239.85), original target held. Risk-Reward 1:3.5. Paired with 20261117_AMZN.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 224.15,
+            "target_price": 294.79,
+            "mode": "stop_hold",
+            "market": "Stocks",
+            "rr_ratio": 3.5
+        },
         {
             "id": "20261116_NEAR-USD",
             "date": "2026-11-16",
@@ -805,7 +847,7 @@
             "date": "2026-11-09",
             "ticker": "JPM",
             "entry_price": 341.62,
-            "status": "ACTIVE",
+            "status": "HIT_STOP",
             "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
             "type": "LONG",
             "context": "TREND_PULLBACK",
@@ -1099,36 +1141,6 @@
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
-        },
-        {
-            "id": "20261102_NVDA",
-            "date": "2026-11-02",
-            "ticker": "NVDA",
-            "entry_price": 207.11,
-            "status": "HIT_STOP",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (31.3) turning up. Risk-Reward 1:2.5 (ATR: $6.52).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 197.32,
-            "target_price": 231.57,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
-        },
-        {
-            "id": "20261102_PLTR",
-            "date": "2026-11-02",
-            "ticker": "PLTR",
-            "entry_price": 184.71,
-            "status": "PENDING",
-            "notes": "Bullish trend value rebound above 200-SMA. RSI Oversold (31.6) turning up. Risk-Reward 1:2.5 (ATR: $9.27).",
-            "type": "LONG",
-            "context": "VALUE_OVERSOLD",
-            "stop_loss": 170.8,
-            "target_price": 219.48,
-            "mode": "baseline",
-            "market": "Stocks",
-            "rr_ratio": 2.5
         }
     ]
 }
