@@ -508,7 +508,7 @@
         "date": "2026-11-13",
         "ticker": "LINK",
         "entry_price": 10.047,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",
@@ -521,7 +521,7 @@
         "date": "2026-11-13",
         "ticker": "LINK",
         "entry_price": 10.9315,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Pullback entry at the baseline stop (10.93), original target held. Paired with 20261113_LINK-USD.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",
@@ -540,6 +540,19 @@
         "context": "VALUE_OVERSOLD",
         "stop_loss": 2.6422,
         "target_price": 4.4721,
+        "mode": "baseline"
+    },
+    {
+        "id": "20261124_SHIB-USD",
+        "date": "2026-11-24",
+        "ticker": "SHIB",
+        "entry_price": 0.0,
+        "status": "PENDING",
+        "notes": "Bearish momentum breakdown below 50-SMA. Risk-Reward 1:2.6.",
+        "type": "SHORT",
+        "context": "BREAKDOWN_SHORT",
+        "stop_loss": 0.0,
+        "target_price": 0.0,
         "mode": "baseline"
     }
 ]
