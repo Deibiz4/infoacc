@@ -713,7 +713,7 @@
         "date": "2026-11-11",
         "ticker": "GBPUSD",
         "entry_price": 1.33995,
-        "status": "PENDING",
+        "status": "EXPIRED",
         "notes": "Pullback entry at the baseline stop (1.33995), original target held. Paired with 20261111_GBPUSD.",
         "type": "SHORT",
         "context": "BREAKDOWN_SHORT",

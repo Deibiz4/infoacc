@@ -1,7 +1,7 @@
 {
-    "last_updated": "2026-11-25 17:38:27",
+    "last_updated": "2026-11-26 17:20:04",
     "global": {
-        "total_signals": 237,
+        "total_signals": 238,
         "closed_trades": 110,
         "wins": 22,
         "losses": 88,
@@ -15,10 +15,10 @@
     },
     "by_market": {
         "Stocks": {
-            "total": 138,
+            "total": 139,
             "wins": 14,
             "losses": 57,
-            "pending": 7,
+            "pending": 8,
             "active": 11,
             "expired": 49,
             "win_rate": 19.7,
@@ -38,16 +38,16 @@
             "total": 56,
             "wins": 6,
             "losses": 26,
-            "pending": 1,
+            "pending": 0,
             "active": 4,
-            "expired": 19,
+            "expired": 20,
             "win_rate": 18.8,
             "total_r": -11.0
         }
     },
     "by_mode": {
         "baseline": {
-            "signals": 128,
+            "signals": 129,
             "closed": 74,
             "wins": 17,
             "losses": 57,
@@ -56,7 +56,7 @@
             "expectancy_r": -0.194,
             "profit_factor": 0.75,
             "expired": 40,
-            "fill_rate": 63.3
+            "fill_rate": 62.8
         },
         "stop_hold": {
             "signals": 109,
@@ -67,7 +67,7 @@
             "total_r": -13.23,
             "expectancy_r": -0.367,
             "profit_factor": 0.57,
-            "expired": 55,
+            "expired": 56,
             "fill_rate": 40.4
         }
     },
@@ -735,6 +735,21 @@
     ],
     "recent_signals": [
         {
+            "id": "20261126_ABNB",
+            "date": "2026-11-26",
+            "ticker": "ABNB",
+            "entry_price": 172.15,
+            "status": "PENDING",
+            "notes": "Healthy pullback to 50-SMA support in 200-SMA uptrend. Risk-Reward 1:2.5.",
+            "type": "LONG",
+            "context": "TREND_PULLBACK",
+            "stop_loss": 160.54,
+            "target_price": 201.18,
+            "mode": "baseline",
+            "market": "Stocks",
+            "rr_ratio": 2.5
+        },
+        {
             "id": "20261125_MSFT",
             "date": "2026-11-25",
             "ticker": "MSFT",
@@ -1054,7 +1069,7 @@
             "date": "2026-11-11",
             "ticker": "GBPUSD",
             "entry_price": 1.33995,
-            "status": "PENDING",
+            "status": "EXPIRED",
             "notes": "Pullback entry at the baseline stop (1.33995), original target held. Paired with 20261111_GBPUSD.",
             "type": "SHORT",
             "context": "BREAKDOWN_SHORT",
@@ -1165,21 +1180,6 @@
             "context": "TREND_PULLBACK",
             "stop_loss": 244.08,
             "target_price": 323.51,
-            "mode": "stop_hold",
-            "market": "Stocks",
-            "rr_ratio": 3.5
-        },
-        {
-            "id": "20261106_MCD_SH",
-            "date": "2026-11-06",
-            "ticker": "MCD",
-            "entry_price": 280.12,
-            "status": "ACTIVE",
-            "notes": "Pullback entry at the baseline stop (280.12), original target held. Risk-Reward 1:3.5. Paired with 20261106_MCD.",
-            "type": "SHORT",
-            "context": "OVERBOUGHT_REJECTION",
-            "stop_loss": 289.94,
-            "target_price": 245.75,
             "mode": "stop_hold",
             "market": "Stocks",
             "rr_ratio": 3.5
